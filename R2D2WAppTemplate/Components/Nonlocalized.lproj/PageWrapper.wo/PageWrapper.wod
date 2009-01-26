@@ -1,0 +1,46 @@
+BreadCrumbTrail: R2DBreadCrumbTrail {
+	page = context.page;
+}
+
+Content: WOComponentContent {
+}
+
+DebugFlags: R2D2WDebugFlags {
+}
+
+Head: R2D2WHead {
+}
+
+HTML: WOGenericContainer {
+	elementName = "html";
+	"xml:lang" = languageCode;
+	xmlns = "http://www.w3.org/1999/xhtml";
+}
+
+LandingLink: WOHyperlink {
+	href = homeLink;
+	string = session.localizer.SiteName;
+}
+
+MenuHeader: MenuHeader {
+}
+
+PodcastButton: R2DPodcastButton {
+	localContext = d2wContext;
+}
+
+RSSButton: R2DRSSButton {
+	localContext = d2wContext;
+}
+
+RSSLink: R2DRSSLink {
+	localContext = d2wContext;
+}
+
+SkipNav: ERXLocalizedString {
+	value = "PageWrapper.skipNav";
+}
+
+StyleSheet: ERXStyleSheet {
+	filename = "example.css";
+}

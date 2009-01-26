@@ -1,0 +1,9 @@
+Content: WOComponentContent {
+}
+
+Head: R2D2WHead {
+}
+
+Language: ERXLocalizedString {
+	value = "ls_lang";
+}

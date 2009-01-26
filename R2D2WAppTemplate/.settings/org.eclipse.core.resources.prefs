@@ -1,0 +1,18 @@
+#Tue Oct 21 23:34:52 EDT 2008
+eclipse.preferences.version=1
+encoding//Components/MailPlainWrapper.api=UTF-8
+encoding//Components/MailWrapper.api=UTF-8
+encoding//Components/Nonlocalized.lproj/MailPlainWrapper.wo=UTF-8
+encoding//Components/Nonlocalized.lproj/MailPlainWrapper.wo/MailPlainWrapper.html=UTF-8
+encoding//Components/Nonlocalized.lproj/MailPlainWrapper.wo/MailPlainWrapper.wod=UTF-8
+encoding//Components/Nonlocalized.lproj/MailPlainWrapper.wo/MailPlainWrapper.woo=UTF-8
+encoding//Components/Nonlocalized.lproj/MailWrapper.wo=UTF-8
+encoding//Components/Nonlocalized.lproj/MailWrapper.wo/MailWrapper.html=UTF-8
+encoding//Components/Nonlocalized.lproj/MailWrapper.wo/MailWrapper.wod=UTF-8
+encoding//Components/Nonlocalized.lproj/MailWrapper.wo/MailWrapper.woo=UTF-8
+encoding//Resources/English.lproj/Localizable.strings=UTF-16
+encoding//Resources/English.lproj/ValidationTemplate.strings=UTF-16
+encoding//Resources/Japanese.lproj/Localizable.strings=UTF-16
+encoding//Resources/Japanese.lproj/ValidationTemplate.strings=UTF-16
+encoding//Sources/com/example/components/MailPlainWrapper.java=UTF-8
+encoding//Sources/com/example/components/MailWrapper.java=UTF-8
