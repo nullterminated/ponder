@@ -1,7 +1,0 @@
-Content: WOComponentContent {
-	
-}
-
-PageTitle: WOString {
-	value = displayNameForPageConfiguration;
-}

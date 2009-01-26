@@ -1,4 +1,0 @@
-ErrorPanel: R2DErrorDictionaryPanel {
-	extraErrorMessage = parentERD2WPage.errorMessage;
-	errorMessages = parentERD2WPage.errorMessages;
-}

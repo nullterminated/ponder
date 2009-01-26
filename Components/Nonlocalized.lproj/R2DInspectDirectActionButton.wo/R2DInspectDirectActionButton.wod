@@ -1,5 +1,0 @@
-InspectLink: WOHyperlink {
-	directActionName = directActionName;
-	queryDictionary = queryDictionary;
-	string = d2wContext.inspectButtonLabel;
-}

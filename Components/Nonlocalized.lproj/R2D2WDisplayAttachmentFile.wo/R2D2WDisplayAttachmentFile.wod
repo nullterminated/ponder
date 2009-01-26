@@ -1,6 +1,0 @@
-Attachment: ERAttachmentIcon {
-	alt = altText;
-	attachment = objectPropertyValue;
-	configurationName = d2wContext.attachmentConfigurationName;
-	size = d2wContext.attachmentIconSize;
-}

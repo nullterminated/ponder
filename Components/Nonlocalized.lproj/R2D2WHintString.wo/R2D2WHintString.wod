@@ -1,8 +1,0 @@
-HasHint: WOConditional {
-	condition = ^d2wContext.hintString;
-}
-
-HintString: WOString {
-	escapeHTML = false;
-	value = ^d2wContext.hintString;
-}

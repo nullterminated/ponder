@@ -1,6 +1,0 @@
-Image: ERAttachmentImageViewer {
-	alt = altText;
-	height = objectPropertyValue.height; //VALID
-	attachment = objectPropertyValue;
-	width = objectPropertyValue.width; //VALID
-}
