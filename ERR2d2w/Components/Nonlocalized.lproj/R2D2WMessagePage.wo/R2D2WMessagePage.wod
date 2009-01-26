@@ -1,0 +1,80 @@
+AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
+    localContext = d2wContext;
+	extraPropertiesKey = "aboveDisplayPropertyKeys";
+}
+
+Banner: R2DBannerComponent {
+	d2wContext = d2wContext;
+}
+
+BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
+    localContext = d2wContext;
+	extraPropertiesKey = "belowDisplayPropertyKeys";
+}
+
+Branch: WOHyperlink {
+	action = nextPageAction;
+	string = branch.branchButtonLabel; //VALID
+}
+
+BranchRepetition: WORepetition {
+	item = branch;
+	list = branchChoices;
+}
+
+ComponentDiv: WOGenericContainer {
+	elementName = "div";
+	class = d2wContext.pageConfiguration;
+}
+
+Errors: R2DErrorDictionaryPanel {
+	errorMessages = errorMessages;
+	extraErrorMessage = errorMessage;
+}
+
+ExplanationComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.explanationComponentName;
+	dataSource = dataSource;
+	object = object;
+	pageConfiguration = d2wContext.explanationConfigurationName;
+}
+
+HasBranches: WOConditional {
+	condition = hasBranchChoices;
+}
+
+HasExplanationComponent: WOConditional {
+	condition = showExplanationComponent;
+}
+
+HasMessage: WOConditional {
+	condition = message;
+}
+
+HasNextPage: WOConditional {
+	condition = hasNextPage;
+}
+
+HasNoBranches: WOConditional {
+	condition = hasBranchChoices;
+	negate = true;
+}
+
+Help: R2DDebuggingHelp {
+	d2wContext = d2wContext;
+}
+
+Message: WOString {
+	escapeHTML = false;
+	value = message;
+}
+
+OKButton: WOHyperlink {
+	action = nextPageAction;
+	string = d2wContext.okButtonLabel;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.pageWrapperName;
+}
+

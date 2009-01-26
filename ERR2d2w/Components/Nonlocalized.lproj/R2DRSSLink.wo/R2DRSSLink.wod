@@ -1,0 +1,10 @@
+RSSLink: WOGenericElement {
+	elementName = "link";
+	href = rssLink;
+	rel = "alternate";
+	type = "application/rss+xml";
+}
+
+ShouldLink: WOConditional {
+	condition = displayRSSLink;
+}

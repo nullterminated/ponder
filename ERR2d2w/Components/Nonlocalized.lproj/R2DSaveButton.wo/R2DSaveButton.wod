@@ -1,0 +1,19 @@
+Button: WOSubmitButton {
+	action = saveAction;
+	value = d2wContext.saveButtonLabel;
+}
+
+IsButton: WOConditional {
+	condition = context.isInForm;
+}
+
+IsLink: WOConditional {
+	condition = context.isInForm;
+	negate = true;
+}
+
+Link: WOHyperlink {
+	action = saveAction;
+	string = d2wContext.saveButtonLabel;
+}
+

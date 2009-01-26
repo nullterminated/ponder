@@ -1,0 +1,23 @@
+LabelString: WOString {
+	value = d2wContext.displayNameForProperty;
+}
+
+LanguageMenu: ERXLanguageMenu {
+	id = _r2FieldLabelID;
+	language = objectPropertyValue;
+	noSelectionString = noSelectionString;
+	title = d2wContext.inputInfo;
+}
+
+PropertyLabel: WOGenericContainer {
+	class = d2wContext.propertyClasses;
+	elementName = "label";
+	for = _r2FieldLabelID;
+}
+
+Wrapper: WOGenericContainer {
+	class = componentClasses;
+	elementID = _r2FieldLabelID;
+	elementName = "div";
+}
+

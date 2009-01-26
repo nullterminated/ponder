@@ -1,0 +1,35 @@
+AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
+    localContext = d2wContext;
+	extraPropertiesKey = "aboveDisplayPropertyKeys";
+}
+
+Banner: R2DBannerComponent {
+	d2wContext = d2wContext;
+}
+
+BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
+    localContext = d2wContext;
+	extraPropertiesKey = "belowDisplayPropertyKeys";
+}
+
+ComponentDiv: WOGenericContainer {
+	elementName = "div";
+	class = d2wContext.pageConfiguration;
+}
+
+Help: R2DDebuggingHelp {
+	d2wContext = d2wContext;
+}
+
+Error: R2DErrorDictionaryPanel {
+	extraErrorMessage = message;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.pageWrapperName;
+}
+
+ReturnLink: WOHyperlink {
+	action = nextPage;
+	string = d2wContext.okButtonLabel;
+}

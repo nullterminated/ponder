@@ -1,0 +1,18 @@
+<webobject name = "DebuggingEnabled">
+  	<div style = "display:inline;" 
+  		onmouseout = "this.innerHTML=this.innerHTML.replace('visibility: visible;','visibility: hidden;');" 
+  		onmouseover = "this.innerHTML=this.innerHTML.replace('visibility: hidden;','visibility: visible;');">
+        ◊
+        <div style="position:absolute;display:inline;visibility: hidden;" 
+        	onclick="this.style.visibility='hidden'; return false;">
+	        <table border="1" class = "contextHelp debug" onclick="this.style.visibility='hidden'; return false;">
+				<webobject name = "ContextKeys">
+				<tr>
+					<td align="center"><webobject name = "CurrentKey" /></td>
+	            	<td align="center"><webobject name = "CurrentValue" /></td>
+	            </tr>
+				</webobject>
+	        </table>
+		</div>
+	</div>
+</webobject>

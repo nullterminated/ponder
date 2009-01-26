@@ -1,0 +1,65 @@
+Attribute: WOSwitchComponent {
+	WOComponentName = d2wContext.componentName;
+	localContext = d2wContext;
+	object = object;
+}
+
+AttributeRepetition: WORepetition {
+	item = d2wContext.propertyKey;
+	list = d2wContext.displayPropertyKeys;	
+}
+
+ChannelDescription: WOString {
+	value = d2wContext.rssChannelDescription;
+}
+
+ChannelLink: WOActionURL {
+	directActionName = d2wContext.rssChannelLinkDirectActionName;
+}
+
+ChannelTitle: WOString {
+	value = d2wContext.rssChannelTitle;
+}
+
+HasLanguage: WOConditional {
+	condition = languageCode;
+}
+
+HasTTL: WOConditional {
+	condition = hasTTL;
+}
+
+ItemID: WOString {
+	value = itemID;
+}
+
+Items: WORepetition {
+	item = object;
+	list = displayGroup.displayedObjects;
+}
+
+ItemURL: WOString {
+	value = itemURL;
+}
+
+LanguageCode: WOString {
+	value = languageCode;
+}
+
+RSSTag: WOGenericContainer {
+	elementName = "rss";
+	otherTagString = otherTagStringForRSSTag;
+}
+
+SelfLink: WOGenericElement {
+	elementName = "atom:link";
+	href = selfLink;
+	omitTags = missingAtom;
+	rel = "self";
+	type = "application/rss+xml";
+}
+
+TTL: WOString {
+	value = rssTTL;
+}
+

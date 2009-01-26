@@ -1,0 +1,66 @@
+AboveDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
+    localContext = d2wContext;
+	extraPropertiesKey = "aboveDisplayPropertyKeys";
+}
+
+ActionGroup: R2D2WActionGroup {
+	localContext = d2wContext;
+	object = object;
+}
+
+AttributeRepetition: WORepetition {
+	item = d2wContext.propertyKey;
+	list = d2wContext.displayPropertyKeys;
+}
+
+Banner: R2DBannerComponent {
+	d2wContext = d2wContext;
+}
+
+BelowDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
+	localContext = d2wContext;
+	extraPropertiesKey = "belowDisplayPropertyKeys";
+}
+
+ComponentDebug: R2DDebuggingComponentHelp {
+	localContext = d2wContext;
+}
+
+ComponentDiv: WOGenericContainer {
+	elementName = "div";
+	class = d2wContext.pageConfiguration;
+}
+
+ComponentName: WOSwitchComponent {
+	WOComponentName = d2wContext.componentName;
+	localContext = localContext;
+	object = object;
+}
+
+EditingForm: ERXOptionalForm {
+	enctype = d2wContext.formEncoding;
+	showForm = d2wContext.hasForm;
+	multipleSubmit = true;
+}
+
+EntityName: WOString {
+	value = d2wContext.displayNameForEntity;
+}
+
+Help: R2DDebuggingHelp {
+	d2wContext = d2wContext;
+}
+
+InfoPanel: R2DInfoPanel {
+	d2wContext = d2wContext;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = pageWrapperName;
+}
+
+ValidationErrors: R2DErrorDictionaryPanel {
+	errorMessages = errorMessages;
+	extraErrorMessage = errorMessage;
+	errorKeyOrder = errorKeyOrder;
+}
