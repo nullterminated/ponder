@@ -1,0 +1,45 @@
+<webobject name = "PageWrapper">
+  <webobject name = "ComponentDiv">
+    <webobject name = "Help" />
+    <webobject name = "AboveDisplayPropertyKeys" />
+    <webobject name = "Banner" />
+    <webobject name = "ListNotEmpty">
+      <webobject name = "NavBar"><webobject name = "FilterDisplayGroupButton" /></webobject>
+      <webobject name = "ListTable">
+        <webobject name = "HasCaption">
+          <caption><webobject name = "Caption" /></caption>
+        </webobject>
+        <thead>
+          <tr>
+            <webobject name = "AttributeRepetition">
+              <webobject name = "TableHeader">
+                <webobject name = "PropertyName" />
+                <webobject name = "IsPropertySortable"><webobject name = "SortOrder" /></webobject>
+                <webobject name = "Debug" />
+              </webobject>
+            </webobject>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <webobject name = "AttributeRepetition">
+              <td>&#160;</td>
+            </webobject>
+          </tr>
+        </tfoot>
+        <tbody>
+          <webobject name = "EntityRepetition">
+            <tr>
+              <webobject name = "AttributeRepetition">
+                <td><webobject name = "AttributeDisplay" /></td>
+              </webobject>
+            </tr>
+          </webobject>
+        </tbody>
+      </webobject>
+    </webobject>
+    <webobject name = "ListEmpty"> <webobject name = "EmptyMessageComponent" /> </webobject>
+    <webobject name = "ActionGroup" />
+    <webobject name = "BelowDisplayPropertyKeys" />
+  </webobject>
+</webobject>

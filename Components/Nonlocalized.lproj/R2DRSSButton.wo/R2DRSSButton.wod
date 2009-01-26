@@ -1,0 +1,12 @@
+DisplayRSSLink: WOConditional {
+	condition = displayRSSLink;
+}
+
+RSSLink: WOHyperlink {	
+	directActionName = directActionName;
+	queryDictionary = queryDictionary;
+	rel = "alternate";
+	string = d2wContext.rssButtonLabel;
+	title = d2wContext.rssButtonTitle;
+	type = "application/rss+xml";
+}

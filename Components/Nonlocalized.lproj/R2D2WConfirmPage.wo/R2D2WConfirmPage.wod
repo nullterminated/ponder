@@ -1,0 +1,93 @@
+Banner: R2DBannerComponent {
+	d2wContext = d2wContext;
+}
+
+BranchButton: WOSubmitButton {
+	action = nextPageAction;
+	value = branch.branchButtonLabel; //VALID
+}
+
+CancelButton: WOSubmitButton {
+	action = cancelAction;
+	value = d2wContext.cancelButtonLabel;
+}
+
+ComponentDiv: WOGenericContainer {
+	elementName = "div";
+	class = d2wContext.pageConfiguration;
+}
+
+Help: R2DDebuggingHelp {
+	d2wContext = d2wContext;
+}
+
+ERDConfirmMessage: ERDConfirmMessage {
+	confirmMessageManditory = d2wContext.confirmMessageManditory;
+	dataSource = dataSource;
+	object = object;
+	confirmMessageKey = d2wContext.confirmMessageKey;
+	confirmRows = d2wContext.confirmRows;
+	confirmMessageTextfieldSize = d2wContext.confirmMessageTextfieldSize;
+	confirmMessageManditoryErrorMessage = d2wContext.confirmMessageManditoryErrorMessage;
+	confirmMessageExplanation = d2wContext.confirmMessageExplanation;
+	confirmMessageIsTextfield = d2wContext.confirmMessageIsTextfield;
+	confirmMessageTextfieldMaxlength = d2wContext.confirmMessageTextfieldMaxlength;
+}
+
+Errors: R2DErrorDictionaryPanel {
+	errorMessages = errorMessages;
+	extraErrorMessage = errorMessage;
+}
+
+Form: WOForm {
+	multipleSubmit = true;
+}
+
+HasBranchChoices: WOConditional {
+	condition = hasBranchChoices;
+}
+
+HasMessage: ERXNonNullConditional {
+	condition = message;
+}
+
+HasNoBranchChoices: WOConditional {
+	condition = hasBranchChoices;
+	negate = true;
+}
+
+Message: WOString {
+	value = message;
+	escapeHTML = false;
+}
+
+OKButton: WOSubmitButton {
+	action = nextPageAction;
+	value = d2wContext.okButtonLabel;
+}
+
+Repetition1: WORepetition {
+	item = branch;
+	list = branchChoices;
+	checkHashCodes = false;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.pageWrapperName;
+}
+
+explanationComponentName: WOSwitchComponent {
+	WOComponentName = d2wContext.explanationComponentName;
+	dataSource = dataSource;
+	object = object;
+	pageConfiguration = d2wContext.explanationConfigurationName;
+	settings = settings;
+}
+
+shouldProvideConfirmMessage: WOConditional {
+	condition = d2wContext.shouldProvideConfirmMessage;
+}
+
+showExplanationComponent: WOConditional {
+	condition = showExplanationComponent;
+}

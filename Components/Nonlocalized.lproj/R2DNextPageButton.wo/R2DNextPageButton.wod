@@ -1,0 +1,23 @@
+Button: WOSubmitButton {
+	action = nextPageAction;
+	value = d2wContext.nextPageButtonLabel;
+}
+
+HasNextPage: WOConditional {
+	condition = hasNextPage;
+}
+
+IsButton: WOConditional {
+	condition = context.isInForm;
+}
+
+IsLink: WOConditional {
+	condition = context.isInForm;
+	negate = true;
+}
+
+Link: WOHyperlink {
+	action = nextPageAction;
+	string = d2wContext.nextPageButtonLabel;
+}
+

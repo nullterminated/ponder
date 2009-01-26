@@ -1,0 +1,18 @@
+LabelString: WOString {
+	value = d2wContext.displayNameForProperty;
+}
+
+Popup: WOPopUpButton {
+	displayString = displayString;
+	id = labelID;
+	item = item;
+	list = queryNumbers;
+	selection = value;
+}
+
+PropertyLabel: WOGenericContainer {
+	elementName = "label";
+	elementID = labelID;
+	for = context.elementID;
+}
+

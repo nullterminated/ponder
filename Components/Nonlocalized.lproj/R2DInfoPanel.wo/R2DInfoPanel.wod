@@ -1,0 +1,12 @@
+HasInfo: WOConditional {
+	condition = infoStrings.count;
+}
+
+InfoRepetition: WORepetition {
+	item = infoString;
+	list = infoStrings;
+}
+
+InfoString: WOString {
+	value = infoString;
+}

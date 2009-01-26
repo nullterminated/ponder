@@ -1,0 +1,22 @@
+ErrorMessage: WOString {
+	escapeHTML = false;
+	value = errorMessageItem;
+} 
+
+Errors: WORepetition {
+	list = errorKeys;
+	item = errorKey;
+}
+
+ExtraError: WOString {
+	escapeHTML = false;
+	value = extraErrorMessage;
+}
+
+HasExtraErrorMessage: WOConditional {
+	condition = extraErrorMessage.length;
+}
+
+ShowErrors: WOConditional {
+	condition = hasErrors;
+}

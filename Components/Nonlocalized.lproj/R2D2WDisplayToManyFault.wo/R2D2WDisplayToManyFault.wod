@@ -1,0 +1,6 @@
+InspectLink: WOHyperlink {
+	action = inspectArrayAction;
+	class = "inspectToMany";
+	string = relationshipCount;
+	title = helpString;
+}

@@ -1,0 +1,21 @@
+Action: WOSwitchComponent {
+	WOComponentName = d2wContext.componentName;
+	dataSource = ^dataSource;
+	displayGroup = ^displayGroup;
+	localContext = d2wContext;
+	object = object;
+}
+
+ActionContainer: WOGenericContainer {
+	elementName = "div";
+	class = "actionGroup";
+}
+
+ActionRepetition: WORepetition {
+	list = d2wContext.actions;
+	item = d2wContext.propertyKey;
+}
+
+HasActions: WOConditional {
+	condition = d2wContext.actions.count;
+}

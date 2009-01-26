@@ -1,0 +1,38 @@
+Hint: R2D2WHintString {
+	d2wContext = d2wContext;
+}
+
+MaxField: WOTextField {
+	dateformat = d2wContext.formatter;
+	id = maxID;
+	value = maxValue;
+}
+
+MaxLabel: WOGenericContainer {
+	elementName = "label";
+	elementID = maxID;
+	for = context.elementID;
+}
+
+MaxString: ERXLocalizedString {
+	object = d2wContext;
+	templateString = "R2D2W.maximumDateFieldLabel";
+}
+
+MinField: WOTextField {
+	dateformat = d2wContext.formatter;
+	id = minID;
+	value = minValue;
+}
+
+MinLabel: WOGenericContainer {
+	elementName = "label";
+	elementID = minID;
+	for = context.elementID;
+}
+
+MinString: ERXLocalizedString {
+	object = d2wContext;
+	templateString = "R2D2W.minimumDateFieldLabel";
+}
+

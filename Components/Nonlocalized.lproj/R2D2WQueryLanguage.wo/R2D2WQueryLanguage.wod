@@ -1,0 +1,17 @@
+LabelString: WOString {
+	value = d2wContext.displayNameForProperty;
+}
+
+LanguageMenu: ERXLanguageMenu {
+	id = labelID;
+	language = displayGroupQueryMatchValue;
+	localizeDisplayStrings = false;
+	noSelectionString = d2wContext.noSelectionStringValue;
+}
+
+PropertyLabel: WOGenericContainer {
+	elementName = "label";
+	elementID = labelID;
+	for = context.elementID;
+}
+
