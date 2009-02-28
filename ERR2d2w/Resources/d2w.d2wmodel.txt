@@ -108,14 +108,13 @@
     11 : *true* => displayNameForPageConfiguration = (null) [R2DDelayedUIStringAssignment],
     11 : task = 'list' => actions = (nextPageAction
 ) [com.webobjects.directtoweb.Assignment],
+    11 : (task = 'list' or task = 'select') => tableActions = (null) [R2DDefaultActionsAssignment],
     11 : *true* => emptyListComponentName = R2DEmptyListMessage [com.webobjects.directtoweb.Assignment],
     11 : smartRelationship.isToMany = '1' => propertyIsSortable = (null) [R2DDerivedCountSortAssignment],
     11 : pageConfiguration like 'List*' => showBanner = true [com.webobjects.directtoweb.BooleanAssignment],
     11 : propertyKey = 'editAction' => componentName = R2DEditButton [com.webobjects.directtoweb.Assignment],
     11 : propertyKey = 'saveAction' => componentName = R2DSaveButton [com.webobjects.directtoweb.Assignment],
     11 : pageConfiguration like 'User*' => entity = defaultUserEntity [er.directtoweb.ERDKeyValueAssignment],
-    11 : task = 'select' => tableActions = (inspectAction,selectAction
-) [com.webobjects.directtoweb.Assignment],
     11 : propertyKey = 'deleteAction' => componentName = R2DDeleteButton [com.webobjects.directtoweb.Assignment],
     11 : propertyKey = 'selectAction' => componentName = R2DSelectButton [com.webobjects.directtoweb.Assignment],
     11 : propertyKey = 'inspectAction' => componentName = R2DInspectButton [com.webobjects.directtoweb.Assignment],
@@ -124,8 +123,6 @@
 ) [com.webobjects.directtoweb.Assignment],
     11 : smartRelationship.isToMany = '0' => propertyIsSortable = false [com.webobjects.directtoweb.BooleanAssignment],
     11 : task = 'inspect' => actions = (nextPageAction,deleteAction,editAction
-) [com.webobjects.directtoweb.Assignment],
-    11 : task = 'list' => tableActions = (inspectAction,editAction,deleteAction
 ) [com.webobjects.directtoweb.Assignment],
     11 : pageConfiguration like 'MailPlain*' => pageWrapperName = MailPlainWrapper [com.webobjects.directtoweb.Assignment],
     11 : pageConfiguration = 'UserLogin' => findButtonLabel = R2D2W.loginButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
