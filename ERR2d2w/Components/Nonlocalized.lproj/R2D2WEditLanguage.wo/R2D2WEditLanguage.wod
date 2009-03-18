@@ -2,7 +2,7 @@ LabelString: WOString {
 	value = d2wContext.displayNameForProperty;
 }
 
-LanguageMenu: ERXLanguageMenu {
+LanguageMenu: R2DLanguageMenu {
 	id = _r2FieldLabelID;
 	language = objectPropertyValue;
 	noSelectionString = noSelectionString;
