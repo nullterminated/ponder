@@ -31,7 +31,7 @@ import er.extensions.localization.ERXLocalizer;
  * in your German.lproj/Localizable.strings file.  Beyond that, you only
  * need to stick it in a form and bind the language binding to something
  * that stores a language value.  For example, your WOD file might contain:
- * <code>LanguageMenu: ERXLanguageMenu { language = session.language; }</code>
+ * <code>LanguageMenu: R2DLanguageMenu { language = session.language; }</code>
  * </p>
  * @author Ramsey Gurley
  * @binding class (optional) the html class attribute string
