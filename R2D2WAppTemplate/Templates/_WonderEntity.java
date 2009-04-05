@@ -13,32 +13,64 @@ import org.apache.log4j.Logger;
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
+#if ($entity.parentSet)
+    #set ($parentClass = ${entity.parent.classNameWithDefault})
+    #set ($parentClazzClass = "${entity.parent.classNameWithoutPackage}.${entity.parent.classNameWithoutPackage}Clazz")
+#else
+    #set ($parentClass = "ERXGenericRecord")
+    #set ($parentClazzClass = "ERXGenericRecord.ERXGenericRecordClazz<${entity.classNameWithoutPackage}>")
+#end
+
 @SuppressWarnings("all")
 public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($entity.partialEntitySet)er.extensions.partials.ERXPartial<${entity.partialEntity.className}>#elseif ($entity.parentSet)${entity.parent.classNameWithDefault}#elseif ($EOGenericRecord)${EOGenericRecord}#else GenericRecord#end {
 #if ($entity.partialEntitySet)
-	public static final String ENTITY_NAME = "$entity.partialEntity.name";
+  public static final String ENTITY_NAME = "$entity.partialEntity.name";
 #else
-	public static final String ENTITY_NAME = "$entity.name";
+  public static final String ENTITY_NAME = "$entity.name";
 #end
 
+  // Attributes
+#foreach ($attribute in $entity.sortedClassAttributes)
+#if ($attribute.userInfo.ERXLanguages)
+#foreach ($lang in $attribute.userInfo.ERXLanguages)
+  public static final String ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY = "$attribute.name.concat('_').concat($lang)";
+  public static final ERXKey ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()} = new ERXKey(${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY);
+#end
+#else
+  public static final String ${attribute.uppercaseUnderscoreName}_KEY = "$attribute.name";
+  public static final ERXKey ${attribute.uppercaseUnderscoreName} = new ERXKey(${attribute.uppercaseUnderscoreName}_KEY);
+#end
+#end
+
+  // Relationships
+#foreach ($relationship in $entity.sortedClassRelationships)
+  public static final String ${relationship.uppercaseUnderscoreName}_KEY = "$relationship.name";
+  public static final ERXKey ${relationship.uppercaseUnderscoreName} = new ERXKey(${relationship.uppercaseUnderscoreName}_KEY);
+#end
+
+	// Repeated for compatibility
+  public interface Key {
 	// Attributes
 #foreach ($attribute in $entity.sortedClassAttributes)
 #if ($attribute.userInfo.ERXLanguages)
 #foreach ($lang in $attribute.userInfo.ERXLanguages)
-	public static final String ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY = "$attribute.name.concat('_').concat($lang)";
-	public static final ERXKey ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()} = new ERXKey(${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY);
+    public static final String ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()} = "$attribute.name.concat('_').concat($lang)";
 #end
 #else
-	public static final String ${attribute.uppercaseUnderscoreName}_KEY = "$attribute.name";
-	public static final ERXKey ${attribute.uppercaseUnderscoreName} = new ERXKey(${attribute.uppercaseUnderscoreName}_KEY);
+    public static final String ${attribute.uppercaseUnderscoreName} = "$attribute.name";
 #end
 #end
 
-	// Relationships
+  // Relationships
 #foreach ($relationship in $entity.sortedClassRelationships)
-	public static final String ${relationship.uppercaseUnderscoreName}_KEY = "$relationship.name";
-	public static final ERXKey ${relationship.uppercaseUnderscoreName} = new ERXKey(${relationship.uppercaseUnderscoreName}_KEY);
+    public static final String ${relationship.uppercaseUnderscoreName} = "$relationship.name";
 #end
+  }
+
+
+  public static class _${entity.classNameWithoutPackage}Clazz extends ${parentClazzClass} {
+    /* more clazz methods here */
+  }
 
   private static Logger LOG = Logger.getLogger(${entity.prefixClassNameWithoutPackage}.class);
 
@@ -110,7 +142,7 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 #foreach ($relationship in $entity.sortedClassToOneRelationships)
 #if (!$relationship.inherited) 
   public $relationship.actualDestination.classNameWithDefault ${relationship.name}() {
-    return ($relationship.actualDestination.classNameWithDefault)storedValueForKey("$relationship.name");
+    return ($relationship.actualDestination.classNameWithDefault)storedValueForKey(${relationship.uppercaseUnderscoreName}_KEY);
   }
 
   public void set${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault value) {
@@ -120,10 +152,10 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
     if (value == null) {
     	$relationship.actualDestination.classNameWithDefault oldValue = ${relationship.name}();
     	if (oldValue != null) {
-    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, "$relationship.name");
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, ${relationship.uppercaseUnderscoreName}_KEY);
       }
     } else {
-    	addObjectToBothSidesOfRelationshipWithKey(value, "$relationship.name");
+    	addObjectToBothSidesOfRelationshipWithKey(value, ${relationship.uppercaseUnderscoreName}_KEY);
     }
   }
   
@@ -132,16 +164,16 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 #foreach ($relationship in $entity.sortedClassToManyRelationships)
 
   public Number count${relationship.capitalizedName}() {
-    return countForRelationship("${relationship.name}");
+    return countForRelationship(${relationship.uppercaseUnderscoreName}_KEY);
   }
 
   public EOQualifier qualifierFor${relationship.capitalizedName}() {
-    return qualifierForRelationshipWithKey("${relationship.name}");
+    return qualifierForRelationshipWithKey(${relationship.uppercaseUnderscoreName}_KEY);
   }
 
 #if (!$relationship.inherited) 
   public NSArray<${relationship.actualDestination.classNameWithDefault}> ${relationship.name}() {
-    return (NSArray<${relationship.actualDestination.classNameWithDefault}>)storedValueForKey("${relationship.name}");
+    return (NSArray<${relationship.actualDestination.classNameWithDefault}>)storedValueForKey(${relationship.uppercaseUnderscoreName}_KEY);
   }
 
 #if (!$relationship.inverseRelationship || $relationship.flattened || !$relationship.inverseRelationship.classProperty)
@@ -206,26 +238,26 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
     if (${entity.prefixClassNameWithoutPackage}.LOG.isDebugEnabled()) {
       ${entity.prefixClassNameWithoutPackage}.LOG.debug("adding " + object + " to ${relationship.name} relationship");
     }
-    addObjectToBothSidesOfRelationshipWithKey(object, "${relationship.name}");
+    addObjectToBothSidesOfRelationshipWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
   }
 
   public void removeFrom${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault object) {
     if (${entity.prefixClassNameWithoutPackage}.LOG.isDebugEnabled()) {
       ${entity.prefixClassNameWithoutPackage}.LOG.debug("removing " + object + " from ${relationship.name} relationship");
     }
-    removeObjectFromBothSidesOfRelationshipWithKey(object, "${relationship.name}");
+    removeObjectFromBothSidesOfRelationshipWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
   }
 
   public $relationship.actualDestination.classNameWithDefault create${relationship.capitalizedName}Relationship() {
-    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName("${relationship.actualDestination.name}");
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName(${relationship.actualDestination.name}.ENTITY_NAME);
     EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
     editingContext().insertObject(eo);
-    addObjectToBothSidesOfRelationshipWithKey(eo, "${relationship.name}");
+    addObjectToBothSidesOfRelationshipWithKey(eo, ${relationship.uppercaseUnderscoreName}_KEY);
     return ($relationship.actualDestination.classNameWithDefault) eo;
   }
 
   public void delete${relationship.capitalizedName}Relationship($relationship.actualDestination.classNameWithDefault object) {
-    removeObjectFromBothSidesOfRelationshipWithKey(object, "${relationship.name}");
+    removeObjectFromBothSidesOfRelationshipWithKey(object, ${relationship.uppercaseUnderscoreName}_KEY);
 #if (!$relationship.ownsDestination)
     editingContext().deleteObject(object);
 #end
