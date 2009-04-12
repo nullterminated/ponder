@@ -87,8 +87,8 @@ public class R2D2WDirectAction extends ERXDirectAction {
 	public static final String DATE_FORMAT = "MM-dd-yyyy HH:mm:ss z";
 	
 	// Short names for selectors
-	public static final NSDictionary<String, NSSelector> OP_KEYS = 
-		new NSDictionary<String, NSSelector>(
+	public static final NSDictionary<String, NSSelector<Boolean>> OP_KEYS = 
+		new NSDictionary<String, NSSelector<Boolean>>(
 			new NSSelector[] {
 				EOQualifier.QualifierOperatorCaseInsensitiveLike,
 				EOQualifier.QualifierOperatorContains,
@@ -131,9 +131,9 @@ public class R2D2WDirectAction extends ERXDirectAction {
 		super(r);
 	}
 	
-	private static NSDictionary langaugeCodes;
+	private static NSDictionary<String, String> langaugeCodes;
 	
-	private NSDictionary languageCodes() {
+	private NSDictionary<String, String> languageCodes() {
 		if(langaugeCodes == null) {
 			langaugeCodes = ERXDictionaryUtilities.dictionaryFromPropertyList("Languages", NSBundle.bundleForName("JavaWebObjects"));
 		}
@@ -447,7 +447,7 @@ public class R2D2WDirectAction extends ERXDirectAction {
 			String rhs = request.stringFormValueForKey(new StringBuilder(path).append(QUALIFIER_PATH_SEPARATOR).append(QUALIFIER_RHS_KEY).toString());
 			
 			if(lhs!=null && opKey!=null && OP_KEYS.containsKey(opKey) && rhs!=null) {
-				NSSelector op = OP_KEYS.get(opKey);
+				NSSelector<Boolean> op = OP_KEYS.get(opKey);
 				EOQualifier q = new EOKeyComparisonQualifier(lhs, op, rhs);
 				if(q!=null) {
 					// TODO catch errors thrown by invalid qualifiers
@@ -463,7 +463,7 @@ public class R2D2WDirectAction extends ERXDirectAction {
 
 			if(lhs!=null && opKey!=null && OP_KEYS.containsKey(opKey) && rhs!=null) {
 				Object val = null;
-				NSSelector op = OP_KEYS.get(opKey);
+				NSSelector<Boolean> op = OP_KEYS.get(opKey);
 				
 				// Attribute value reconstruction.
 				if(!NSKeyValueCoding.NullValue.toString().equals(rhs)) {

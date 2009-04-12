@@ -11,7 +11,6 @@ import com.webobjects.eoaccess.EOModelGroup;
 import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eocontrol.EOClassDescription;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSLog;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSNotification;
 import com.webobjects.foundation.NSNotificationCenter;
@@ -28,13 +27,13 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 
 	public static final String DERIVED_COUNT = "DerivedCount";
     public static final Logger log = Logger.getLogger(ERR2d2w.class);
-    public final static Class[] REQUIRES = new Class[] {ERXExtensions.class, ERDirectToWeb.class};
+    public final static Class<?>[] REQUIRES = new Class[] {ERXExtensions.class, ERDirectToWeb.class};
 
     protected static ERR2d2w sharedInstance;
 
     // Registers the class as the framework principal
     static {
-    	NSLog.out.appendln("Static Initializer for ERR2d2w");
+    	log.debug("Static Initializer for ERR2d2w");
     	setUpFrameworkPrincipalClass (ERR2d2w.class);
     }
 
@@ -72,7 +71,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
         return ERXProperties.booleanForKeyWithDefault("er.r2d2w.ERR2d2w.printLocalizableKeys", false);
     }
     
-    public static NSArray modelsToIgnore() {
+    public static NSArray<String> modelsToIgnore() {
     	return ERXProperties.arrayForKeyWithDefault("er.r2d2w.ERR2d2w.ignoreModels", NSArray.EmptyArray);
     }
     
@@ -96,7 +95,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     
     public static void printLocalizableStringsKeys(EOModel model) {
     	
-		NSLog.out.appendln("Localizable keys for model: " + model.name());
+		log.info("Localizable keys for model: " + model.name());
 		NSMutableArray<String> propKeys = new NSMutableArray<String>();
 		StringBuilder requiredKeys = new StringBuilder("/* Required keys for Entity and Attribute localization */\n\n");
 		StringBuilder recommendedKeys = new StringBuilder("/* Recommended keys for improved accessibility */\n\n");

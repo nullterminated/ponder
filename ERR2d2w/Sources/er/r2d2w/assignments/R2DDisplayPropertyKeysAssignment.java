@@ -58,6 +58,7 @@ public class R2DDisplayPropertyKeysAssignment extends ERDAssignment implements E
 			if(prop.endsWith(ERR2d2w.DERIVED_COUNT)) {continue;}
 			
 			EOAttribute attr = c.entity().attributeNamed(prop);
+			//FIXME set prop key on c to get correct values for fallback per key
 
 			if(attr.adaptorValueType() == EOAttribute.AdaptorBytesType && 
 					!ERXValueUtilities.booleanValue(c.valueForKey("displayBytesTypeKeys"))) {
@@ -103,7 +104,7 @@ public class R2DDisplayPropertyKeysAssignment extends ERDAssignment implements E
 		Boolean result = Boolean.FALSE;
 		if(!fallbackDefault) { return result; }
 		if(ERXValueUtilities.booleanValue(c.valueForKey("displayAllLocalesForAttribute"))) { return result; }
-		Class entityClass = null;
+		Class<?> entityClass = null;
 		try {
 			entityClass = Class.forName(c.entity().className());
 		} catch (ClassNotFoundException e) {

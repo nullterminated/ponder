@@ -28,7 +28,7 @@ import er.extensions.validation.ERXValidationFactory;
 import er.r2d2w.interfaces.R2DAttachmentContainer;
 
 public class R2D2WEditFile extends ERDCustomEditComponent {
-    /** logging support */
+	/** logging support */
     public final static Logger log = Logger.getLogger(R2D2WEditFile.class);
 	
 	public R2D2WEditFile(WOContext context) {
@@ -40,7 +40,7 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 	private String filePath;
 	private String finalFilePath;
 	private String mimeType;
-	private NSArray mimeTypes;
+	private NSArray<String> mimeTypes;
 	
 	public void appendToResponse(WOResponse r, WOContext c) {
 		super.appendToResponse(r, c);
@@ -106,7 +106,7 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
     	}
     	
     	try {
-    		ERAttachmentProcessor processor = ERAttachmentProcessor.processorForType(storageType);
+    		ERAttachmentProcessor<?> processor = ERAttachmentProcessor.processorForType(storageType);
     		IERAttachmentProcessorDelegate delegate = (IERAttachmentProcessorDelegate)c.valueForKey("attachmentProcessorDelegate");
     		//CHECKME why doesn't IERAttachmentProcessorDelegate pass a file handle on attachmentCreated??
     		if(delegate instanceof R2DAttachmentContainer) {
@@ -211,7 +211,7 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 	/**
 	 * @return the mimeTypes
 	 */
-	public NSArray mimeTypes() {
+	public NSArray<String> mimeTypes() {
 		if(mimeTypes == null) {
 			//CHECKME make sure this isn't caching incorrectly
 			mimeTypes = ERXValueUtilities.arrayValueWithDefault(d2wContext().valueForKeyPath("smartRelationship.userInfo.mimeTypes"), NSArray.EmptyArray);

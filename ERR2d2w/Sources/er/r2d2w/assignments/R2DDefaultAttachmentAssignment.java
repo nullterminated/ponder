@@ -25,7 +25,7 @@ public class R2DDefaultAttachmentAssignment extends ERDAssignment {
 		super(key, value);
 	}
 
-	public NSArray dependentKeys(String keyPath) {
+	public NSArray<String> dependentKeys(String keyPath) {
 		return dependentKeys;
 	}
 	
@@ -39,15 +39,14 @@ public class R2DDefaultAttachmentAssignment extends ERDAssignment {
 
 	public Object formEncoding(D2WContext c) {
 		String result = null;
-		NSArray displayPropertyKeys = ERXValueUtilities.arrayValueWithDefault(c.valueForKey(D2WModel.DisplayPropertyKeysKey), NSArray.EmptyArray);
+		NSArray<String> displayPropertyKeys = ERXValueUtilities.arrayValueWithDefault(c.valueForKey(D2WModel.DisplayPropertyKeysKey), NSArray.EmptyArray);
 		EOEntity entity = (EOEntity)c.valueForKey(D2WModel.EntityKey);
-		for(Object prop: displayPropertyKeys) {
-			String propertyKey = (String)prop;
+		for(String propertyKey: displayPropertyKeys) {
 			EORelationship r = entity.relationshipNamed(propertyKey);
 			if(r != null) {
 				EOEntity de = r.destinationEntity();
 				try {
-					Class entityClass = Class.forName(de.className());
+					Class<?> entityClass = Class.forName(de.className());
 					if(ERAttachment.class.isAssignableFrom(entityClass)) {
 						result = FORM_ENCODING;
 						break;
