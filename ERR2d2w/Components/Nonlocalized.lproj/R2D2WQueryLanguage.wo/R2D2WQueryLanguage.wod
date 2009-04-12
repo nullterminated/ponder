@@ -2,7 +2,7 @@ LabelString: WOString {
 	value = d2wContext.displayNameForProperty;
 }
 
-LanguageMenu: R2DLanguageMenu {
+LanguageMenu: ERXLanguageMenu {
 	id = labelID;
 	language = displayGroupQueryMatchValue;
 	localizeDisplayStrings = false;

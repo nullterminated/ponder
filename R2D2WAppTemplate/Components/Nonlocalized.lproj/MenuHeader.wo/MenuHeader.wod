@@ -56,7 +56,7 @@ LanguageLegend: ERXLocalizedString {
 	value = "Choose a language";
 }
 
-LanguageMenu: R2DLanguageMenu {
+LanguageMenu: ERXLanguageMenu {
 	id = "languageMenu";
 	language = session.language;
 }
