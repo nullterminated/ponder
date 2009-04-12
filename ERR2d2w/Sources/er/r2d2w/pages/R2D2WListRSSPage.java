@@ -1,7 +1,5 @@
 package er.r2d2w.pages;
 
-import java.text.SimpleDateFormat;
-
 import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOContext;
@@ -22,7 +20,6 @@ public class R2D2WListRSSPage extends ERD2WListPage {
 	/** logging support */
 	public final static Logger log = Logger.getLogger(R2D2WListRSSPage.class);
 
-	public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z");
 	public static final String CONTENT_TYPE_KEY = "content-type";
 	public static final String CONTENT_TYPE_VALUE = "application/xml";
 	
