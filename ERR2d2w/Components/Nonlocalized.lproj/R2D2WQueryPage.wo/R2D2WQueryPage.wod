@@ -44,7 +44,7 @@ Help: R2DDebuggingHelp {
 
 ListPage: ERXD2WList {
 	dataSource = queryDataSource;
-	entityName = entity;
+	entityName = entity.name;
 	pageConfiguration = d2wContext.listConfigurationName;
 }
 
