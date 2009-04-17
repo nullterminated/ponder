@@ -67,6 +67,7 @@ ItemsPerPage: ERXLocalizedString {
 
 LeftArrow: WOHyperlink {	
     action = displayPreviousBatch;
+    class = "navPrev";
     string = session.localizer.R2DBatchNavigationBar.previous;
 }
 
@@ -87,6 +88,7 @@ Page: ERXLocalizedString {
 
 RightArrow: WOHyperlink {
     action = displayNextBatch;
+    class = "navNext";
 	string = session.localizer.R2DBatchNavigationBar.next;
 }
 
