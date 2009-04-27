@@ -11,6 +11,7 @@ import com.webobjects.eoaccess.EOModelGroup;
 import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eocontrol.EOClassDescription;
 import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSForwardException;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSNotification;
 import com.webobjects.foundation.NSNotificationCenter;
@@ -22,6 +23,8 @@ import er.extensions.ERXFrameworkPrincipal;
 import er.extensions.eof.ERXConstant;
 import er.extensions.eof.ERXModelGroup;
 import er.extensions.foundation.ERXProperties;
+import er.extensions.foundation.ERXRetainer;
+import er.r2d2w.delegates.PreferenceHandlerDelegate;
 
 public class ERR2d2w extends ERXFrameworkPrincipal {
 
@@ -56,6 +59,25 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 		}
     }
 
+    /**
+     * Registers notification handlers for user preference notifications.
+     */
+    private static void registerHandlers() {
+        log.debug("Registering preference handlers");
+        Object handler = null;
+        String className = ERXProperties.stringForKey("ERXPreferenceHandlerClass");
+    	if(className != null) {
+    		try {
+    			handler = Class.forName(className).newInstance();
+    		} catch (Exception e) {
+    			throw NSForwardException._runtimeExceptionForThrowable(e);
+    		}
+    	}
+        if(handler == null) {
+        	handler = new PreferenceHandlerDelegate();
+        }
+        ERXRetainer.retain(handler);        
+    }
 
     /**
      * Checks the system property <code>er.directtoweb.ERDirectToWeb.createsDerivedCounts</code>.
@@ -76,6 +98,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     }
     
     public static void applicationDidFinishLaunching(NSNotification n) {
+    	registerHandlers();
     	
     	NSArray<EOModel> models = EOModelGroup.defaultGroup().models();
     	for(EOModel model: models) {
