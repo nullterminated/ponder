@@ -1,0 +1,77 @@
+ButtonRepetition: WORepetition {
+	list = availableCalendarViews;
+	item = viewItem;
+}
+
+CalendarNavBarContainer: WOGenericContainer {
+	class = "calendarNavBar";
+	elementName = "div";
+}
+
+HasMultipleViews: WOConditional {
+	condition = hasMultipleViews;
+}
+
+LabelString: ERXLocalizedString {
+	value = "R2D2WCalendarNavigationBar.gotoLabel";
+}
+
+NavButtons: WOGenericContainer {
+	class = "navButtons";
+	elementName = "div";
+}
+
+Next: WOHyperlink {
+	action = nextCalendar;
+	class = "navNext";
+	string = session.localizer.R2D2WCalendarNavigationBar.next;
+}
+
+OptionalForm: ERXOptionalForm {
+	
+}
+
+Previous: WOHyperlink {
+	action = previousCalendar;
+	class = "navPrev";
+	string = session.localizer.R2D2WCalendarNavigationBar.previous;
+}
+
+SelectedDate: WOTextField {
+	dateformat = dateFormat;
+	id = textFieldID;
+	value = ^rangeGrouper.selectedDate;
+}
+
+SelectedDateLabel: WOGenericContainer {
+	elementID = textFieldID;
+	elementName = "label";
+	for = context.elementID;
+}
+
+Today: WOHyperlink {
+	action = todayAction;
+	disabled = isToday;
+	string = d2wContext.todayButtonLabel;
+}
+
+TodaySpan: WOGenericContainer {
+	class = "disabled button";
+	elementName = "span";
+	omitTags = isNotToday;
+}
+
+ViewButton: WOHyperlink {
+	action = viewLink;
+	disabled = isCurrentView;
+	string = viewString;
+}
+
+ViewButtons: WOGenericContainer {
+	class = "viewButtons";
+	elementName = "ul";
+}
+
+ViewSpan: WOGenericContainer {
+	elementName = "li";
+}

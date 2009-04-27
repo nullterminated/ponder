@@ -29,6 +29,22 @@
       "author" = "0"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
+        "class" = "R2DDelayedUserPreferenceAssignment"; 
+        "keyPath" = "calendarView"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "R2DDelayedUserPreferenceAssignment"; 
+        "keyPath" = "sortOrdering"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
         "class" = "R2DDefaultUserEntityAssignment"; 
         "keyPath" = "defaultUserEntity"; 
       }; 
@@ -274,6 +290,15 @@
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "defaultCalendarView"; 
+        "value" = "MONTH"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "userContactPrototype"; 
         "value" = "email"; 
       }; 
@@ -484,6 +509,20 @@
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "availableCalendarViews"; 
+        "value" = (
+          "DAY", 
+          "WEEK", 
+          "MONTH", 
+          "YEAR"
+        ); 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "emptyAttachmentComponentName"; 
         "value" = "R2D2WDisplayEmptyFile"; 
       }; 
@@ -506,6 +545,15 @@
         "value" = {
           "atom" = "http://www.w3.org/2005/Atom"; 
         }; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "calendarNavigationBarComponentName"; 
+        "value" = "R2D2WCalendarNavigationBar"; 
       }; 
     }, 
     {
@@ -579,21 +627,6 @@
       "author" = "0"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "lhs" = {
-        "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
-        "key" = "smartRelationship.destinationEntity.name"; 
-        "selectorName" = "isLike"; 
-        "value" = "*Attachment"; 
-      }; 
-      "rhs" = {
-        "class" = "com.webobjects.directtoweb.Assignment"; 
-        "keyPath" = "attachmentComponentName"; 
-        "value" = "R2D2WDisplayAttachmentFile"; 
-      }; 
-    }, 
-    {
-      "author" = "0"; 
-      "class" = "com.webobjects.directtoweb.Rule"; 
-      "lhs" = {
         "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
         "qualifiers" = (
           {
@@ -652,6 +685,32 @@
         "qualifiers" = (
           {
             "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "propertyType"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "r"; 
+          }, 
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "smartRelationship.destinationEntity.name"; 
+            "selectorName" = "isLike"; 
+            "value" = "*Attachment"; 
+          }
+        ); 
+      }; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "attachmentComponentName"; 
+        "value" = "R2D2WDisplayAttachmentFile"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "lhs" = {
+        "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
+        "qualifiers" = (
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
             "key" = "formatter"; 
             "selectorName" = "isNotEqualTo"; 
             "value" = {
@@ -695,6 +754,15 @@
       "rhs" = {
         "class" = "R2DDerivedCountSortAssignment"; 
         "keyPath" = "sortKeyForList"; 
+      }; 
+    }, 
+    {
+      "author" = "1"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "templateNameForListCalendarPage"; 
+        "value" = "R2D2WCalendarPage"; 
       }; 
     }, 
     {
@@ -746,11 +814,62 @@
       }; 
     }, 
     {
+      "author" = "3"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "lhs" = {
+        "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
+        "qualifiers" = (
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "smartAttribute.className"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "er.extensions.eof.ERXKeyGlobalID"; 
+          }, 
+          {
+            "class" = "com.webobjects.eocontrol.EOOrQualifier"; 
+            "qualifiers" = (
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "list"; 
+              }, 
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "select"; 
+              }, 
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "inspect"; 
+              }
+            ); 
+          }
+        ); 
+      }; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "componentName"; 
+        "value" = "R2D2WDisplayKeyGlobalID"; 
+      }; 
+    }, 
+    {
       "author" = "5"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "R2DDefaultAttachmentAssignment"; 
         "keyPath" = "formEncoding"; 
+      }; 
+    }, 
+    {
+      "author" = "5"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "R2DUserPreferencesAssignment"; 
+        "keyPath" = "userPreferences"; 
       }; 
     }, 
     {
@@ -1037,6 +1156,15 @@
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "dayButtonLabel"; 
+        "value" = "R2D2W.dayButtonLabel"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
         "keyPath" = "rssButtonLabel"; 
         "value" = "R2D2W.rssButtonLabel"; 
       }; 
@@ -1053,6 +1181,24 @@
     {
       "author" = "10"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "weekButtonLabel"; 
+        "value" = "R2D2W.weekButtonLabel"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "yearButtonLabel"; 
+        "value" = "R2D2W.yearButtonLabel"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
       "lhs" = {
         "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
         "key" = "pageConfiguration"; 
@@ -1063,6 +1209,24 @@
         "class" = "er.directtoweb.ERDKeyValueAssignment"; 
         "keyPath" = "entity"; 
         "value" = "dummyEntity"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "monthButtonLabel"; 
+        "value" = "R2D2W.monthButtonLabel"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "todayButtonLabel"; 
+        "value" = "R2D2W.todayButtonLabel"; 
       }; 
     }, 
     {
@@ -1395,6 +1559,58 @@
         "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "subTask"; 
         "value" = "plainText"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "R2DDelayedSelectorInvocationAssignment"; 
+        "keyPath" = "calendarCaptionFormat"; 
+        "value" = (
+          "session.localizer", 
+          "localizedStringForKey", 
+          (
+            "java.lang.String"
+          ), 
+          (
+            "calendarCaptionFormatKey"
+          )
+        ); 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDDelayedSwitchAssignment"; 
+        "keyPath" = "calendarComponentName"; 
+        "value" = {
+          "qualifierFormat" = "calendarView = '@@'"; 
+          "switch" = {
+            "DAY" = "R2DDayView"; 
+            "MONTH" = "R2DMonthView"; 
+            "WEEK" = "R2DWeekView"; 
+            "YEAR" = "R2DYearView"; 
+          }; 
+        }; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDDelayedSwitchAssignment"; 
+        "keyPath" = "calendarCaptionFormatKey"; 
+        "value" = {
+          "qualifierFormat" = "calendarView = '@@'"; 
+          "switch" = {
+            "DAY" = "R2D2W.dayCaptionFormat"; 
+            "MONTH" = "R2D2W.monthCaptionFormat"; 
+            "WEEK" = "R2D2W.weekCaptionFormat"; 
+            "YEAR" = "R2D2W.yearCaptionFormat"; 
+          }; 
+        }; 
       }; 
     }, 
     {
@@ -2176,6 +2392,22 @@
       "rhs" = {
         "class" = "R2DDefaultRSSAssignment"; 
         "keyPath" = "displayPropertyKeys"; 
+      }; 
+    }, 
+    {
+      "author" = "15"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "lhs" = {
+        "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+        "key" = "session.objectStore.user"; 
+        "selectorName" = "isEqualTo"; 
+        "value" = {
+          "class" = "com.webobjects.foundation.NSKeyValueCoding$Null"; 
+        }; 
+      }; 
+      "rhs" = {
+        "class" = "R2DUserPreferencesAssignment"; 
+        "keyPath" = "userPreferences"; 
       }; 
     }, 
     {
@@ -3622,6 +3854,14 @@
         "class" = "er.directtoweb.ERDKeyValueAssignment"; 
         "keyPath" = "pageName"; 
         "value" = "templateNameForEditPage"; 
+      }; 
+    }, 
+    {
+      "author" = "201"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "R2DDelayedUserPreferenceAssignment"; 
+        "keyPath" = "batchSize"; 
       }; 
     }
   ); 
