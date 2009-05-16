@@ -28,7 +28,7 @@ public class R2D2WQueryEntitiesPage extends ERD2WQueryEntitiesPage {
     	Boolean result = Boolean.FALSE;
     	D2WContext rc = relationshipContext();
        	rc.setEntity(entity());
-    	NSArray propertyKeys = ERXValueUtilities.arrayValueWithDefault(rc.valueForKey(D2WModel.DisplayPropertyKeysKey), NSArray.EmptyArray);
+    	NSArray<String> propertyKeys = ERXValueUtilities.arrayValueWithDefault(rc.valueForKey(D2WModel.DisplayPropertyKeysKey), NSArray.EmptyArray);
 		for(Object key: propertyKeys) {
 			String attributeName = (String)key;
 			EOAttribute attribute = entity().attributeNamed(attributeName);

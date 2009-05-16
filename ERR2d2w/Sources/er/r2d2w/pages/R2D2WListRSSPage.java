@@ -34,7 +34,7 @@ public class R2D2WListRSSPage extends ERD2WListPage {
 	
 	public String otherTagStringForRSSTag() {
 		StringBuilder sb = new StringBuilder();
-		NSDictionary rssNamespaces = ERXValueUtilities.dictionaryValueWithDefault(d2wContext().valueForKey("rssNamespaces"), NSDictionary.EmptyDictionary);
+		NSDictionary<String,Object> rssNamespaces = ERXValueUtilities.dictionaryValueWithDefault(d2wContext().valueForKey("rssNamespaces"), NSDictionary.EmptyDictionary);
 		for(Object key: rssNamespaces.allKeys()) {
 			sb.append("xmlns:").append(key).append("=\"").append(rssNamespaces.objectForKey(key)).append("\" ");
 		}
@@ -97,7 +97,7 @@ public class R2D2WListRSSPage extends ERD2WListPage {
 	}
 
 	public boolean missingAtom() {
-		NSDictionary rssNamespaces = ERXValueUtilities.dictionaryValueWithDefault(d2wContext().valueForKey("rssNamespaces"), NSDictionary.EmptyDictionary);
+		NSDictionary<String,Object> rssNamespaces = ERXValueUtilities.dictionaryValueWithDefault(d2wContext().valueForKey("rssNamespaces"), NSDictionary.EmptyDictionary);
 		return !rssNamespaces.containsKey("atom");
 	}
 
