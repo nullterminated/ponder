@@ -38,7 +38,7 @@ Previous: WOHyperlink {
 }
 
 SelectedDate: WOTextField {
-	dateformat = dateFormat;
+	formatter = dateFormat;
 	id = textFieldID;
 	value = ^rangeGrouper.selectedDate;
 }
