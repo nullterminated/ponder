@@ -62,7 +62,7 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
     			// If date is null, the object is not grouped.
     			if(!isNullKey) {
     				NSTimestamp date = (NSTimestamp)startDate;
-    				date = new NSTimestamp(date.getTime(), currentTimeZone());
+    				date = _dateInCurrentZone(date);
     				Object duration = NSKeyValueCodingAdditions.Utility.valueForKeyPath(o, durationKeyPath());
     				
     				// Create a range from the date and duration
@@ -72,7 +72,7 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
     				} else if(duration instanceof Number) {
     					rangeValue = new R2DDateRange(date, ((Number)duration).longValue());
     				} else if(duration instanceof NSTimestamp) {
-    					NSTimestamp endDate = new NSTimestamp(((NSTimestamp)duration).getTime(), currentTimeZone());
+    					NSTimestamp endDate = _dateInCurrentZone((NSTimestamp)duration);
     					rangeValue = new R2DDateRange(date, endDate);
     				} else {
     					throw new IllegalArgumentException("Value for durationKeyPath [" + durationKeyPath() + "] is not a Number or NSTimestamp. Value = " + duration);
@@ -150,7 +150,7 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
     	NSTimestamp result = _dateForDayInYear(ERXTimestampUtility.yearOfCommonEra(value), ERXTimestampUtility.dayOfYear(value));
     	return result;
     }
-        
+    
 	public CalendarView calendarView() {
 		return _calendarView;
 	}
@@ -164,6 +164,7 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
 	}
 	
 	public void setCurrentTimeZone(TimeZone timeZone) {
+		if(timeZone == null) { throw new NullPointerException("TimeZone must not be null!"); }
 		_currentTimeZone = timeZone;
 		_groupedObjects = null;
 	}
@@ -176,5 +177,9 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
 		_groupedObjects = null;
 		_durationKeyPath = durationKeyPath;
 	}
-    
+	
+	protected NSTimestamp _dateInCurrentZone(NSTimestamp date) {
+		date = new NSTimestamp(date.getTime(), currentTimeZone());
+		return date;
+	}
 }
