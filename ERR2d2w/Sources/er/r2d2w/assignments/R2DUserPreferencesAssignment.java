@@ -6,13 +6,9 @@ import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.eocontrol.EOKeyValueArchiver;
 import com.webobjects.eocontrol.EOKeyValueUnarchiver;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSForwardException;
 import com.webobjects.foundation.NSMutableDictionary;
 
 import er.directtoweb.assignments.ERDAssignment;
-import er.extensions.foundation.ERXProperties;
-import er.extensions.foundation.ERXRetainer;
-import er.r2d2w.delegates.PreferenceHandlerDelegate;
 
 public class R2DUserPreferencesAssignment extends ERDAssignment {
 
