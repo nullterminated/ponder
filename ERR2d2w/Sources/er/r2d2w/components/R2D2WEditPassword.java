@@ -102,8 +102,7 @@ public class R2D2WEditPassword extends ERDCustomEditComponent {
         validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), key(), password(), errorCode), password(), key());
     }
 
-    // Yeah, it looks like (is) a total hack, but it seems to work.
-    //TODO figure out how to do this in a cleaner way
+    //TODO figure out how to do this in a cleaner way?
     protected void checkPasswords() {
     	if(password() == null || password().length() == 0 || confirmPassword() == null || confirmPassword().length() == 0) {
     		confirmPassword = (String)objectPropertyValue();
