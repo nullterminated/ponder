@@ -39,7 +39,7 @@ public class R2D2WDisplayToOneFault extends D2WDisplayToOneFault {
     }
     
 	public NSDictionary<String, Object> queryDictionary() {
-		NSDictionary d = EOUtilities.destinationKeyForSourceObject(object().editingContext(), object(), propertyKey());
+		NSDictionary<String,Object> d = EOUtilities.destinationKeyForSourceObject(object().editingContext(), object(), propertyKey());
 		if(d != null && d.count() > 0) {
 			Object o = d.allValues().objectAtIndex(0);
 			if(o.equals(NSKeyValueCoding.NullValue)) {

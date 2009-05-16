@@ -34,7 +34,7 @@ public class R2DPieChart extends ERXStatelessComponent {
 	private static final String semicolon = ";";
 	private static final String zeroOffset = "0 0";
 	
-	private NSDictionary<String, ? extends Number> chartDictionary;
+	private NSDictionary<String, Number> chartDictionary;
 	private NSArray<String> sortedChartKeys;
 	private String sliceKey;
 	private Number total;
@@ -57,20 +57,19 @@ public class R2DPieChart extends ERXStatelessComponent {
 		total = null;
 	}
     
-	@SuppressWarnings("unchecked")
-	public NSDictionary<String, ? extends Number> chartDictionary() {
+	public NSDictionary<String, Number> chartDictionary() {
 		if(chartDictionary == null) {
-			chartDictionary = (NSDictionary<String, ? extends Number>)valueForBinding("chartDictionary");
+			chartDictionary = (NSDictionary<String, Number>)valueForBinding("chartDictionary");
 		}
 		return chartDictionary;
 	}
 	
 	public NSArray<String> sortedChartKeys() {
 		if(sortedChartKeys == null) {
-			NSArray tmpKeys = ERXDictionaryUtilities.keysSortedByValueAscending(chartDictionary());
+			NSArray<String> tmpKeys = ERXDictionaryUtilities.keysSortedByValueAscending(chartDictionary());
 			NSMutableArray<String> reverseKeys = new NSMutableArray<String>();
 			for(int i = tmpKeys.count() -1; i >= 0; i--) {
-				reverseKeys.add((String)tmpKeys.objectAtIndex(i));
+				reverseKeys.add(tmpKeys.objectAtIndex(i));
 			}
 			sortedChartKeys = reverseKeys.immutableClone();
 		}
@@ -84,7 +83,7 @@ public class R2DPieChart extends ERXStatelessComponent {
 		return total;
 	}
 	
-	public Number totalForArray(NSArray array) {
+	public Number totalForArray(NSArray<Number> array) {
 		return (Number)NSArray.operatorForKey(NSArray.SumOperatorName).compute(array, "doubleValue");
 	}
 

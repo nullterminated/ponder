@@ -15,7 +15,7 @@ public class R2D2WQueryBoolean extends ERD2WCustomQueryBoolean {
     }
     
     public String displayString() {
-    	NSArray choicesNames = choicesNames();
+    	NSArray<String> choicesNames = choicesNames();
         String result;
         int choicesIndex = queryNumbers.indexOf(item);
         choicesIndex = choicesIndex == 0 ? 2 : choicesIndex - 1;

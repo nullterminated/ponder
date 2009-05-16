@@ -199,7 +199,7 @@ public class R2DDefaultUserEntityAssignment extends ERDAssignment {
 	protected EOAttribute attributeForPrototype(EOEntity entity, String proto) {
 		EOAttribute result = null;
 		for(EOAttribute attr: entity.attributes()) {
-			NSDictionary userInfo = attr.userInfo();
+			NSDictionary<String,Object> userInfo = attr.userInfo();
 			if(userInfo != null) {
 				Object val = userInfo.objectForKey(PROTOTYPE_KEY);
 				if(proto.equals(val)) {
@@ -224,10 +224,10 @@ public class R2DDefaultUserEntityAssignment extends ERDAssignment {
 	protected EOEntity entityForPrototype(D2WContext c, String proto) {
 		EOEntity result = null;
 		EOEditingContext ec = ERXEC.newEditingContext();
-		NSArray entityNames = (NSArray)c.valueForKey(D2WModel.VisibleEntityNamesKey);
-		for(Object name: entityNames) {
-			EOEntity entity = EOUtilities.entityNamed(ec, name.toString());
-			NSDictionary userInfo = entity.userInfo();
+		NSArray<String> entityNames = (NSArray<String>)c.valueForKey(D2WModel.VisibleEntityNamesKey);
+		for(String name: entityNames) {
+			EOEntity entity = EOUtilities.entityNamed(ec, name);
+			NSDictionary<String,Object> userInfo = entity.userInfo();
 			if(userInfo != null) {
 				Object val = userInfo.objectForKey(PROTOTYPE_KEY);
 				if(proto.equals(val)){

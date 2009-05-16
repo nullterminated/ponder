@@ -44,7 +44,7 @@ public class R2DDefaultDisplayNameAssignment extends ERDAssignment implements ER
     	String propKey = c.propertyKey();
     	String propName = propKey.substring(0, propKey.length()-3);
     	String languageKey = propKey.substring(propKey.length()-2);
-    	languageKey = languages().get(languageKey).toString();    		
+    	languageKey = languages().objectForKey(languageKey);    		
     	
     	// Localize the attribute name
     	ERXLocalizer loc = ERXLocalizer.currentLocalizer();
@@ -61,9 +61,9 @@ public class R2DDefaultDisplayNameAssignment extends ERDAssignment implements ER
     	return displayName;
     }
 
-	private static NSDictionary langauges;
+	private static NSDictionary<String,String> langauges;
 	
-	private NSDictionary languages() {
+	private NSDictionary<String,String> languages() {
 		if(langauges == null) {
 			langauges = ERXDictionaryUtilities.dictionaryFromPropertyList("Languages", NSBundle.bundleForName("JavaWebObjects"));
 		}

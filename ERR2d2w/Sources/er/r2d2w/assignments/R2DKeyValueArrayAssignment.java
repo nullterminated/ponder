@@ -33,9 +33,9 @@ public class R2DKeyValueArrayAssignment extends ERDAssignment {
 	
 	public Object fire(D2WContext c) {
 		NSMutableArray<Object> results = new NSMutableArray<Object>();
-		NSArray keyPaths = (NSArray)value();
-		for(Object path: keyPaths) {
-			results.addObject(c.valueForKeyPath(path.toString()));
+		NSArray<String> keyPaths = (NSArray<String>)value();
+		for(String path: keyPaths) {
+			results.addObject(c.valueForKeyPath(path));
 		}
 		return results;
 	}

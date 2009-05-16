@@ -69,7 +69,7 @@ public class R2DDelayedSelectorInvocationAssignment
 			parameters[j] = o;
 		}
 		
-		NSSelector<?> sel = new NSSelector(selectorName, parameterTypes);
+		NSSelector<?> sel = new NSSelector<Object>(selectorName, parameterTypes);
 		result = ERXSelectorUtilities.invoke(sel, target, parameters);
 		
 		return result;

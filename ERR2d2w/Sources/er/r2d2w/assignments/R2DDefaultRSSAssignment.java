@@ -67,7 +67,7 @@ public class R2DDefaultRSSAssignment extends ERDAssignment {
 		super(key, value);
 	}
 
-	public NSArray dependentKeys(String keyPath) {
+	public NSArray<String> dependentKeys(String keyPath) {
 		return (keyPath.equals(D2WModel.DisplayPropertyKeysKey))?dpkDependentKeys:dependentKeys;
 	}
 	

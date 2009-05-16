@@ -37,9 +37,8 @@ public class R2D2WPieChart extends ERD2WStatelessComponent {
 			sql.append(c.entity().externalName());
 			sql.append(space).append(groupBy).append(space);
 			sql.append(attr.columnName());
-			NSArray array = EOUtilities.rawRowsForSQL(session().defaultEditingContext(), c.entity().model().name(), sql.toString(), new NSArray<String>( new String[]{keyKey, countKey}));
-			for(Object o: array) {
-				NSDictionary counts = (NSDictionary)o;
+			NSArray<NSDictionary<String,Object>> array = EOUtilities.rawRowsForSQL(session().defaultEditingContext(), c.entity().model().name(), sql.toString(), new NSArray<String>( new String[]{keyKey, countKey}));
+			for(NSDictionary<String,Object> counts: array) {
 				String key = (String)counts.objectForKey(keyKey);
 				Number value = (Number)counts.objectForKey(countKey);
 				//FIXME localize boolean and language values here

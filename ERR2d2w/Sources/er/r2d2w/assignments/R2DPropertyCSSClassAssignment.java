@@ -32,7 +32,7 @@ public class R2DPropertyCSSClassAssignment extends ERDDelayedAssignment {
 	public Object fireNow(D2WContext c) {
 		NSMutableArray<String> classes = new NSMutableArray<String>();
 		String propertyKey = c.propertyKey();
-		NSArray exceptions = (NSArray)c.valueForKey("keyPathsWithValidationExceptions");
+		NSArray<String> exceptions = (NSArray<String>)c.valueForKey("keyPathsWithValidationExceptions");
 		if(exceptions != null && exceptions.containsObject(propertyKey)) {
 			classes.add(ERROR_CLASS);
 		}

@@ -21,7 +21,7 @@ public class R2DInfoPanel extends ERDCustomComponent {
 			infoStrings = new NSMutableArray<String>();
 			ERXLocalizer loc = ERXLocalizer.currentLocalizer();
 			D2WContext c = d2wContext();
-			NSArray propKeys = (NSArray)c.valueForKey("displayPropertyKeys");
+			NSArray<String> propKeys = (NSArray<String>)c.valueForKey("displayPropertyKeys");
 			for(Object prop: propKeys) {
 				String locKey = "PropertyKey." + prop.toString() + ".inputInfo";
 				c.setPropertyKey(prop.toString());

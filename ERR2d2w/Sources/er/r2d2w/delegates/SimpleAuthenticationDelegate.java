@@ -54,7 +54,7 @@ public class SimpleAuthenticationDelegate implements NextPageDelegate {
 		EOFetchSpecification f = new EOFetchSpecification(page.entityName(), q, null);
 		EODatabaseDataSource dds = new EODatabaseDataSource(page.editingContext(),page.entityName());
 		dds.setFetchSpecification(f);
-		NSArray objects = dds.fetchObjects();
+		NSArray<EOEnterpriseObject> objects = dds.fetchObjects();
 		
 		int count = objects.count();
 		
@@ -63,7 +63,7 @@ public class SimpleAuthenticationDelegate implements NextPageDelegate {
 			invalidCredentials(c, usernameKey, passwordKey, sender);
 			break;
 		case 1:
-			EOEnterpriseObject user = (EOEnterpriseObject)objects.objectAtIndex(0);
+			EOEnterpriseObject user = objects.objectAtIndex(0);
 			ERXSession session = (ERXSession)sender.session();
 			session.setObjectForKey(user, "user");
 			didAuthenticate(sender);

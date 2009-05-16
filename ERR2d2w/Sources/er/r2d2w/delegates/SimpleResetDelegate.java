@@ -52,7 +52,7 @@ public class SimpleResetDelegate implements NextPageDelegate {
 		EOFetchSpecification f = new EOFetchSpecification(page.entityName(), q, null);
 		EODatabaseDataSource dds = new EODatabaseDataSource(page.editingContext(),page.entityName());
 		dds.setFetchSpecification(f);
-		NSArray objects = dds.fetchObjects();
+		NSArray<EOEnterpriseObject> objects = dds.fetchObjects();
 		
 		int count = objects.count();
 
@@ -61,7 +61,7 @@ public class SimpleResetDelegate implements NextPageDelegate {
 			userIDNotFound(c, usernameKey, sender);
 			break;
 		case 1:
-			EOEnterpriseObject user = (EOEnterpriseObject)objects.objectAtIndex(0);
+			EOEnterpriseObject user = objects.objectAtIndex(0);
 			String path = (String)c.valueForKeyPath("userContactAttribute.name");
 			String mailToAddress = (String)user.valueForKey(path);
 			

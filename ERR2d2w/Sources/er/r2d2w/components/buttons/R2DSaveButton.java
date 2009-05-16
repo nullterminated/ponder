@@ -33,7 +33,7 @@ public class R2DSaveButton extends ERDActionButton {
             parentPage.takeValueForKey(ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("ERD2WInspect.alreadyAborted", d2wContext()), "errorMessage");
             clearValidationFailed();
         } else {
-        	NSDictionary errorMessages = ERXValueUtilities.dictionaryValueWithDefault(parentPage.valueForKey("errorMessages"), NSDictionary.EmptyDictionary);
+        	NSDictionary<String,String> errorMessages = ERXValueUtilities.dictionaryValueWithDefault(parentPage.valueForKey("errorMessages"), NSDictionary.EmptyDictionary);
             if (errorMessages.count()==0) {
                 try {
                 	// CHECKME objectsaver interface on edit page is not going to work
@@ -52,7 +52,7 @@ public class R2DSaveButton extends ERDActionButton {
         }
 
         // refresh newly created object to get values for derived attributes.
-        NSDictionary errorMessages = ERXValueUtilities.dictionaryValueWithDefault(parentPage.valueForKey("errorMessages"), NSDictionary.EmptyDictionary);
+        NSDictionary<String,String> errorMessages = ERXValueUtilities.dictionaryValueWithDefault(parentPage.valueForKey("errorMessages"), NSDictionary.EmptyDictionary);
     	if(errorMessages.count() == 0) {
     		EOEditingContext ec = object().editingContext();
     		ec.refreshObject(object());

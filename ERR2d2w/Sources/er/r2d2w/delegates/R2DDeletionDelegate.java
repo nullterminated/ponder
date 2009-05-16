@@ -53,7 +53,7 @@ public class R2DDeletionDelegate implements NextPageDelegate {
 			} catch (EOObjectNotAvailableException e) {
 				exception = ERXValidationFactory.defaultFactory().createCustomException(eo, EOObjectNotAvailableException.class.getSimpleName());
 			} catch (EOGeneralAdaptorException e) {
-				NSDictionary userInfo = e.userInfo();
+				NSDictionary<Object,Object> userInfo = e.userInfo();
             	if(userInfo != null) {
             		EODatabaseOperation op = (EODatabaseOperation)userInfo.objectForKey(EODatabaseContext.FailedDatabaseOperationKey);
             		if(op.databaseOperator() == EODatabaseOperation.DatabaseDeleteOperator) {
