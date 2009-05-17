@@ -1,4 +1,4 @@
-package er.r2d2w.components;
+package er.r2d2w.components.calendar;
 
 import java.text.SimpleDateFormat;
 
@@ -24,14 +24,17 @@ public class R2D2WCalendarNavigationBar extends ERD2WStatelessComponent {
 	
 	private NSArray<String> calendarViews;
 	private R2DDateRangeGrouper.CalendarView currentView;
+	private SimpleDateFormat formatter;
 	private String textFieldID;
 	private String viewItem;
 
 	public void reset() {
 		calendarViews = null;
 		currentView = null;
+		formatter = null;
 		textFieldID = null;
 		viewItem = null;
+		super.reset();
 	}
 	
     public R2D2WCalendarNavigationBar(WOContext context) {
@@ -132,12 +135,16 @@ public class R2D2WCalendarNavigationBar extends ERD2WStatelessComponent {
 	/**
 	 * Since the R2DDateRangeGrouper already adjusts for time zone, an unadjusted formatter is
 	 * required to avoid errors in the text field.
-	 * @return a new SimpleDateFormat with a default time zone
+	 * @return a new localized SimpleDateFormat with a default time zone
 	 */
 	public SimpleDateFormat dateFormat() {
-		String format = ERXLocalizer.currentLocalizer().localizedStringForKey("R2D2WCalendarNavigationBar.format");
-		format = ERXStringUtilities.stringIsNullOrEmpty(format)?defaultFormat:format;
-		return new SimpleDateFormat(format);
+		if(formatter == null) {
+			ERXLocalizer loc = ERXLocalizer.currentLocalizer();
+			String format = loc.localizedStringForKey("R2D2WCalendarNavigationBar.format");
+			format = ERXStringUtilities.stringIsNullOrEmpty(format)?defaultFormat:format;
+			formatter = new SimpleDateFormat(format, loc.locale());
+		}
+		return formatter;
 	}
 
 }

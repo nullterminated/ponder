@@ -1,11 +1,15 @@
 package er.r2d2w.pages;
 
+import java.util.TimeZone;
+
 import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
+import com.webobjects.appserver.WOResponse;
 
 import er.directtoweb.pages.ERD2WCalendarPage;
+import er.extensions.appserver.ERXSession;
 import er.r2d2w.foundation.R2DDateRangeGrouper;
 
 public class R2D2WCalendarPage extends ERD2WCalendarPage {
@@ -16,6 +20,17 @@ public class R2D2WCalendarPage extends ERD2WCalendarPage {
 	public R2D2WCalendarPage(WOContext context) {
         super(context);
     }
+	
+	public void appendToResponse(WOResponse r, WOContext c) {
+		if(ERXSession.class.isAssignableFrom(session().getClass())) {
+			TimeZone tz = ((ERXSession)session()).timeZone();
+			if(!rangeGrouper().currentTimeZone().equals(tz)) {
+				log.debug("Updating to new time zone: " + tz.getID());
+				rangeGrouper().setCurrentTimeZone(tz);
+			}
+		}
+		super.appendToResponse(r, c);
+	}
 	
 	public WODisplayGroup displayGroup() {
 		if(_displayGroup == null) {
@@ -31,6 +46,9 @@ public class R2D2WCalendarPage extends ERD2WCalendarPage {
 				String durationKey = (String)d2wContext().valueForKey("durationGroupingKey");
 				if(durationKey != null) { grouper.setDurationKeyPath(durationKey); }
 			}
+			if(ERXSession.class.isAssignableFrom(session().getClass())) {
+				grouper.setCurrentTimeZone(((ERXSession)session()).timeZone());
+			}
 			_displayGroup = grouper;
 		}
 		return _displayGroup;
@@ -39,5 +57,5 @@ public class R2D2WCalendarPage extends ERD2WCalendarPage {
 	public R2DDateRangeGrouper rangeGrouper() {
 		return (R2DDateRangeGrouper)displayGroup();
 	}
-
+	
 }

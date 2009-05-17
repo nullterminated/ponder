@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOMessage;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 
@@ -39,7 +40,8 @@ public class R2DTimeZoneMenu extends ERXStatelessComponent {
 	
 	public String zoneDisplayName() {
 		Locale l = ((ERXSession)session()).localizer().locale();
-		return zone().getDisplayName(l);
+		//TODO use a ERXLocalizer override since Java's defaults kinda suck
+		return WOMessage.stringByEscapingHTMLString(zone().getDisplayName(l));
 	}
 
 	/**
@@ -60,4 +62,5 @@ public class R2DTimeZoneMenu extends ERXStatelessComponent {
 		}
 		return zoneList;
 	}
+	
 }

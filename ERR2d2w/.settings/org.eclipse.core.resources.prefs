@@ -1,4 +1,4 @@
-#Sun Apr 12 02:10:58 EDT 2009
+#Sun May 17 10:58:47 EDT 2009
 eclipse.preferences.version=1
 encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo/R2D2WActionGroup.html=UTF-8
@@ -247,7 +247,6 @@ encoding//Components/R2DYearView.api=UTF-8
 encoding//Resources/English.lproj/Localizable.strings=UTF-16
 encoding//Resources/English.lproj/ValidationTemplate.strings=UTF-16
 encoding//Sources/er/r2d2w/components/R2D2WActionGroup.java=UTF-8
-encoding//Sources/er/r2d2w/components/R2D2WCalendarNavigationBar.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2D2WDisplayAttachmentFile.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2D2WDisplayDate.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2D2WDisplayEmptyFile.java=UTF-8
@@ -282,13 +281,14 @@ encoding//Sources/er/r2d2w/components/buttons/R2DPodcastButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DRSSButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DSaveButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DSelectButton.java=UTF-8
+encoding//Sources/er/r2d2w/components/calendar/R2D2WCalendarNavigationBar.java=UTF-8
+encoding//Sources/er/r2d2w/components/calendar/R2DDayView.java=UTF-8
+encoding//Sources/er/r2d2w/components/calendar/R2DMonthView.java=UTF-8
+encoding//Sources/er/r2d2w/components/calendar/R2DWeekView.java=UTF-8
+encoding//Sources/er/r2d2w/components/calendar/R2DYearView.java=UTF-8
 encoding//Sources/er/r2d2w/components/charting/R2D2WPieChart.java=UTF-8
 encoding//Sources/er/r2d2w/components/charting/R2DPieChart.java=UTF-8
-encoding//Sources/er/r2d2w/components/misc/R2DDayView.java=UTF-8
 encoding//Sources/er/r2d2w/components/misc/R2DEmptyListMessage.java=UTF-8
-encoding//Sources/er/r2d2w/components/misc/R2DMonthView.java=UTF-8
-encoding//Sources/er/r2d2w/components/misc/R2DWeekView.java=UTF-8
-encoding//Sources/er/r2d2w/components/misc/R2DYearView.java=UTF-8
 encoding//Sources/er/r2d2w/components/relationships/R2D2WQueryAnyField.java=UTF-8
 encoding//Sources/er/r2d2w/pages/R2D2WCalendarPage.java=UTF-8
 encoding//Sources/er/r2d2w/pages/R2D2WListRSSPage.java=UTF-8

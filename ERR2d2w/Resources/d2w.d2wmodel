@@ -1566,6 +1566,24 @@
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "R2DDelayedSelectorInvocationAssignment"; 
+        "keyPath" = "calendarHeaderFormat"; 
+        "value" = (
+          "session.localizer", 
+          "localizedStringForKey", 
+          (
+            "java.lang.String"
+          ), 
+          (
+            "calendarHeaderFormatKey"
+          )
+        ); 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "R2DDelayedSelectorInvocationAssignment"; 
         "keyPath" = "calendarCaptionFormat"; 
         "value" = (
           "session.localizer", 
@@ -1601,6 +1619,23 @@
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "ERDDelayedSwitchAssignment"; 
+        "keyPath" = "calendarHeaderFormatKey"; 
+        "value" = {
+          "qualifierFormat" = "calendarView = '@@'"; 
+          "switch" = {
+            "DAY" = "R2D2W.dayHeaderFormat"; 
+            "MONTH" = "R2D2W.monthHeaderFormat"; 
+            "WEEK" = "R2D2W.weekHeaderFormat"; 
+            "YEAR" = "R2D2W.yearHeaderFormat"; 
+          }; 
+        }; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDDelayedSwitchAssignment"; 
         "keyPath" = "calendarCaptionFormatKey"; 
         "value" = {
           "qualifierFormat" = "calendarView = '@@'"; 
@@ -1609,6 +1644,23 @@
             "MONTH" = "R2D2W.monthCaptionFormat"; 
             "WEEK" = "R2D2W.weekCaptionFormat"; 
             "YEAR" = "R2D2W.yearCaptionFormat"; 
+          }; 
+        }; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDDelayedSwitchAssignment"; 
+        "keyPath" = "calendarCellComponentName"; 
+        "value" = {
+          "qualifierFormat" = "calendarView = '@@'"; 
+          "switch" = {
+            "DAY" = "R2D2WSimpleCalendarCell"; 
+            "MONTH" = "R2D2WSimpleCalendarCell"; 
+            "WEEK" = "R2D2WSimpleCalendarCell"; 
+            "YEAR" = "R2D2WSimpleCalendarCell"; 
           }; 
         }; 
       }; 

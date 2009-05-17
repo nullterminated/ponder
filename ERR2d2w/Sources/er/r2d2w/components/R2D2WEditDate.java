@@ -10,6 +10,7 @@ import com.webobjects.foundation.NSTimestamp;
 import com.webobjects.foundation.NSValidation;
 
 import er.directtoweb.components.ERDCustomEditComponent;
+import er.extensions.appserver.ERXSession;
 import er.extensions.localization.ERXLocalizer;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
@@ -65,7 +66,11 @@ public class R2D2WEditDate extends ERDCustomEditComponent {
 	}
 
 	public SimpleDateFormat dateFormatter() {
-		return new SimpleDateFormat(formatPattern());
+		SimpleDateFormat result = new SimpleDateFormat(formatPattern());
+		if(ERXSession.class.isAssignableFrom(session().getClass())) {
+			result.setTimeZone(((ERXSession)session()).timeZone());
+		}
+		return result;
 	}
 
 	public String formatPattern() {

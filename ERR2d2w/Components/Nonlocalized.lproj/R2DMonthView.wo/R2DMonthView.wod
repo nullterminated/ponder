@@ -1,3 +1,9 @@
+CalendarCellComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.calendarCellComponentName;
+	localContext = d2wContext;
+	rangeGrouper = ^rangeGrouper;
+}
+
 CalendarTable: WOGenericContainer {
 	border = 1;
 	cellpadding = 2;
@@ -16,17 +22,9 @@ DatesForWeeks: WORepetition {
 	item = ^rangeGrouper.datesForCurrentWeek;
 }
 
-DateLink: WOHyperlink {
-	action = selectDateAction;
-	disabled = ^rangeGrouper.hasNoObjectsForCurrentDate;
-}
-
-DateString: WOString {
-	value = dayString;
-}
-
 DayName: WOString {
-	value = dayName;
+	formatter = calendarHeaderFormat;
+	value = ^rangeGrouper.currentDate;
 }
 
 HeaderLoop: WORepetition {
@@ -35,7 +33,7 @@ HeaderLoop: WORepetition {
 }
 
 MonthName: WOString {
-	dateformat = d2wContext.calendarCaptionFormat;
+	formatter = calendarCaptionFormat;
 	value = ^rangeGrouper.selectedDate;
 }
 

@@ -115,11 +115,17 @@
 ) [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration = 'MailUserReset' or pageConfiguration = 'MailPlainUserReset') => explanationComponentName = ERXD2WInspect [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration like 'MailPlain*' or pageConfiguration = plainTextEmbeddedInspectUserConfiguration) => subTask = plainText [com.webobjects.directtoweb.Assignment],
+    10 : *true* => calendarHeaderFormat = ("session.localizer",localizedStringForKey,    (    "java.lang.String"),    (    calendarHeaderFormatKey)
+) [R2DDelayedSelectorInvocationAssignment],
     10 : *true* => calendarCaptionFormat = ("session.localizer",localizedStringForKey,    (    "java.lang.String"),    (    calendarCaptionFormatKey)
 ) [R2DDelayedSelectorInvocationAssignment],
     10 : *true* => calendarComponentName = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2DDayView"; "MONTH" = "R2DMonthView"; "WEEK" = "R2DWeekView"; "YEAR" = "R2DYearView"; }; 
 } [ERDDelayedSwitchAssignment],
+    10 : *true* => calendarHeaderFormatKey = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2W.dayHeaderFormat"; "MONTH" = "R2D2W.monthHeaderFormat"; "WEEK" = "R2D2W.weekHeaderFormat"; "YEAR" = "R2D2W.yearHeaderFormat"; }; 
+} [ERDDelayedSwitchAssignment],
     10 : *true* => calendarCaptionFormatKey = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2W.dayCaptionFormat"; "MONTH" = "R2D2W.monthCaptionFormat"; "WEEK" = "R2D2W.weekCaptionFormat"; "YEAR" = "R2D2W.yearCaptionFormat"; }; 
+} [ERDDelayedSwitchAssignment],
+    10 : *true* => calendarCellComponentName = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2WSimpleCalendarCell"; "MONTH" = "R2D2WSimpleCalendarCell"; "WEEK" = "R2D2WSimpleCalendarCell"; "YEAR" = "R2D2WSimpleCalendarCell"; }; 
 } [ERDDelayedSwitchAssignment],
     10 : (entity != dummyEntity and (pageConfiguration = 'UserLogin' or pageConfiguration = defaultEmbeddedInspectUserConfiguration or pageConfiguration = plainTextEmbeddedInspectUserConfiguration)) => displayPropertyKeys = ("userIDAttribute.name","userCredentialAttribute.name"
 ) [R2DKeyValueArrayAssignment],

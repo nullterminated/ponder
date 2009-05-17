@@ -11,7 +11,7 @@ import er.extensions.ERXExtensions;
 import er.extensions.batching.ERXBatchNavigationBar;
 import er.extensions.components.ERXSortOrder;
 import er.extensions.eof.ERXConstant;
-import er.r2d2w.components.R2D2WCalendarNavigationBar;
+import er.r2d2w.components.calendar.R2D2WCalendarNavigationBar;
 
 public class PreferenceHandlerDelegate {
 	/**

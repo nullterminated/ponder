@@ -1,0 +1,10 @@
+DateLink: WOHyperlink {
+	action = selectDateAction;
+	disabled = ^rangeGrouper.hasNoObjectsForCurrentDate;
+}
+
+DateString: WOString {
+	formatter = dateFormat;
+	value = ^rangeGrouper.currentDate;
+}
+

@@ -1,4 +1,4 @@
-package er.r2d2w.components.misc;
+package er.r2d2w.components.calendar;
 
 import com.webobjects.appserver.WOContext;
 import er.directtoweb.components.ERD2WStatelessComponent;
