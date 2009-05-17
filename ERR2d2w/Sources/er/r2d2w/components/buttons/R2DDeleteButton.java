@@ -20,10 +20,13 @@ public class R2DDeleteButton extends ERDDeleteButton {
         super(context);
     }
 	
-
     public WOComponent deleteObjectAction() {
         ConfirmPageInterface nextPage = (ConfirmPageInterface)D2W.factory().pageForConfigurationNamed((String)valueForBinding("confirmDeleteConfigurationName"), session());
+
+        //TODO assuming patch is accepted, delete this override and delegate class
         nextPage.setConfirmDelegate(new R2DDeletionDelegate(object(), context().page()));
+        //nextPage.setConfirmDelegate(new ERDDeletionDelegate(object(), dataSource(), context().page()));
+
         nextPage.setCancelDelegate(new ERDPageDelegate(context().page()));
         D2WPage d2wPage = ((D2WPage)nextPage);
         
