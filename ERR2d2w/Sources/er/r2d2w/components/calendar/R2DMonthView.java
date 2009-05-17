@@ -2,7 +2,6 @@ package er.r2d2w.components.calendar;
 
 import java.text.SimpleDateFormat;
 
-import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
 
 import er.directtoweb.components.ERD2WStatelessComponent;
