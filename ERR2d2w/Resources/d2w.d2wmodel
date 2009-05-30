@@ -1139,6 +1139,15 @@
       "author" = "10"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
+        "class" = "er.corebusinesslogic.ERCUserPreferencesAssignment"; 
+        "keyPath" = "userPreferences"; 
+        "value" = "<computed>"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
         "class" = "R2DDefaultUserEntityAssignment"; 
         "keyPath" = "defaultEmbeddedInspectUserConfiguration"; 
       }; 
@@ -3780,6 +3789,110 @@
         "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "pageAvailable"; 
         "value" = "R2D2WEditPage"; 
+      }; 
+    }, 
+    {
+      "author" = "51"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "lhs" = {
+        "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
+        "qualifiers" = (
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "entity.name"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "ERCAuditTrailEntry"; 
+          }, 
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "task"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "list"; 
+          }
+        ); 
+      }; 
+      "rhs" = {
+        "class" = "R2DDisplayPropertyKeysAssignment"; 
+        "keyPath" = "displayPropertyKeys"; 
+      }; 
+    }, 
+    {
+      "author" = "51"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "lhs" = {
+        "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
+        "qualifiers" = (
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "entity.name"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "ERCAuditTrail"; 
+          }, 
+          {
+            "class" = "com.webobjects.eocontrol.EOOrQualifier"; 
+            "qualifiers" = (
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "edit"; 
+              }, 
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "inspect"; 
+              }
+            ); 
+          }
+        ); 
+      }; 
+      "rhs" = {
+        "class" = "R2DDisplayPropertyKeysAssignment"; 
+        "keyPath" = "displayPropertyKeys"; 
+      }; 
+    }, 
+    {
+      "author" = "51"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "lhs" = {
+        "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
+        "qualifiers" = (
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "entity.name"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "ERCAuditTrail"; 
+          }, 
+          {
+            "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+            "key" = "propertyKey"; 
+            "selectorName" = "isEqualTo"; 
+            "value" = "entries"; 
+          }, 
+          {
+            "class" = "com.webobjects.eocontrol.EOOrQualifier"; 
+            "qualifiers" = (
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "edit"; 
+              }, 
+              {
+                "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
+                "key" = "task"; 
+                "selectorName" = "isEqualTo"; 
+                "value" = "inspect"; 
+              }
+            ); 
+          }
+        ); 
+      }; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "componentName"; 
+        "value" = "R2D2WDisplayToManyFault"; 
       }; 
     }, 
     {
