@@ -22,31 +22,30 @@ public class R2DBatchNavigationBar extends ERXBatchNavigationBar {
         super(context);
     }
 
+	public void reset() {
+		batchSizeID = null;
+		batchIndexID = null;
+		super.reset();
+	}
+	
 	/**
 	 * @return the batchSizeID
 	 */
 	public String batchSizeID() {
+		if(batchSizeID == null) {
+			batchSizeID = "id" + context().elementID();
+		}
 		return batchSizeID;
-	}
-
-	/**
-	 * @param batchSizeID the batchSizeID to set
-	 */
-	public void setBatchSizeID(String batchSizeID) {
-		this.batchSizeID = batchSizeID;
 	}
 
 	/**
 	 * @return the batchIndexID
 	 */
 	public String batchIndexID() {
+		if(batchIndexID == null) {
+			batchIndexID = "id" + context().elementID();
+		}
 		return batchIndexID;
 	}
 
-	/**
-	 * @param batchIndexID the batchIndexID to set
-	 */
-	public void setBatchIndexID(String batchIndexID) {
-		this.batchIndexID = batchIndexID;
-	}
 }

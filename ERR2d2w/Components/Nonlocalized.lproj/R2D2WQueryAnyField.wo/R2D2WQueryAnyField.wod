@@ -18,8 +18,7 @@ OptionMenu: ERXOptGroupPopupButton {
 
 PropertyLabel: WOGenericContainer {
 	elementName = "label";
-	elementID = labelID;
-	for = context.elementID;
+	for = labelID;
 }
 
 QueryField: WOTextField {

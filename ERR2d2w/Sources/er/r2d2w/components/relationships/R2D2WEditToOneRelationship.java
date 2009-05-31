@@ -1,15 +1,15 @@
-package er.r2d2w.components;
+package er.r2d2w.components.relationships;
 
 import com.webobjects.appserver.WOContext;
 
-import er.directtoweb.components.ERDCustomQueryComponent;
+import er.directtoweb.components.relationships.ERD2WEditToOneRelationship;
 
-public class R2D2WQueryLanguage extends ERDCustomQueryComponent {
-    private String labelID;
-
-	public R2D2WQueryLanguage(WOContext context) {
+public class R2D2WEditToOneRelationship extends ERD2WEditToOneRelationship {
+    public R2D2WEditToOneRelationship(WOContext context) {
         super(context);
     }
+
+	private String labelID;
 
 	public void reset() {
 		labelID = null;

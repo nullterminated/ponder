@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wodefinitions>
-    <wo class="R2D2WEditFile" wocomponentcontent="false">    <binding name="labelID"/>
-        <binding name="objectPropertyValue"/>
-        <binding name="objectKeyPathValue"/>
-        <binding name="object"/>
-        <binding name="localContext"/>
-        <binding name="d2wContext"/>
-        <binding name="extraBindings"/>
-        <binding name="key"/>
-        <binding name="context"/>
-        <binding name="_unroll"/>
-        <binding name="_componentUnroll"/>
+    <wo class="R2D2WEditFile" wocomponentcontent="false">    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     </wo>
 </wodefinitions>

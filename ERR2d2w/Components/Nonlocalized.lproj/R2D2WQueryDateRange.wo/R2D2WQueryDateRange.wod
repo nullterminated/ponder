@@ -10,8 +10,7 @@ MaxField: WOTextField {
 
 MaxLabel: WOGenericContainer {
 	elementName = "label";
-	elementID = maxID;
-	for = context.elementID;
+	for = maxID;
 }
 
 MaxString: ERXLocalizedString {
@@ -27,8 +26,7 @@ MinField: WOTextField {
 
 MinLabel: WOGenericContainer {
 	elementName = "label";
-	elementID = minID;
-	for = context.elementID;
+	for = minID;
 }
 
 MinString: ERXLocalizedString {

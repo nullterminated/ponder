@@ -44,9 +44,8 @@ SelectedDate: WOTextField {
 }
 
 SelectedDateLabel: WOGenericContainer {
-	elementID = textFieldID;
 	elementName = "label";
-	for = context.elementID;
+	for = textFieldID;
 }
 
 Today: WOHyperlink {

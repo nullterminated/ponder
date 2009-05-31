@@ -11,31 +11,30 @@ public class R2D2WQueryNumberRange extends D2WQueryNumberRange {
         super(context);
     }
 
+	public void reset() {
+		maxID = null;
+		minID = null;
+		super.reset();
+	}
+
 	/**
 	 * @return the maxID
 	 */
 	public String maxID() {
+		if(maxID == null) {
+			maxID = "id" + context().elementID();
+		}
 		return maxID;
-	}
-
-	/**
-	 * @param maxID the maxID to set
-	 */
-	public void setMaxID(String maxID) {
-		this.maxID = maxID;
 	}
 
 	/**
 	 * @return the minID
 	 */
 	public String minID() {
+		if(minID == null) {
+			minID = "id" + context().elementID();
+		}
 		return minID;
 	}
 
-	/**
-	 * @param minID the minID to set
-	 */
-	public void setMinID(String minID) {
-		this.minID = minID;
-	}
 }

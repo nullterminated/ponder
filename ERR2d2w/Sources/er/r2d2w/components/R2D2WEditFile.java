@@ -135,18 +135,11 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
     	mimeTypes = null;
     }
 
-	/**
-	 * @return the _r2FieldLabelID
-	 */
 	public String labelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
-	}
-
-	/**
-	 * @param labelID the _r2FieldLabelID to set
-	 */
-	public void setLabelID(String labelID) {
-		this.labelID = labelID;
 	}
 	
 	public String tempFilePath() throws IOException {

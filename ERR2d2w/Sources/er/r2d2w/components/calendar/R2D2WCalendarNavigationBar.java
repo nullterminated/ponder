@@ -122,14 +122,10 @@ public class R2D2WCalendarNavigationBar extends ERD2WStatelessComponent {
 	 * @return the textFieldID
 	 */
 	public String textFieldID() {
+		if(textFieldID == null) {
+			textFieldID = "id" + context().elementID();
+		}
 		return textFieldID;
-	}
-
-	/**
-	 * @param textFieldID the textFieldID to set
-	 */
-	public void setTextFieldID(String textFieldID) {
-		this.textFieldID = textFieldID;
 	}
 
 	/**

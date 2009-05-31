@@ -19,7 +19,7 @@ public class R2D2WEditToManyFault extends ERD2WEditToManyFault {
     }
     
     public String labelFor() {
-    	return (browserList() != null && browserList().count() > 0)?_r2FieldLabelID():null;
+    	return (browserList() != null && browserList().count() > 0)?labelID():null;
     }
 
     private static final String _COMPONENT_CLASS = "toMany";
@@ -29,18 +29,11 @@ public class R2D2WEditToManyFault extends ERD2WEditToManyFault {
     	return _COMPONENT_CLASS;
     }
     
-	/**
-	 * @return the _r2FieldLabelID
-	 */
-	public String _r2FieldLabelID() {
+	public String labelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
-	}
-
-	/**
-	 * @param labelID the _r2FieldLabelID to set
-	 */
-	public void set_r2FieldLabelID(String labelID) {
-		this.labelID = labelID;
 	}
 
 }

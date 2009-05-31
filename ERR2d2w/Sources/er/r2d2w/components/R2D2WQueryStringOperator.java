@@ -11,17 +11,19 @@ public class R2D2WQueryStringOperator extends ERD2WQueryStringOperator {
         super(context);
     }
 
+	public void reset() {
+		labelID = null;
+		super.reset();
+	}
+	
 	/**
 	 * @return the labelID
 	 */
 	public String labelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
 	}
 
-	/**
-	 * @param labelID the labelID to set
-	 */
-	public void setLabelID(String labelID) {
-		this.labelID = labelID;
-	}
 }

@@ -12,7 +12,6 @@ Popup: WOPopUpButton {
 
 PropertyLabel: WOGenericContainer {
 	elementName = "label";
-	elementID = labelID;
-	for = context.elementID;
+	for = labelID;
 }
 

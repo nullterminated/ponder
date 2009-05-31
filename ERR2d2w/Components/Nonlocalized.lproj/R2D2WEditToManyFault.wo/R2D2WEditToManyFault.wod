@@ -21,12 +21,11 @@ PropertyLabel: WOGenericContainer {
 
 Wrapper: WOGenericContainer {
 	class = componentClasses;
-	elementID = _r2FieldLabelID;
 	elementName = "div";
 }
 
 Values: WOBrowser {
-	id = _r2FieldLabelID;
+	id = labelID;
 	item = browserItem;
 	list = browserList;
 	multiple = true;

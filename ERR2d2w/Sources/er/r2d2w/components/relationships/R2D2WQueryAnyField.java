@@ -155,14 +155,10 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 	 * @return the labelID
 	 */
 	public String labelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
-	}
-
-	/**
-	 * @param labelID the labelID to set
-	 */
-	public void setLabelID(String labelID) {
-		this.labelID = labelID;
 	}
 
 	public String group() {

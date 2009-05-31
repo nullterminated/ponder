@@ -21,32 +21,18 @@ public class R2D2WEditPassword extends ERDCustomEditComponent {
 	private boolean confirmSetToNull = false;
 	private boolean setToNull = false;
     
-	/**
-	 * @return the confirmLabelID
-	 */
 	public String r2ConfirmLabelID() {
+		if(confirmLabelID == null) {
+			confirmLabelID = "id" + context().elementID();
+		}
 		return confirmLabelID;
 	}
 
-	/**
-	 * @param confirmLabelID the confirmLabelID to set
-	 */
-	public void setR2ConfirmLabelID(String confirmLabelID) {
-		this.confirmLabelID = confirmLabelID;
-	}
-
-	/**
-	 * @return the _r2FieldLabelID
-	 */
-	public String _r2FieldLabelID() {
+	public String passwordLabelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
-	}
-
-	/**
-	 * @param labelID the _r2FieldLabelID to set
-	 */
-	public void set_r2FieldLabelID(String labelID) {
-		this.labelID = labelID;
 	}
 	
 	public String componentClasses() {

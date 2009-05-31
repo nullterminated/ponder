@@ -14,6 +14,11 @@ public class R2D2WQueryBoolean extends ERD2WCustomQueryBoolean {
         super(context);
     }
     
+	public void reset() {
+		labelID = null;
+		super.reset();
+	}
+	
     public String displayString() {
     	NSArray<String> choicesNames = choicesNames();
         String result;
@@ -31,14 +36,10 @@ public class R2D2WQueryBoolean extends ERD2WCustomQueryBoolean {
 	 * @return the labelID
 	 */
 	public String labelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
 	}
 
-	/**
-	 * @param labelID the labelID to set
-	 */
-	public void setLabelID(String labelID) {
-		this.labelID = labelID;
-	}
-    
 }

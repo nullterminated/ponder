@@ -35,6 +35,5 @@ PropertyLabel: WOGenericContainer {
 
 Wrapper: WOGenericContainer {
 	class = componentClasses;
-	elementID = labelID;
 	elementName = "div";
 }

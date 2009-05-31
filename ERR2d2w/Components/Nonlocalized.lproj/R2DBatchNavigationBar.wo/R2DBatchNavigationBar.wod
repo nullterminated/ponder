@@ -11,13 +11,11 @@ BatchIndex: WOTextField {
 
 BatchPage: WOGenericContainer {
 	class = "batchPage";
-	elementID = batchIndexID;
 	elementName = "div";
 }
 
 BatchSize: WOGenericContainer {
 	class = "batchSize";
-	elementID = batchSizeID;
 	elementName = "div";
 }
 

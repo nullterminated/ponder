@@ -1,7 +1,7 @@
 Checkbox: WOCheckBox {
 	checked = value;
 	class = d2wContext.propertyClasses;
-	id = _r2FieldLabelID;
+	id = labelID;
 	title = d2wContext.inputInfo;
 }
 
@@ -12,12 +12,11 @@ LabelString: WOString {
 PropertyLabel: WOGenericContainer {
 	class = d2wContext.propertyClasses;
 	elementName = "label";
-	for = _r2FieldLabelID;
+	for = labelID;
 }
 
 Wrapper: WOGenericContainer {
 	class = componentClasses;
-	elementID = _r2FieldLabelID;
 	elementName = "div";
 }
 

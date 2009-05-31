@@ -2,7 +2,7 @@ EditString: WOText {
 	class = d2wContext.propertyClasses;
 	cols = d2wContext.length;
 	disabled = d2wContext.disabled;
-	id = _r2FieldLabelID;
+	id = labelID;
 	rows = d2wContext.rows;
 	title = d2wContext.inputInfo;
 	value = value;
@@ -23,12 +23,11 @@ LabelString: WOString {
 PropertyLabel: WOGenericContainer {
 	class = d2wContext.propertyClasses;
 	elementName = "label";
-	for = _r2FieldLabelID;
+	for = labelID;
 }
 
 Wrapper: WOGenericContainer {
 	class = componentClasses;
-	elementID = _r2FieldLabelID;
 	elementName = "div";
 }
 

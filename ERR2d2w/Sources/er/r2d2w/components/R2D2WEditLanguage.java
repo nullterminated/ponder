@@ -21,18 +21,16 @@ public class R2D2WEditLanguage extends ERDCustomEditComponent {
     	return _COMPONENT_CLASS;
     }
     
-	/**
-	 * @return the _r2FieldLabelID
-	 */
-	public String _r2FieldLabelID() {
+    public void reset() {
+    	labelID = null;
+    	super.reset();
+    }
+    
+	public String labelID() {
+		if(labelID == null) {
+			labelID = "id" + context().elementID();
+		}
 		return labelID;
-	}
-
-	/**
-	 * @param labelID the _r2FieldLabelID to set
-	 */
-	public void set_r2FieldLabelID(String labelID) {
-		this.labelID = labelID;
 	}
 
 	public String noSelectionString() {
