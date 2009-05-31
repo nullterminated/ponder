@@ -18,6 +18,7 @@ HasItems: WOConditional {
 HasNoItems: WOConditional {
 	condition = theList.count;
 	negate = true;
+}
 
 IsBrowserConditional: WOConditional {
 	condition = isBrowser;
