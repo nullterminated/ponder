@@ -220,8 +220,6 @@
     51 : (entity.name = 'ERCAuditTrail' and (task = 'edit' or task = 'inspect')) => displayPropertyKeys = (null) [R2DDisplayPropertyKeysAssignment],
     51 : (entity.name = 'ERCAuditTrail' and propertyKey = 'entries' and (task = 'edit' or task = 'inspect')) => componentName = R2D2WDisplayToManyFault [com.webobjects.directtoweb.Assignment],
     52 : task = 'inspect' => pageName = templateNameForInspectPage [er.directtoweb.ERDKeyValueAssignment],
-    55 : *true* => uiStyle = browser [com.webobjects.directtoweb.Assignment],
-    55 : *true* => toOneUIStyle = popup [com.webobjects.directtoweb.Assignment],
     55 : (task = 'list' and subTask = 'rss') => pageName = templateNameForRSSPage [er.directtoweb.ERDKeyValueAssignment],
     55 : (task = 'inspect' and subTask = 'plainText') => pageName = templateNameForPlainTextInspectPage [er.directtoweb.ERDKeyValueAssignment],
     55 : (task = 'message' and subTask = 'plainText') => pageName = templateNameForPlainTextMessagePage [er.directtoweb.ERDKeyValueAssignment],

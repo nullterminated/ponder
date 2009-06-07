@@ -3913,24 +3913,6 @@
     {
       "author" = "55"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
-      "rhs" = {
-        "class" = "com.webobjects.directtoweb.Assignment"; 
-        "keyPath" = "uiStyle"; 
-        "value" = "browser"; 
-      }; 
-    }, 
-    {
-      "author" = "55"; 
-      "class" = "com.webobjects.directtoweb.Rule"; 
-      "rhs" = {
-        "class" = "com.webobjects.directtoweb.Assignment"; 
-        "keyPath" = "toOneUIStyle"; 
-        "value" = "popup"; 
-      }; 
-    }, 
-    {
-      "author" = "55"; 
-      "class" = "com.webobjects.directtoweb.Rule"; 
       "lhs" = {
         "class" = "com.webobjects.eocontrol.EOAndQualifier"; 
         "qualifiers" = (
