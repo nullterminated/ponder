@@ -4,9 +4,9 @@ EditToOneRelationship: R2DToOneRelationship {
 	destinationEntityName = d2wContext.destinationEntityName;
     destinationSortKey = d2wContext.sortKey;
     id = labelID;
-    isMandatory = d2wContext.isMandatory;
+    //isMandatory = d2wContext.isMandatory;
 	localizeDisplayKeys = d2wContext.localizeDisplayKeys;
-    maxColumns = d2wContext.numCols;
+    //maxColumns = d2wContext.numCols;
 	noSelectionString = d2wContext.noSelectionString;
 	popupName = d2wContext.popupName;
     possibleChoices = restrictedChoiceList;
