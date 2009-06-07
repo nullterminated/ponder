@@ -24,7 +24,7 @@ public class R2DRadioButtonFieldset extends ERXRadioButtonMatrix {
 	}
 
 	public String generateID() {
-		labelID = "element" + context().elementID();
+		labelID = "id" + context().elementID();
 		return labelID;
 	}
 }
