@@ -45,7 +45,7 @@ PopupList: WOPopUpButton {
 	disabled = ^disabled;
 }
 
-RadioButtonMatrix: R2DRadioButtonFieldset {
+RadioButtonFieldset: R2DRadioButtonFieldset {
 	item = theCurrentItem;
 	list = theList;
 	selection = selection;
@@ -58,7 +58,7 @@ RadioButtonMatrix: R2DRadioButtonFieldset {
 
 String: WOString {
 	value = theCurrentValue;
-	escapeHTML = false;
+	//escapeHTML = false;
 }
 
 LabelString: WOString {
