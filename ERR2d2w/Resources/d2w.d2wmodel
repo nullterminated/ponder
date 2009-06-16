@@ -1139,15 +1139,6 @@
       "author" = "10"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
-        "class" = "er.corebusinesslogic.ERCUserPreferencesAssignment"; 
-        "keyPath" = "userPreferences"; 
-        "value" = "<computed>"; 
-      }; 
-    }, 
-    {
-      "author" = "10"; 
-      "class" = "com.webobjects.directtoweb.Rule"; 
-      "rhs" = {
         "class" = "R2DDefaultUserEntityAssignment"; 
         "keyPath" = "defaultEmbeddedInspectUserConfiguration"; 
       }; 

@@ -85,7 +85,6 @@
     10 : pageConfiguration like 'RSS*' => subTask = rss [com.webobjects.directtoweb.Assignment],
     10 : pageConfiguration like 'Mail*' => task = message [com.webobjects.directtoweb.Assignment],
     10 : pageConfiguration = 'UserCreation' => task = edit [com.webobjects.directtoweb.Assignment],
-    10 : *true* => userPreferences = <computed> [er.corebusinesslogic.ERCUserPreferencesAssignment],
     10 : *true* => defaultEmbeddedInspectUserConfiguration = (null) [R2DDefaultUserEntityAssignment],
     10 : *true* => plainTextEmbeddedInspectUserConfiguration = (null) [R2DDefaultUserEntityAssignment],
     10 : *true* => dayButtonLabel = R2D2W.dayButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
