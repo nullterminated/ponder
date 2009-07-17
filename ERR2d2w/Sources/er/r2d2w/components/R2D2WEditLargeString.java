@@ -3,6 +3,8 @@ package er.r2d2w.components;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2WEditLargeString;
 
+import er.extensions.foundation.ERXStringUtilities;
+
 public class R2D2WEditLargeString extends D2WEditLargeString {
     
 	public R2D2WEditLargeString(WOContext context) {
@@ -23,7 +25,7 @@ public class R2D2WEditLargeString extends D2WEditLargeString {
 
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

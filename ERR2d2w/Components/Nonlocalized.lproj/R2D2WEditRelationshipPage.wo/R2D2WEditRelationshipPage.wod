@@ -12,6 +12,15 @@ BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	extraPropertiesKey = "belowDisplayPropertyKeys";
 }
 
+BrowserLabel: WOGenericContainer {
+	elementName = "label";
+	for = labelID;
+}
+
+BrowserLabelString: WOString {
+	value = d2wContext.displayNameForEntity;
+}
+
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
 	class = d2wContext.pageConfiguration;
@@ -103,6 +112,7 @@ QueryLink: WOHyperlink {
 
 RelationshipBrowser: WOBrowser {
 	displayString = browserStringForItem;
+	id = labelID;
 	item = browserItem;
 	list = relationshipDisplayGroup.allObjects;
 	multiple = true;

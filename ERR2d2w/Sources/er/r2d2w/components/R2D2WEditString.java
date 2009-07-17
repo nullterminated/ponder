@@ -3,6 +3,7 @@ package er.r2d2w.components;
 import com.webobjects.appserver.WOContext;
 
 import er.directtoweb.components.strings.ERD2WEditString;
+import er.extensions.foundation.ERXStringUtilities;
 
 public class R2D2WEditString extends ERD2WEditString {
 	
@@ -24,7 +25,7 @@ public class R2D2WEditString extends ERD2WEditString {
 
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

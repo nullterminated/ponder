@@ -3,6 +3,8 @@ package er.r2d2w.components;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2WEditBoolean;
 
+import er.extensions.foundation.ERXStringUtilities;
+
 public class R2D2WEditBoolean extends D2WEditBoolean {
     public R2D2WEditBoolean(WOContext context) {
         super(context);
@@ -22,7 +24,7 @@ public class R2D2WEditBoolean extends D2WEditBoolean {
 
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

@@ -5,6 +5,7 @@ import com.webobjects.appserver.WORequest;
 import com.webobjects.foundation.NSValidation;
 
 import er.directtoweb.components.ERDCustomEditComponent;
+import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.localization.ERXLocalizer;
 import er.extensions.validation.ERXValidationFactory;
 
@@ -23,14 +24,14 @@ public class R2D2WEditPassword extends ERDCustomEditComponent {
     
 	public String r2ConfirmLabelID() {
 		if(confirmLabelID == null) {
-			confirmLabelID = "id" + context().elementID();
+			confirmLabelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return confirmLabelID;
 	}
 
 	public String passwordLabelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

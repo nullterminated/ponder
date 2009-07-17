@@ -3,6 +3,7 @@ package er.r2d2w.components.relationships;
 import com.webobjects.appserver.WOContext;
 
 import er.directtoweb.components.relationships.ERD2WEditToOneRelationship;
+import er.extensions.foundation.ERXStringUtilities;
 
 public class R2D2WEditToOneRelationship extends ERD2WEditToOneRelationship {
     public R2D2WEditToOneRelationship(WOContext context) {
@@ -21,7 +22,7 @@ public class R2D2WEditToOneRelationship extends ERD2WEditToOneRelationship {
 	 */
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

@@ -23,6 +23,7 @@ import er.directtoweb.components.ERDCustomEditComponent;
 import er.directtoweb.pages.ERD2WPage;
 import er.extensions.foundation.ERXFileUtilities;
 import er.extensions.foundation.ERXProperties;
+import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.validation.ERXValidationFactory;
 import er.r2d2w.interfaces.R2DAttachmentContainer;
@@ -137,7 +138,7 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

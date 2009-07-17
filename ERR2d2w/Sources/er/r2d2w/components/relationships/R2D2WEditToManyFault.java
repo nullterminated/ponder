@@ -3,6 +3,7 @@ package er.r2d2w.components.relationships;
 import com.webobjects.appserver.WOContext;
 
 import er.directtoweb.components.relationships.ERD2WEditToManyFault;
+import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.localization.ERXLocalizer;
 
 public class R2D2WEditToManyFault extends ERD2WEditToManyFault {
@@ -31,7 +32,7 @@ public class R2D2WEditToManyFault extends ERD2WEditToManyFault {
     
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

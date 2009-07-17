@@ -6,6 +6,7 @@ import com.webobjects.eocontrol.EOEnterpriseObject;
 
 import er.directtoweb.components.ERDCustomEditComponent;
 import er.extensions.appserver.ERXSession;
+import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2D2WEditLanguage extends ERDCustomEditComponent {
@@ -28,7 +29,7 @@ public class R2D2WEditLanguage extends ERDCustomEditComponent {
     
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');
 		}
 		return labelID;
 	}

@@ -4,13 +4,14 @@
     <webobject name = "AboveDisplayPropertyKeys" />
     <webobject name = "Banner" />
     <webobject name = "IsToMany">
-      <span class = "entityCount">
-        <webobject name = "NumberOfEntities" />
-        <webobject name = "EntityName" />
-      </span>
       <webobject name = "HasEntities">
         <webobject name = "ToManyForm">
           <fieldset>
+          	<legend>
+          		<webobject name = "NumberOfEntities" />
+		        <webobject name = "EntityName" />
+          	</legend>
+          	<webobject name = "BrowserLabel"><webobject name = "BrowserLabelString"/></webobject>
             <webobject name = "RelationshipBrowser" />
             <div class = "buttonGroup">
               <webobject name = "ShouldAllowEditingConditional"><webobject name = "EditButton" /></webobject>
