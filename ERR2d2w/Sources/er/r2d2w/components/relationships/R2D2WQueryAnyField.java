@@ -156,7 +156,7 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 	 */
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(),"id",'_');
 		}
 		return labelID;
 	}

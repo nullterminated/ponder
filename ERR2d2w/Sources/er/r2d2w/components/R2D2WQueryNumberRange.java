@@ -3,6 +3,8 @@ package er.r2d2w.components;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2WQueryNumberRange;
 
+import er.extensions.foundation.ERXStringUtilities;
+
 public class R2D2WQueryNumberRange extends D2WQueryNumberRange {
     private String maxID;
 	private String minID;
@@ -22,7 +24,7 @@ public class R2D2WQueryNumberRange extends D2WQueryNumberRange {
 	 */
 	public String maxID() {
 		if(maxID == null) {
-			maxID = "id" + context().elementID();
+			maxID = ERXStringUtilities.safeIdentifierName(context().elementID(),"id",'_');
 		}
 		return maxID;
 	}
@@ -32,7 +34,7 @@ public class R2D2WQueryNumberRange extends D2WQueryNumberRange {
 	 */
 	public String minID() {
 		if(minID == null) {
-			minID = "id" + context().elementID();
+			minID = ERXStringUtilities.safeIdentifierName(context().elementID(),"id",'_');
 		}
 		return minID;
 	}

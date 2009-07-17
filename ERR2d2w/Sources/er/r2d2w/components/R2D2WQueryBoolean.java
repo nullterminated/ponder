@@ -4,6 +4,7 @@ import com.webobjects.appserver.WOContext;
 import com.webobjects.foundation.NSArray;
 
 import er.directtoweb.components.bool.ERD2WCustomQueryBoolean;
+import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.localization.ERXLocalizer;
 
 public class R2D2WQueryBoolean extends ERD2WCustomQueryBoolean {
@@ -37,7 +38,7 @@ public class R2D2WQueryBoolean extends ERD2WCustomQueryBoolean {
 	 */
 	public String labelID() {
 		if(labelID == null) {
-			labelID = "id" + context().elementID();
+			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(),"id",'_');
 		}
 		return labelID;
 	}
