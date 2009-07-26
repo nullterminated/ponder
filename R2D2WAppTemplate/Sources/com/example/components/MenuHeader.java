@@ -183,4 +183,15 @@ public class MenuHeader extends WOComponent {
 		return ERXLocalizer.currentLocalizer().localizedStringForKey("R2D2W.queryAllButtonLabel");
 	}
 
+	private static final NSArray<String> availableTimeZones = new NSArray<String>(new String[] {
+			 "US/Hawaii", "US/Alaska", "US/Pacific", "US/Mountain", "US/Central", "US/Eastern", "GMT", "Asia/Tokyo"
+	});
+
+	/**
+	 * @return the availableTimeZones
+	 */
+	public NSArray<String> availableTimeZones() {
+		return availableTimeZones;
+	}
+
 }

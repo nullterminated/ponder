@@ -53,7 +53,7 @@ LanguageForm: WOForm {
 }
 
 LanguageLegend: ERXLocalizedString {
-	value = "Choose a language";
+	value = "Preferences";
 }
 
 LanguageMenu: ERXLanguageMenu {
@@ -93,6 +93,16 @@ PopupLabel: ERXLocalizedString {
 QueryAllLink: WOHyperlink {
 	action = queryAnyAction;
 	string = queryAnyString;
+}
+
+TimeZoneLabel: ERXLocalizedString {
+	value = "Time Zone";
+}
+
+TimeZoneMenu: R2DTimeZoneMenu {
+	list = availableTimeZones;
+	selection = session.timeZone;
+	id = "timeZoneMenu";
 }
 
 SelectEntity: WOPopUpButton {
