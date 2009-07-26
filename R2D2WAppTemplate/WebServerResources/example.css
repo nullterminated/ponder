@@ -3,3 +3,403 @@
 
 /* Begin site CSS */
 
+/* Skip Navigation */
+
+#skipNavigation a {
+	background: url("skipnav.png");
+	background-repeat: no-repeat;
+	background-position: top right;
+	display: inline;
+	min-height: 32px;
+	padding-right: 32px;
+	position: absolute;
+	top: -500px;
+}
+
+#skipNavigation a:active, #skipNavigation a:focus {
+	color: #f4f4f4;
+	float: left;
+	position:static; 
+}
+
+/* General Styles */
+
+/* Headers */
+h1 {
+	font: 2em bold Verdana, Geneva, sans-serif;
+	margin: 0.67em 0 0.67em 0;
+}
+
+h1#siteLogo a {
+	color: #f4f4f4;
+	margin-left: 1em;
+}
+
+h1#siteLogo a:hover {
+	color: #C6DEF5;
+}
+
+h1#siteLogo svg {
+	height: 1em;
+	overflow: visible;
+}
+
+h2 {
+	font: 1.5em bold Verdana, Geneva, sans-serif;
+	margin: 0.83em 0 0.83em 0;
+}
+
+h3 {
+	font: 1.17em bold Verdana, Geneva, sans-serif;
+	margin: 1em 0 1em 0;
+}
+
+h4 {
+	font: bold 1.0em Verdana, Geneva, sans-serif;
+	margin: 1.33em 0 1.33em 0;
+}
+
+h5 {
+	font: 0.83em bold Verdana, Geneva, sans-serif;
+	margin: 1.67em 0 1.67em 0;
+}
+
+h6 {
+	font: 0.67em bold Verdana, Geneva, sans-serif;
+	margin: 2.33em 0 2.33em 0;
+}
+
+body {
+	border: 0;
+	font: 0.9em Helvetica, Arial, sans-serif;
+	margin: 0;
+	width: auto;
+}
+
+/* Tables */
+
+caption {
+	margin-bottom: 1em;
+	text-align: center;
+}
+
+table.debug {
+	background: #fff;
+}
+
+/* Log4J Table */
+
+table#log4j tr td:first-child, table#log4j tr th:first-child {
+	max-width: 20em;
+}
+
+table#log4j td {
+	font: 1em serif;
+	padding: 0.25ex 1ex;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+table#log4j th {
+	background-color: darkslategrey;
+	color: #f5f5f5;
+	padding: 0.25ex 1ex;
+}
+
+table#log4j tbody tr:nth-child(odd) td {
+	background-color: #cfc;
+}
+
+table#log4j label {
+	display: inline-block;
+}
+
+table#log4j label.debug, 
+table#log4j label.unset {
+	width: 4em;
+}
+
+table#log4j label.error, 
+table#log4j label.fatal, 
+table#log4j label.warn {
+	font-style: normal;
+	width: 3.5em;
+}
+
+table#log4j label.info, 
+table#log4j label.off {
+	width: 3em;
+}
+
+/* Forms */
+
+fieldset {
+	border: 2px solid;
+	padding: 1ex;
+}
+
+legend {
+	font: 1.17em bold Verdana, Geneva, sans-serif;
+	margin: 1em 0 1em 0;
+}
+
+label.mandatory {
+	font-weight: bold;
+}
+
+label.error {
+	font-style: italic;
+}
+
+.editFieldset .errorPanel, .errorPanel {
+	background: #ffc0cb;
+	border: red 1px solid;
+	margin: 1em;
+	padding: 1em;
+}
+
+.editFieldset ul.info {
+	background: #C6DEF5;
+	border: blue 1px solid;
+	padding: 1em;
+	margin: 1em;
+}
+
+.editFieldset label {
+	float: left;
+	margin-right: 0.5em;
+	text-align: right;
+	width: 12em;
+}
+
+.editFieldset fieldset label {
+	float: none;
+	margin-left: 0.5em;
+	text-align: left;
+	width: 12em;
+}
+
+.editFieldset .actionGroup {
+	margin-left: 12.5em;
+}
+
+.editFieldset div {
+	margin: 0.5em 0 0.5em 0;
+}
+
+.editFieldset input.error,.editFieldset textarea.error {
+	background-color: #ffc0cb;
+}
+
+.editFieldset textarea {
+	font: 0.9em Helvetica, Arial, sans-serif;
+	margin-left: 14em;
+	display: block;
+}
+
+.queryEntities fieldset {
+	border: 0;
+	padding: 0;
+}
+
+.queryEntities label {
+	float: left;
+	margin-right: 0.5em;
+	text-align: right;
+	width: 9em;
+}
+
+.queryEntities select {
+	width: 12em;
+}
+
+.queryEntities form {
+	margin-bottom: 0.5em;
+}
+
+.queryFieldset label {
+	float: left;
+	margin-right: 0.5em;
+	text-align: right;
+	width: 12em;
+}
+
+.queryFieldset select {
+	width: 12em;
+}
+
+.queryFieldset input[type="text"], .queryFieldset input[type="password"] {
+	margin: .25em 0 .25em 0;
+	width: 12em;
+}
+
+.queryFieldset .actionGroup {
+	margin-left: 12.5em;
+}
+
+
+/* 2 & 3 column liquid layouts */
+/* http://matthewjamestaylor.com/blog/perfect-multi-column-liquid-layouts */
+
+body {
+	background: #4577A8;
+	border: 0;				/* This removes the border around the viewport in old versions of IE */
+	font: 0.9em sans-serif;
+	margin: 0;
+	width: auto;
+}
+
+#pageHeader,
+#pageFooter {
+	background: #4577A8;
+	clear: both;
+	float: left;
+	overflow: hidden;		/* This chops off any overhanging divs */
+	position: relative;		/* This fixes the IE7 overflow hidden bug */
+	width: 100%;			/* width of whole page */
+}
+
+/* column container */
+.colMask {
+	clear: both;
+	float: left;
+	overflow: hidden;		/* This chops off any overhanging divs */
+	position: relative;		/* This fixes the IE7 overflow hidden bug */
+	width: 100%;			/* width of whole page */
+}
+
+/* common column settings */
+.colRight,
+.colMid,
+.colLeft {
+	float: left;
+	position: relative;
+	width: 100%;			/* width of page */
+}
+.col1,
+.col2,
+.col3 {
+	float: left;
+	overflow: hidden;
+	position: relative;
+	padding: 1em 0 1em 0;	/* no left and right padding on columns, we just make them narrower instead 
+							only padding top and bottom is included here, make it whatever value you need */
+}
+
+/* 3 Column settings */
+.threeCol {
+	background: #eee;		/* right column background colour */
+}
+.threeCol .colMid {
+	right: 25%;				/* width of the right column */
+	background: #fff;		/* center column background colour */
+}
+.threeCol .colLeft {
+	right: 50%;				/* width of the middle column */
+	background: #f4f4f4;	/* left column background colour */
+}
+.threeCol .col1 {
+	width: 46%;				/* width of center column content (column width minus padding on either side) */
+	left: 102%;				/* 100% plus left padding of center column */
+}
+.threeCol .col2 {
+	width: 21%;				/* Width of left column content (column width minus padding on either side) */
+	left: 31%;				/* width of (right column) plus (center column left and right padding) plus (left column left padding) */
+}
+.threeCol .col3 {
+	width: 21%;				/* Width of right column content (column width minus padding on either side) */
+	left: 85%;				/* Please make note of the brackets here:
+							(100% - left column width) plus (center column left and right padding) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* 2 Column (left menu) settings */
+.leftMenu {
+	background: #F5F5F5;	/* right column background colour */
+}
+.leftMenu .colLeft {
+	right: 75%;				/* right column width */
+	background: #4577A8;	/* left column background colour */
+}
+.leftMenu .col1 {
+	width: 71%;				/* right column content width */
+	left: 102%;				/* 100% plus left column left padding */
+	color: #0A0A0A;
+	border: #0A0A0A;
+}
+.leftMenu .col2 {
+	width: 21%;				/* left column content width (column width minus left and right padding) */
+	left: 6%;				/* (right column left and right padding) plus (left column left padding) */
+	color: #F5F5F5;
+	border: #F5F5F5;
+}
+
+/* 2 Column (right menu) settings */
+.rightMenu {
+	background: #f4f4f4;	/* right column background colour */
+}
+.rightMenu .colLeft {
+	right: 25%;				/* right column width */
+	background: #fff;		/* left column background colour */
+}
+.rightMenu .col1 {
+	width: 71%;				/* left column content width (left column width minus left and right padding) */
+	left: 27%;				/* (right column width) plus (left column left padding) */
+}
+.rightMenu .col2 {
+	width: 21%;				/* right column content width (right column width minus left and right padding) */
+	left: 31%;				/* (right column width) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* 2 Column (double page) settings */
+.doublePage {
+	background: #eee;		/* right column background colour */
+}
+.doublePage .colLeft {
+	right: 50%;				/* right column width */
+	background: #fff;		/* left column background colour */
+}
+.doublePage .col1 {
+	width: 46%;				/* left column content width (column width minus left and right padding) */
+	left: 52%;				/* right column width plus left column left padding */
+}
+.doublePage .col2 {
+	width: 46%;				/* right column content width (column width minus left and right padding) */
+	left: 56%;				/* (right column width) plus (left column left and right padding) plus (right column left padding) */
+}
+
+/* left menu */
+
+.col2 a {
+	background: #f4f4f4;
+	border: double 4px #4577A8; 
+	color: #4577A8;
+	display: block;
+	margin: .25em 0 .25em 0;
+	padding: .25em;
+	text-align: center;
+	text-decoration: none;
+}
+
+.col2 a:hover {
+	background: #C6DEF5;
+	color: #4577A8;
+}
+
+.col2 fieldset a {
+	background: none;
+	border: 0;
+	color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+	text-align: inherit;
+	text-decoration: underline;
+}
+
+.col2 fieldset a:hover {
+	background: none;
+	color: #C6DEF5;
+}
+
+
+
