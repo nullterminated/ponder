@@ -54,6 +54,7 @@ import er.extensions.foundation.ERXDictionaryUtilities;
 import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.localization.ERXLocalizer;
+import er.r2d2w.components.misc.R2DLog4JConfiguration;
 
 public class R2D2WDirectAction extends ERXDirectAction {
     protected static final Logger log = Logger.getLogger(ERD2WDirectAction.class);
@@ -552,5 +553,19 @@ public class R2D2WDirectAction extends ERXDirectAction {
 		}
 		return result.immutableClone();
 	}
+
+    /**
+     * Overrides super class method to return an XHTML compliant configuration page.
+     * @return {@link R2DLog4JConfiguration} for modifying current logging settings.
+     */
+    public WOComponent log4jAction() {
+        WOComponent result=null;
+        if (canPerformActionWithPasswordKey("er.extensions.ERXLog4JPassword")) {
+            	result=D2W.factory().pageForConfigurationNamed("Log4JConfiguration", session());//pageWithName(R2DLog4JConfiguration.class);
+            	session().setObjectForKey(Boolean.TRUE, "ERXLog4JConfiguration.enabled");
+        }
+        return result;
+    }
+
 
 }

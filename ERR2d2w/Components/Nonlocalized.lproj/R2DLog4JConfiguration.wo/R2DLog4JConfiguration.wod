@@ -1,0 +1,231 @@
+B1: WOGenericContainer {
+	elementName = "b";
+	omitTags = loggerIsNotDebug;
+}
+
+B2: WOGenericContainer {
+	elementName = "b";
+	omitTags = loggerIsNotInfo;
+}
+
+B3: WOGenericContainer {
+	elementName = "b";
+	omitTags = loggerIsNotWarn;
+}
+
+B4: WOGenericContainer {
+	elementName = "b";
+	omitTags = loggerIsNotError;
+}
+
+B5: WOGenericContainer {
+	elementName = "b";
+	omitTags = loggerIsNotFatal;
+}
+
+B6: WOGenericContainer {
+	elementName = "b";
+	omitTags = loggerIsNotOff;
+}
+
+FilterForm: WOForm {
+	action = filter;
+	multipleSubmit = true;
+}
+
+LoggerTableForm: WOForm {
+	multipleSubmit = true;
+}
+
+AddLoggerForm: WOForm {
+	multipleSubmit = true;
+}
+
+RulesForm: WOForm {
+	action = addRuleKey;
+	multipleSubmit = true;
+}
+
+TableRow: WOGenericContainer {
+	//bgcolor = bgColor;
+	class = rowClass;
+	elementName = "tr";
+}
+
+HeaderLink: WOHyperlink {
+	?wosid = false;
+	actionClass = "R2D2WDirectAction";
+	directActionName = "log4j";
+}
+
+RadioButtonDebugLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = debugLevel;
+}
+
+RadioButtonErrorLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = errorLevel;
+}
+
+RadioButtonFatalLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = fatalLevel;
+}
+
+RadioButtonOffLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = offLevel;
+}
+
+RadioButtonInfoLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = infoLevel;
+}
+
+RadioButtonUnsetLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = unsetLevel;
+}
+
+RadioButtonWarnLevel: WORadioButton {
+	name = logger.name;
+	selection = loggerLevelValue;
+	value = warnLevel;
+}
+
+RepetitionLoggers: WORepetition {
+	index = index;
+	item = logger;
+	list = loggers;
+}
+
+ApplicationName: WOString {
+	value = application.name;
+}
+
+StringLoggerLevel: WOString {
+	value = logger.level.toString;
+}
+
+LoggerName: WOGenericContainer {
+	elementName = "td";
+	title = logger.name;
+}
+
+StringLoggerName: WOString {
+	value = logger.name;
+}
+
+UpdateButton: WOSubmitButton {
+	action = update;
+	value = "Update";
+}
+
+ShowAllButton: WOSubmitButton {
+	action = showAll;
+	value = "Show All";
+}
+
+ShowExplicitButton: WOSubmitButton {
+	action = showExplicitlySet;
+	value = "Show Explicit Levels";
+}
+
+AddLoggerButton: WOSubmitButton {
+	action = addLogger;
+	value = "Add";
+}
+
+SubmitButtonAddRuleKey: WOSubmitButton {
+	action = addRuleKey;
+	value = "Add";
+}
+
+SubmitButtonFilter: WOSubmitButton {
+	action = filter;
+	value = "Filter";
+}
+
+SubmitButtonResetFilter: WOSubmitButton {
+	action = resetFilter;
+	value = "Reset Filter";
+}
+
+LoggerString: WOString {
+	value = loggerPropertiesString;
+}
+
+TextFieldFilterString: WOTextField {
+	value = filterString;
+}
+
+TextFieldLoggerName: WOTextField {
+	value = loggerName;
+}
+
+TextFieldRuleKey: WOTextField {
+	value = ruleKey;
+}
+
+
+ConversionPatternForm: WOForm {
+       multipleSubmit = true;
+}
+
+ 
+ConversionPatternString: WOTextField {
+       value = conversionPattern;
+       size = 70;
+}
+
+UpdateConversionPatternButton: WOSubmitButton {
+       action = updateConversionPattern;
+       value = "Update";
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = pageWrapperName;
+}
+
+DebugLabel: WOGenericContainer {
+	elementName = "label";
+	class = "debug";
+}
+
+InfoLabel: WOGenericContainer {
+	elementName = "label";
+	class = "info";
+}
+
+WarnLabel: WOGenericContainer {
+	elementName = "label";
+	class = "warn";
+}
+
+ErrorLabel: WOGenericContainer {
+	elementName = "label";
+	class = "error";
+}
+
+FatalLabel: WOGenericContainer {
+	elementName = "label";
+	class = "fatal";
+}
+
+OffLabel: WOGenericContainer {
+	elementName = "label";
+	class = "off";
+}
+
+UnsetLabel: WOGenericContainer {
+	elementName = "label";
+	class = "unset";
+}
+
