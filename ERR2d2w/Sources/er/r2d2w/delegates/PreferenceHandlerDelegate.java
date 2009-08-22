@@ -40,7 +40,7 @@ public class PreferenceHandlerDelegate {
 		}
 	
 		/** Logging support */
-	    public final Logger log = Logger.getLogger(PreferenceHandlerDelegate.class);
+	    public static final Logger log = Logger.getLogger(PreferenceHandlerDelegate.class);
 	
 	    public void handleBatchSizeChange(NSNotification n) { handleChange("batchSize", n); }
 	    public void handleCalendarViewChange(NSNotification n) { handleChange("calendarView", n); }
