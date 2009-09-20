@@ -3,8 +3,10 @@
 
 # XHTML Strict Compliance
 er.extensions.ERXWOForm.useIdInsteadOfNameTag=true
-er.extensions.foundation.ERXPatcher.DynamicElementsPatches.SubmitButton.useButtonTag=true
 er.extensions.ERXResponseRewriter.javascriptTypeAttribute=true
+
+# Use buttons
+#er.extensions.foundation.ERXPatcher.DynamicElementsPatches.SubmitButton.useButtonTag=true
 
 # ERR2D2W
 #er.r2d2w.ERR2d2w.createsDerivedCounts=true
