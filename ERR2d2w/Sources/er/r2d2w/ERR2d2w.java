@@ -118,7 +118,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     
     public static void printLocalizableStringsKeys(EOModel model) {
     	
-		log.info("Localizable keys for model: " + model.name());
+		log.debug("Localizable keys for model: " + model.name());
 		NSMutableArray<String> propKeys = new NSMutableArray<String>();
 		StringBuilder requiredKeys = new StringBuilder("/* Required keys for Entity and Attribute localization */\n\n");
 		StringBuilder recommendedKeys = new StringBuilder("/* Recommended keys for improved accessibility */\n\n");
@@ -203,7 +203,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 		message.append(recommendedKeys.toString()).append("\n");
 		message.append(optionalKeys.toString()).append("\n");
 		message.append(pageTitleKeys.toString()).append("}\n");
-		log.info(message.toString());
+		log.debug(message.toString());
 	}
     
 	public static void createDerivedCountAttributes(EOModel model) {
