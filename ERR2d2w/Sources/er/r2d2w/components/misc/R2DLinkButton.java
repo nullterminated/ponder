@@ -94,7 +94,12 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 	 * Defines if the hyperlink adds a default <code>rel="nofollow"</code> if an action is bound.
 	 */
 	private static boolean defaultNoFollow = ERXProperties.booleanForKey("er.extensions.ERXHyperlink.defaultNoFollow");
-	
+
+	/**
+	 * Defines if the anchor adds a default <code>class="button"</code>
+	 */
+	private static boolean defaultButtonClass = ERXProperties.booleanForKeyWithDefault("er.r2d2w.components.misc.R2DLinkButton.defaultClass", true);
+
 	protected NSDictionary<String, WOAssociation> _otherQueryAssociations;
 	
 	protected WOAssociation _action;
@@ -134,7 +139,7 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 		_useAsButton = (WOAssociation)_associations.removeObjectForKey("useAsButton");
 		_useIEConditionals = (WOAssociation)_associations.removeObjectForKey("useIEConditionals");
 		_value = (WOAssociation)_associations.removeObjectForKey("value");
-		
+		        
 		if(_value == null) {
 			_value = new WOConstantValueAssociation("Submit");
 		}
@@ -289,7 +294,6 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 			_appendClosingHrefToResponse(response, context);
 			_appendRelToResponse(response, context);
 		}
-		
 	}
 	
 	protected void _appendOpenTagToResponse(WOResponse response, WOContext context) {
@@ -483,6 +487,18 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 			}
 		}
 	}
+	
+    public String classInContext(WOContext context) {
+        String value = super.classInContext(context);
+        if(defaultButtonClass) {
+			if(value == null || value.length() == 0) {
+				value = "button";
+			} else {
+				value = "button " + value;
+			}
+		}
+        return value;
+    }
 	
 	protected void _appendIEStringToResponse(WOResponse response, WOContext context) {
 		Object value = null;
