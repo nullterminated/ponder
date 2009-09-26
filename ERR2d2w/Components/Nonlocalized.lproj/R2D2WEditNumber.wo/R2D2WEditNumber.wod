@@ -7,6 +7,10 @@ EditNumber: WOTextField {
 	value = stringValue;
 }
 
+Hint: R2D2WHintString {
+	d2wContext = d2wContext;
+}
+
 LabelString: WOString {
 	value = d2wContext.displayNameForProperty;
 }
