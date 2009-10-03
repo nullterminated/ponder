@@ -8,5 +8,9 @@ public class R2D2WActionGroup extends ERD2WStatelessComponent {
 	public R2D2WActionGroup(WOContext context) {
         super(context);
     }
+	
+	public void validationFailedWithException(Throwable t, Object value, String keyPath) {
+		parent().validationFailedWithException(t, value, keyPath);
+	}
 
 }
