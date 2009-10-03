@@ -50,7 +50,7 @@ SelectedDateLabel: WOGenericContainer {
 
 Today: WOHyperlink {
 	action = todayAction;
-	disabled = isToday;
+	disabled = ^rangeGrouper.isToday;
 	string = d2wContext.todayButtonLabel;
 }
 

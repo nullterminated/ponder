@@ -11,7 +11,6 @@ import com.webobjects.foundation.NSTimestamp;
 
 import er.directtoweb.components.ERD2WStatelessComponent;
 import er.extensions.foundation.ERXStringUtilities;
-import er.extensions.foundation.ERXTimestampUtility;
 import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.localization.ERXLocalizer;
 import er.r2d2w.foundation.R2DDateRangeGrouper;
@@ -72,13 +71,9 @@ public class R2D2WCalendarNavigationBar extends ERD2WStatelessComponent {
 	}
 
 	public Boolean isNotToday() {
-		return !isToday();
+		return !rangeGrouper().isToday();
 	}
 	
-	public Boolean isToday() {
-		return ERXTimestampUtility.differenceByDay(rangeGrouper().currentDate(), new NSTimestamp()) == 0;
-	}
-
 	/**
 	 * @return the viewItem
 	 */
