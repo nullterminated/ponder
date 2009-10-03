@@ -65,7 +65,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     private static void registerHandlers() {
         log.debug("Registering preference handlers");
         Object handler = null;
-        String className = ERXProperties.stringForKey("ERXPreferenceHandlerClass");
+        String className = ERXProperties.stringForKey("er.corebusinesslogic.ERCoreUserPreferences.handlerClassName");
     	if(className != null) {
     		try {
     			handler = Class.forName(className).newInstance();
