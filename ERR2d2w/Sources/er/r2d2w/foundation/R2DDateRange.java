@@ -1,5 +1,7 @@
 package er.r2d2w.foundation;
 
+import java.text.SimpleDateFormat;
+
 import com.webobjects.foundation.NSTimestamp;
 
 
@@ -96,13 +98,14 @@ public class R2DDateRange {
 	}
 
 	public String toString() {
-		return (new StringBuilder())
-			.append("{")
-			.append(getTime())
-			.append(", ")
-			.append(duration())
-			.append("}")
-			.toString();
+		StringBuilder sb = new StringBuilder();
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+		sb.append("{");
+		sb.append(sdf.format(date()));
+		sb.append(" Etc/GMT, ");
+		sb.append(duration());
+		sb.append("ms}");
+		return sb.toString();
 	}
 
 	public R2DDateRange rangeByUnioningRange(R2DDateRange otherRange) {
