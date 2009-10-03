@@ -541,6 +541,15 @@
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
         "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "defaultButtonContentComponentName"; 
+        "value" = "R2DDefaultButtonContent"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "rssNamespaces"; 
         "value" = {
           "atom" = "http://www.w3.org/2005/Atom"; 
@@ -1199,6 +1208,15 @@
       "author" = "10"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "buttonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
         "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
         "keyPath" = "weekButtonLabel"; 
         "value" = "R2D2W.weekButtonLabel"; 
@@ -1250,6 +1268,51 @@
       "author" = "10"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "editButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "pickButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "saveButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "cancelButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "deleteButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
         "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
         "keyPath" = "inspectButtonLabel"; 
         "value" = "ERD2W.inspectButtonLabel"; 
@@ -1280,6 +1343,15 @@
         "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
         "keyPath" = "podcastButtonTitle"; 
         "value" = "R2D2W.podcastButtonTitle"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "returnButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
       }; 
     }, 
     {
@@ -1340,6 +1412,24 @@
         "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "componentName"; 
         "value" = "R2DErrorPanel"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "ERDKeyValueAssignment"; 
+        "keyPath" = "controllerButtonContentComponentName"; 
+        "value" = "defaultButtonContentComponentName"; 
+      }; 
+    }, 
+    {
+      "author" = "10"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "controllerButtonLabel"; 
+        "value" = "R2D2W.controllerButtonLabel"; 
       }; 
     }, 
     {
@@ -2467,6 +2557,15 @@
     {
       "author" = "15"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "actionBarComponentName"; 
+        "value" = "R2DActionBar"; 
+      }; 
+    }, 
+    {
+      "author" = "15"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
       "lhs" = {
         "class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; 
         "key" = "pageConfiguration"; 
@@ -2508,6 +2607,15 @@
         "keyPath" = "actions"; 
         "value" = (
         ); 
+      }; 
+    }, 
+    {
+      "author" = "15"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "controllerButtonComponentName"; 
+        "value" = "R2DControllerButton"; 
       }; 
     }, 
     {
