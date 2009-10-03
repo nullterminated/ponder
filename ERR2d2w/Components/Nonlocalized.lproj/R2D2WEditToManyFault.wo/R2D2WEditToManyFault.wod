@@ -1,7 +1,13 @@
-EditLink: WOHyperlink {
+ButtonContent: WOSwitchComponent {
+	buttonLabel = browserList.count;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.buttonContentComponentName;
+}
+
+EditLink: R2DLinkButton {
 	action = editValues;
 	class = "editToMany";
-	string = browserList.count;
+	value = browserList.count;
 	title = helpString;
 }
 

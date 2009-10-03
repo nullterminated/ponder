@@ -1,7 +1,13 @@
-EditRelationship: WOHyperlink {
+ButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.editButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.buttonContentComponentName;
+}
+
+EditRelationship: R2DLinkButton {
 	action = editRelationship;
 	class = "editToOne";
-	string = d2wContext.editButtonLabel;
+	value = d2wContext.editButtonLabel;
 	title = helpString;
 }
 
