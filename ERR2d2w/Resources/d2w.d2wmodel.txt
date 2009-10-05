@@ -1,4 +1,5 @@
 (
+    0 : *true* => pageClasses = (null) [R2DClassAssignment],
     0 : *true* => bannerString = (null) [R2DDelayedUIStringAssignment],
     0 : *true* => userIDAttribute = (null) [R2DDefaultUserEntityAssignment],
     0 : *true* => bannerWrapper = h2 [com.webobjects.directtoweb.Assignment],
