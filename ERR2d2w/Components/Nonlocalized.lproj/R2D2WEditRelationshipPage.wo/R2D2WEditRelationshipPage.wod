@@ -23,7 +23,7 @@ BrowserLabelString: WOString {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
 }
 
 CreateLink: WOHyperlink {

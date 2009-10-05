@@ -1,6 +1,7 @@
 EditString: WOTextField {
 	class = d2wContext.propertyClasses;
 	id = labelID;
+	formatter = d2wContext.format;
 	maxlength = d2wContext.maxLength;
 	size = length;
 	title = d2wContext.inputInfo;

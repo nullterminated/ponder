@@ -14,7 +14,7 @@ CancelButton: WOSubmitButton {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
 }
 
 Help: R2DDebuggingHelp {

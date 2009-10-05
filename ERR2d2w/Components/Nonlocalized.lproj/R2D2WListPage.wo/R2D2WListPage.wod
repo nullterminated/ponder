@@ -37,7 +37,7 @@ Caption: WOString {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
 }
 
 Debug: R2DDebuggingComponentHelp {

@@ -24,7 +24,7 @@ BranchRepetition: WORepetition {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
 }
 
 Errors: R2DErrorDictionaryPanel {
