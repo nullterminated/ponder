@@ -67,8 +67,10 @@ public class R2D2WEditDate extends ERDCustomEditComponent {
 	}
 
 	public SimpleDateFormat dateFormatter() {
-		SimpleDateFormat result = new SimpleDateFormat(formatPattern());
-		if(ERXSession.class.isAssignableFrom(session().getClass())) {
+		SimpleDateFormat result = new SimpleDateFormat(formatPattern(), 
+				ERXLocalizer.currentLocalizer().locale());
+		if(ERXSession.class.isAssignableFrom(session().getClass()) &&
+				ERXSession.autoAdjustTimeZone()) {
 			result.setTimeZone(((ERXSession)session()).timeZone());
 		}
 		return result;
