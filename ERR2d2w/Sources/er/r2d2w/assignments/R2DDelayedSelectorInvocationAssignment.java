@@ -20,6 +20,17 @@ public class R2DDelayedSelectorInvocationAssignment
 	public static Object decodeWithKeyValueUnarchiver(EOKeyValueUnarchiver unarchiver) { return new R2DDelayedSelectorInvocationAssignment(unarchiver); }
 	
 	public NSArray<String> dependentKeys(String keyPath) {
+		NSArray<Object> value = (NSArray<Object>)value();
+		int valueCount = value.count();
+		if(valueCount == 2 || valueCount == 4) {
+			String target = (String)value.objectAtIndex(0);
+			NSArray<String> result = new NSArray<String>(target);
+			if(valueCount == 4) {
+				NSArray<String> args = (NSArray<String>)value.objectAtIndex(3);
+				result = result.arrayByAddingObjectsFromArray(args);
+			}
+			return result;
+		}
 		return null;
 	}
 	
