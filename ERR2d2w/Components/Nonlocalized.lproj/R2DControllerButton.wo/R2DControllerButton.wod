@@ -1,5 +1,5 @@
-ActionLegend: ERXLocalizedString {
-	value = "R2DControllerButton.legend";
+ActionLegend: WOString {
+	value = d2wContext.controllerButtonLegend;
 }
 
 BranchChoices: WOPopUpButton {
@@ -15,8 +15,8 @@ HasChoices: WOConditional {
 	condition = hasBranchChoices;
 }
 
-LabelString: ERXLocalizedString {
-	value = "R2DControllerButton.label";
+LabelString: WOString {
+	value = d2wContext.controllerPopupLabel;
 }
 
 OptionalForm: ERXOptionalForm {
@@ -30,6 +30,7 @@ PopupLabel: WOGenericContainer {
 
 SubmitButton: R2DLinkButton {
 	action = performAction;
+	value = d2wContext.controllerButtonLabel;
 }
 
 SubmitButtonContent: WOSwitchComponent {
