@@ -118,6 +118,8 @@
     10 : (pageConfiguration = 'UserLogin' and task = 'query') => subTask = login [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration = 'UserReset' and task = 'query') => subTask = reset [com.webobjects.directtoweb.Assignment],
     10 : (task = 'edit' and pageConfiguration = 'UserCreation') => subTask = wizard [com.webobjects.directtoweb.Assignment],
+    10 : *true* => controllerPopupLabel = R2DControllerButton.controllerPopupLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
+    10 : *true* => controllerButtonLegend = R2DControllerButton.controllerButtonLegend [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : (pageConfiguration = 'UserLogin' or pageConfiguration = 'UserReset') => task = query [com.webobjects.directtoweb.Assignment],
     10 : (entity != dummyEntity and pageConfiguration = 'UserReset') => displayPropertyKeys = ("userIDAttribute.name"
 ) [R2DKeyValueArrayAssignment],
