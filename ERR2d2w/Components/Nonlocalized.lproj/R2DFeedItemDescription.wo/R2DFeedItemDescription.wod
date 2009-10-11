@@ -1,4 +1,4 @@
-CDataString: R2DCDataWrapper {
+CDataString: WOString {
 	escapeHTML = d2wContext.escapeHTML;
-	value = objectPropertyValue;
+	value = stringValue;
 }
