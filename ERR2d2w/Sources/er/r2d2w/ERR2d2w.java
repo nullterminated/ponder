@@ -206,6 +206,8 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 		log.debug(message.toString());
 	}
     
+    //FIXME: this is a MySQL only hack right now.  Hoping to make this
+    //more general purpose later.
 	public static void createDerivedCountAttributes(EOModel model) {
 		log.debug("Model added: Begin adding derived counts");
 		
@@ -215,19 +217,13 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 			//Compound keys aren't supported
 			if(!entity.hasSimplePrimaryKey()) {continue;}
 
-			//Must use ERPrototypes
-			EOAttribute intProto = entity.model().prototypeAttributeNamed("intNumber");
-			if(intProto == null){continue;}
-
 			EOEntityClassDescription ecd = new EOEntityClassDescription(entity);
-			NSArray<String> relationships = ecd.toManyRelationshipKeys();
-			if(!(relationships.count() > 0)){continue;}
 			
 			//Create derived attribute to fetch relationship counts
-			for(int k = 0; k < relationships.count(); k++) {
-				EORelationship rel = entity.relationshipNamed(relationships.objectAtIndex(k).toString());
+			for(String relationshipName : ecd.toManyRelationshipKeys()) {
+				EORelationship rel = entity.relationshipNamed(relationshipName);
 				
-				// Entities must share the same model
+				// Entities must share the same model (Assuming different model means different DB)
 				if(!rel.destinationEntity().model().equals(entity.model())){continue;}
 				
 				//CHECKME can I do this with flattened many-to-manys??
@@ -238,15 +234,11 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 				EOAttribute att = new EOAttribute();
 				
 				// Set att name
-				StringBuilder attName = new StringBuilder();
-				attName.append(rel.name()).append(DERIVED_COUNT);
-				att.setName(attName.toString());
-				log.debug("Building derived attribute for entity named " + entity.name() + ": " + attName.toString());
+				att.setName(rel.name() + DERIVED_COUNT);
+				log.debug("Building derived attribute for entity named " + entity.name() + ": " + att.name());
 				
-				// Set proto attributes individually to avoid column name NPE
-				att.setValueType(intProto.valueType());
-				att.setExternalType(intProto.externalType());
-				att.setClassName(intProto.className());
+				att.setValueType(Character.toString(EOAttribute._VTInteger));
+				att.setClassName(Number.class.getName());
 				
 				// Other important settings
 				att.setAllowsNull(true);
@@ -262,6 +254,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 				attDef.append(" WHERE ");
 				attDef.append(rel.destinationEntity().externalName());
 				attDef.append(".");
+				NSArray attrs = rel.destinationAttributes();
 				attDef.append(rel.destinationAttributes().objectAtIndex(0).columnName());
 				attDef.append(" = ");
 				attDef.append(entity.primaryKeyAttributes().objectAtIndex(0).columnName());
