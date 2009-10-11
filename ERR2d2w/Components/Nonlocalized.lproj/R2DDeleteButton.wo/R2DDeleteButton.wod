@@ -1,22 +1,13 @@
-CanDelete: WOConditional {
-	condition = canDelete;
-}
-
-DeleteButton: WOSubmitButton {
+DeleteButton: R2DLinkButton {
 	action = deleteObjectAction;
+	class = "delete";
+	disabled = disabled;
+	title = d2wContext.displayNameForConfirmDeleteConfiguration;
 	value = d2wContext.deleteButtonLabel;
 }
 
-DeleteLink: WOHyperlink {
-	action = deleteObjectAction;
-	string = d2wContext.deleteButtonLabel;	
-}
-
-IsButton: WOConditional {
-	condition = context.isInForm;
-}
-
-IsLink: WOConditional {
-	condition = context.isInForm;
-	negate = true;	
+DeleteButtonContent: WOSwitchComponent {
+	WOComponentName = d2wContext.buttonContentComponentName;
+	localContext = d2wContext;
+	buttonLabel = d2wContext.deleteButtonLabel;
 }

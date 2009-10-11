@@ -1,21 +1,11 @@
-InspectEntity: WOHyperlink {
+InspectEntityButton: R2DLinkButton {
 	action = inspectEntity;
-	string = inspectEntityLabel;
 	title = inspectEntityTitle;
+	value = inspectEntityLabel;
 }
 
-InspectEntityAction: WOHyperlink {
-	directActionName = inspectEntityAction;
-	queryDictionary = queryDictionary;
-	string = inspectEntityLabel;
-	title = inspectEntityTitle;
-}
-
-UseComponentAction: WOConditional {
-	condition = d2wContext.shouldUseDirectActions;
-	negate = true;
-}
-
-UseDirectAction: WOConditional {
-	condition = d2wContext.shouldUseDirectActions;	
+InspectEntityButtonContent: WOSwitchComponent {
+	WOComponentName = d2wContext.buttonContentComponentName;
+	localContext = d2wContext;
+	buttonLabel = inspectEntityLabel;
 }

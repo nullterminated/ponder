@@ -186,7 +186,6 @@
 ) [com.webobjects.directtoweb.Assignment],
     15 : *true* => controllerButtonComponentName = R2DControllerButton [com.webobjects.directtoweb.Assignment],
     15 : (entity = dummyEntity and pageConfiguration like 'User*') => task = error [com.webobjects.directtoweb.Assignment],
-    15 : (propertyKey = 'inspectAction' and shouldUseDirectActions = '1') => componentName = R2DInspectDirectActionButton [com.webobjects.directtoweb.Assignment],
     15 : componentName = 'R2D2WQueryBoolean' => choicesNames = ("R2D2W.trueString","R2D2W.falseString","ERD2W.noSelectionString"
 ) [com.webobjects.directtoweb.Assignment],
     15 : (task = 'query' and (smartAttribute.userInfo.erPrototype = 'language' or smartAttribute = userLanguageAttribute)) => componentName = R2D2WQueryLanguage [com.webobjects.directtoweb.Assignment],

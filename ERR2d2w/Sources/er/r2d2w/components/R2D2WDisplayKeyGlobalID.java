@@ -2,6 +2,7 @@ package er.r2d2w.components;
 
 import org.apache.log4j.Logger;
 
+import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2W;
@@ -11,14 +12,11 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableDictionary;
 
 import er.directtoweb.components.ERD2WStatelessComponent;
-import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXEOControlUtilities;
 import er.extensions.eof.ERXEOGlobalIDUtilities;
 import er.extensions.eof.ERXKeyGlobalID;
 import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.localization.ERXLocalizer;
-import er.r2d2w.R2D2WDirectAction;
-import com.webobjects.appserver.WOActionResults;
 
 public class R2D2WDisplayKeyGlobalID extends ERD2WStatelessComponent {
     /** logging support */
@@ -34,7 +32,7 @@ public class R2D2WDisplayKeyGlobalID extends ERD2WStatelessComponent {
     }
 
     public EOEnterpriseObject objectForGlobalID() {
-    	return ERXEOGlobalIDUtilities.fetchObjectWithGlobalID(ERXEC.newEditingContext(), globalIDFromObjectPropertyValue());
+    	return ERXEOGlobalIDUtilities.fetchObjectWithGlobalID(object().editingContext(), globalIDFromObjectPropertyValue());
     }
     
     public ERXKeyGlobalID globalIDFromObjectPropertyValue() {
@@ -74,15 +72,6 @@ public class R2D2WDisplayKeyGlobalID extends ERD2WStatelessComponent {
 		}
 		ERXLocalizer.currentLocalizer().takeValueForKey(result, localizerKey);
 		return result;
-	}
-
-	public NSDictionary<String, Object> queryDictionary() {
-		ERXKeyGlobalID gid = globalIDFromObjectPropertyValue();
-		return R2D2WDirectAction.inspectQueryDictionaryForKey(ERXEOControlUtilities.primaryKeyStringForGlobalID(gid));
-	}
-
-	public String inspectEntityAction() {
-		return "Inspect" + globalIDFromObjectPropertyValue().entityName();
 	}
 
 	public WOActionResults inspectEntity() {

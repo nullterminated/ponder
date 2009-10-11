@@ -10,4 +10,8 @@ public class R2DDeleteButton extends ERDDeleteButton {
         super(context);
     }
 
+	public Boolean disabled() {
+		return !canDelete();
+	}
+
 }

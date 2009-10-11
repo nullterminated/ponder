@@ -1,18 +1,12 @@
-InspectButton: WOSubmitButton {
+InspectButtonLink: R2DLinkButton {
 	action = inspectObjectAction;
+	//TODO ?? disabled = isEntityInspectable
+	title = d2wContext.displayNameForInspectConfiguration;
 	value = d2wContext.inspectButtonLabel;
 }
 
-InspectLink: WOHyperlink {
-	action = inspectObjectAction;
-	string = d2wContext.inspectButtonLabel;
-}
-
-IsButton: WOConditional {
-	condition = context.isInForm;
-}
-
-IsLink: WOConditional {
-	condition = context.isInForm;
-	negate = true;
+InspectButtonContent: WOSwitchComponent {
+	WOComponentName = d2wContext.buttonContentComponentName;
+	localContext = d2wContext;
+	buttonLabel = d2wContext.inspectButtonLabel;
 }

@@ -1,22 +1,13 @@
-CanEdit: WOConditional {
-	condition = isEditable;
-}
-
-EditButton: WOSubmitButton {
+EditButton: R2DLinkButton {
 	action = editObjectAction;
+	class = "edit";
+	disabled = isNotEditable;
+	title = d2wContext.displayNameForEditConfiguration;
 	value = d2wContext.editButtonLabel;
 }
 
-EditLink: WOHyperlink {
-	action = editObjectAction;
-	string = d2wContext.editButtonLabel;
-}
-
-IsButton: WOConditional {
-	condition = context.isInForm;
-}
-
-IsLink: WOConditional {
-	condition = context.isInForm;
-	negate = true;
+EditButtonContent: WOSwitchComponent {
+	WOComponentName = d2wContext.buttonContentComponentName;
+	localContext = d2wContext;
+	buttonLabel = d2wContext.editButtonLabel;
 }

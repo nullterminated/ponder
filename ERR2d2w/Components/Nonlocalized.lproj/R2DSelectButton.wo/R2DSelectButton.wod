@@ -1,18 +1,10 @@
-IsButton: WOConditional {
-	condition = context.isInForm;
-}
-
-IsLink: WOConditional {
-	condition = context.isInForm;
-	negate = true;
-}
-
 SelectButton: WOSubmitButton {
 	action = selectObjectAction;
 	value = d2wContext.pickButtonLabel;
 }
 
-SelectLink: WOHyperlink {
-	action = selectObjectAction;
-	string = d2wContext.pickButtonLabel;
+SelectButtonContent: WOSwitchComponent {
+	WOComponentName = d2wContext.buttonContentComponentName;
+	localContext = d2wContext;
+	buttonLabel = d2wContext.pickButtonLabel;
 }
