@@ -1,5 +1,6 @@
 Checkbox: WOGenericElement {
-	checked = isCurrentItemChecked;
+	checked = checkboxChecked;
+	disabled = checkboxDisabled;
 	elementName = "input";
 	id = generateID;
 	name = wrapperElementID;
@@ -13,12 +14,11 @@ CheckboxRepetition: WORepetition {
 	index = index;
 }
 
-CheckboxWrapper//VALID
-: WOGenericContainer {
-    // ** Because there's no elementName, this is an invisible wrapper element.
+CheckboxWrapper : WOGenericContainer {
+	// ** Because there's no elementName, this is an invisible wrapper element.
 	elementID = wrapperElementID;
-    name = context.elementID;
-    formValues = selections;
+	name = context.elementID;
+	formValues = selections;
 }
 
 Content: WOComponentContent {

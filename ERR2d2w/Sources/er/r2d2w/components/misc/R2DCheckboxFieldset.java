@@ -27,5 +27,23 @@ public class R2DCheckboxFieldset extends ERXCheckboxMatrix {
 		labelID = "id" + context().elementID();
 		return labelID;
 	}
+	
+	public boolean checked() {
+		boolean checked = selections() != null && selections().containsObject(currentItem);
+		return checked;
+	}
+	
+	public boolean disabled() {
+		boolean disabled = booleanValueForBinding("disabled", false);
+		return disabled;
+	}
+	
+    public String checkboxChecked() {
+        return checked() ? "checked" : null;
+    }
+    
+    public String checkboxDisabled() {
+    	return disabled() ? "disabled" : null;
+    }
 
 }
