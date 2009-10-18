@@ -17,7 +17,7 @@ Head: R2D2WHead {
 
 HTML: WOGenericContainer {
 	elementName = "html";
-	xml:lang = languageCode;
+	"xml:lang" = languageCode;
 	xmlns = "http://www.w3.org/1999/xhtml";
 }
 
