@@ -1,4 +1,4 @@
-#Sun May 17 10:58:47 EDT 2009
+#Sun Oct 11 17:13:49 EDT 2009
 eclipse.preferences.version=1
 encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo/R2D2WActionGroup.html=UTF-8
@@ -152,10 +152,6 @@ encoding//Components/Nonlocalized.lproj/R2DInspectButton.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DInspectButton.wo/R2DInspectButton.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DInspectButton.wo/R2DInspectButton.wod=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DInspectButton.wo/R2DInspectButton.woo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInspectDirectActionButton.wo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInspectDirectActionButton.wo/R2DInspectDirectActionButton.html=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInspectDirectActionButton.wo/R2DInspectDirectActionButton.wod=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInspectDirectActionButton.wo/R2DInspectDirectActionButton.woo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DMonthView.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DMonthView.wo/R2DMonthView.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DMonthView.wo/R2DMonthView.wod=UTF-8
@@ -233,7 +229,6 @@ encoding//Components/R2DFeedEnclosure.api=UTF-8
 encoding//Components/R2DFeedItemDescription.api=UTF-8
 encoding//Components/R2DInfoPanel.api=UTF-8
 encoding//Components/R2DInspectButton.api=UTF-8
-encoding//Components/R2DInspectDirectActionButton.api=UTF-8
 encoding//Components/R2DMonthView.api=UTF-8
 encoding//Components/R2DNextPageButton.api=UTF-8
 encoding//Components/R2DPieChart.api=UTF-8
@@ -275,7 +270,6 @@ encoding//Sources/er/r2d2w/components/R2DRSSLink.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DDeleteButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DEditButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DInspectButton.java=UTF-8
-encoding//Sources/er/r2d2w/components/buttons/R2DInspectDirectActionButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DNextPageButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DPodcastButton.java=UTF-8
 encoding//Sources/er/r2d2w/components/buttons/R2DRSSButton.java=UTF-8

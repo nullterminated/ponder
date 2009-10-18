@@ -63,10 +63,16 @@ ItemsPerPage: ERXLocalizedString {
 	value = "ERXBatchNavigationBar.items_per_page"; 
 }
 
-LeftArrow: WOHyperlink {	
+LeftArrow: R2DLinkButton {	
     action = displayPreviousBatch;
     class = "navPrev";
-    string = session.localizer.R2DBatchNavigationBar.previous;
+    value = session.localizer.R2DBatchNavigationBar.previous;
+}
+
+LeftArrowContent: WOSwitchComponent {
+	buttonLabel = session.localizer.R2DBatchNavigationBar.previous;
+	localContext = ^d2wContext;
+	WOComponentName = ^d2wContext.previousBatchButtonContentComponentName;
 }
 
 ObjectsCount: WOString {
@@ -84,10 +90,16 @@ Page: ERXLocalizedString {
 	value = "ERXBatchNavigationBar.page"; 
 }
 
-RightArrow: WOHyperlink {
+RightArrow: R2DLinkButton {
     action = displayNextBatch;
     class = "navNext";
-	string = session.localizer.R2DBatchNavigationBar.next;
+	value = session.localizer.R2DBatchNavigationBar.next;
+}
+
+RightArrowContent: WOSwitchComponent {
+	buttonLabel = session.localizer.R2DBatchNavigationBar.next;
+	localContext = ^d2wContext;
+	WOComponentName = ^d2wContext.nextBatchButtonContentComponentName;
 }
 
 SortComponent: WOSortOrderManyKey {

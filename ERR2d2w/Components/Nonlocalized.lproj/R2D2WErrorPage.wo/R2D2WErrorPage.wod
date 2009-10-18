@@ -25,11 +25,18 @@ Error: R2DErrorDictionaryPanel {
 	extraErrorMessage = message;
 }
 
-PageWrapper: WOSwitchComponent {
-	WOComponentName = d2wContext.pageWrapperName;
+OkButton: R2DLinkButton {
+	action = nextPage;
+	class = "ok";
+	value = d2wContext.okButtonLabel;
 }
 
-ReturnLink: WOHyperlink {
-	action = nextPage;
-	string = d2wContext.okButtonLabel;
+OkButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.okButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.okButtonContentComponentName;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.pageWrapperName;
 }
