@@ -76,6 +76,10 @@ body {
 	width: auto;
 }
 
+a.button {
+	text-decoration: none;
+}
+
 /* Tables */
 
 caption {
@@ -159,7 +163,6 @@ fieldset {
 
 legend {
 	font: 1.17em bold Verdana, Geneva, sans-serif;
-	margin: 1em 0 1em 0;
 }
 
 label.mandatory {
