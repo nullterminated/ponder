@@ -132,6 +132,24 @@ table#log4j label.off {
 	width: 3em;
 }
 
+/* Calendar Table */
+
+table.calendar td.out {
+	background-color: #ccc;
+}
+
+table.calendar td {
+	background-color: #fff;
+}
+
+table.calendar td.selected {
+	background-color: #ddd;
+}
+
+table.calendar td.today {
+	background-color: #cec;
+}
+
 /* Forms */
 
 fieldset {
@@ -198,23 +216,23 @@ label.error {
 	display: block;
 }
 
-.queryEntities fieldset {
+.queryAll fieldset {
 	border: 0;
 	padding: 0;
 }
 
-.queryEntities label {
+.queryAll label {
 	float: left;
 	margin-right: 0.5em;
 	text-align: right;
 	width: 9em;
 }
 
-.queryEntities select {
+.queryAll select {
 	width: 12em;
 }
 
-.queryEntities form {
+.queryAll form {
 	margin-bottom: 0.5em;
 }
 
