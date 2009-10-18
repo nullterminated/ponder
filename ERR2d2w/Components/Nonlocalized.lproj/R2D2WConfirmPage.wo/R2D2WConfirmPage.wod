@@ -2,14 +2,34 @@ Banner: R2DBannerComponent {
 	d2wContext = d2wContext;
 }
 
-BranchButton: WOSubmitButton {
+BranchButton: R2DLinkButton {
 	action = nextPageAction;
-	value = branch.branchButtonLabel; //VALID
+	class = d2wContext.branch.branchButtonID;
+	value = d2wContext.branch.branchButtonLabel;
 }
 
-CancelButton: WOSubmitButton {
+BranchButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.branch.branchButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.buttonContentComponentName;
+}
+
+BranchRepetition: WORepetition {
+	item = d2wContext.branch;
+	list = branchChoices;
+	checkHashCodes = false;
+}
+
+CancelButton: R2DLinkButton {
 	action = cancelAction;
+	class = "cancel";
 	value = d2wContext.cancelButtonLabel;
+}
+
+CancelButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.cancelButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.cancelButtonContentComponentName;
 }
 
 ComponentDiv: WOGenericContainer {
@@ -61,15 +81,16 @@ Message: WOString {
 	escapeHTML = false;
 }
 
-OKButton: WOSubmitButton {
+OkButton: R2DLinkButton {
 	action = nextPageAction;
+	class = "ok";
 	value = d2wContext.okButtonLabel;
 }
 
-Repetition1: WORepetition {
-	item = branch;
-	list = branchChoices;
-	checkHashCodes = false;
+OkButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.okButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.okButtonContentComponentName;
 }
 
 PageWrapper: WOSwitchComponent {
