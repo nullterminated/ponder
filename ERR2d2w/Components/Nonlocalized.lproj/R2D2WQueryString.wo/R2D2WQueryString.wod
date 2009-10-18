@@ -3,6 +3,7 @@ LabelString: WOString {
 }
 
 String: WOTextField {
+	formatter = d2wContext.formatObject;
 	id = labelID;
 	value = displayGroupQueryMatchValue;
 }
