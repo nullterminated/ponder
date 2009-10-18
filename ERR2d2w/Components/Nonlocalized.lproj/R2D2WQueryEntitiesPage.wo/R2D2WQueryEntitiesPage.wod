@@ -16,7 +16,7 @@ BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = "queryEntities";
+	class = d2wContext.pageClasses;
 }
 
 EntitiesRepetition: WORepetition {
