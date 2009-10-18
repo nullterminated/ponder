@@ -1,20 +1,27 @@
 <webobject name = "PageWrapper">
   <webobject name = "ComponentDiv">
+    <webobject name = "Help" />
+    <webobject name = "AboveDisplayPropertyKeys" />
+    <webobject name = "Banner" />
     <webobject name = "HasObject">
-      <webobject name = "Help" />
-      <webobject name = "AboveDisplayPropertyKeys" />
-      <webobject name = "Banner" />
       <webobject name = "AttributeRepetition">
         <webobject name = "PropertyName" />
         <webobject name = "ComponentDebug" />
         <webobject name = "AttributeWrapper"><webobject name = "AttributeValue" /></webobject>
       </webobject>
-      <webobject name = "ActionGroup" />
-      <webobject name = "BelowDisplayPropertyKeys" />
     </webobject>
-    <webobject name = "MissingObject">
-      <webobject name = "EmptyMessage" />
-      <webobject name = "ActionGroup" />
+    <webobject name = "MissingObject"> <webobject name = "EmptyMessage" /> </webobject>
+    <webobject name = "ActionGroup">
+      <webobject name = "ShowCancel">
+        <webobject name = "ReturnButton"><webobject name = "ReturnButtonContent" /></webobject>
+      </webobject>
+      <webobject name = "IsObjectEditable">
+        <webobject name = "EditButton"><webobject name = "EditButtonContent" /></webobject>
+      </webobject>
+      <webobject name = "IsObjectDeletable">
+        <webobject name = "DeleteButton"><webobject name = "DeleteButtonContent" /></webobject>
+      </webobject>
     </webobject>
+    <webobject name = "BelowDisplayPropertyKeys" />
   </webobject>
 </webobject>

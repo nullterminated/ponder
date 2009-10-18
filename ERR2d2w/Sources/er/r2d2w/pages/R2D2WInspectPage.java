@@ -18,4 +18,8 @@ public class R2D2WInspectPage extends ERD2WInspectPage {
 	public String emptyObjectMessage() {
 		return ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("R2D2WInspectPage.emptyObjectMessage", d2wContext());
 	}
+
+	public boolean hasNoActions() {
+		return !(showCancel() && isObjectEditable() && isObjectDeleteable());
+	}
 }

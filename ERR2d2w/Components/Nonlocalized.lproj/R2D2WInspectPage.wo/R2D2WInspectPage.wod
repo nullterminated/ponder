@@ -3,9 +3,10 @@ AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	extraPropertiesKey = "aboveDisplayPropertyKeys";
 }
 
-ActionGroup: R2D2WActionGroup {
-	localContext = d2wContext;
-	object = object;
+ActionGroup: WOGenericContainer {
+	class = "actionGroup";
+	elementName = "div";
+	omitTags = hasNoActions;
 }
 
 AttributeRepetition: WORepetition {
@@ -40,7 +41,31 @@ ComponentDebug: R2DDebuggingComponentHelp {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
+}
+
+DeleteButton: R2DLinkButton {
+	action = deleteAction;
+	class = "delete";
+	value = d2wContext.deleteButtonLabel;
+}
+
+DeleteButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.deleteButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.deleteButtonContentComponentName;
+}
+
+EditButton: WOSubmitButton {
+	action = editAction;
+	class = "edit";
+	value = d2wContext.editButtonLabel;
+}
+
+EditButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.editButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.editButtonContentComponentName;
 }
 
 EmptyMessage: R2DEmptyListMessage {
@@ -54,6 +79,14 @@ HasObject: WOConditional {
 
 Help: R2DDebuggingHelp {
 	d2wContext = d2wContext;
+}
+
+IsObjectDeletable: WOConditional {
+	condition = isObjectDeleteable;
+}
+
+IsObjectEditable: WOConditional {
+	condition = isObjectEditable;
 }
 
 MissingObject: WOConditional {
@@ -70,3 +103,20 @@ PropertyName: WOSwitchComponent {
 	localContext = d2wContext;
 	object = object;
 }
+
+ReturnButton: R2DLinkButton {
+	action = nextPage;
+	class = "return";
+	value = d2wContext.returnButtonLabel;
+}
+
+ReturnButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.returnButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.returnButtonContentComponentName;
+}
+
+ShowCancel: WOConditional {
+	condition = showCancel;
+}
+
