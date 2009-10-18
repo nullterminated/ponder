@@ -8,11 +8,20 @@
         <legend><webobject name = "EntityName" /></legend>
         <webobject name = "ValidationErrors" />
         <webobject name = "InfoPanel" />
-        <webobject name = "AttributeRepetition">
-          <webobject name = "ComponentName" />
-          <webobject name = "ComponentDebug" />
-        </webobject>
-        <webobject name = "ActionGroup" />
+        <ul>
+          <webobject name = "AttributeRepetition">
+            <li>
+              <webobject name = "ComponentName" />
+              <webobject name = "ComponentDebug" />
+            </li>
+          </webobject>
+        </ul>
+        <div class = "actionGroup">
+          <webobject name = "SaveButton"><webobject name = "SaveButtonContent" /></webobject>
+          <webobject name = "CancelButton"><webobject name = "CancelButtonContent" /></webobject>
+          <webobject name = "ActionBar" />
+          <webobject name = "Controller" />
+        </div>
       </fieldset>
     </webobject>
     <webobject name = "BelowDisplayPropertyKeys" />

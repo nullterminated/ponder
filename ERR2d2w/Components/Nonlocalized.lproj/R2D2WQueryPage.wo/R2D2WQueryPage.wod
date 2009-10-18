@@ -4,6 +4,11 @@ AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	dataSource = queryDataSource;
 }
 
+ActionBar: WOSwitchComponent {
+	WOComponentName = d2wContext.actionBarComponentName;
+	d2wContext = d2wContext;
+}
+
 Banner: R2DBannerComponent {
 	d2wContext = d2wContext;
 }
@@ -20,13 +25,24 @@ ComponentDebug: R2DDebuggingComponentHelp {
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
 }
 
 ComponentName: WOSwitchComponent {
 	displayGroup = displayGroup;
 	localContext = d2wContext;
 	WOComponentName = d2wContext.componentName;
+}
+
+Controller: WOSwitchComponent {
+	WOComponentName = d2wContext.controllerButtonComponentName;
+	d2wContext = d2wContext;
+}
+
+Errors: R2DErrorDictionaryPanel {
+	errorMessages = errorMessages;
+	extraErrorMessage = errorMessage;
+	errorKeyOrder = errorKeyOrder;
 }
 
 EntityName: WOString {

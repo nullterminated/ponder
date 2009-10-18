@@ -3,9 +3,9 @@ AboveDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
 	extraPropertiesKey = "aboveDisplayPropertyKeys";
 }
 
-ActionGroup: R2D2WActionGroup {
-	localContext = d2wContext;
-	object = object;
+ActionBar: WOSwitchComponent {
+	WOComponentName = d2wContext.actionBarComponentName;
+	d2wContext = d2wContext;
 }
 
 AttributeRepetition: WORepetition {
@@ -22,19 +22,37 @@ BelowDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
 	extraPropertiesKey = "belowDisplayPropertyKeys";
 }
 
+CancelButton: R2DLinkButton {
+	action = cancelAction;
+	class = "cancel";
+	useAsButton = false;
+	value = d2wContext.cancelButtonLabel;
+}
+
+CancelButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.cancelButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.cancelButtonContentComponentName;
+}
+
 ComponentDebug: R2DDebuggingComponentHelp {
 	localContext = d2wContext;
 }
 
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
-	class = d2wContext.pageConfiguration;
+	class = d2wContext.pageClasses;
 }
 
 ComponentName: WOSwitchComponent {
 	WOComponentName = d2wContext.componentName;
 	localContext = localContext;
 	object = object;
+}
+
+Controller: WOSwitchComponent {
+	WOComponentName = d2wContext.controllerButtonComponentName;
+	d2wContext = d2wContext;
 }
 
 EditingForm: ERXOptionalForm {
@@ -57,6 +75,18 @@ InfoPanel: R2DInfoPanel {
 
 PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
+}
+
+SaveButton: R2DLinkButton {
+	action = submitAction;
+	class = "save";
+	value = d2wContext.saveButtonLabel;
+}
+
+SaveButtonContent: WOSwitchComponent {
+	buttonLabel = d2wContext.saveButtonLabel;
+	localContext = d2wContext;
+	WOComponentName = d2wContext.saveButtonContentComponentName;
 }
 
 ValidationErrors: R2DErrorDictionaryPanel {
