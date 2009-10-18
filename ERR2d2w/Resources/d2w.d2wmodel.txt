@@ -56,6 +56,8 @@
     0 : *true* => rssNamespaces = {"atom" = "http://www.w3.org/2005/Atom"; 
 } [com.webobjects.directtoweb.Assignment],
     0 : *true* => calendarNavigationBarComponentName = R2D2WCalendarNavigationBar [com.webobjects.directtoweb.Assignment],
+    0 : smartAttribute.className like '*Crypto*' => qualifierOperators = ("=","<>"
+) [com.webobjects.directtoweb.Assignment],
     0 : (subTask = 'rss' and propertyKey = rssItemTitle) => dipslayStringWrapper = title [com.webobjects.directtoweb.Assignment],
     0 : componentName = 'R2D2WEditLargeString' => hintString = R2D2W.maxLengthMessage [er.directtoweb.ERDDelayedLocalizedAssignment],
     0 : (task = 'query' and pageConfiguration = 'UserReset') => nextPageDelegate = er.r2d2w.delegates.SimpleResetDelegate [ERDDelayedObjectCreationAssignment],
@@ -97,7 +99,9 @@
     10 : *true* => yearButtonLabel = R2D2W.yearButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : pageConfiguration = 'MessageSent' => entity = dummyEntity [er.directtoweb.ERDKeyValueAssignment],
     10 : *true* => monthButtonLabel = R2D2W.monthButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
+    10 : *true* => okButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
     10 : *true* => todayButtonLabel = R2D2W.todayButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
+    10 : *true* => defaultDateFormat = R2D2W.defaultDateFormat [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : *true* => editButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
     10 : *true* => pickButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
     10 : *true* => saveButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
@@ -111,9 +115,12 @@
     10 : pageConfiguration like 'Mail*' => pageWrapperName = MailWrapper [com.webobjects.directtoweb.Assignment],
     10 : pageConfiguration = 'Log4JConfiguration' => entity = dummyEntity [er.directtoweb.ERDKeyValueAssignment],
     10 : pageConfiguration = 'UserMessageSentReminder' => task = message [com.webobjects.directtoweb.Assignment],
+    10 : *true* => nextBatchButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
     10 : propertyKey = 'errorPanelAction' => componentName = R2DErrorPanel [com.webobjects.directtoweb.Assignment],
     10 : *true* => controllerButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
     10 : *true* => controllerButtonLabel = R2D2W.controllerButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
+    10 : *true* => defaultDateTimeFormat = R2D2W.defaultDateTimeFormat [er.directtoweb.ERDDelayedLocalizedAssignment],
+    10 : *true* => previousBatchButtonContentComponentName = defaultButtonContentComponentName [ERDKeyValueAssignment],
     10 : *true* => moreOptionsButtonLabel = R2D2W.moreOptionsButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : (pageConfiguration = 'UserLogin' and task = 'query') => subTask = login [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration = 'UserReset' and task = 'query') => subTask = reset [com.webobjects.directtoweb.Assignment],
@@ -125,16 +132,18 @@
 ) [R2DKeyValueArrayAssignment],
     10 : pageConfiguration = 'MailUserReset' => explanationConfigurationName = defaultEmbeddedInspectUserConfiguration [er.directtoweb.ERDKeyValueAssignment],
     10 : pageConfiguration = 'MailPlainUserReset' => explanationConfigurationName = plainTextEmbeddedInspectUserConfiguration [er.directtoweb.ERDKeyValueAssignment],
-    10 : (pageConfiguration = 'UserLogin' or pageConfiguration = 'UserReset') => belowDisplayPropertyKeys = (errorPanelAction
-) [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration = 'MailUserReset' or pageConfiguration = 'MailPlainUserReset') => explanationComponentName = ERXD2WInspect [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration like 'MailPlain*' or pageConfiguration = plainTextEmbeddedInspectUserConfiguration) => subTask = plainText [com.webobjects.directtoweb.Assignment],
+    10 : smartAttribute.className = 'er.extensions.foundation.ERXCryptoString' => formatObject = er.extensions.formatters.ERXCryptoStringFormatter [ERDDelayedObjectCreationAssignment],
     10 : *true* => calendarHeaderFormat = ("session.localizer",localizedStringForKey,    (    "java.lang.String"),    (    calendarHeaderFormatKey)
 ) [R2DDelayedSelectorInvocationAssignment],
     10 : *true* => calendarCaptionFormat = ("session.localizer",localizedStringForKey,    (    "java.lang.String"),    (    calendarCaptionFormatKey)
 ) [R2DDelayedSelectorInvocationAssignment],
     10 : *true* => calendarComponentName = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2DDayView"; "MONTH" = "R2DMonthView"; "WEEK" = "R2DWeekView"; "YEAR" = "R2DYearView"; }; 
 } [ERDDelayedSwitchAssignment],
+    10 : ((task = 'query' or task = 'queryAll') and (smartAttribute.className = 'java.lang.Number' or smartAttribute.className = 'java.math.BigDecimal')) => formatter = ###,###.##;0;-###,###.## [com.webobjects.directtoweb.Assignment],
+    10 : smartAttribute.className = 'com.webobjects.foundation.NSTimestamp' => formatObject = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "formatter"; }); "className" = "java.text.SimpleDateFormat"; 
+} [ERDDelayedObjectCreationAssignment],
     10 : *true* => calendarHeaderFormatKey = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2W.dayHeaderFormat"; "MONTH" = "R2D2W.monthHeaderFormat"; "WEEK" = "R2D2W.weekHeaderFormat"; "YEAR" = "R2D2W.yearHeaderFormat"; }; 
 } [ERDDelayedSwitchAssignment],
     10 : *true* => calendarCaptionFormatKey = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2W.dayCaptionFormat"; "MONTH" = "R2D2W.monthCaptionFormat"; "WEEK" = "R2D2W.weekCaptionFormat"; "YEAR" = "R2D2W.yearCaptionFormat"; }; 
@@ -143,6 +152,8 @@
 } [ERDDelayedSwitchAssignment],
     10 : (entity != dummyEntity and (pageConfiguration = 'UserLogin' or pageConfiguration = defaultEmbeddedInspectUserConfiguration or pageConfiguration = plainTextEmbeddedInspectUserConfiguration)) => displayPropertyKeys = ("userIDAttribute.name","userCredentialAttribute.name"
 ) [R2DKeyValueArrayAssignment],
+    10 : (smartAttribute.className = 'java.lang.Number' or smartAttribute.className = 'java.math.BigDecimal') => formatObject = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "formatter"; }); "className" = "com.webobjects.foundation.NSNumberFormatter"; 
+} [ERDDelayedObjectCreationAssignment],
     11 : task = 'select' => actions = (
 ) [com.webobjects.directtoweb.Assignment],
     11 : *true* => displayNameForPageConfiguration = (null) [R2DDelayedUIStringAssignment],
@@ -196,12 +207,12 @@
     20 : ((pageConfiguration = 'UserLogin' or pageConfiguration = 'UserReset') and smartAttribute.className = 'java.lang.String') => componentName = R2D2WQueryString [com.webobjects.directtoweb.Assignment],
     21 : *true* => propertyNameComponentName = R2D2WPropertyName [com.webobjects.directtoweb.Assignment],
     21 : propertyKey like '*primaryKey' => componentName = R2D2WDisplayString [com.webobjects.directtoweb.Assignment],
+    21 : smartAttribute.className = 'com.webobjects.foundation.NSTimestamp' => formatter = defaultDateFormat [ERDDelayedKeyValueAssignment],
     21 : (task = 'edit' and smartAttribute.className = 'java.lang.String') => componentName = R2D2WEditString [com.webobjects.directtoweb.Assignment],
-    21 : smartAttribute.className = 'com.webobjects.foundation.NSTimestamp' => formatter = R2D2W.dateFormat [er.directtoweb.ERDDelayedLocalizedAssignment],
     21 : ((task = 'list' or task = 'select' or task = 'inspect') and smartRelationship.isToMany = 1) => componentName = R2D2WDisplayToManyFault [com.webobjects.directtoweb.Assignment],
     21 : ((task = 'list' or task = 'select' or task = 'inspect') and propertyType = 'r' and not (smartRelationship.isToMany = 1)) => componentName = R2D2WDisplayToOneFault [com.webobjects.directtoweb.Assignment],
     21 : ((task = 'inspect' or task = 'list' or task = 'select') and smartAttribute.className = 'com.webobjects.foundation.NSTimestamp') => componentName = R2D2WDisplayDate [com.webobjects.directtoweb.Assignment],
-    22 : smartAttribute.prototypeName = 'dateTime' => formatter = R2D2W.dateTimeFormat [er.directtoweb.ERDDelayedLocalizedAssignment],
+    22 : smartAttribute.prototypeName = 'dateTime' => formatter = defaultDateTimeFormat [ERDDelayedKeyValueAssignment],
     25 : *true* => templateNameForEditPage = R2D2WEditPage [com.webobjects.directtoweb.Assignment],
     25 : *true* => templateNameForListPage = R2D2WListPage [com.webobjects.directtoweb.Assignment],
     25 : *true* => templateNameForErrorPage = R2D2WErrorPage [com.webobjects.directtoweb.Assignment],

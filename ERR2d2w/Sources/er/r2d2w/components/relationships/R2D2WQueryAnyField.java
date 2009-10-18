@@ -1,5 +1,7 @@
 package er.r2d2w.components.relationships;
 
+import java.text.Format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import com.webobjects.appserver.WOContext;
@@ -15,12 +17,12 @@ import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSTimestamp;
 
 import er.directtoweb.components.ERD2WStatelessComponent;
+import er.extensions.appserver.ERXSession;
 import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.localization.ERXLocalizer;
 import er.r2d2w.assignments.R2DDefaultUserEntityAssignment;
 
-@SuppressWarnings("unchecked")
 public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 	private static final NSArray<String> stringQualifierOperators = new NSArray<String>(new String[]{"starts with", "contains", "ends with", "is", "like"});
 	private static final NSArray<String> relationalQualifierOperators = new NSArray<String>(new String[]{"=", "<>", "<", ">", "<=", ">="});
@@ -70,15 +72,18 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 	public NSArray<EOAttribute> queryAttributes() {
 		NSMutableArray<EOAttribute> result = new NSMutableArray<EOAttribute>();
 		EOEntity entity = relationshipContext().entity();
-		NSArray propertyKeys = ERXValueUtilities.arrayValueWithDefault(relationshipContext().valueForKey(D2WModel.DisplayPropertyKeysKey), NSArray.EmptyArray);
-		for(Object key: propertyKeys) {
-			String attributeName = (String)key;
+		NSArray<String> propertyKeys = ERXValueUtilities.arrayValueWithDefault(relationshipContext().valueForKey(D2WModel.DisplayPropertyKeysKey), NSArray.EmptyArray);
+		for(String attributeName: propertyKeys) {
 			EOAttribute attribute = entity.attributeNamed(attributeName);
 			if(attribute!=null) { result.add(attribute); }
 		}
 		return result.immutableClone();
 	}
 
+    public NSArray<String> qualifierOperatorsOverrideFromRules(){
+        return (NSArray<String>)relationshipContext().valueForKey("qualifierOperators");
+    }
+    
 	public NSArray<String> displayKeys() {
 		NSMutableArray<String> result = new NSMutableArray<String>();
 		NSArray<EOAttribute> attributes = queryAttributes();
@@ -86,32 +91,37 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 
 		for(EOAttribute attribute: attributes) {
 			rc.setPropertyKey(attribute.name());
-			Class attributeClass = null;
+			Class<?> attributeClass = null;
 			try {
 				attributeClass = Class.forName(attribute.className());
 			} catch(ClassNotFoundException e) {
 				throw NSForwardException._runtimeExceptionForThrowable(e);
 			}
 
+			//TODO get all the qualifier operators from the rule system rather than
+			//define them here?
 			NSArray<String> operators = null;
-			if(Number.class.isAssignableFrom(attributeClass)) {
-				String v = attribute.valueType();
-				if(v != null && v.length() == 1 && v.charAt(0) == EOAttribute._VTBoolean) {
+			operators = qualifierOperatorsOverrideFromRules();
+			
+			if(operators == null) {
+				if(Number.class.isAssignableFrom(attributeClass)) {
+					String v = attribute.valueType();
+					if(v != null && v.length() == 1 && v.charAt(0) == EOAttribute._VTBoolean) {
+						operators = booleanQualifierOperators;
+					} else {
+						operators = relationalQualifierOperators;
+					}
+				} else if (attribute.userInfo() != null && 
+						("language".equals(attribute.userInfo().objectForKey("erPrototype")) || 
+						attribute.equals(relationshipContext().valueForKey(R2DDefaultUserEntityAssignment.LANGUAGE_PROTO_KEY)))) {
+					operators = languageQualifierOperators;
+				} else if (Boolean.class.equals(attributeClass)) {
 					operators = booleanQualifierOperators;
+				} else if (String.class.equals(attributeClass)) {
+					operators = standardQualifierOperators;
 				} else {
 					operators = relationalQualifierOperators;
 				}
-			} else if (attribute.userInfo() != null && 
-					("language".equals(attribute.userInfo().objectForKey("erPrototype")) || 
-					attribute.equals(relationshipContext().valueForKey(R2DDefaultUserEntityAssignment.LANGUAGE_PROTO_KEY)))) {
-				operators = languageQualifierOperators;
-			} else if (Boolean.class.equals(attributeClass)) {
-				operators = booleanQualifierOperators;
-			} else if (String.class.equals(attributeClass)) {
-				NSArray<String> opArray = (NSArray<String>)ERXValueUtilities.arrayValueWithDefault(rc.valueForKey("qualifierOperators"), new NSArray<String>());
-				operators = (opArray.count() > 0)?opArray:standardQualifierOperators;
-			} else {
-				operators = relationalQualifierOperators;
 			}
 			
 			StringBuilder sb = new StringBuilder(attribute.name()).append(NSKeyValueCodingAdditions.KeyPathSeparator);
@@ -256,11 +266,22 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 			}
 
 			if(!ERXStringUtilities.stringIsNullOrEmpty(queryValue)) {
-				SimpleDateFormat sdf = null;
-				if(NSTimestamp.class.getName().equals(rc.attribute().className())) {
-					sdf = new SimpleDateFormat((String)rc.valueForKey("formatter"));
+
+				Format formatObject = formatObject();
+				
+				//Get the value entered
+				Object val = null;
+				if(formatObject == null) {
+					val = queryValue;
+				} else {
+					try {
+						val = formatObject.parseObject(queryValue);
+					} catch (ParseException pe) {
+						//FIXME don't swallow. Provide user feedback
+						pe.printStackTrace();
+					}
 				}
-				Object val = ERXStringUtilities.attributeValueFromString(rc.attribute(), queryValue, context().request().formValueEncoding(), sdf);
+				
 				if(val!=null) {
 					dg.queryMatch().takeValueForKey(val, prop);
 				} else {
@@ -274,4 +295,34 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 		}
 	}
 	
+	/**
+	 * Retrieves the formatObject from the d2wContext and sets the time zone on
+	 * date formatters if necessary. Since NSTimestampFormatter is deprecated,
+	 * this method only supports SimpleDateFormat and its descendants.
+	 * 
+	 * @return the Format object used to format query strings
+	 */
+	public Format formatObject() {
+		
+		//Get the format object
+		D2WContext rc = relationshipContext();
+		Format formatObject = (Format)rc.valueForKey("formatObject");
+		
+		//Set the time zone if necessary
+		if(
+				formatObject != null &&
+				NSTimestamp.class.getName().equals(rc.attribute().className()) &&
+				SimpleDateFormat.class.isAssignableFrom(formatObject.getClass()) && 
+				context().hasSession() && 
+				ERXSession.class.isAssignableFrom(session().getClass()) &&
+				ERXSession.autoAdjustTimeZone()
+				) {
+			
+			SimpleDateFormat sdf = (SimpleDateFormat)formatObject;
+			ERXSession session = (ERXSession)session();
+			sdf.setTimeZone(session.timeZone());
+		}
+		
+		return formatObject;
+	}
 }
