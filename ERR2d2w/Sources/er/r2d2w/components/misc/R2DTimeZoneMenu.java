@@ -10,6 +10,7 @@ import com.webobjects.foundation.NSMutableArray;
 
 import er.extensions.appserver.ERXSession;
 import er.extensions.components.ERXStatelessComponent;
+import er.extensions.localization.ERXLocalizer;
 
 public class R2DTimeZoneMenu extends ERXStatelessComponent {
     public R2DTimeZoneMenu(WOContext context) {
@@ -39,9 +40,10 @@ public class R2DTimeZoneMenu extends ERXStatelessComponent {
 	}
 	
 	public String zoneDisplayName() {
-		Locale l = ((ERXSession)session()).localizer().locale();
-		//TODO use a ERXLocalizer override since Java's defaults kinda suck
-		return WOMessage.stringByEscapingHTMLString(zone().getDisplayName(l));
+		ERXLocalizer loc = ((ERXSession)session()).localizer();
+		Locale l = loc.locale();
+		String result = (String)loc.localizedValueForKey("TimeZone." + zone().getID());
+		return WOMessage.stringByEscapingHTMLString(result==null?zone().getDisplayName(l):result);
 	}
 
 	/**
