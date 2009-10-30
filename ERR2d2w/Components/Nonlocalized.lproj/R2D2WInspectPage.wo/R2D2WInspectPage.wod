@@ -56,7 +56,7 @@ DeleteButtonContent: WOSwitchComponent {
 	WOComponentName = d2wContext.deleteButtonContentComponentName;
 }
 
-EditButton: WOSubmitButton {
+EditButton: R2DLinkButton {
 	action = editAction;
 	class = "edit";
 	value = d2wContext.editButtonLabel;
