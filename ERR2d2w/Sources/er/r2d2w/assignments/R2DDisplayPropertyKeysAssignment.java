@@ -74,12 +74,13 @@ public class R2DDisplayPropertyKeysAssignment extends ERDAssignment implements E
 			// Determine how to display localized attributes
 			if(attr.userInfo() != null && attr.userInfo().containsKey(ERXModelGroup.LANGUAGES_KEY)) {
 				// If display all, just add.
+				String languageCode = ERXLocalizer.currentLocalizer().languageCode();
 				if (ERXValueUtilities.booleanValue(c.valueForKey("displayAllLocalesForAttribute"))) {
 					result.add(prop);
 				
-				} else if (prop.endsWith(ERXLocalizer.currentLocalizer().languageCode())) {
+				} else if (prop.endsWith(languageCode)) {
 					if(ERXValueUtilities.booleanValue(c.valueForKey("localizationShouldFallback")) && attr.allowsNull()) {
-						prop = prop.substring(0, prop.length()-3);
+						prop = prop.substring(0, prop.length()-(languageCode.length() + 1));
 					}
 					result.add(prop);
 				}
