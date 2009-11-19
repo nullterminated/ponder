@@ -254,7 +254,6 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 				attDef.append(" WHERE ");
 				attDef.append(rel.destinationEntity().externalName());
 				attDef.append(".");
-				NSArray attrs = rel.destinationAttributes();
 				attDef.append(rel.destinationAttributes().objectAtIndex(0).columnName());
 				attDef.append(" = ");
 				attDef.append(entity.primaryKeyAttributes().objectAtIndex(0).columnName());
