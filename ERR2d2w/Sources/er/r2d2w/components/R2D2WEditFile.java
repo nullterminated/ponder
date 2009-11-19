@@ -41,7 +41,6 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 	private String filePath;
 	private String finalFilePath;
 	private String mimeType;
-	private NSArray<String> mimeTypes;
 	
 	public void appendToResponse(WOResponse r, WOContext c) {
 		super.appendToResponse(r, c);
@@ -127,13 +126,13 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
     	return _COMPONENT_CLASS;
     }
     
+    //TODO this component should probably be stateless. Needs lots of reworking though.
     public void reset() {
     	super.reset();
     	filePath = null;
     	finalFilePath = null;
     	labelID = null;
     	mimeType = null;
-    	mimeTypes = null;
     }
 
 	public String labelID() {
@@ -206,12 +205,11 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 	 * @return the mimeTypes
 	 */
 	public NSArray<String> mimeTypes() {
-		if(mimeTypes == null) {
-			//CHECKME make sure this isn't caching incorrectly
-			mimeTypes = ERXValueUtilities.arrayValueWithDefault(d2wContext().valueForKeyPath("smartRelationship.userInfo.mimeTypes"), NSArray.EmptyArray);
-		}
-		return mimeTypes;
+		return ERXValueUtilities.arrayValueWithDefault(d2wContext().valueForKeyPath("smartRelationship.userInfo.mimeTypes"), NSArray.EmptyArray);
 	}
 
-
+	public String acceptTypes() {
+		String accept = mimeTypes().componentsJoinedByString(",");
+		return ERXStringUtilities.stringIsNullOrEmpty(accept)?null:accept;
+	}
 }

@@ -17,6 +17,7 @@ FileUpload: WOFileUpload {
 	id = labelID;
 	class = componentClasses;
 	title = d2wContext.inputInfo;
+	accept = acceptTypes;
 }
 
 Hint: R2D2WHintString {
