@@ -142,8 +142,6 @@
     10 : *true* => calendarComponentName = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2DDayView"; "MONTH" = "R2DMonthView"; "WEEK" = "R2DWeekView"; "YEAR" = "R2DYearView"; }; 
 } [ERDDelayedSwitchAssignment],
     10 : ((task = 'query' or task = 'queryAll') and (smartAttribute.className = 'java.lang.Number' or smartAttribute.className = 'java.math.BigDecimal')) => formatter = ###,###.##;0;-###,###.## [com.webobjects.directtoweb.Assignment],
-    10 : smartAttribute.className = 'com.webobjects.foundation.NSTimestamp' => formatObject = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "formatter"; }); "className" = "java.text.SimpleDateFormat"; 
-} [ERDDelayedObjectCreationAssignment],
     10 : *true* => calendarHeaderFormatKey = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2W.dayHeaderFormat"; "MONTH" = "R2D2W.monthHeaderFormat"; "WEEK" = "R2D2W.weekHeaderFormat"; "YEAR" = "R2D2W.yearHeaderFormat"; }; 
 } [ERDDelayedSwitchAssignment],
     10 : *true* => calendarCaptionFormatKey = {"qualifierFormat" = "calendarView = '@@'"; "switch" = {"DAY" = "R2D2W.dayCaptionFormat"; "MONTH" = "R2D2W.monthCaptionFormat"; "WEEK" = "R2D2W.weekCaptionFormat"; "YEAR" = "R2D2W.yearCaptionFormat"; }; 
@@ -153,6 +151,8 @@
     10 : (entity != dummyEntity and (pageConfiguration = 'UserLogin' or pageConfiguration = defaultEmbeddedInspectUserConfiguration or pageConfiguration = plainTextEmbeddedInspectUserConfiguration)) => displayPropertyKeys = ("userIDAttribute.name","userCredentialAttribute.name"
 ) [R2DKeyValueArrayAssignment],
     10 : (smartAttribute.className = 'java.lang.Number' or smartAttribute.className = 'java.math.BigDecimal') => formatObject = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "formatter"; }); "className" = "com.webobjects.foundation.NSNumberFormatter"; 
+} [ERDDelayedObjectCreationAssignment],
+    10 : smartAttribute.className = 'com.webobjects.foundation.NSTimestamp' => formatObject = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "formatter"; }, {"className" = "java.util.Locale"; "contextKey" = "session.localizer.@locale"; }); "className" = "java.text.SimpleDateFormat"; 
 } [ERDDelayedObjectCreationAssignment],
     11 : task = 'select' => actions = (
 ) [com.webobjects.directtoweb.Assignment],
@@ -226,9 +226,7 @@
     25 : *true* => templateNameForEditRelationshipPage = R2D2WEditRelationshipPage [com.webobjects.directtoweb.Assignment],
     25 : *true* => templateNameForPlainTextInspectPage = R2D2WPlainTextInspectPage [com.webobjects.directtoweb.Assignment],
     25 : *true* => templateNameForPlainTextMessagePage = R2D2WPlainTextMessagePage [com.webobjects.directtoweb.Assignment],
-    25 : (task = 'edit' and smartRelationship.destinationEntity.name like '*Attachment') => componentName = R2D2WEditFile [com.webobjects.directtoweb.Assignment],
     25 : (task = 'edit' and (smartAttribute.userInfo.erPrototype = 'language' or smartAttribute = userLanguageAttribute)) => componentName = R2D2WEditLanguage [com.webobjects.directtoweb.Assignment],
-    25 : (task = 'inspect' and smartRelationship.destinationEntity.name like '*Attachment' and not (smartRelationship.isToMany = '1')) => componentName = R2D2WDisplayFile [com.webobjects.directtoweb.Assignment],
     25 : (propertyKey = 'password' or smartAttribute.userInfo.erPrototype = 'password' or smartAttribute = userCredentialAttribute) => componentName = R2D2WDisplayPassword [com.webobjects.directtoweb.Assignment],
     26 : (task = 'edit' and smartAttribute.className = 'java.lang.String' and (smartAttribute.width = 0 or not (smartAttribute.width < 80))) => componentName = R2D2WEditLargeString [com.webobjects.directtoweb.Assignment],
     26 : (task = 'edit' and (propertyKey = 'password' or smartAttribute.userInfo.erPrototype = 'password' or smartAttribute = userCredentialAttribute)) => componentName = R2D2WEditPassword [com.webobjects.directtoweb.Assignment],
@@ -250,6 +248,9 @@
     55 : pageConfiguration = 'Log4JConfiguration' => pageName = R2DLog4JConfiguration [com.webobjects.directtoweb.Assignment],
     55 : (task = 'inspect' and subTask = 'plainText') => pageName = templateNameForPlainTextInspectPage [er.directtoweb.ERDKeyValueAssignment],
     55 : (task = 'message' and subTask = 'plainText') => pageName = templateNameForPlainTextMessagePage [er.directtoweb.ERDKeyValueAssignment],
+    55 : (task = 'edit' and smartRelationship.destinationEntity.name like '*Attachment' and smartRelationship.isToMany = 0) => componentName = R2D2WEditFile [com.webobjects.directtoweb.Assignment],
+    55 : (task = 'inspect' and smartRelationship.destinationEntity.name like '*Attachment' and smartRelationship.isToMany = 0) => componentName = R2D2WDisplayFile [com.webobjects.directtoweb.Assignment],
+    55 : (task = 'list' and smartRelationship.destinationEntity.name like '*Attachment' and smartRelationship.isToMany = 0) => componentName = R2D2WDisplayToOneFault [com.webobjects.directtoweb.Assignment],
     75 : task = 'edit' => pageName = templateNameForEditPage [er.directtoweb.ERDKeyValueAssignment],
     201 : *true* => batchSize = (null) [R2DDelayedUserPreferenceAssignment]
 )
