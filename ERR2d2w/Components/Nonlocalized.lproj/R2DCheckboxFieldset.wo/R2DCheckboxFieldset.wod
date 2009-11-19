@@ -14,7 +14,18 @@ CheckboxRepetition: WORepetition {
 	index = index;
 }
 
+/*
+Disabled until I can put a VALID tag on this that works.
+Using a switch component to get around the red x
 CheckboxWrapper : WOGenericContainer {
+	elementID = wrapperElementID;
+	name = context.elementID;
+	formValues = selections;
+}
+*/
+
+CheckboxWrapper : WOSwitchComponent {
+	WOComponentName = "WOGenericContainer";
 	// ** Because there's no elementName, this is an invisible wrapper element.
 	elementID = wrapperElementID;
 	name = context.elementID;
