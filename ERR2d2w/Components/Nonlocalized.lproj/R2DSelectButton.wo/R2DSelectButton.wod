@@ -1,4 +1,4 @@
-SelectButton: WOSubmitButton {
+SelectButton: R2DLinkButton {
 	action = selectObjectAction;
 	value = d2wContext.pickButtonLabel;
 }
