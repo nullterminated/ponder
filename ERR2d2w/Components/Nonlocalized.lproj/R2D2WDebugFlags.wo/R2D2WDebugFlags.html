@@ -1,31 +1,11 @@
 <webobject name = "Show">
 	<div id = "debugFlags">
-	  <webobject name = "Script">
-	    function ERD2WDebugFlags_cssDebug() {
-	        var newSS;
-	        newSS=document.getElementById('debug-stylesheet');
-	        if(newSS){
-	            newSS.href=null;
-	            document.documentElement.childNodes[0].removeChild(newSS);
-	        } else {
-	            newSS=document.createElement('link');
-	            newSS.rel='stylesheet';
-	            newSS.type='text/css';
-	            newSS.href='<webobject name = "CSSUrl" />';
-	            newSS.id='debug-stylesheet';
-	            document.documentElement.childNodes[0].appendChild(newSS);
-	        }
-	    }
-	  </webobject>
 	  <ul>
 	    <li>
 	      <webobject name = "Log4J">Log4J</webobject>
 	    </li>
 	    <li>
 	      <webobject name = "D2W">D2W</webobject>
-	    </li>
-	    <li>
-	      <webobject name = "CSS">CSS</webobject>
 	    </li>
 	    <li>
 	      <webobject name = "SQL">Toggle SQL</webobject>
