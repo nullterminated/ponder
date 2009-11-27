@@ -19,8 +19,8 @@ LabelString: WOString {
 	value = d2wContext.controllerPopupLabel;
 }
 
-OptionalForm: ERXOptionalForm {
-	
+OptionalForm: ERXWOForm {
+	disabled = context.isInForm;
 }
 
 PopupLabel: WOGenericContainer {

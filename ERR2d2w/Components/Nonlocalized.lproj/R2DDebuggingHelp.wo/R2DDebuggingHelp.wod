@@ -25,7 +25,8 @@ CurrentValue: WOString {
 	value = currentValue;
 }
 
-D2WKeyForm: ERXOptionalForm {
+D2WKeyForm: ERXWOForm {
+	disabled = context.isInForm;
 }
 
 DefaultEC: WOString {

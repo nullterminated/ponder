@@ -42,9 +42,12 @@ QueryAnyField: R2D2WQueryAnyField {
 	noSelectionString = d2wContext.noSelectionStringValue;
 }
 
-QueryForm: WOForm {
+QueryForm: ERXWOForm {
 	action = queryAction;
+	disabled = d2wContext.formDisabled;
+	enctype = d2wContext.formEncoding;
 	multipleSubmit = true;
+	secure = d2wContext.secureForm;
 }
 
 QueryLink: WOHyperlink {

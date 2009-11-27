@@ -70,7 +70,10 @@ PageWrapper: WOSwitchComponent {
 
 QueryForm: WOForm {
 	action = queryAction;
+	disabled = d2wContext.formDisabled;
+	enctype = d2wContext.formEncoding;
 	multipleSubmit = true;
+	secure = d2wContext.secureForm;
 }
 
 QueryRepetition: WORepetition {

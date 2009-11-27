@@ -59,8 +59,11 @@ Errors: R2DErrorDictionaryPanel {
 	extraErrorMessage = errorMessage;
 }
 
-Form: WOForm {
+Form: ERXWOForm {
+	disabled = d2wContext.formDisabled;
+	enctype = d2wContext.formEncoding;
 	multipleSubmit = true;
+	secure = d2wContext.secureForm;
 }
 
 HasBranchChoices: WOConditional {

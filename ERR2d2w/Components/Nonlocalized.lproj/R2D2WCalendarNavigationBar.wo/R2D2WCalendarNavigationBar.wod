@@ -27,8 +27,8 @@ Next: WOHyperlink {
 	string = session.localizer.R2D2WCalendarNavigationBar.next;
 }
 
-OptionalForm: ERXOptionalForm {
-	
+OptionalForm: ERXWOForm {
+	disabled = context.isInForm;
 }
 
 Previous: WOHyperlink {

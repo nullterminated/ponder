@@ -55,10 +55,11 @@ Controller: WOSwitchComponent {
 	d2wContext = d2wContext;
 }
 
-EditingForm: ERXOptionalForm {
+EditingForm: ERXWOForm {
+	disabled = d2wContext.formDisabled;
 	enctype = d2wContext.formEncoding;
-	showForm = d2wContext.hasForm;
 	multipleSubmit = true;
+	secure = d2wContext.secureForm;
 }
 
 EntityName: WOString {

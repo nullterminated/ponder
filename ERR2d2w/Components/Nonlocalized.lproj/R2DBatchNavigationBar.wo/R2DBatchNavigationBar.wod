@@ -83,7 +83,8 @@ Of: ERXLocalizedString {
 	value = "ERXBatchNavigationBar.of"; 
 }
 
-OptionalForm: ERXOptionalForm {
+OptionalForm: ERXWOForm {
+	disabled = context.isInForm;
 }
 
 Page: ERXLocalizedString {
