@@ -1,0 +1,18 @@
+EditEnum: R2DToOneRelationship {
+	class = d2wContext.propertyClasses;
+	//Set this key for an enum method that returns a display string or localizer key
+    destinationDisplayKey = d2wContext.destinationDisplayKey;
+    destinationSortKey = d2wContext.sortKey;
+    id = labelID;
+	localizeDisplayKeys = d2wContext.localizeDisplayKeys;
+	noSelectionString = d2wContext.noSelectionString;
+    possibleChoices = restrictedChoiceList;
+    propertyLabel = d2wContext.displayNameForProperty;
+    relationshipKey = d2wContext.propertyKey;
+    size = d2wContext.size;
+    sortCaseInsensitive = d2wContext.sortCaseInsensitive;
+    sourceEntityName = object.entityName;
+    sourceObject = object;
+    uiStyle = d2wContext.toOneUIStyle;
+	uniqueID = d2wContext.uniqueID;
+}

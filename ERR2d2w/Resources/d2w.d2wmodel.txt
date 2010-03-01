@@ -71,6 +71,7 @@
     1 : smartAttribute.className = 'java.lang.String' => maxLength = smartAttribute.width [ERDKeyValueAssignment],
     1 : smartAttribute.prototypeName = 'dateTime' => hintString = R2D2W.dateTimeFormatHint [er.directtoweb.ERDDelayedLocalizedAssignment],
     2 : not (task = 'query') => componentName = R2D2WDisplayString [com.webobjects.directtoweb.Assignment],
+    3 : (task = 'edit' and smartAttribute.prototype.name = 'javaEnum') => componentName = R2D2WEditEnum [com.webobjects.directtoweb.Assignment],
     3 : (smartAttribute.className = 'er.extensions.eof.ERXKeyGlobalID' and (task = 'list' or task = 'select' or task = 'inspect')) => componentName = R2D2WDisplayKeyGlobalID [com.webobjects.directtoweb.Assignment],
     5 : *true* => formEncoding = (null) [R2DDefaultAttachmentAssignment],
     5 : *true* => userPreferences = (null) [R2DUserPreferencesAssignment],
