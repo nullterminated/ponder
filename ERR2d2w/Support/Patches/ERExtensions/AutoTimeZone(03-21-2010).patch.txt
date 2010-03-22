@@ -1,6 +1,6 @@
 Index: Sources/er/extensions/appserver/ERXSession.java
 ===================================================================
---- Sources/er/extensions/appserver/ERXSession.java	(revision 10473)
+--- Sources/er/extensions/appserver/ERXSession.java	(revision 10732)
 +++ Sources/er/extensions/appserver/ERXSession.java	(working copy)
 @@ -10,6 +10,7 @@
  import java.io.ObjectInputStream;
@@ -21,7 +21,7 @@ Index: Sources/er/extensions/appserver/ERXSession.java
  
    /**
     * _originalThreadName holds the original name from the WorkerThread which
-@@ -742,5 +747,22 @@
+@@ -750,5 +755,22 @@
  			_convertSessionCookiesToSecure(response);
  		}
  	}
@@ -47,7 +47,7 @@ Index: Sources/er/extensions/appserver/ERXSession.java
  }
 Index: Sources/er/extensions/components/_private/ERXWOString.java
 ===================================================================
---- Sources/er/extensions/components/_private/ERXWOString.java	(revision 10473)
+--- Sources/er/extensions/components/_private/ERXWOString.java	(revision 10732)
 +++ Sources/er/extensions/components/_private/ERXWOString.java	(working copy)
 @@ -13,7 +13,10 @@
  import com.webobjects.appserver._private.WODynamicElementCreationException;
@@ -116,7 +116,7 @@ Index: Sources/er/extensions/components/_private/ERXWOString.java
                  } else {
 Index: Sources/er/extensions/components/_private/ERXWOTextField.java
 ===================================================================
---- Sources/er/extensions/components/_private/ERXWOTextField.java	(revision 10473)
+--- Sources/er/extensions/components/_private/ERXWOTextField.java	(revision 10732)
 +++ Sources/er/extensions/components/_private/ERXWOTextField.java	(working copy)
 @@ -16,7 +16,10 @@
  import com.webobjects.appserver._private.WOInput;
