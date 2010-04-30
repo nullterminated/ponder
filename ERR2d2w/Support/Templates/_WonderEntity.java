@@ -15,10 +15,10 @@ import er.extensions.foundation.*;
 
 #if ($entity.parentSet)
     #set ($parentClass = ${entity.parent.classNameWithDefault})
-    #set ($parentClazzClass = "${entity.parent.classNameWithoutPackage}.${entity.parent.classNameWithoutPackage}Clazz")
+    #set ($parentClazzClass = "${entity.parent.classNameWithoutPackage}.${entity.parent.classNameWithOptionalPackage}Clazz")
 #else
     #set ($parentClass = "ERXGenericRecord")
-    #set ($parentClazzClass = "ERXGenericRecord.ERXGenericRecordClazz<${entity.classNameWithoutPackage}>")
+    #set ($parentClazzClass = "ERXGenericRecord.ERXGenericRecordClazz<${entity.classNameWithOptionalPackage}>")
 #end
 
 @SuppressWarnings("all")
@@ -258,7 +258,7 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
   }
 
   public $relationship.actualDestination.classNameWithDefault create${relationship.capitalizedName}Relationship() {
-    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName(#if(${relationship.actualDestination.genericRecord})"${relationship.actualDestination.name}"#else ${relationship.actualDestination.name}.ENTITY_NAME #end);
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName(#if(${relationship.actualDestination.genericRecord})"${relationship.actualDestination.name}"#else ${relationship.actualDestination.classNameWithDefault}.ENTITY_NAME #end);
     EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
     editingContext().insertObject(eo);
     addObjectToBothSidesOfRelationshipWithKey(eo, ${entity.prefixClassNameWithoutPackage}.${relationship.uppercaseUnderscoreName}_KEY);

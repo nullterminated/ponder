@@ -11,7 +11,7 @@ public#if (${entity.abstractEntity}) abstract#end class ${entity.classNameWithou
 	private static Logger log = Logger.getLogger(${entity.classNameWithoutPackage}.class);
 
     public static final ${entity.classNameWithoutPackage}Clazz clazz = new ${entity.classNameWithoutPackage}Clazz();
-    public static class ${entity.classNameWithoutPackage}Clazz extends ${entity.prefixClassNameWithOptionalPackage}.${entity.prefixClassNameWithOptionalPackage}Clazz {
+    public static class ${entity.classNameWithoutPackage}Clazz extends ${entity.prefixClassNameWithOptionalPackage}.${entity.prefixClassNameWithoutPackage}Clazz {
         /* more clazz methods here */
     }
 
