@@ -15,7 +15,7 @@ import er.extensions.foundation.*;
 
 #if ($entity.parentSet)
     #set ($parentClass = ${entity.parent.classNameWithDefault})
-    #set ($parentClazzClass = "${entity.parent.classNameWithoutPackage}.${entity.parent.classNameWithOptionalPackage}Clazz")
+    #set ($parentClazzClass = "${entity.parent.classNameWithOptionalPackage}.${entity.parent.classNameWithoutPackage}Clazz")
 #else
     #set ($parentClass = "ERXGenericRecord")
     #set ($parentClazzClass = "ERXGenericRecord.ERXGenericRecordClazz<${entity.classNameWithOptionalPackage}>")
