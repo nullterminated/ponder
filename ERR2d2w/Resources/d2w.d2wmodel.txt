@@ -79,6 +79,7 @@
     5 : task = 'inspect' => propertyNameComponentWrapper = h3 [com.webobjects.directtoweb.Assignment],
     5 : task = 'edit' => displayAllLocalesForAttribute = true [com.webobjects.directtoweb.BooleanAssignment],
     5 : task = 'query' => displayToManyRelationshipKeys = false [com.webobjects.directtoweb.BooleanAssignment],
+    5 : propertyType = 'r' => destinationDisplayKey = keyWhenRelationship [er.directtoweb.ERDKeyValueAssignment],
     5 : (task != 'message' and entity != dummyEntity) => displayPropertyKeys = (null) [R2DDisplayPropertyKeysAssignment],
     5 : (shouldUseDirectActions = '1' and entity != dummyEntity) => shouldDisplayRSS = true [com.webobjects.directtoweb.BooleanAssignment],
     5 : (task = 'edit' and entity = defaultUserEntity and propertyKey = userLanguageAttribute.name) => updatesCurrentLanguage = true [com.webobjects.directtoweb.BooleanAssignment],
@@ -132,6 +133,7 @@
     10 : *true* => controllerPopupLabel = R2DControllerButton.controllerPopupLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : *true* => controllerButtonLegend = R2DControllerButton.controllerButtonLegend [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : (pageConfiguration = 'UserLogin' or pageConfiguration = 'UserReset') => task = query [com.webobjects.directtoweb.Assignment],
+    10 : (task = 'edit' and smartAttribute.prototype.name = 'javaEnum') => destinationDisplayKey = name [com.webobjects.directtoweb.Assignment],
     10 : (entity != dummyEntity and pageConfiguration = 'UserReset') => displayPropertyKeys = ("userIDAttribute.name"
 ) [R2DKeyValueArrayAssignment],
     10 : pageConfiguration = 'MailUserReset' => explanationConfigurationName = defaultEmbeddedInspectUserConfiguration [er.directtoweb.ERDKeyValueAssignment],
