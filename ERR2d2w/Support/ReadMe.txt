@@ -4,10 +4,22 @@ instructions on how to do this on the wiki.  The patches
 folder in this directory contains patches for project 
 wonder on which this framework depends.  You will need 
 to apply these patches to your wonder source in order for 
-everything to work correctly.  The Project Templates.zip 
-file is a compressed archive of project templates for 
-use with this framework.  See the readme file contained 
-in that archive for more information.
+everything to work correctly.  
+
+The Project Templates.zip file is a compressed archive of 
+project templates for use with this framework. See the 
+readme file contained in that archive for more information.
+
+The Templates folder contains eoGen templates that I use
+for generating model classes.  They're pretty nice now,
+but I'm still running into cases where they need tweaking.
+
+An example of how to add Wonder's ajax to an existing 
+framework's edit pages is included in the AjaxLook.zip 
+archive. The example should launch and allow you to go
+to an EditAddress configuration page to test out the
+dependency observers that work between different 
+property level components.
 
 TODO
 
