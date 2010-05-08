@@ -21,6 +21,10 @@ to an EditAddress configuration page to test out the
 dependency observers that work between different 
 property level components.
 
+Since this is a bit of a grab bag of goodies already,
+I'm throwing in a zip archive of FreshnessExplorer
+so I can clear my workspace a bit :)
+
 TODO
 
 Some things are currently works in progress. I need to
