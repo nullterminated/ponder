@@ -10,7 +10,6 @@ import com.webobjects.appserver.WOPageNotFoundException;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.appserver._private.WOCGIFormValues;
-import com.webobjects.appserver._private.WOConstantValueAssociation;
 import com.webobjects.appserver._private.WODynamicElementCreationException;
 import com.webobjects.appserver._private.WOHTMLDynamicElement;
 import com.webobjects.appserver._private.WONoContentElement;
@@ -20,8 +19,21 @@ import com.webobjects.foundation._NSDictionaryUtilities;
 
 import er.extensions.appserver.ERXSession;
 import er.extensions.foundation.ERXProperties;
+import er.extensions.foundation.ERXValueUtilities;
 
 /**
+ * This dynamic element produces markup like 
+ * &lt;a&gt;&lt;button&gt;...&lt;/button&gt;&lt;/a&gt;.
+ * This allows for consistent markup for all links and buttons that make 
+ * use of this element. Outside of forms, it uses the combo like a link, 
+ * populating the href attribute of the anchor element. Inside of forms, 
+ * it defaults to using the combo as a button instead. Since IE is unable
+ * to correctly use the &lt;button&gt; element, the default behavior is
+ * to generate IE conditionals around the element and use simple &lt;a&gt;
+ * tags for links and &lt;input&gt; for buttons.  Any unnamed bindings are
+ * passed through to the anchor element. (eg. title, onclick, etc.) 
+ * 
+ * 
  * @binding action Action method to invoke when this element is activated.
  * 
  * @binding actionClass The name of the class in which the method
@@ -69,8 +81,10 @@ import er.extensions.foundation.ERXProperties;
  * the valid combinations). This binding has no effect when this element is
  * used as a button.
  * 
- * @binding string Defines the string content of the hyperlink for IE, and
- * is appended to any wrapped content of the button element.
+ * @binding string This binding provides the string value of the link when
+ * useAsButton is false. If no string is provided, it falls back to the value
+ * binding. If no value is provided, no string is used. If the element has
+ * child elements, the string is ignored except when using IE conditionals.
  * 
  * @binding useAsButton This binding is ignored and the default is false if the 
  * this element is used outside of a form, 'pageName' is bound, or 'href' is bound. 
@@ -81,9 +95,10 @@ import er.extensions.foundation.ERXProperties;
  * hyperlink elements using IE conditional comments, since IE is unable to
  * handle button elements correctly. The default is true.
  * 
- * @binding value Title of the button for IE conditional elements. If this
- * element is used as a link and 'string' is bound, then 'string' will override
- * this value.
+ * @binding value This binding provides the title of the button when useAsButton
+ * is true. If no value is provided, the value falls back to the string binding.
+ * If no string binding is provided, a default value of "Submit" is used. If the
+ * element has child elements, the value is ignored except when using IE conditionals.
  * 
  * @author Ramsey Gurley
  *
@@ -118,6 +133,7 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 	protected WOAssociation _useIEConditionals;
 	protected WOAssociation _value;
 	
+	@SuppressWarnings("unchecked")
 	public R2DLinkButton(String aName, NSDictionary<String, WOAssociation> associations, WOElement template) {
 		super("a", associations, template);
 		
@@ -139,10 +155,6 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 		_useAsButton = (WOAssociation)_associations.removeObjectForKey("useAsButton");
 		_useIEConditionals = (WOAssociation)_associations.removeObjectForKey("useIEConditionals");
 		_value = (WOAssociation)_associations.removeObjectForKey("value");
-		        
-		if(_value == null) {
-			_value = new WOConstantValueAssociation("Submit");
-		}
 		
 		if(_action == null && _href == null && _pageName == null && _directActionName == null && _actionClass == null) {
 			throw new WODynamicElementCreationException((new StringBuilder()).append("<").append(getClass().getName()).append("> Missing required attribute: 'action' or 'href' or 'pageName' or 'directActionName' or 'actionClass'").toString());
@@ -273,7 +285,9 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 	public void appendChildrenToResponse(WOResponse response, WOContext context) {
 		_appendButtonOpenTagToResponse(response, context);
 		super.appendChildrenToResponse(response, context);
-		_appendStringToResponse(response, context);
+		if(!hasChildrenElements()){
+			_appendChildStringToResponse(response, context);
+		}
 		_appendButtonCloseTagToResponse(response, context);
 	}
 	
@@ -380,11 +394,15 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 		if(_pageName != null || _href != null || !isInForm) {
 			return false;
 		}
-		return (_useAsButton == null)?isInForm:_useAsButton.booleanValueInComponent(context.component());
+		return (_useAsButton == null)?
+				isInForm:
+				ERXValueUtilities.booleanValueWithDefault(_useAsButton.valueInComponent(context.component()), isInForm);
 	}
 	
 	protected boolean useIEConditionalsInContext(WOContext context) {
-		return (_useIEConditionals == null)?true:_useIEConditionals.booleanValueInComponent(context.component());
+		return (_useIEConditionals == null)?
+				true:
+				ERXValueUtilities.booleanValueWithDefault(_useIEConditionals.valueInComponent(context.component()), true);
 	}
 	
 	private String _actionClassAndName(WOContext context) {
@@ -444,15 +462,6 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 		response.appendContentString("<!--> <![endif]-->");
 	}
 	
-	protected void _appendValueStringToResponse(WOResponse response, WOContext context) {
-		String valueToAppend = valueInContext(context);
-		if(escapeHTMLInContext(context)) {
-			response.appendContentHTMLString(valueToAppend);
-		} else {
-			response.appendContentString(valueToAppend);
-		}
-	}
-	
 	protected void _appendTypeAttributeToResponse(WOResponse response, WOContext context) {
 		String type = useAsButtonInContext(context) ? "submit":"button";
 		_appendTagAttributeAndValueToResponse(response, "type", type, false);
@@ -501,43 +510,22 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
     }
 	
 	protected void _appendIEStringToResponse(WOResponse response, WOContext context) {
-		Object value = null;
-		WOComponent component = context.component();
-		if(_string != null) {
-			value = _string.valueInComponent(component);
-			if(value != null) {
-				_appendIEOpenTagToResponse(response, context);
-				if(escapeHTMLInContext(context)) {
-					response.appendContentHTMLString(value.toString());
-				} else {
-					response.appendContentString(value.toString());
-				}
-				_appendIECloseTagToResponse(response, context);
-			} 
+		Object value = childStringInContext(context);
+		_appendIEOpenTagToResponse(response, context);
+		if(escapeHTMLInContext(context)) {
+			response.appendContentHTMLString(value.toString());
+		} else {
+			response.appendContentString(value.toString());
 		}
-		if(value == null) {
-			value = _value.valueInComponent(component);
-			_appendIEOpenTagToResponse(response, context);
-			if(escapeHTMLInContext(context)) {
-				response.appendContentHTMLString(value.toString());
-			} else {
-				response.appendContentString(value.toString());
-			}
-			_appendIECloseTagToResponse(response, context);
-		}
+		_appendIECloseTagToResponse(response, context);
 	}
 	
-	protected void _appendStringToResponse(WOResponse response, WOContext context) {
-		if(_string != null) {
-			WOComponent component = context.component();
-			Object value = _string.valueInComponent(component);
-			if(value != null) {
-				if(escapeHTMLInContext(context)) {
-					response.appendContentHTMLString(value.toString());
-				} else {
-					response.appendContentString(value.toString());
-				}
-			}
+	protected void _appendChildStringToResponse(WOResponse response, WOContext context) {
+		String childString = childStringInContext(context);
+		if(escapeHTMLInContext(context)) {
+			response.appendContentHTMLString(childString);
+		} else {
+			response.appendContentString(childString);
 		}
 	}
 	
@@ -575,10 +563,30 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 	}
 	
 	protected String valueInContext(WOContext context) {
-		Object value = _value.valueInComponent(context.component());
+		Object value = _value == null?null:_value.valueInComponent(context.component());
+		return value == null?null:value.toString();
+	}
+	
+	/**
+	 * Returns the child string for the button supplied by the string or value attribute.
+	 * If useAsButton is true, then the value binding is preferred. Otherwise, the string 
+	 * binding is preferred.
+	 * @param context the current context
+	 * @return the child string value
+	 */
+	protected String childStringInContext(WOContext context) {
+		Object value = null;
+		WOComponent component = context.component();
+		Object stringVal = _string == null?null:_string.valueInComponent(component);
+		Object valueVal = valueInContext(context);
+		if(useAsButtonInContext(context)) {
+			value = valueVal == null?stringVal == null?"Submit":stringVal:valueVal;
+		} else {
+			value = stringVal == null?valueVal:stringVal;
+		}
 		return value.toString();
 	}
-		
+	
 	public String toString() {
 		return (new StringBuilder()).append("<").append(getClass().getName()).append(" action: ").append(_action).append(" actionClass: ").append(_actionClass).append(" href: ").append(_href).append(" value: ").append(_value).append(" queryDictionary: ").append(_queryDictionary).append(" otherQueryAssociations: ").append(_otherQueryAssociations).append(" pageName: ").append(_pageName).append(" fragmentIdentifier: ").append(_fragmentIdentifier).append(" disabled: ").append(_disabled).append(" secure: ").append(_secure).append(">").toString();
 	}
@@ -588,7 +596,9 @@ public class R2DLinkButton extends WOHTMLDynamicElement {
 	}
 	
 	protected boolean escapeHTMLInContext(WOContext context) {
-		return _escapeHTML == null ? defaultEscapeHTML() : _escapeHTML.booleanValueInComponent(context.component());
+		return _escapeHTML == null ?
+				defaultEscapeHTML():
+				ERXValueUtilities.booleanValueWithDefault(_escapeHTML.valueInComponent(context.component()),defaultEscapeHTML());
 	}
 	
 }
