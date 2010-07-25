@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import com.webobjects.eoaccess.EOAdaptor;
 import com.webobjects.eoaccess.EOAttribute;
 import com.webobjects.eoaccess.EOEntity;
+import com.webobjects.eoaccess.EOModel;
+import com.webobjects.eoaccess.EOModelGroup;
 import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eoaccess.EOSQLExpression;
 import com.webobjects.eoaccess.synchronization.EOSchemaGenerationOptions;
@@ -41,7 +43,8 @@ public class _MySQLPlugIn extends JDBCPlugIn {
 			super(entity);
 		}
 
-		public char sqlEscapeChar(){
+		@Override
+        public char sqlEscapeChar(){
 			return '|';
 		}
 
@@ -53,41 +56,86 @@ public class _MySQLPlugIn extends JDBCPlugIn {
 			super(adaptor);
 		}
 
+        @Override
         public String _alterPhraseInsertionClausePrefixAtIndex(int columnIndex) {
             return (columnIndex != 0)?"":"ADD";
         }
 
-		protected String formatTableName(String name) {
+		@Override
+        protected String formatTableName(String name) {
 			return name;
 		}
 
+		@Override
 		protected String formatColumnName(String name) {
 			return name;
 		}
 
+		@Override
 		public NSArray<EOSQLExpression> primaryKeySupportStatementsForEntityGroups(NSArray<NSArray<EOEntity>> entityGroups) {
 			String pkTable = ((JDBCAdaptor)adaptor()).plugIn().primaryKeyTableName();
 			NSMutableArray<EOSQLExpression> statements = new NSMutableArray<EOSQLExpression>();
 			statements.addObject(_expressionForString((new StringBuilder()).append("CREATE TABLE ").append(pkTable).append(" (NAME CHAR(40) PRIMARY KEY, PK INT)").toString()));
 			return statements;
 		}
-
+		
+		@Override
+        public NSArray<EOSQLExpression> statementsToModifyColumnNullRule(String columnName, String tableName, boolean allowsNull, EOSchemaGenerationOptions options) {
+		    String nullStatement = allowsNull ? " NULL" : " NOT NULL";
+		    EOAttribute attribute = attributeInEntityWithColumnName(entityForTableName(tableName), columnName);
+		    return new NSArray<EOSQLExpression>(_expressionForString((new StringBuilder()).append("ALTER TABLE ").append(formatTableName(tableName)).append(" MODIFY ").append(formatColumnName(columnName)).append(" ").append(attribute.externalType()).append(nullStatement).toString()));
+		}
+		
+		@Override
+		public boolean supportsDirectColumnNullRuleModification() {
+		    return true;
+		}
+		
+		@Override
+		public NSArray<EOSQLExpression> statementsToRenameColumnNamed(String columnName, String tableName, String newName, EOSchemaGenerationOptions options) {
+		    EOAttribute attribute = attributeInEntityWithColumnName(entityForTableName(tableName), newName);
+		    String nullStatement = attribute.allowsNull() ? " NULL" : " NOT NULL";
+		    return new NSArray<EOSQLExpression>(_expressionForString((new StringBuilder()).append("ALTER TABLE ").append(formatTableName(tableName)).append(" CHANGE ").append(formatColumnName(columnName)).append(" ").append(formatColumnName(newName)).append(" ").append(attribute.externalType()).append(nullStatement).toString()));
+		}
+		
+		@Override
+		public boolean supportsDirectColumnRenaming() {
+		    return true;
+		}
+		
+		private EOEntity entityForTableName(String tableName) {
+		    EOModelGroup modelGroup = EOModelGroup.globalModelGroup();
+            for (EOModel model : modelGroup.models()) {
+                for (EOEntity entity : model.entities()) {
+                    if (entity.externalName().equalsIgnoreCase(tableName)) {
+                        return entity;
+                    }
+                }
+            }
+            return null;
+        }
+		
+		@Override
 		public NSArray<EOSQLExpression> dropPrimaryKeySupportStatementsForEntityGroups(NSArray<NSArray<EOEntity>> entityGroups) {
 			return new NSArray<EOSQLExpression>(_expressionForString((new StringBuilder()).append("DROP TABLE ").append(((JDBCAdaptor)adaptor()).plugIn().primaryKeyTableName()).append(" CASCADE").toString()));
 		}
 
+		@Override
 		public NSArray<EOSQLExpression> _statementsToDropPrimaryKeyConstraintsOnTableNamed(String tableName) {
 			return new NSArray<EOSQLExpression>(_expressionForString((new StringBuilder()).append("alter table ").append(tableName).append(" drop primary key").toString()));
 		}
 
+		@Override
 		public NSArray<EOSQLExpression> foreignKeyConstraintStatementsForRelationship(EORelationship relationship) {
 			return null;
 		}
 
+		@Override
 		public NSArray<EOSQLExpression> statementsToRenameTableNamed(String tableName, String newName, EOSchemaGenerationOptions options) {
 			return new NSArray<EOSQLExpression>(_expressionForString((new StringBuilder()).append("rename table ").append(tableName).append(" to ").append(newName).toString()));
 		}
 
+		@Override
 		public boolean supportsSchemaSynchronization() {
 			return true;
 		}
@@ -99,27 +147,33 @@ public class _MySQLPlugIn extends JDBCPlugIn {
 	 * assemble the name of the prototype to use when it loads models.</p>
 	 * @return Name of the plugin.
 	 */
-	public String name() {
+	@Override
+    public String name() {
 		return DriverProductName;
 	}
 
+	@Override
 	public String defaultDriverName() {
 		return DriverClassName;
 	}
 
+	@Override
 	public String databaseProductName() {
 		return DriverProductName;
 	}
 
+	@Override
 	public Class<com.webobjects.jdbcadaptor._MySQLPlugIn.MySQLExpression> defaultExpressionClass() {
 		return com.webobjects.jdbcadaptor._MySQLPlugIn.MySQLExpression.class;
 	}
 
+	@Override
 	public EOSchemaSynchronizationFactory createSchemaSynchronizationFactory() {
 		return new com.webobjects.jdbcadaptor._MySQLPlugIn.MySQLSynchronizationFactory(_adaptor);
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public NSDictionary<String, Object> jdbcInfo() {
 
 		NSDictionary<String, Object> jdbcInfo;
@@ -176,6 +230,7 @@ public class _MySQLPlugIn extends JDBCPlugIn {
 		return jdbcInfo;
 	}
 
+	@Override
 	public Object fetchBLOB(ResultSet rs, int column, EOAttribute attribute, boolean materialize) throws SQLException {
 		NSData data = null;
 		Blob blob = rs.getBlob(column);
