@@ -1,0 +1,49 @@
+WOPopUpButton : WOPopUpButton {
+  list = options;
+  item = option;
+  displayString = displayString;
+  noSelectionString = noSelectionString;
+  selection = ^selection;
+  class = ^class;
+  id = ^id;
+  style = ^style;
+}
+
+RadioButtonFieldset: R2DRadioButtonFieldset {
+	item = proxy;
+	list = proxyOptions;
+	selection = proxySelection;
+	uniqueID = ^uniqueID;
+	class = ^class;
+	id = ^id;
+	disabled = ^disabled;
+	legendString = ^legendString;
+}
+
+IsCheckbox : WOConditional {
+	condition = isCheckbox;
+}
+
+IsPopup : WOConditional {
+	condition = isPopup;
+}
+
+IsRadio : WOConditional {
+	condition = isRadio;
+}
+
+DisplayName: WOString {
+	value = displayString;
+}
+
+WOCheckbox: WOCheckBox {
+	checked = ^selection;
+	class = ^class;
+	id = ^id;
+	style = ^style;
+}
+
+YesName: ERXLocalizedString {
+	value = ^yesName;
+	valueWhenEmpty = "Yes";
+}

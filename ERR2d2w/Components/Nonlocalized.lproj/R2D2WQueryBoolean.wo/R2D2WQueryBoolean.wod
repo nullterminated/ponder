@@ -2,12 +2,14 @@ LabelString: WOString {
 	value = d2wContext.displayNameForProperty;
 }
 
-Popup: WOPopUpButton {
-	displayString = displayString;
-	id = labelID;
-	item = item;
-	list = queryNumbers;
+Selector: R2DBooleanSelector {
+	yesString = stringForYes;
+	noString = stringForNo;
+	noSelectionString = stringForNull;
 	selection = value;
+	uiMode = "radio";
+	id = labelID;
+	legendString = d2wContext.displayNameForProperty;
 }
 
 PropertyLabel: WOGenericContainer {
