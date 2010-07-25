@@ -4,8 +4,7 @@ FalseString: WOString {
 }
 
 IsFalse: WOConditional {
-	condition = objectPropertyValue;
-	negate = true;
+	condition = isFalse;
 }
 
 IsTrue: WOConditional {
@@ -15,4 +14,14 @@ IsTrue: WOConditional {
 TrueString: WOString {
 	escapeHTML = false;
 	value = d2wContext.trueString;
+}
+
+IsNull: WOConditional {
+	condition = objectPropertyValueIsNonNull;
+	negate = true;
+}
+
+NullString: WOString {
+	escapeHTML = false;
+	value = d2wContext.nullString;
 }

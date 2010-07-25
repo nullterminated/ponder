@@ -1,19 +1,8 @@
-LabelString: WOString {
-	value = d2wContext.displayNameForProperty;
-}
-
 Selector: R2DBooleanSelector {
 	yesString = stringForYes;
 	noString = stringForNo;
 	noSelectionString = stringForNull;
 	selection = value;
-	uiMode = "radio";
-	id = labelID;
-	legendString = d2wContext.displayNameForProperty;
+	uiMode = d2wContext.uiStyle;
+	labelString = d2wContext.displayNameForProperty;
 }
-
-PropertyLabel: WOGenericContainer {
-	elementName = "label";
-	for = labelID;
-}
-

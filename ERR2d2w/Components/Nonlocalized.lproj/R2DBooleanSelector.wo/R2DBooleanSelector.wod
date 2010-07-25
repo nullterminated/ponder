@@ -1,12 +1,12 @@
 WOPopUpButton : WOPopUpButton {
-  list = options;
-  item = option;
-  displayString = displayString;
-  noSelectionString = noSelectionString;
-  selection = ^selection;
-  class = ^class;
-  id = ^id;
-  style = ^style;
+	list = options;
+	item = option;
+	displayString = displayString;
+	noSelectionString = noSelectionString;
+	selection = ^selection;
+	class = ^class;
+	style = ^style;
+	id = labelID;
 }
 
 RadioButtonFieldset: R2DRadioButtonFieldset {
@@ -17,7 +17,7 @@ RadioButtonFieldset: R2DRadioButtonFieldset {
 	class = ^class;
 	id = ^id;
 	disabled = ^disabled;
-	legendString = ^legendString;
+	legendString = ^labelString;
 }
 
 IsCheckbox : WOConditional {
@@ -39,11 +39,16 @@ DisplayName: WOString {
 WOCheckbox: WOCheckBox {
 	checked = ^selection;
 	class = ^class;
-	id = ^id;
+	id = labelID;
 	style = ^style;
 }
 
-YesName: ERXLocalizedString {
-	value = ^yesName;
-	valueWhenEmpty = "Yes";
+PropertyLabel: WOGenericContainer {
+	class = d2wContext.propertyClasses;
+	elementName = "label";
+	for = labelID;
+}
+
+LabelString: WOString {
+	value = ^labelString;
 }

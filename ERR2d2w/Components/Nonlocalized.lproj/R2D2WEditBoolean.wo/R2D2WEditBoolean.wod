@@ -20,3 +20,12 @@ Wrapper: WOGenericContainer {
 	elementName = "div";
 }
 
+Selector: R2DBooleanSelector {
+	yesString = stringForYes;
+	noString = stringForNo;
+	noSelectionString = stringForNull;
+	labelString = d2wContext.displayNameForProperty;
+	selection = objectPropertyValue;
+	uiMode = d2wContext.uiStyle;
+}
+
