@@ -1,7 +1,7 @@
 EditEnum: R2DToOneRelationship {
 	class = d2wContext.propertyClasses;
-	//Set this key for an enum method that returns a display string or localizer key
-    destinationDisplayKey = d2wContext.destinationDisplayKey;
+    displayString = enumDisplayString;
+    item = enumItem;
     destinationSortKey = d2wContext.sortKey;
     id = labelID;
 	localizeDisplayKeys = d2wContext.localizeDisplayKeys;

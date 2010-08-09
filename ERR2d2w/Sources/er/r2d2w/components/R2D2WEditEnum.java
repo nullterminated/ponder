@@ -2,11 +2,10 @@ package er.r2d2w.components;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.eoaccess.EOAttribute;
-import com.webobjects.eoaccess.EOEntity;
-import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSForwardException;
+import com.webobjects.foundation.NSKeyValueCodingAdditions;
 import com.webobjects.foundation.NSMutableArray;
+import com.webobjects.foundation._NSUtilities;
 
 import er.directtoweb.components.ERD2WStatelessComponent;
 import er.extensions.foundation.ERXStringUtilities;
@@ -17,10 +16,12 @@ public class R2D2WEditEnum<T extends Enum<T>> extends ERD2WStatelessComponent {
     }
 	private String labelID;
 	private Class<T> clazz;
+	private Object enumItem;
 
 	public void reset() {
 		labelID = null;
 		clazz = null;
+		enumItem = null;
 		super.reset();
 	}
 	
@@ -41,14 +42,8 @@ public class R2D2WEditEnum<T extends Enum<T>> extends ERD2WStatelessComponent {
 	@SuppressWarnings("unchecked")
 	protected Class<T> enumClass() {
 		if(clazz == null) {
-			EOEntity entity = EOUtilities.entityForObject(object().editingContext(), object());
-			EOAttribute attribute = entity.attributeNamed(d2wContext().propertyKey());
-			String className = attribute.className();
-			try {
-				clazz = (Class<T>) Class.forName(className);
-			} catch (ClassNotFoundException e) {
-				throw NSForwardException._runtimeExceptionForThrowable(e);
-			}
+			EOAttribute attr = (EOAttribute)d2wContext().valueForKey("smartAttribute");
+			clazz = _NSUtilities.classWithName(attr.className());
 		}
 		return clazz;
 	}
@@ -76,6 +71,43 @@ public class R2D2WEditEnum<T extends Enum<T>> extends ERD2WStatelessComponent {
         
 		//If possibleChoices does not exist, return all enum values as choices
 		return new NSArray<T>(klass.getEnumConstants());
+	}
+
+	/**
+	 * @return the enumItem
+	 */
+	public Object enumItem() {
+		return enumItem;
+	}
+
+	/**
+	 * @param enumItem the enumItem to set
+	 */
+	public void setEnumItem(Object enumItem) {
+		this.enumItem = enumItem;
+	}
+
+	/**
+	 * This method will first return destinationDisplayKey binding. If it is null,
+	 * then it will return a localizable key like Color.RED or Status.NORMAL.
+	 * @return the display string or key
+	 */
+	public String enumDisplayString() {
+		if(enumItem() instanceof String) {
+			return (String)enumItem();
+		} else {
+			StringBuilder sb = new StringBuilder();
+			String destinationDisplayKey = (String)d2wContext().valueForKey("destinationDisplayKey");
+			if(destinationDisplayKey == null) {
+				sb.append(enumClass().getSimpleName());
+				sb.append(NSKeyValueCodingAdditions.KeyPathSeparator);
+				sb.append(((T)enumItem()).name());
+			} else {
+				String displayString = (String)NSKeyValueCodingAdditions.Utility.valueForKeyPath(enumItem(), destinationDisplayKey);
+				sb.append(displayString);
+			}
+			return sb.toString();
+		}
 	}
 
 }
