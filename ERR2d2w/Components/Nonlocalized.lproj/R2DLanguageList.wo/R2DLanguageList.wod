@@ -1,0 +1,26 @@
+UnorderedList: WOGenericContainer {
+	elementName = "ul";
+	class = ^class;
+	id = ^id;
+	style = ^style;
+	title = ^title;
+}
+
+Languages: WORepetition {
+	item = languageOption;
+	list = availableLanguages;
+}
+
+LanguageLink: WOHyperlink {
+	action = languageAction;
+	disabled = isSelected;
+	hreflang = languageCode;
+	rel = "alternate";
+	string = displayStringForLanguage;
+	"xml:lang" = languageCode;
+}
+
+SelectedSpan: WOGenericContainer {
+	elementName = "span";
+	omitTags = isNotSelected;
+}
