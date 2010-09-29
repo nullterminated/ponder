@@ -15,6 +15,7 @@ PropertyLabel: WOGenericContainer {
 }
 
 TextField: WOTextField {
+	formatter = d2wContext.formatObject;
 	id = labelID;
 	size = length;
 	value = value;
