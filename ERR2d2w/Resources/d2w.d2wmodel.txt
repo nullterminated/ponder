@@ -138,9 +138,11 @@
 ) [R2DKeyValueArrayAssignment],
     10 : pageConfiguration = 'MailUserReset' => explanationConfigurationName = defaultEmbeddedInspectUserConfiguration [er.directtoweb.ERDKeyValueAssignment],
     10 : pageConfiguration = 'MailPlainUserReset' => explanationConfigurationName = plainTextEmbeddedInspectUserConfiguration [er.directtoweb.ERDKeyValueAssignment],
+    10 : (smartAttribute.className = 'er.extensions.crypting.ERXCryptoString' and task = 'edit') => componentName = R2D2WEditString [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration = 'MailUserReset' or pageConfiguration = 'MailPlainUserReset') => explanationComponentName = ERXD2WInspect [com.webobjects.directtoweb.Assignment],
     10 : (pageConfiguration like 'MailPlain*' or pageConfiguration = plainTextEmbeddedInspectUserConfiguration) => subTask = plainText [com.webobjects.directtoweb.Assignment],
-    10 : smartAttribute.className = 'er.extensions.foundation.ERXCryptoString' => formatObject = er.extensions.formatters.ERXCryptoStringFormatter [ERDDelayedObjectCreationAssignment],
+    10 : smartAttribute.className = 'er.extensions.crypting.ERXCryptoString' => formatObject = er.extensions.formatters.ERXCryptoStringFormatter [ERDDelayedObjectCreationAssignment],
+    10 : (smartAttribute.className = 'er.extensions.crypting.ERXCryptoString' and task = 'query') => componentName = R2D2WQueryStringOperator [com.webobjects.directtoweb.Assignment],
     10 : *true* => calendarHeaderFormat = ("session.localizer",localizedStringForKey,    (    "java.lang.String"),    (    calendarHeaderFormatKey)
 ) [R2DDelayedSelectorInvocationAssignment],
     10 : *true* => calendarCaptionFormat = ("session.localizer",localizedStringForKey,    (    "java.lang.String"),    (    calendarCaptionFormatKey)
