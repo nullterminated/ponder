@@ -1,4 +1,4 @@
-SelectButton: R2DLinkButton {
+SelectButton: ERXLinkButton {
 	action = selectObjectAction;
 	value = d2wContext.pickButtonLabel;
 }

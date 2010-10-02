@@ -25,7 +25,7 @@ Error: R2DErrorDictionaryPanel {
 	extraErrorMessage = message;
 }
 
-OkButton: R2DLinkButton {
+OkButton: ERXLinkButton {
 	action = nextPage;
 	class = "ok";
 	value = d2wContext.okButtonLabel;

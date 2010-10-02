@@ -22,10 +22,10 @@ BelowDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
 	extraPropertiesKey = "belowDisplayPropertyKeys";
 }
 
-CancelButton: R2DLinkButton {
+CancelButton: ERXLinkButton {
 	action = cancelAction;
 	class = "cancel";
-	useAsButton = false;
+	submit = false;
 	value = d2wContext.cancelButtonLabel;
 }
 
@@ -78,7 +78,7 @@ PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
 
-SaveButton: R2DLinkButton {
+SaveButton: ERXLinkButton {
 	action = submitAction;
 	class = "save";
 	value = d2wContext.saveButtonLabel;

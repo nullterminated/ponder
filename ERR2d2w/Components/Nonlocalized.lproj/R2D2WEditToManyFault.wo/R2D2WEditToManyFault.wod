@@ -4,7 +4,7 @@ ButtonContent: WOSwitchComponent {
 	WOComponentName = d2wContext.buttonContentComponentName;
 }
 
-EditLink: R2DLinkButton {
+EditLink: ERXLinkButton {
 	action = editValues;
 	class = "editToMany";
 	value = browserList.count;

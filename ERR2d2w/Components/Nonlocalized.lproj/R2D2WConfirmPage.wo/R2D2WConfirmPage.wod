@@ -2,7 +2,7 @@ Banner: R2DBannerComponent {
 	d2wContext = d2wContext;
 }
 
-BranchButton: R2DLinkButton {
+BranchButton: ERXLinkButton {
 	action = nextPageAction;
 	class = d2wContext.branch.branchButtonID;
 	value = d2wContext.branch.branchButtonLabel;
@@ -20,7 +20,7 @@ BranchRepetition: WORepetition {
 	checkHashCodes = false;
 }
 
-CancelButton: R2DLinkButton {
+CancelButton: ERXLinkButton {
 	action = cancelAction;
 	class = "cancel";
 	value = d2wContext.cancelButtonLabel;
@@ -84,7 +84,7 @@ Message: WOString {
 	escapeHTML = false;
 }
 
-OkButton: R2DLinkButton {
+OkButton: ERXLinkButton {
 	action = nextPageAction;
 	class = "ok";
 	value = d2wContext.okButtonLabel;

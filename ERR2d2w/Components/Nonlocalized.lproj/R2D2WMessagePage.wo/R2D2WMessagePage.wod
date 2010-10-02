@@ -12,7 +12,7 @@ BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	extraPropertiesKey = "belowDisplayPropertyKeys";
 }
 
-BranchButton: R2DLinkButton {
+BranchButton: ERXLinkButton {
 	action = nextPageAction;
 	class = d2wContext.branch.branchButtonID;
 	value = d2wContext.branch.branchButtonLabel;
@@ -77,7 +77,7 @@ Message: WOString {
 	value = message;
 }
 
-OkButton: R2DLinkButton {
+OkButton: ERXLinkButton {
 	action = nextPage;
 	class = "ok";
 	value = d2wContext.okButtonLabel;

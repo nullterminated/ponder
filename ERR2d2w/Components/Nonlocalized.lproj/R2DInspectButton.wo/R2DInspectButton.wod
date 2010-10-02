@@ -1,4 +1,4 @@
-InspectButtonLink: R2DLinkButton {
+InspectButtonLink: ERXLinkButton {
 	action = inspectObjectAction;
 	//TODO ?? disabled = isEntityInspectable
 	title = d2wContext.displayNameForInspectConfiguration;

@@ -71,8 +71,8 @@ deprecated now. Add a new list repetition that does
 'baseball cards' instead of a table. Add a 'tree' inspect
 view that allows for threaded discussions and such. I
 need to convert the rest of the WOSubmitButtons and
-WOHyperlinks to R2DLinkButtons. I need to look at
-R2DLinkButton again and see if I can get rid of the
+WOHyperlinks to ERXLinkButtons. I need to look at
+ERXLinkButton again and see if I can get rid of the
 string binding by using the hasChildrenElements() 
 method from WODynamicGroup.
 

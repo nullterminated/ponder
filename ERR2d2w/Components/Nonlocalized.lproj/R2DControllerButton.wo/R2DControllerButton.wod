@@ -28,7 +28,7 @@ PopupLabel: WOGenericContainer {
 	for = labelID;
 }
 
-SubmitButton: R2DLinkButton {
+SubmitButton: ERXLinkButton {
 	action = performAction;
 	value = d2wContext.controllerButtonLabel;
 }

@@ -1,4 +1,4 @@
-EditButton: R2DLinkButton {
+EditButton: ERXLinkButton {
 	action = editObjectAction;
 	class = "edit";
 	disabled = isNotEditable;

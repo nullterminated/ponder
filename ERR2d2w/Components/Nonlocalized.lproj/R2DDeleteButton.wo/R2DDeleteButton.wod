@@ -1,4 +1,4 @@
-DeleteButton: R2DLinkButton {
+DeleteButton: ERXLinkButton {
 	action = deleteObjectAction;
 	class = "delete";
 	disabled = disabled;

@@ -63,7 +63,7 @@ ItemsPerPage: ERXLocalizedString {
 	value = "ERXBatchNavigationBar.items_per_page"; 
 }
 
-LeftArrow: R2DLinkButton {	
+LeftArrow: ERXLinkButton {	
     action = displayPreviousBatch;
     class = "navPrev";
     value = session.localizer.R2DBatchNavigationBar.previous;
@@ -91,7 +91,7 @@ Page: ERXLocalizedString {
 	value = "ERXBatchNavigationBar.page"; 
 }
 
-RightArrow: R2DLinkButton {
+RightArrow: ERXLinkButton {
     action = displayNextBatch;
     class = "navNext";
 	value = session.localizer.R2DBatchNavigationBar.next;

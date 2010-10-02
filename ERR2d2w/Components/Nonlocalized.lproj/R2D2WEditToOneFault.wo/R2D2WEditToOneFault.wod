@@ -4,7 +4,7 @@ ButtonContent: WOSwitchComponent {
 	WOComponentName = d2wContext.buttonContentComponentName;
 }
 
-EditRelationship: R2DLinkButton {
+EditRelationship: ERXLinkButton {
 	action = editRelationship;
 	class = "editToOne";
 	value = d2wContext.editButtonLabel;
