@@ -46,6 +46,10 @@ LanguageCode: WOString {
 	value = languageCode;
 }
 
+Link: WOGenericContainer {
+	elementName = "link";
+}
+
 RSSTag: WOGenericContainer {
 	elementName = "rss";
 	otherTagString = otherTagStringForRSSTag;
