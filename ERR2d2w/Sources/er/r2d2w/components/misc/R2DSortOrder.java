@@ -11,18 +11,6 @@ public class R2DSortOrder extends ERXSortOrder {
         super(context);
     }
 
-    public boolean isAscending() {
-    	return (currentState() == SortedAscending);
-    }
-    
-    public boolean isDescending() {
-    	return (currentState() == SortedDescending);
-    }
-    
-    public boolean isUnsorted() {
-    	return (currentState() == Unsorted);
-    }
-    
     public String helpString() {
     	D2WContext c = (D2WContext)valueForBinding("d2wContext");
     	ERXLocalizer loc = ERXLocalizer.currentLocalizer();
@@ -32,5 +20,22 @@ public class R2DSortOrder extends ERXSortOrder {
     			loc.localizedTemplateStringForKeyWithObject("R2DSortOrder.sortAsc", c);
     	return helpString;
     }
+    
+	public String sortClass() {
+		StringBuilder sb = new StringBuilder("sort");
+		switch(currentState()) {
+		case Unsorted:
+			sb.append(" uns");
+			break;
+		case SortedAscending:
+			sb.append(" asc");
+			break;
+		case SortedDescending:
+			sb.append(" dsc");
+			break;
+		default:
+		}
+		return sb.toString();
+	}
     
 }

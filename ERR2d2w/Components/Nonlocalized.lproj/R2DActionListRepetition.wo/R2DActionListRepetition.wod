@@ -1,0 +1,24 @@
+HasActions: WOConditional {
+	condition = ^list.count;
+}
+
+UL: WOGenericContainer {
+	elementName = "ul";
+	class = ^class;
+}
+
+ActionRepetition: WORepetition {
+	list = ^list;
+	item = d2wContext.propertyKey;
+}
+
+LI: WOGenericContainer {
+	elementName = "li";
+	class = d2wContext.propertyClasses;
+}
+
+Action: WOSwitchComponent {
+	WOComponentName = d2wContext.componentName;
+	localContext = d2wContext;
+	object = d2wContext.object;
+}

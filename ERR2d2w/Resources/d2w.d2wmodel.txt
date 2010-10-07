@@ -50,9 +50,14 @@
     0 : *true* => displayToOneRelationshipKeys = true [com.webobjects.directtoweb.BooleanAssignment],
     0 : *true* => displayToManyRelationshipKeys = true [com.webobjects.directtoweb.BooleanAssignment],
     0 : *true* => displayAllLocalesForAttribute = false [com.webobjects.directtoweb.BooleanAssignment],
+    0 : *true* => groupHeaderComponentName = ERXEmptyComponent [com.webobjects.directtoweb.Assignment],
+    0 : *true* => leftActionRepetition = R2DActionListRepetition [com.webobjects.directtoweb.Assignment],
     0 : *true* => rssChannelTitle = R2D2WListRSSPage.defaultChannelTitle [ERDDelayedLocalizedAssignment],
     0 : *true* => availableCalendarViews = (DAY,WEEK,MONTH,YEAR
 ) [com.webobjects.directtoweb.Assignment],
+    0 : *true* => rightActionRepetition = R2DActionListRepetition [com.webobjects.directtoweb.Assignment],
+    0 : *true* => tableHeaderComponentName = R2DSimpleTableHeader [com.webobjects.directtoweb.Assignment],
+    0 : *true* => tableCaptionComponentName = R2DSimpleTableCaption [com.webobjects.directtoweb.Assignment],
     0 : *true* => emptyAttachmentComponentName = R2D2WDisplayEmptyFile [com.webobjects.directtoweb.Assignment],
     0 : *true* => rssChannelDescription = R2D2WListRSSPage.defaultChannelDescription [ERDDelayedLocalizedAssignment],
     0 : *true* => defaultButtonContentComponentName = R2DDefaultButtonContent [com.webobjects.directtoweb.Assignment],
@@ -82,6 +87,7 @@
     5 : task = 'query' => displayToManyRelationshipKeys = false [com.webobjects.directtoweb.BooleanAssignment],
     5 : propertyType = 'r' => destinationDisplayKey = keyWhenRelationship [er.directtoweb.ERDKeyValueAssignment],
     5 : (task != 'message' and entity != dummyEntity) => displayPropertyKeys = (null) [R2DDisplayPropertyKeysAssignment],
+    5 : propertyIsSortable = '1' => tableHeaderComponentName = R2DSortableTableHeader [com.webobjects.directtoweb.Assignment],
     5 : (shouldUseDirectActions = '1' and entity != dummyEntity) => shouldDisplayRSS = true [com.webobjects.directtoweb.BooleanAssignment],
     5 : (task = 'edit' and entity = defaultUserEntity and propertyKey = userLanguageAttribute.name) => updatesCurrentLanguage = true [com.webobjects.directtoweb.BooleanAssignment],
     5 : hasPodcast = '1' => rssNamespaces = {"atom" = "http://www.w3.org/2005/Atom"; "itunes" = "http://www.itunes.com/dtds/podcast-1.0.dtd"; 
@@ -162,12 +168,7 @@
 } [ERDDelayedObjectCreationAssignment],
     10 : smartAttribute.className = 'com.webobjects.foundation.NSTimestamp' => formatObject = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "formatter"; }, {"className" = "java.util.Locale"; "contextKey" = "session.localizer.@locale"; }); "className" = "java.text.SimpleDateFormat"; 
 } [ERDDelayedObjectCreationAssignment],
-    11 : task = 'select' => actions = (
-) [com.webobjects.directtoweb.Assignment],
     11 : *true* => displayNameForPageConfiguration = (null) [R2DDelayedUIStringAssignment],
-    11 : task = 'list' => actions = (nextPageAction
-) [com.webobjects.directtoweb.Assignment],
-    11 : (task = 'list' or task = 'select') => tableActions = (null) [R2DDefaultActionsAssignment],
     11 : *true* => emptyListComponentName = R2DEmptyListMessage [com.webobjects.directtoweb.Assignment],
     11 : smartRelationship.isToMany = '1' => propertyIsSortable = (null) [R2DDerivedCountSortAssignment],
     11 : pageConfiguration like 'List*' => showBanner = true [com.webobjects.directtoweb.BooleanAssignment],
@@ -178,11 +179,7 @@
     11 : propertyKey = 'selectAction' => componentName = R2DSelectButton [com.webobjects.directtoweb.Assignment],
     11 : propertyKey = 'inspectAction' => componentName = R2DInspectButton [com.webobjects.directtoweb.Assignment],
     11 : propertyKey = 'nextPageAction' => componentName = R2DNextPageButton [com.webobjects.directtoweb.Assignment],
-    11 : task = 'edit' => actions = (nextPageAction,deleteAction,saveAction
-) [com.webobjects.directtoweb.Assignment],
     11 : smartRelationship.isToMany = '0' => propertyIsSortable = false [com.webobjects.directtoweb.BooleanAssignment],
-    11 : task = 'inspect' => actions = (nextPageAction,deleteAction,editAction
-) [com.webobjects.directtoweb.Assignment],
     11 : pageConfiguration like 'MailPlain*' => pageWrapperName = MailPlainWrapper [com.webobjects.directtoweb.Assignment],
     11 : pageConfiguration = 'UserLogin' => findButtonLabel = R2D2W.loginButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
     11 : pageConfiguration = 'UserReset' => findButtonLabel = R2D2W.resetButtonLabel [er.directtoweb.ERDDelayedLocalizedAssignment],
@@ -201,8 +198,6 @@
     15 : *true* => actionBarComponentName = R2DActionBar [com.webobjects.directtoweb.Assignment],
     15 : pageConfiguration like 'RSS*' => displayPropertyKeys = (null) [R2DDefaultRSSAssignment],
     15 : session.objectStore.user = null => userPreferences = (null) [R2DUserPreferencesAssignment],
-    15 : pageConfiguration like '*Embedded*' => actions = (
-) [com.webobjects.directtoweb.Assignment],
     15 : *true* => controllerButtonComponentName = R2DControllerButton [com.webobjects.directtoweb.Assignment],
     15 : (entity = dummyEntity and pageConfiguration like 'User*') => task = error [com.webobjects.directtoweb.Assignment],
     15 : (task = 'query' and (smartAttribute.userInfo.erPrototype = 'language' or smartAttribute = userLanguageAttribute)) => componentName = R2D2WQueryLanguage [com.webobjects.directtoweb.Assignment],
@@ -210,8 +205,10 @@
 ) [com.webobjects.directtoweb.Assignment],
     16 : ((task = 'list' or task = 'select' or task = 'inspect') and propertyIsKeyPath = 1) => componentName = R2D2WDisplayString [com.webobjects.directtoweb.Assignment],
     17 : ((task = 'list' or task = 'select' or task = 'inspect') and (smartAttribute.userInfo.erPrototype = 'language' or smartAttribute = userLanguageAttribute)) => componentName = R2D2WDisplayLanguage [com.webobjects.directtoweb.Assignment],
+    20 : *true* => templateNameForGroupingListPage = R2D2WListPage [com.webobjects.directtoweb.Assignment],
     20 : *true* => batchNavigationBarComponentName = R2DBatchNavigationBar [com.webobjects.directtoweb.Assignment],
     20 : (task = 'edit' and componentName = 'R2D2WEditBoolean') => displayRequiredMarker = false [com.webobjects.directtoweb.BooleanAssignment],
+    20 : (task = 'list' or task = 'select' or (task = 'edit' and subTask = 'list')) => repetitionComponentName = R2DListTableRepetition [com.webobjects.directtoweb.Assignment],
     20 : ((pageConfiguration = 'UserLogin' or pageConfiguration = 'UserReset') and smartAttribute.className = 'java.lang.String') => componentName = R2D2WQueryString [com.webobjects.directtoweb.Assignment],
     21 : *true* => propertyNameComponentName = R2D2WPropertyName [com.webobjects.directtoweb.Assignment],
     21 : propertyKey like '*primaryKey' => componentName = R2D2WDisplayString [com.webobjects.directtoweb.Assignment],
@@ -243,6 +240,7 @@
     26 : (task = 'edit' and (smartAttribute.className = 'java.lang.Boolean' or ((smartAttribute.userInfo.erPrototype = 'Boolean' or smartAttribute.userInfo.erPrototype = 'BooleanYesNo' or smartAttribute.valueType = 'c') and (smartAttribute.className = 'java.math.BigDecimal' or smartAttribute.className = 'java.lang.Number')))) => uiStyle = radio [com.webobjects.directtoweb.Assignment],
     26 : (task = 'edit' and (smartAttribute.className = 'java.lang.Boolean' or ((smartAttribute.userInfo.erPrototype = 'Boolean' or smartAttribute.userInfo.erPrototype = 'BooleanYesNo' or smartAttribute.valueType = 'c') and (smartAttribute.className = 'java.math.BigDecimal' or smartAttribute.className = 'java.lang.Number')))) => componentName = R2D2WEditBoolean [com.webobjects.directtoweb.Assignment],
     26 : ((not (task = 'edit') and not (task = 'query')) and (smartAttribute.className = 'java.lang.Boolean' or ((smartAttribute.userInfo.erPrototype = 'Boolean' or smartAttribute.userInfo.erPrototype = 'BooleanYesNo' or smartAttribute.valueType = 'c') and (smartAttribute.className = 'java.math.BigDecimal' or smartAttribute.className = 'java.lang.Number')))) => componentName = R2D2WDisplayBoolean [com.webobjects.directtoweb.Assignment],
+    30 : *true* => groupingComponentName = R2DGroupingHeaderString [com.webobjects.directtoweb.Assignment],
     30 : (subTask = 'rss' and propertyKey = rssItemTitle) => componentName = R2D2WDisplayString [com.webobjects.directtoweb.Assignment],
     30 : (subTask = 'rss' and propertyKey = rssItemEnclosure) => componentName = R2DFeedEnclosure [com.webobjects.directtoweb.Assignment],
     30 : (subTask = 'rss' and propertyKey = rssItemDescription) => componentName = R2DFeedItemDescription [com.webobjects.directtoweb.Assignment],

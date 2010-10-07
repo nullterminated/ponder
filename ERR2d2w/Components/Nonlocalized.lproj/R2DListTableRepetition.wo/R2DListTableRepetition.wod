@@ -1,0 +1,218 @@
+Table: WOGenericContainer {
+	elementName = "table";
+	summary = d2wContext.tableSummary;
+	class = d2wContext.tableClasses;
+	border = "1";
+}
+
+CaptionComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.tableCaptionComponentName;
+	localContext = d2wContext;
+	displayGroup = ^displayGroup;
+}
+
+IsGrouping: WOConditional {
+	condition = isGrouping;
+}
+
+IsNotGrouping: WOConditional {
+	condition = isGrouping;
+	negate = true;
+}
+
+SectionRepetition: WORepetition {
+	list = sectionsContents;
+	item = currentSection;
+}
+
+AttributeRepetition: WORepetition {
+	item = propertyKey;
+	list = currentSectionKeys;
+}
+
+Colgroup: WOGenericContainer {
+	elementName = "colgroup";
+	title = currentSection.displayName;
+	class = currentSection.name;
+	omitTags = isNotMultipleSections;
+}
+
+Col: WOGenericElement {
+	elementName = "col";
+	title = d2wContext.displayNameForProperty;
+	class = d2wContext.propertyClasses;
+}
+
+GroupingColgroup: WOGenericContainer {
+	elementName = "colgroup";
+	class = "grouping";
+}
+
+GroupingCol: WOGenericElement {
+	elementName = "col";
+	class = d2wContext.groupingItemKey;
+}
+
+HasMultipleSections: WOConditional {
+	condition = isNotMultipleSections;
+	negate = true;
+}
+
+IsNotMultipleSections: WOConditional {
+	condition = isNotMultipleSections;
+}
+
+SectionHeader: WOGenericContainer {
+	elementName = "th";
+	colspan = currentSection.keys.count;
+	class = currentSection.name;
+	id = sectionHeaderID;
+}
+
+SectionHeaderString: WOString {
+	value = currentSection.displayName;
+	valueWhenEmpty = sectionTitle;
+}
+
+AttributeHeaderCell: WOGenericContainer {
+	elementName = "th";
+	abbr = d2wContext.attributeAbbr;
+	class = d2wContext.propertyClasses;
+	id = attributeHeaderID;
+}
+
+AttributeHeaderComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.tableHeaderComponentName;
+	localContext = d2wContext;
+	displayGroup = ^displayGroup;
+}
+
+GroupHeaderComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.groupHeaderComponentName;
+	localContext = d2wContext;
+	displayGroup = ^displayGroup;
+}
+
+GroupingRepetition: ERXGroupingRepetition {
+	item = d2wContext.object;
+	list = ^displayGroup.displayedObjects;
+	subListSection = sublistSection;
+	subList = sublist;
+	sectionForItem = section;
+	sectionKey = "primaryKey";
+}
+
+GroupingObjectRepetition: WORepetition {
+	list = sublist;
+	item = d2wContext.object;
+	index = index;
+}
+
+ObjectTableRow: WOGenericContainer {
+	elementName = "tr";
+}
+
+IsFirstRow: WOConditional {
+	condition = index;
+	negate = true;
+}
+
+GroupingHeader: WOGenericContainer {
+	elementName = "th";
+	rowspan = sublist.count;
+	id = groupingHeaderID;
+}
+
+GroupComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.groupingComponentName;
+	localContext = d2wContext;
+	object = sublistSection;
+	sublist = sublist;
+}
+
+ObjectRepetition: WORepetition {
+	list = ^displayGroup.displayedObjects;
+	item = d2wContext.object;
+	index = index;
+}
+
+AttributeCell: WOGenericContainer {
+	elementName = "td";
+	headers = headers;
+}
+
+AttributeComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.componentName;
+	localContext = d2wContext;
+	object = d2wContext.object;
+}
+
+GroupHeaderTall: WOGenericContainer {
+	elementName = "th";
+	rowspan = "2";
+}
+
+GroupHeader: WOGenericContainer {
+	elementName = "th";
+}
+
+LeftActionColgroup: WOGenericContainer {
+	elementName = "colgroup";
+	class = "left actions";
+}
+
+RightActionColgroup: WOGenericContainer {
+	elementName = "colgroup";
+	class = "right actions";
+}
+
+ActionCol: WOGenericElement {
+	elementName = "col";
+}
+
+LeftActionHeaderTall: WOGenericContainer {
+	elementName = "th";
+	class = "left actions";
+	rowspan = 2;
+}
+
+RightActionHeaderTall: WOGenericContainer {
+	elementName = "th";
+	class = "right actions";
+	rowspan = 2;
+}
+
+LeftActionHeader: WOGenericContainer {
+	elementName = "th";
+	class = "left actions";
+}
+
+RightActionHeader: WOGenericContainer {
+	elementName = "th";
+	class = "right actions";
+}
+
+LeftActionCell: WOGenericContainer {
+	elementName = "td";
+	class = "left actions";
+}
+
+RightActionCell: WOGenericContainer {
+	elementName = "td";
+	class = "right actions";
+}
+
+LeftActionRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.leftActionRepetition;
+	localContext = d2wContext;
+	list = d2wContext.actions.left;
+	class = "left actions";
+}
+
+RightActionRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.rightActionRepetition;
+	localContext = d2wContext;
+	list = d2wContext.actions.right;
+	class = "right actions";
+}
+

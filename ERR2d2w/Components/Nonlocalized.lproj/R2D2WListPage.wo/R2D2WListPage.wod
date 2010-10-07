@@ -4,23 +4,6 @@ AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	dataSource = dataSource;
 }
 
-ActionGroup: R2D2WActionGroup {
-	dataSource = displayGroup.dataSource;
-	displayGroup = displayGroup;
-	localContext = d2wContext;
-}
-
-AttributeDisplay: WOSwitchComponent {
- 	WOComponentName = d2wContext.componentName;
- 	localContext = localContext;
- 	object = object;
-}
-
-AttributeRepetition: WORepetition {
-	item = d2wContext.propertyKey;
-	list = displayKeys;
-}
-
 Banner: R2DBannerComponent {
 	d2wContext = d2wContext;
 }
@@ -31,17 +14,9 @@ BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	dataSource = dataSource;
 }
 
-Caption: WOString {
-	value = d2wContext.tableCaption;
-}
-
 ComponentDiv: WOGenericContainer {
 	elementName = "div";
 	class = d2wContext.pageClasses;
-}
-
-Debug: R2DDebuggingComponentHelp {
-	localContext = d2wContext;
 }
 
 EmptyMessageComponent: WOSwitchComponent {
@@ -49,26 +24,13 @@ EmptyMessageComponent: WOSwitchComponent {
 	d2wContext = d2wContext;
 }
 
-EntityRepetition: WORepetition {
-	item = object;
-	list = displayGroup.displayedObjects;
-}
-
 FilterDisplayGroupButton: ERDFilterDisplayGroupButton {
 	d2wContext = d2wContext;
 	displayGroup = displayGroup;
 }
 
-HasCaption: WOConditional {
-	condition = d2wContext.tableCaption;
-}
-
 Help: R2DDebuggingHelp {
 	d2wContext = d2wContext;
-}
-
-IsPropertySortable: WOConditional {
-	condition = d2wContext.propertyIsSortable;
 }
 
 ListEmpty: WOConditional {
@@ -78,15 +40,6 @@ ListEmpty: WOConditional {
 ListNotEmpty: WOConditional {
 	condition = isListEmpty;
 	negate = true;
-}
-
-ListTable: WOGenericContainer {
-	border = "1";
-	cellpadding = "2";
-	cellspacing = "2";
-	class = d2wContext.tableClasses;
-	elementName = "table";
-	summary = d2wContext.tableSummary;
 }
 
 NavBar: WOSwitchComponent {
@@ -100,20 +53,8 @@ PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
 
-PropertyName: WOSwitchComponent {
-	WOComponentName = d2wContext.propertyNameComponentName;
+ListRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.repetitionComponentName;
 	localContext = d2wContext;
-	object = object;
-}
-
-SortOrder: R2DSortOrder {
-	d2wContext = d2wContext;
 	displayGroup = displayGroup;
-	displayKey = d2wContext.displayNameForProperty;
-	key = d2wContext.sortKeyForList;
-}
-
-TableHeader: WOGenericContainer {
-	abbr = d2wContext.attributeAbbr;
-	elementName = "th";
 }

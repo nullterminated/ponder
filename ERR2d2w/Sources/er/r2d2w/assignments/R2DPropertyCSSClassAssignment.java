@@ -7,6 +7,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 
 import er.directtoweb.assignments.delayed.ERDDelayedAssignment;
+import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2DPropertyCSSClassAssignment extends ERDDelayedAssignment {
@@ -39,6 +40,7 @@ public class R2DPropertyCSSClassAssignment extends ERDDelayedAssignment {
 		if(ERXValueUtilities.booleanValue(c.valueForKey("displayRequiredMarker"))){
 			classes.add(MANDATORY_CLASS);
 		}
+		classes.add(ERXStringUtilities.safeIdentifierName(c.propertyKey()));
 		return classes.componentsJoinedByString(" ");
 	}
 	
