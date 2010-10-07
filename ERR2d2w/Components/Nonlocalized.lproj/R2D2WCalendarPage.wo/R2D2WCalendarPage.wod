@@ -4,12 +4,6 @@ AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	dataSource = dataSource;
 }
 
-ActionGroup: R2D2WActionGroup {
-	dataSource = displayGroup.dataSource;
-	displayGroup = displayGroup;
-	localContext = d2wContext;
-}
-
 Banner: R2DBannerComponent {
 	d2wContext = d2wContext;
 }

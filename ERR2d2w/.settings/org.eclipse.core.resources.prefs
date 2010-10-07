@@ -1,9 +1,6 @@
-#Sun Oct 11 17:13:49 EDT 2009
+#Wed Oct 06 21:33:48 EDT 2010
 eclipse.preferences.version=1
 encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo/R2D2WActionGroup.html=UTF-8
-encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo/R2D2WActionGroup.wod=UTF-8
-encoding//Components/Nonlocalized.lproj/R2D2WActionGroup.wo/R2D2WActionGroup.woo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo/R2D2WCalendarNavigationBar.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo/R2D2WCalendarNavigationBar.wod=UTF-8
@@ -192,7 +189,6 @@ encoding//Components/Nonlocalized.lproj/R2DYearView.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DYearView.wo/R2DYearView.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DYearView.wo/R2DYearView.wod=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DYearView.wo/R2DYearView.woo=UTF-8
-encoding//Components/R2D2WActionGroup.api=UTF-8
 encoding//Components/R2D2WCalendarNavigationBar.api=UTF-8
 encoding//Components/R2D2WCalendarPage.api=UTF-8
 encoding//Components/R2D2WDisplayAttachmentFile.api=UTF-8
@@ -241,7 +237,6 @@ encoding//Components/R2DWeekView.api=UTF-8
 encoding//Components/R2DYearView.api=UTF-8
 encoding//Resources/English.lproj/Localizable.strings=UTF-16
 encoding//Resources/English.lproj/ValidationTemplate.strings=UTF-16
-encoding//Sources/er/r2d2w/components/R2D2WActionGroup.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2D2WDisplayAttachmentFile.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2D2WDisplayDate.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2D2WDisplayEmptyFile.java=UTF-8
