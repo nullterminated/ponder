@@ -66,6 +66,7 @@ SectionHeader: WOGenericContainer {
 	elementName = "th";
 	colspan = currentSection.keys.count;
 	class = currentSection.name;
+	scope = "colgroup";
 	id = sectionHeaderID;
 }
 
@@ -78,6 +79,7 @@ AttributeHeaderCell: WOGenericContainer {
 	elementName = "th";
 	abbr = d2wContext.attributeAbbr;
 	class = d2wContext.propertyClasses;
+	scope = "col";
 	id = attributeHeaderID;
 }
 
@@ -120,6 +122,7 @@ IsFirstRow: WOConditional {
 GroupingHeader: WOGenericContainer {
 	elementName = "th";
 	rowspan = sublist.count;
+	scope = "rowgroup";
 	id = groupingHeaderID;
 }
 
@@ -150,10 +153,14 @@ AttributeComponent: WOSwitchComponent {
 GroupHeaderTall: WOGenericContainer {
 	elementName = "th";
 	rowspan = "2";
+	scope = "col";
+	class = "grouping";
 }
 
 GroupHeader: WOGenericContainer {
 	elementName = "th";
+	scope = "col";
+	class = "grouping";
 }
 
 LeftActionColgroup: WOGenericContainer {
@@ -174,22 +181,26 @@ LeftActionHeaderTall: WOGenericContainer {
 	elementName = "th";
 	class = "left actions";
 	rowspan = 2;
+	scope = "col";
 }
 
 RightActionHeaderTall: WOGenericContainer {
 	elementName = "th";
 	class = "right actions";
 	rowspan = 2;
+	scope = "col";
 }
 
 LeftActionHeader: WOGenericContainer {
 	elementName = "th";
 	class = "left actions";
+	scope = "col";
 }
 
 RightActionHeader: WOGenericContainer {
 	elementName = "th";
 	class = "right actions";
+	scope = "col";
 }
 
 LeftActionCell: WOGenericContainer {
