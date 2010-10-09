@@ -50,12 +50,12 @@ QueryForm: ERXWOForm {
 	secure = d2wContext.secureForm;
 }
 
-QueryLink: WOHyperlink {
+QueryLink: ERXLinkButton {
 	action = showRegularQueryAction;
 	string = d2wContext.moreOptionsButtonLabel;
 }
 
-SearchButton: WOSubmitButton {
+SearchButton: ERXLinkButton {
 	action = queryAction;
 	value = d2wContext.findButtonLabel;
 }

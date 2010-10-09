@@ -1,4 +1,4 @@
-Button: WOSubmitButton {
+Button: ERXLinkButton {
 	action = nextPageAction;
 	value = d2wContext.nextPageButtonLabel;
 }
@@ -16,7 +16,7 @@ IsLink: WOConditional {
 	negate = true;
 }
 
-Link: WOHyperlink {
+Link: ERXLinkButton {
 	action = nextPageAction;
 	string = d2wContext.nextPageButtonLabel;
 }

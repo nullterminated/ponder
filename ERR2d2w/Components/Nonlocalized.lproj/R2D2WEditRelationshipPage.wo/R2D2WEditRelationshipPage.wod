@@ -26,7 +26,7 @@ ComponentDiv: WOGenericContainer {
 	class = d2wContext.pageClasses;
 }
 
-CreateLink: WOHyperlink {
+CreateLink: ERXLinkButton {
 	action = newObjectAction;
 	string = d2wContext.createButtonLabel;
 }
@@ -43,7 +43,7 @@ DisplayQuery: WOConditional {
 	condition = displayQuery;
 }
 
-EditButton: WOSubmitButton {
+EditButton: ERXLinkButton {
 	action = editObjectInRelationship;
 	value = d2wContext.editButtonLabel;
 }
@@ -105,7 +105,7 @@ QueryComponent: D2WQuery {
 	queryDataSource = selectDataSource;
 }
 
-QueryLink: WOHyperlink {
+QueryLink: ERXLinkButton {
 	action = displayQueryAction;
 	string = d2wContext.findButtonLabel;
 }
@@ -120,17 +120,17 @@ RelationshipBrowser: WOBrowser {
 	size = 4;
 }
 
-RemoveToManyButton: WOSubmitButton {
+RemoveToManyButton: ERXLinkButton {
 	action = removeFromToManyRelationshipAction;
 	value = d2wContext.removeButtonLabel;
 }
 
-RemoveToOneButton: WOSubmitButton {
+RemoveToOneButton: ERXLinkButton {
 	action = removeFromToOneRelationshipAction;
 	value = d2wContext.removeButtonLabel;
 }
 
-ReturnLink: WOHyperlink {
+ReturnLink: ERXLinkButton {
 	action = returnAction;
 	string = d2wContext.returnButtonLabel;
 }

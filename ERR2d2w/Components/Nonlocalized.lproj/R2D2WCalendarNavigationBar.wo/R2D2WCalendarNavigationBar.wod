@@ -21,7 +21,7 @@ NavButtons: WOGenericContainer {
 	elementName = "div";
 }
 
-Next: WOHyperlink {
+Next: ERXLinkButton {
 	action = nextCalendar;
 	class = "navNext";
 	string = session.localizer.R2D2WCalendarNavigationBar.next;
@@ -31,7 +31,7 @@ OptionalForm: ERXWOForm {
 	disabled = context.isInForm;
 }
 
-Previous: WOHyperlink {
+Previous: ERXLinkButton {
 	action = previousCalendar;
 	class = "navPrev";
 	string = session.localizer.R2D2WCalendarNavigationBar.previous;
@@ -48,7 +48,7 @@ SelectedDateLabel: WOGenericContainer {
 	for = textFieldID;
 }
 
-Today: WOHyperlink {
+Today: ERXLinkButton {
 	action = todayAction;
 	disabled = ^rangeGrouper.isToday;
 	string = d2wContext.todayButtonLabel;
@@ -60,7 +60,7 @@ TodaySpan: WOGenericContainer {
 	omitTags = isNotToday;
 }
 
-ViewButton: WOHyperlink {
+ViewButton: ERXLinkButton {
 	action = viewLink;
 	disabled = isCurrentView;
 	string = viewString;

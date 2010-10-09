@@ -2,7 +2,7 @@ DisplayPodcastLink: WOConditional {
 	condition = displayPodcast;
 }
 
-PodcastLink: WOHyperlink {
+PodcastLink: ERXLinkButton {
 	href = podcastLink;
 	rel = "alternate";
 	string = d2wContext.podcastButtonLabel;

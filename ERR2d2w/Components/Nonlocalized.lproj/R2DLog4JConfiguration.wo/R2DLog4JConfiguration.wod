@@ -52,7 +52,7 @@ TableRow: WOGenericContainer {
 	elementName = "tr";
 }
 
-HeaderLink: WOHyperlink {
+HeaderLink: ERXLinkButton {
 	?wosid = false;
 	actionClass = "R2D2WDirectAction";
 	directActionName = "log4j";
@@ -123,37 +123,37 @@ StringLoggerName: WOString {
 	value = logger.name;
 }
 
-UpdateButton: WOSubmitButton {
+UpdateButton: ERXLinkButton {
 	action = update;
 	value = "Update";
 }
 
-ShowAllButton: WOSubmitButton {
+ShowAllButton: ERXLinkButton {
 	action = showAll;
 	value = "Show All";
 }
 
-ShowExplicitButton: WOSubmitButton {
+ShowExplicitButton: ERXLinkButton {
 	action = showExplicitlySet;
 	value = "Show Explicit Levels";
 }
 
-AddLoggerButton: WOSubmitButton {
+AddLoggerButton: ERXLinkButton {
 	action = addLogger;
 	value = "Add";
 }
 
-SubmitButtonAddRuleKey: WOSubmitButton {
+SubmitButtonAddRuleKey: ERXLinkButton {
 	action = addRuleKey;
 	value = "Add";
 }
 
-SubmitButtonFilter: WOSubmitButton {
+SubmitButtonFilter: ERXLinkButton {
 	action = filter;
 	value = "Filter";
 }
 
-SubmitButtonResetFilter: WOSubmitButton {
+SubmitButtonResetFilter: ERXLinkButton {
 	action = resetFilter;
 	value = "Reset Filter";
 }
@@ -185,7 +185,7 @@ ConversionPatternString: WOTextField {
        size = 70;
 }
 
-UpdateConversionPatternButton: WOSubmitButton {
+UpdateConversionPatternButton: ERXLinkButton {
        action = updateConversionPattern;
        value = "Update";
 }

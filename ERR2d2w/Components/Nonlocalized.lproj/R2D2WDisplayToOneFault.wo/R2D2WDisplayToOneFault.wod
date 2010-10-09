@@ -1,4 +1,4 @@
-InspectAction: WOHyperlink {
+InspectAction: ERXLinkButton {
 	class = "inspectToOne";
 	directActionName = directActionName;
 	queryDictionary = queryDictionary;
@@ -6,7 +6,7 @@ InspectAction: WOHyperlink {
 	title = helpString;
 }
 
-InspectLink: WOHyperlink {
+InspectLink: ERXLinkButton {
 	action = toOneAction;
 	class = "inspectToOne";
 	string = d2wContext.displayNameForProperty;

@@ -1,4 +1,4 @@
-Button: WOSubmitButton {
+Button: ERXLinkButton {
 	action = saveAction;
 	value = d2wContext.saveButtonLabel;
 }
@@ -12,7 +12,7 @@ IsLink: WOConditional {
 	negate = true;
 }
 
-Link: WOHyperlink {
+Link: ERXLinkButton {
 	action = saveAction;
 	string = d2wContext.saveButtonLabel;
 }

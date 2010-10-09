@@ -1,4 +1,4 @@
-CreateObjectLink : WOHyperlink {
+CreateObjectLink : ERXLinkButton {
 	action = createObject;
 }
 

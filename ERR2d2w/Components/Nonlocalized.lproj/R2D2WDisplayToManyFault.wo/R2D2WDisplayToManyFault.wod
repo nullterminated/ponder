@@ -1,4 +1,4 @@
-InspectLink: WOHyperlink {
+InspectLink: ERXLinkButton {
 	action = inspectArrayAction;
 	class = "inspectToMany";
 	string = relationshipCount;

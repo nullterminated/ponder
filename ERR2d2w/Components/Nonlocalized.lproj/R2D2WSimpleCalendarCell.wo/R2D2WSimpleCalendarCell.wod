@@ -1,4 +1,4 @@
-DateLink: WOHyperlink {
+DateLink: ERXLinkButton {
 	action = selectDateAction;
 	disabled = ^rangeGrouper.hasNoObjectsForCurrentDate;
 }

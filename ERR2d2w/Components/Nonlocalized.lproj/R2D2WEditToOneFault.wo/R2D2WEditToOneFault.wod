@@ -11,7 +11,7 @@ EditRelationship: ERXLinkButton {
 	title = helpString;
 }
 
-InspectObject: WOHyperlink {
+InspectObject: ERXLinkButton {
 	action = toOneAction;
 	class = "inspectToOne";
 	disabled = d2wContext.disabled;

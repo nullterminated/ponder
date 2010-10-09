@@ -52,9 +52,7 @@ key printing strategy. There's a ERDPageRunner
 something or other that looks handy for that. I need
 to create a language link menu instead of just a
 popup menu. I need to revisit the localized page titles.
-I still need to fix the action assignments for the list
-task and finally dump the old actiongroups. I need to
-look at banner localizations again. I'd like to revise
+I need to look at banner localizations again. I'd like to revise
 the current html to be a bit better structured. I need
 to fix the query boolean to use radio buttons instead of
 just a popup menu. I'd like to add support for captioning
@@ -69,11 +67,6 @@ and duration of uploaded movie files since QT4J seems to
 be failing with exceptions instead of just being
 deprecated now. Add a new list repetition that does
 'baseball cards' instead of a table. Add a 'tree' inspect
-view that allows for threaded discussions and such. I
-need to convert the rest of the WOSubmitButtons and
-WOHyperlinks to ERXLinkButtons. I need to look at
-ERXLinkButton again and see if I can get rid of the
-string binding by using the hasChildrenElements() 
-method from WODynamicGroup.
+view that allows for threaded discussions and such.
 
 Yeah, just a few things to fix. :)

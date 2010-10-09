@@ -2,7 +2,7 @@ DisplayRSSLink: WOConditional {
 	condition = displayRSSLink;
 }
 
-RSSLink: WOHyperlink {	
+RSSLink: ERXLinkButton {	
 	directActionName = directActionName;
 	queryDictionary = queryDictionary;
 	rel = "alternate";

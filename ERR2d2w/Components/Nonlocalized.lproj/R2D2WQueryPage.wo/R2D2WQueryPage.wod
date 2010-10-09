@@ -49,7 +49,7 @@ EntityName: WOString {
 	value = localContext.displayNameForEntity;
 }
 
-FindButton: WOSubmitButton {
+FindButton: ERXLinkButton {
 	action = queryAction;
 	value = d2wContext.findButtonLabel;
 }
@@ -81,7 +81,7 @@ QueryRepetition: WORepetition {
 	list = d2wContext.displayPropertyKeys;
 }
 
-ReturnButton: WOSubmitButton {
+ReturnButton: ERXLinkButton {
 	action = cancelAction;
 	value = d2wContext.returnButtonLabel;
 }
