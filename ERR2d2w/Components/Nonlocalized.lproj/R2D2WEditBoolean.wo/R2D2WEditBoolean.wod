@@ -1,20 +1,3 @@
-Checkbox: WOCheckBox {
-	checked = value;
-	class = d2wContext.propertyClasses;
-	id = labelID;
-	title = d2wContext.inputInfo;
-}
-
-LabelString: WOString {
-	value = d2wContext.displayNameForProperty;
-}
-
-PropertyLabel: WOGenericContainer {
-	class = d2wContext.propertyClasses;
-	elementName = "label";
-	for = labelID;
-}
-
 Wrapper: WOGenericContainer {
 	class = componentClasses;
 	elementName = "div";

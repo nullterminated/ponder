@@ -1,8 +1,3 @@
-AboveDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
-    localContext = d2wContext;
-	extraPropertiesKey = "aboveDisplayPropertyKeys";
-}
-
 ActionBar: WOSwitchComponent {
 	WOComponentName = d2wContext.actionBarComponentName;
 	d2wContext = d2wContext;
@@ -11,15 +6,6 @@ ActionBar: WOSwitchComponent {
 AttributeRepetition: WORepetition {
 	item = d2wContext.propertyKey;
 	list = d2wContext.displayPropertyKeys;
-}
-
-Banner: R2DBannerComponent {
-	d2wContext = d2wContext;
-}
-
-BelowDisplayPropertyKeys: ERD2WExtraDisplayPropertyKeysComponent {
-	localContext = d2wContext;
-	extraPropertiesKey = "belowDisplayPropertyKeys";
 }
 
 CancelButton: ERXLinkButton {
@@ -39,9 +25,9 @@ ComponentDebug: R2DDebuggingComponentHelp {
 	localContext = d2wContext;
 }
 
-ComponentDiv: WOGenericContainer {
-	elementName = "div";
-	class = d2wContext.pageClasses;
+ContentWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.contentWrapperComponentName;
+	localContext = d2wContext;
 }
 
 ComponentName: WOSwitchComponent {
@@ -64,10 +50,6 @@ EditingForm: ERXWOForm {
 
 EntityName: WOString {
 	value = d2wContext.displayNameForEntity;
-}
-
-Help: R2DDebuggingHelp {
-	d2wContext = d2wContext;
 }
 
 InfoPanel: R2DInfoPanel {

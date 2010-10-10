@@ -1,7 +1,3 @@
-Banner: R2DBannerComponent {
-	d2wContext = d2wContext;
-}
-
 BranchButton: ERXLinkButton {
 	action = nextPageAction;
 	class = d2wContext.branch.branchButtonID;
@@ -32,13 +28,9 @@ CancelButtonContent: WOSwitchComponent {
 	WOComponentName = d2wContext.cancelButtonContentComponentName;
 }
 
-ComponentDiv: WOGenericContainer {
-	elementName = "div";
-	class = d2wContext.pageClasses;
-}
-
-Help: R2DDebuggingHelp {
-	d2wContext = d2wContext;
+ContentWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.contentWrapperComponentName;
+	localContext = d2wContext;
 }
 
 ERDConfirmMessage: ERDConfirmMessage {

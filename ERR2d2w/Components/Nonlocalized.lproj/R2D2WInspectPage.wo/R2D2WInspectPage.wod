@@ -1,8 +1,3 @@
-AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
-    localContext = d2wContext;
-	extraPropertiesKey = "aboveDisplayPropertyKeys";
-}
-
 ActionGroup: WOGenericContainer {
 	class = "actionGroup";
 	elementName = "div";
@@ -26,22 +21,13 @@ AttributeWrapper: WOGenericContainer {
 	omitTags = omitAttributeWrapper;
 }
 
-Banner: R2DBannerComponent {
-	d2wContext = d2wContext;
-}
-
-BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
-	localContext = d2wContext;
-	extraPropertiesKey = "belowDisplayPropertyKeys";
-}
-
 ComponentDebug: R2DDebuggingComponentHelp {
 	localContext = d2wContext;
 }
 
-ComponentDiv: WOGenericContainer {
-	elementName = "div";
-	class = d2wContext.pageClasses;
+ContentWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.contentWrapperComponentName;
+	localContext = d2wContext;
 }
 
 DeleteButton: ERXLinkButton {
@@ -75,10 +61,6 @@ EmptyMessage: R2DEmptyListMessage {
 
 HasObject: WOConditional {
 	condition = object;
-}
-
-Help: R2DDebuggingHelp {
-	d2wContext = d2wContext;
 }
 
 IsObjectDeletable: WOConditional {

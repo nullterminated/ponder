@@ -1,17 +1,3 @@
-AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
-    localContext = d2wContext;
-	extraPropertiesKey = "aboveDisplayPropertyKeys";
-}
-
-Banner: R2DBannerComponent {
-	d2wContext = d2wContext;
-}
-
-BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
-    localContext = d2wContext;
-	extraPropertiesKey = "belowDisplayPropertyKeys";
-}
-
 BrowserLabel: WOGenericContainer {
 	elementName = "label";
 	for = labelID;
@@ -21,9 +7,9 @@ BrowserLabelString: WOString {
 	value = d2wContext.displayNameForEntity;
 }
 
-ComponentDiv: WOGenericContainer {
-	elementName = "div";
-	class = d2wContext.pageClasses;
+ContentWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.contentWrapperComponentName;
+	localContext = d2wContext;
 }
 
 CreateLink: ERXLinkButton {
@@ -58,10 +44,6 @@ HasEntities: WOConditional {
 
 HasToOne: WOConditional {
 	condition = toOneDescription;
-}
-
-Help: R2DDebuggingHelp {
-	d2wContext = d2wContext;
 }
 
 InspectComponent: D2WEdit {

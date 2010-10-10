@@ -1,17 +1,3 @@
-AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
-    localContext = d2wContext;
-	extraPropertiesKey = "aboveDisplayPropertyKeys";
-}
-
-Banner: R2DBannerComponent {
-	d2wContext = d2wContext;
-}
-
-BelowDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
-    localContext = d2wContext;
-	extraPropertiesKey = "belowDisplayPropertyKeys";
-}
-
 BranchButton: ERXLinkButton {
 	action = nextPageAction;
 	class = d2wContext.branch.branchButtonID;
@@ -30,9 +16,9 @@ BranchRepetition: WORepetition {
 	checkHashCodes = false;
 }
 
-ComponentDiv: WOGenericContainer {
-	elementName = "div";
-	class = d2wContext.pageClasses;
+ContentWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.contentWrapperComponentName;
+	localContext = d2wContext;
 }
 
 Errors: R2DErrorDictionaryPanel {
@@ -66,10 +52,6 @@ HasNextPage: WOConditional {
 HasNoBranches: WOConditional {
 	condition = hasBranchChoices;
 	negate = true;
-}
-
-Help: R2DDebuggingHelp {
-	d2wContext = d2wContext;
 }
 
 Message: WOString {

@@ -7,6 +7,6 @@ BannerConditional: WOConditional {
 }
 
 BannerWrapper: WOGenericContainer {
-	elementName = d2wContext.bannerWrapper;
+	elementName = "h3";
 	class = d2wContext.bannerClasses;
 }
