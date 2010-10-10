@@ -1,11 +1,10 @@
 package er.r2d2w.components.misc;
 
 import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
+
 import er.extensions.components.ERXStatelessComponent;
 import er.extensions.localization.ERXLocalizer;
-
-import com.webobjects.foundation.NSArray;
-import com.webobjects.appserver.WOActionResults;
 
 public class R2DLanguageList extends ERXStatelessComponent {
 	public static final String LANGUAGE_BINDING_KEY = "language";
