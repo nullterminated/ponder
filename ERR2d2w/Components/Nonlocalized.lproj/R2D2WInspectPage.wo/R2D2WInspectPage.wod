@@ -1,74 +1,20 @@
-ActionGroup: WOGenericContainer {
-	class = "actionGroup";
-	elementName = "div";
-	omitTags = hasNoActions;
-}
-
-AttributeRepetition: WORepetition {
-	item = d2wContext.propertyKey;
-	list = d2wContext.displayPropertyKeys;
-}
-
-AttributeValue: WOSwitchComponent {
-	WOComponentName = d2wContext.componentName;
-	localContext = d2wContext;
-	object = object;
-}
-
-AttributeWrapper: WOGenericContainer {
-	class = d2wContext.attributeClasses;
-	elementName = d2wContext.attributeWrapper;
-	omitTags = omitAttributeWrapper;
-}
-
-ComponentDebug: R2DDebuggingComponentHelp {
-	localContext = d2wContext;
-}
-
 ContentWrapper: WOSwitchComponent {
 	WOComponentName = d2wContext.contentWrapperComponentName;
 	localContext = d2wContext;
 }
 
-DeleteButton: ERXLinkButton {
-	action = deleteAction;
-	class = "delete";
-	value = d2wContext.deleteButtonLabel;
-}
-
-DeleteButtonContent: WOSwitchComponent {
-	buttonLabel = d2wContext.deleteButtonLabel;
-	localContext = d2wContext;
-	WOComponentName = d2wContext.deleteButtonContentComponentName;
-}
-
-EditButton: ERXLinkButton {
-	action = editAction;
-	class = "edit";
-	value = d2wContext.editButtonLabel;
-}
-
-EditButtonContent: WOSwitchComponent {
-	buttonLabel = d2wContext.editButtonLabel;
-	localContext = d2wContext;
-	WOComponentName = d2wContext.editButtonContentComponentName;
-}
-
-EmptyMessage: R2DEmptyListMessage {
+EmptyMessage: WOSwitchComponent {
+	WOComponentName = d2wContext.emptyListComponentName;
 	d2wContext = d2wContext;
-	emptyListMessage = emptyObjectMessage;
 }
 
 HasObject: WOConditional {
 	condition = object;
 }
 
-IsObjectDeletable: WOConditional {
-	condition = isObjectDeleteable;
-}
-
-IsObjectEditable: WOConditional {
-	condition = isObjectEditable;
+InspectRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.repetitionComponentName;
+	localContext = d2wContext;
 }
 
 MissingObject: WOConditional {
@@ -79,26 +25,3 @@ MissingObject: WOConditional {
 PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
-
-PropertyName: WOSwitchComponent {
-	WOComponentName = d2wContext.propertyNameComponentName;
-	localContext = d2wContext;
-	object = object;
-}
-
-ReturnButton: ERXLinkButton {
-	action = nextPage;
-	class = "return";
-	value = d2wContext.returnButtonLabel;
-}
-
-ReturnButtonContent: WOSwitchComponent {
-	buttonLabel = d2wContext.returnButtonLabel;
-	localContext = d2wContext;
-	WOComponentName = d2wContext.returnButtonContentComponentName;
-}
-
-ShowCancel: WOConditional {
-	condition = showCancel;
-}
-

@@ -8,9 +8,10 @@ EmptyMessageComponent: WOSwitchComponent {
 	d2wContext = d2wContext;
 }
 
-FilterDisplayGroupButton: ERDFilterDisplayGroupButton {
-	d2wContext = d2wContext;
+FilteringComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.filteringComponentName;
 	displayGroup = displayGroup;
+	localContext = d2wContext;
 }
 
 ListEmpty: WOConditional {
@@ -20,6 +21,12 @@ ListEmpty: WOConditional {
 ListNotEmpty: WOConditional {
 	condition = isListEmpty;
 	negate = true;
+}
+
+ListRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.repetitionComponentName;
+	localContext = d2wContext;
+	displayGroup = displayGroup;
 }
 
 NavBar: WOSwitchComponent {
@@ -33,8 +40,6 @@ PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
 
-ListRepetition: WOSwitchComponent {
-	WOComponentName = d2wContext.repetitionComponentName;
-	localContext = d2wContext;
-	displayGroup = displayGroup;
+ShowNav: WOConditional {
+	condition = shouldShowBatchNavigation;
 }

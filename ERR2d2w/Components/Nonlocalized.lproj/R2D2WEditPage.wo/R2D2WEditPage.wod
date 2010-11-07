@@ -1,79 +1,22 @@
-ActionBar: WOSwitchComponent {
-	WOComponentName = d2wContext.actionBarComponentName;
-	d2wContext = d2wContext;
-}
-
-AttributeRepetition: WORepetition {
-	item = d2wContext.propertyKey;
-	list = d2wContext.displayPropertyKeys;
-}
-
-CancelButton: ERXLinkButton {
-	action = cancelAction;
-	class = "cancel";
-	submit = false;
-	value = d2wContext.cancelButtonLabel;
-}
-
-CancelButtonContent: WOSwitchComponent {
-	buttonLabel = d2wContext.cancelButtonLabel;
-	localContext = d2wContext;
-	WOComponentName = d2wContext.cancelButtonContentComponentName;
-}
-
-ComponentDebug: R2DDebuggingComponentHelp {
-	localContext = d2wContext;
-}
-
 ContentWrapper: WOSwitchComponent {
 	WOComponentName = d2wContext.contentWrapperComponentName;
 	localContext = d2wContext;
 }
 
-ComponentName: WOSwitchComponent {
-	WOComponentName = d2wContext.componentName;
-	localContext = localContext;
-	object = object;
-}
-
-Controller: WOSwitchComponent {
-	WOComponentName = d2wContext.controllerButtonComponentName;
-	d2wContext = d2wContext;
-}
-
 EditingForm: ERXWOForm {
-	disabled = d2wContext.formDisabled;
-	enctype = d2wContext.formEncoding;
+	class = d2wContext.task;
+	disabled = context.isInForm;
 	multipleSubmit = true;
+	enctype = d2wContext.formEncoding;
 	secure = d2wContext.secureForm;
 }
 
-EntityName: WOString {
-	value = d2wContext.displayNameForEntity;
-}
-
-InfoPanel: R2DInfoPanel {
-	d2wContext = d2wContext;
+InspectRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.repetitionComponentName;
+	localContext = d2wContext;
+	object = object;
 }
 
 PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
-}
-
-SaveButton: ERXLinkButton {
-	action = submitAction;
-	class = "save";
-	value = d2wContext.saveButtonLabel;
-}
-
-SaveButtonContent: WOSwitchComponent {
-	buttonLabel = d2wContext.saveButtonLabel;
-	localContext = d2wContext;
-	WOComponentName = d2wContext.saveButtonContentComponentName;
-}
-
-ValidationErrors: R2DErrorDictionaryPanel {
-	errorMessages = errorMessages;
-	extraErrorMessage = errorMessage;
-	errorKeyOrder = errorKeyOrder;
 }

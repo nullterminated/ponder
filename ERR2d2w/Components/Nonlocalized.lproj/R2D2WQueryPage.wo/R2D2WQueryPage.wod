@@ -1,41 +1,6 @@
-ActionBar: WOSwitchComponent {
-	WOComponentName = d2wContext.actionBarComponentName;
-	d2wContext = d2wContext;
-}
-
-ComponentDebug: R2DDebuggingComponentHelp {
-	localContext = d2wContext;
-}
-
 ContentWrapper: WOSwitchComponent {
 	WOComponentName = d2wContext.contentWrapperComponentName;
 	localContext = d2wContext;
-}
-
-ComponentName: WOSwitchComponent {
-	displayGroup = displayGroup;
-	localContext = d2wContext;
-	WOComponentName = d2wContext.componentName;
-}
-
-Controller: WOSwitchComponent {
-	WOComponentName = d2wContext.controllerButtonComponentName;
-	d2wContext = d2wContext;
-}
-
-Errors: R2DErrorDictionaryPanel {
-	errorMessages = errorMessages;
-	extraErrorMessage = errorMessage;
-	errorKeyOrder = errorKeyOrder;
-}
-
-EntityName: WOString {
-	value = localContext.displayNameForEntity;
-}
-
-FindButton: ERXLinkButton {
-	action = queryAction;
-	value = d2wContext.findButtonLabel;
 }
 
 ListPage: ERXD2WList {
@@ -48,26 +13,18 @@ PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
 
-QueryForm: WOForm {
-	action = queryAction;
-	disabled = d2wContext.formDisabled;
-	enctype = d2wContext.formEncoding;
+QueryForm: ERXWOForm {
+	class = d2wContext.task;
+	disabled = context.isInForm;
 	multipleSubmit = true;
+	enctype = d2wContext.formEncoding;
 	secure = d2wContext.secureForm;
 }
 
-QueryRepetition: WORepetition {
-	item = d2wContext.propertyKey;
-	list = d2wContext.displayPropertyKeys;
-}
-
-ReturnButton: ERXLinkButton {
-	action = cancelAction;
-	value = d2wContext.returnButtonLabel;
-}
-
-ShowCancel: WOConditional {
-	condition = showCancel;
+QueryRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.repetitionComponentName;
+	localContext = d2wContext;
+	displayGroup = displayGroup;
 }
 
 ShowListInPage: WOConditional {
