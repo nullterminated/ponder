@@ -18,8 +18,11 @@ ComponentWrapper: WOGenericContainer {
 	class = d2wContext.pageClasses;
 }
 
-Content: WOComponentContent {
-	
+Content: WOComponentContent {}
+
+Errors: WOSwitchComponent {
+	WOComponentName = d2wContext.errorPanelComponentName;
+	localContext = d2wContext;
 }
 
 Help: R2DDebuggingHelp {
