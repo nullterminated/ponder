@@ -1,6 +1,7 @@
 package er.r2d2w.assignments;
 
 import com.webobjects.directtoweb.D2WContext;
+import com.webobjects.eoaccess.EOEntity;
 import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOKeyValueUnarchiver;
@@ -23,9 +24,9 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 	public static final NSArray<String> rightControllerDependentKeys = 
 		new NSArray<String>("task","isEntityDeletable","isEntityEditable","object.canDelete","object.canUpdate","readOnly");
 	public static final NSArray<String> toManyRelationshipDependentKeys =
-		new NSArray<String>("task","parentRelationship","frame","isEntityEditable","readOnly");
+		new NSArray<String>("task","parentRelationship","frame","isEntityEditable","readOnly","entity");
 	public static final NSArray<String> toOneRelationshipDependentKeys =
-		new NSArray<String>("task","parentRelationship","frame","isEntityDeletable","isEntityEditable","isEntityInspectable","readOnly","object.canDelete","object.canUpdate");
+		new NSArray<String>("task","parentRelationship","frame","isEntityDeletable","isEntityEditable","isEntityInspectable","readOnly","object.canDelete","object.canUpdate","entity");
 	public static final NSArray<String> inspectControllerDependentKeys = 
 		new NSArray<String>("task","frame","isEntityDeletable","isEntityEditable","readOnly","object.canDelete","object.canUpdate");
 	public static final NSArray<String> editControllerDependentKeys = 
@@ -111,15 +112,17 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 	public Object toManyControllerChoices(D2WContext c) {
 		NSMutableArray<String> choices = new NSMutableArray<String>();
 		EORelationship rel = (EORelationship)c.valueForKey("parentRelationship");
+		EOEntity e = c.entity();
 		boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
 		boolean readOnly = ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		
 		if(!c.frame()) {
 			choices.add("_returnRelated");
 		}
 		if(rel.inverseRelationship() == null || !readOnly ) {
 			choices.add("_queryRelated");
 		}
-		if(!readOnly && isEntityEditable) {
+		if(!readOnly && isEntityEditable && !e.isAbstractEntity() && e.subEntities().isEmpty()) {
 			choices.add("_createRelated");
 		}
 		return choices;
@@ -129,6 +132,7 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 		NSMutableArray<String> choices = new NSMutableArray<String>();
 		EOEnterpriseObject eo = (EOEnterpriseObject)c.valueForKey("object");
 		EORelationship rel = (EORelationship)c.valueForKey("parentRelationship");
+		EOEntity e = c.entity();
 		boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
 		boolean isEntityDeletable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityDeletable"));
 		boolean isEntityInspectable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityInspectable"));
@@ -143,8 +147,10 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 		if(isEntityInspectable) {
 			choices.add("_inspectRelated");
 		}
-		if(!readOnly && isEntityEditable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():true) {
+		if(!readOnly && isEntityEditable && !e.isAbstractEntity() && e.subEntities().isEmpty()) {
 			choices.add("_createRelated");
+		}
+		if(!readOnly && isEntityEditable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():true) {
 			choices.add("_editRelated");
 			if(!rel.ownsDestination()) {
 				choices.add("_removeRelated");
