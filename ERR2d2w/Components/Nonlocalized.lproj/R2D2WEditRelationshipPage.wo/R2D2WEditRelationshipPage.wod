@@ -1,60 +1,48 @@
-BrowserLabel: WOGenericContainer {
-	elementName = "label";
-	for = labelID;
-}
-
-BrowserLabelString: WOString {
-	value = d2wContext.displayNameForEntity;
-}
-
 ContentWrapper: WOSwitchComponent {
 	WOComponentName = d2wContext.contentWrapperComponentName;
 	localContext = d2wContext;
-}
-
-CreateLink: ERXLinkButton {
-	action = newObjectAction;
-	string = d2wContext.createButtonLabel;
 }
 
 DisplayList: WOConditional {
 	condition = displayList;
 }
 
-DisplayNew: WOConditional {
-	condition = displayNew;
+DisplayInspect: WOConditional {
+	condition = displayInspect;
 }
 
 DisplayQuery: WOConditional {
 	condition = displayQuery;
 }
 
-EditButton: ERXLinkButton {
-	action = editObjectInRelationship;
-	value = d2wContext.editButtonLabel;
+EmptyMessageComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.emptyListComponentName;
+	d2wContext = d2wContext;
 }
 
-EntityName: WOString {
-	value = d2wContext.displayNameForEntity;
+FilteringComponent: WOSwitchComponent {
+	WOComponentName = d2wContext.filteringComponentName;
+	displayGroup = relationshipDisplayGroup;
+	localContext = d2wContext;
 }
 
-HasEntities: WOConditional {
+HasObjects: WOConditional {
 	condition = relationshipDisplayGroup.allObjects.count;
 }
 
-HasToOne: WOConditional {
-	condition = toOneDescription;
-}
-
-InspectComponent: D2WEdit {
+InspectComponent: ERXD2WInspect {
+    pageConfiguration = d2wContext.inspectConfigurationName;
+    task = inlineTask;
 	action = saveAction;
 	entityName = entity.name;
-	object = newObjectInRelationship;
+	object = objectInRelationship;
+	settings = settings;
 }
 
-IsEntityWritable: WOConditional {
-	condition = isEntityReadOnly;
-	negate = true;
+InspectRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.toOneRepetitionComponentName;
+	localContext = d2wContext;
+	object = selectedObject;
 }
 
 IsToMany: WOConditional {
@@ -73,64 +61,34 @@ ListComponent: ERXD2WSelect {
 	selectedObject = objectToAddToRelationship;
 }
 
-NumberOfEntities: WOString {
-	value = relationshipDisplayGroup.allObjects.count;
+ListEmpty: WOConditional {
+	condition = relationshipDisplayGroup.allObjects.count;
+	negate = true;
+}
+
+ObjectRepetition: WOSwitchComponent {
+	WOComponentName = d2wContext.repetitionComponentName;
+	localContext = d2wContext;
+	displayGroup = relationshipDisplayGroup;
+}
+
+NavBar: WOSwitchComponent {
+    WOComponentName = d2wContext.batchNavigationBarComponentName;
+	displayGroup = relationshipDisplayGroup;
+	objectName = d2wContext.displayNameForEntity;
+	d2wContext = d2wContext;
 }
 
 PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
 
-QueryComponent: D2WQuery {
+QueryComponent: ERD2WQuery {
 	action = queryAction;
 	entityName = entity.name;
 	queryDataSource = selectDataSource;
 }
 
-QueryLink: ERXLinkButton {
-	action = displayQueryAction;
-	string = d2wContext.findButtonLabel;
+ShowNav: WOConditional {
+	condition = shouldShowBatchNavigation;
 }
-
-RelationshipBrowser: WOBrowser {
-	displayString = browserStringForItem;
-	id = labelID;
-	item = browserItem;
-	list = relationshipDisplayGroup.allObjects;
-	multiple = true;
-	selections = browserSelections;
-	size = 4;
-}
-
-RemoveToManyButton: ERXLinkButton {
-	action = removeFromToManyRelationshipAction;
-	value = d2wContext.removeButtonLabel;
-}
-
-RemoveToOneButton: ERXLinkButton {
-	action = removeFromToOneRelationshipAction;
-	value = d2wContext.removeButtonLabel;
-}
-
-ReturnLink: ERXLinkButton {
-	action = returnAction;
-	string = d2wContext.returnButtonLabel;
-}
-
-ShouldAllowEditingConditional: WOConditional {
-	condition = isEntityReadOnly;
-	negate = true;
-}
-
-ToManyForm: WOForm {
-	multipleSubmit = isEntityWritable;
-}
-
-ToOneForm: WOForm {
-	
-}
-
-ToOneValue: WOString {
-	value = toOneDescription;
-}
-

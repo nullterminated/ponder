@@ -1,40 +1,16 @@
 <webobject name = "PageWrapper">
-  <webobject name = "ContentWrapper">
-    <webobject name = "IsToMany">
-      <webobject name = "HasEntities">
-        <webobject name = "ToManyForm">
-          <fieldset>
-          	<legend>
-          		<webobject name = "NumberOfEntities" />
-		        <webobject name = "EntityName" />
-          	</legend>
-          	<webobject name = "BrowserLabel"><webobject name = "BrowserLabelString"/></webobject>
-            <webobject name = "RelationshipBrowser" />
-            <div class = "buttonGroup">
-              <webobject name = "ShouldAllowEditingConditional"><webobject name = "EditButton" /></webobject>
-              <webobject name = "RemoveToManyButton" />
-            </div>
-          </fieldset>
-        </webobject>
-      </webobject>
-    </webobject>
-    <webobject name = "IsToOne">
-      <webobject name = "HasToOne">
-        <webobject name = "ToOneForm">
-          <div>
-            <span class = "toOneDescription"><webobject name = "ToOneValue" /></span>
-            <webobject name = "RemoveToOneButton" />
-          </div>
-        </webobject>
-      </webobject>
-    </webobject>
-    <div class = "linkGroup">
-      <webobject name = "ReturnLink" />
-      <webobject name = "QueryLink" />
-      <webobject name = "IsEntityWritable"><webobject name = "CreateLink" /></webobject>
-    </div>
-    <webobject name = "DisplayQuery"> <webobject name = "QueryComponent" /> </webobject>
-    <webobject name = "DisplayList"> <webobject name = "ListComponent" /> </webobject>
-    <webobject name = "DisplayNew"> <webobject name = "InspectComponent" /> </webobject>
-  </webobject>
+	<webobject name = "ContentWrapper">
+		<webobject name = "HasObjects">
+			<webobject name = "ShowNav">
+				<webobject name = "NavBar"><webobject name = "FilteringComponent"/></webobject>
+			</webobject>
+			<webobject name = "ObjectRepetition"/>
+		</webobject>
+		<webobject name = "ListEmpty">
+			<webobject name = "EmptyMessageComponent"/>
+		</webobject>
+	</webobject>
+	<webobject name = "DisplayQuery"><webobject name = "QueryComponent" /></webobject>
+	<webobject name = "DisplayList"><webobject name = "ListComponent" /></webobject>
+	<webobject name = "DisplayInspect"><webobject name = "InspectComponent" /></webobject>
 </webobject>
