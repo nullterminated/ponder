@@ -5,8 +5,8 @@
 er.extensions.ERXWOForm.useIdInsteadOfNameTag=true
 er.extensions.ERXResponseRewriter.javascriptTypeAttribute=true
 
-# Use buttons
-#er.extensions.foundation.ERXPatcher.DynamicElementsPatches.SubmitButton.useButtonTag=true
+# Don't use componentIdentifier
+er.extensions.foundation.ERXPatcher.DynamicElementsPatches.appendComponentIdentifier=false
 
 # ERR2D2W
 #er.r2d2w.ERR2d2w.createsDerivedCounts=true
