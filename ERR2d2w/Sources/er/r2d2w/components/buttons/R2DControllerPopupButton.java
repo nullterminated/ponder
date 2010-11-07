@@ -12,14 +12,14 @@ import er.directtoweb.delegates.ERDBranchInterface;
 import er.directtoweb.pages.ERD2WPage;
 import er.extensions.foundation.ERXStringUtilities;
 
-public class R2DControllerButton extends ERDCustomComponent implements ERDBranchInterface {
+public class R2DControllerPopupButton extends ERDCustomComponent implements ERDBranchInterface {
 
     protected NSArray<NSDictionary<String, Object>> branchChoices;
     protected ERDBranchDelegateInterface branchDelegate;
 	protected NSDictionary<String, Object> selectedBranch;
 	private String labelID;
 	
-	public R2DControllerButton(WOContext context) {
+	public R2DControllerPopupButton(WOContext context) {
         super(context);
     }
 	
@@ -108,5 +108,6 @@ public class R2DControllerButton extends ERDCustomComponent implements ERDBranch
 		return labelID;
 	}
 
+    public boolean synchronizesVariablesWithBindings() { return false; }
 
 }
