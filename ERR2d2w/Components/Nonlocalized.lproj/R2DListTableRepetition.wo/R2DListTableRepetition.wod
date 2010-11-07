@@ -71,7 +71,7 @@ SectionHeader: WOGenericContainer {
 }
 
 SectionHeaderString: WOString {
-	value = currentSection.displayName;
+	value = d2wContext.displayNameForSectionKey;
 	valueWhenEmpty = sectionTitle;
 }
 
@@ -213,17 +213,17 @@ RightActionCell: WOGenericContainer {
 	class = "right actions";
 }
 
-LeftActionRepetition: WOSwitchComponent {
-	WOComponentName = d2wContext.leftActionRepetition;
-	localContext = d2wContext;
+LeftActionRepetition: WORepetition {
 	list = d2wContext.actions.left;
-	class = "left actions";
+	item = d2wContext.propertyKey;
 }
 
-RightActionRepetition: WOSwitchComponent {
-	WOComponentName = d2wContext.rightActionRepetition;
-	localContext = d2wContext;
+RightActionRepetition: WORepetition {
 	list = d2wContext.actions.right;
-	class = "right actions";
+	item = d2wContext.propertyKey;
 }
 
+Action: WOSwitchComponent {
+	WOComponentName = d2wContext.componentName;
+	localContext = d2wContext;
+}
