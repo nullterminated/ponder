@@ -17,6 +17,6 @@ HasExtraErrorMessage: WOConditional {
 	condition = extraErrorMessage.length;
 }
 
-ShowErrors: WOConditional {
+HasErrors: WOConditional {
 	condition = hasErrors;
 }
