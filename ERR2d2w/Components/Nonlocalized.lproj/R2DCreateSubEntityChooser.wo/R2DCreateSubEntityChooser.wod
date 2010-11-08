@@ -1,0 +1,29 @@
+CreateButton: ERXLinkButton {
+	action = createAction;
+	value = d2wContext.createButtonLabel;
+}
+
+CreateEntityForm: ERXWOForm {
+	disabled = context.isInForm;
+}
+
+CreateEntityLegend: WOString {
+	value = d2wContext.createSubEntityLegend;
+}
+
+EntityPopup: WOPopUpButton {
+	list = possibleSubEntities;
+	item = subEntity;
+	selection = selectedEntity;
+	noSelectionString = d2wContext.noSelectionStringValue;
+	displayString = displayNameForEntity;
+}
+
+ParentEntityName: WOString {
+	value = d2wContext.displayNameForEntity;
+}
+
+PopupLabel: WOGenericContainer {
+	elementName = "label";
+	for = labelID;
+}
