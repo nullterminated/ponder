@@ -21,6 +21,5 @@ PropertyKey: WOString {
 
 PropertyKeySwitchComponent: WOSwitchComponent {
 	WOComponentName = d2wContext.componentName;
-	dataSource = ^dataSource;
 	localContext = d2wContext;
 }
