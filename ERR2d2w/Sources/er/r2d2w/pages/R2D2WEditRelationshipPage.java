@@ -38,6 +38,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	private boolean isRelationshipToMany;
 	private WODisplayGroup relationshipDisplayGroup;
 	private EODataSource selectDataSource;
+	private String inspectConfigurationName;
 	
 	public static final NSSelector<Void> OBJECTS_CHANGED = new NSSelector<Void>("objectsChangedInEditingContext", ERXConstant.NotificationClassArray);
 	public static final NSSelector<Void> OBJECTS_INVALIDATED = new NSSelector<Void>("objectsInvalidatedInEditingContext", ERXConstant.NotificationClassArray);
@@ -218,7 +219,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	}
 	
 	/**
-	 * Creates the display group and sets the _displayGroup instance variable
+	 * Creates the display group
 	 */
 	protected void createDisplayGroup() {
 		boolean useBatchingDisplayGroup = useBatchingDisplayGroup();
@@ -358,7 +359,25 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 				relationshipDisplayGroup().displayBatchContainingSelectedObject();
 			}
 		}
- 		setInlineTaskSafely(null);	
+ 		setInlineTaskSafely(null);
+ 		setInspectConfigurationName(null);
 		return context().page();
+	}
+
+	/**
+	 * @return the inspectConfigurationName
+	 */
+	public String inspectConfigurationName() {
+		if(inspectConfigurationName == null) {
+			inspectConfigurationName = (String)d2wContext().valueForKey("inspectConfigurationName");
+		}
+		return inspectConfigurationName;
+	}
+
+	/**
+	 * @param inspectConfigurationName the inspectConfigurationName to set
+	 */
+	public void setInspectConfigurationName(String inspectConfigurationName) {
+		this.inspectConfigurationName = inspectConfigurationName;
 	}
 }

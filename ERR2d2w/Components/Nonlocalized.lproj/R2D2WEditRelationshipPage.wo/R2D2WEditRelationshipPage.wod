@@ -31,7 +31,7 @@ HasObjects: WOConditional {
 }
 
 InspectComponent: ERXD2WInspect {
-    pageConfiguration = d2wContext.inspectConfigurationName;
+    pageConfiguration = inspectConfigurationName;
     task = inlineTask;
 	action = saveAction;
 	entityName = entity.name;
