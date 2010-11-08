@@ -222,6 +222,7 @@
     20 : *true* => templateNameForGroupingListPage = "R2D2WListPage" [com.webobjects.directtoweb.Assignment],
     20 : *true* => batchNavigationBarComponentName = "R2DBatchNavigationBar" [com.webobjects.directtoweb.Assignment],
     20 : task = 'query' => repetitionComponentName = "R2DQueryFormRepetition" [com.webobjects.directtoweb.Assignment],
+    20 : (task = 'edit' and smartRelationship != null) => componentName = "ERDEditRelationship" [com.webobjects.directtoweb.Assignment],
     20 : (task = 'inspect' or task = 'edit') => repetitionComponentName = "R2DInspectFormRepetition" [com.webobjects.directtoweb.Assignment],
     20 : *true* => actions = {"left" = ("leftControllerAction"); "right" = ("rightControllerAction"); } [com.webobjects.directtoweb.Assignment],
     20 : (task = 'edit' and componentName = 'R2D2WEditBoolean') => displayRequiredMarker = "false" [com.webobjects.directtoweb.BooleanAssignment],
