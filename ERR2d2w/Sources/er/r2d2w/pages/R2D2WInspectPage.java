@@ -2,24 +2,16 @@ package er.r2d2w.pages;
 
 import com.webobjects.appserver.WOContext;
 
-import er.directtoweb.pages.ERD2WInspectPage;
-import er.extensions.foundation.ERXStringUtilities;
-import er.extensions.localization.ERXLocalizer;
+import er.directtoweb.pages.ERD2WTabInspectPage;
+import er.extensions.foundation.ERXValueUtilities;
 
-public class R2D2WInspectPage extends ERD2WInspectPage {
+public class R2D2WInspectPage extends ERD2WTabInspectPage {
 	public R2D2WInspectPage(WOContext context) {
 		super(context);
 	}
 
-	public Boolean omitAttributeWrapper() {
-		return ERXStringUtilities.stringIsNullOrEmpty((String)d2wContext().valueForKey("attributeWrapper"));
-	}
-
-	public String emptyObjectMessage() {
-		return ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("R2D2WInspectPage.emptyObjectMessage", d2wContext());
-	}
-
-	public boolean hasNoActions() {
-		return !(showCancel() && isObjectEditable() && isObjectDeleteable());
+	public boolean disableForm() {
+		boolean hasForm = ERXValueUtilities.booleanValue(d2wContext().valueForKey("hasForm"));
+		return context().isInForm() || !hasForm;
 	}
 }
