@@ -25,10 +25,12 @@ import com.webobjects.eocontrol.EODataSource;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOSharedEditingContext;
+import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSKeyValueCoding;
 import com.webobjects.foundation.NSValidation;
 
+import er.directtoweb.ERD2WContainer;
 import er.directtoweb.delegates.ERDBranchDelegate;
 import er.directtoweb.delegates.ERDBranchInterface;
 import er.directtoweb.delegates.ERDQueryValidationDelegate;
@@ -44,11 +46,11 @@ import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.localization.ERXLocalizer;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
+import er.r2d2w.pages.R2D2WInspectPage;
 
 public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 	private static final Logger log = Logger.getLogger(R2DDefaultBranchDelegate.class);
 	
-	public boolean shouldRevertChanges(D2WContext c) { return ERXValueUtilities.booleanValue(c.valueForKey("shouldRevertChanges")); }
 	public boolean shouldSaveChanges(D2WContext c) { return ERXValueUtilities.booleanValue(c.valueForKey("shouldSaveChanges")); }
 	public boolean shouldValidateBeforeSave(D2WContext c) { return ERXValueUtilities.booleanValue(c.valueForKey("shouldValidateBeforeSave")); }
 	public boolean shouldRecoverFromOptimisticLockingFailure(D2WContext c) { return ERXValueUtilities.booleanValueWithDefault(c.valueForKey("shouldRecoverFromOptimisticLockingFailure"), false); }
@@ -61,6 +63,16 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
             eo.editingContext().revert();
         }
         return page.nextPage(false);
+	}
+
+	public WOComponent _confirmCancelEdit(WOComponent sender) {
+		//TODO
+		return null;
+	}
+	
+	public WOComponent _confirmSave(WOComponent sender) {
+		//TODO
+		return null;
 	}
 	
 	public WOComponent _create(WOComponent sender) {
@@ -114,6 +126,30 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 		return (WOComponent)ipi;
 	}
 	
+	public void _nextStep(WOComponent sender) {
+		R2D2WInspectPage page = ERD2WUtilities.enclosingComponentOfClass(sender, R2D2WInspectPage.class);
+		NSArray<ERD2WContainer> tabs = page.tabSectionsContents();
+		ERD2WContainer tab = page.currentTab();
+		int index = tabs.indexOf(tab);
+		if(page.errorMessages().isEmpty() && index + 1 < tabs.count()) {
+			ERD2WContainer next = tabs.objectAtIndex(index + 1);
+			page.setCurrentTab(next);
+		}
+	}
+	
+	public void _prevStep(WOComponent sender) {
+		R2D2WInspectPage page = ERD2WUtilities.enclosingComponentOfClass(sender, R2D2WInspectPage.class);
+		NSArray<ERD2WContainer> tabs = page.tabSectionsContents();
+		ERD2WContainer tab = page.currentTab();
+		int index = tabs.indexOf(tab);
+		if(index != 0) {
+			page.clearValidationFailed();
+			ERD2WContainer prev = tabs.objectAtIndex(index - 1);
+			page.setCurrentTab(prev);
+		}
+		
+	}
+
 	public WOComponent _query(WOComponent sender) {
 		ERD2WQueryPage page = ERD2WUtilities.enclosingComponentOfClass(sender, ERD2WQueryPage.class);
         WOComponent nextPage = null;
@@ -198,6 +234,8 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 				try {
 					ec.saveChanges();
 					nextPage = _nextPageFromDelegate(page);
+					// Refresh object to update derived attributes
+					ec.refreshObject(eo);
 				} catch(RuntimeException e) {
 					if(shouldRevertUponSaveFailure(c)) { shouldRevert = true; }
 					throw e;
