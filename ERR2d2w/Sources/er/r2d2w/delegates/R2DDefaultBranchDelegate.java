@@ -70,6 +70,11 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 		return null;
 	}
 	
+	public WOComponent _confirmDelete(WOComponent sender) {
+		//TODO
+		return null;
+	}
+	
 	public WOComponent _confirmSave(WOComponent sender) {
 		//TODO
 		return null;
