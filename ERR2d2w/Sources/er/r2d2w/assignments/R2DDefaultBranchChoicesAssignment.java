@@ -7,11 +7,13 @@ import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOKeyValueUnarchiver;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSForwardException;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 
 import er.directtoweb.assignments.ERDAssignment;
 import er.extensions.eof.ERXGuardedObjectInterface;
+import er.extensions.eof.ERXNonNullObjectInterface;
 import er.extensions.foundation.ERXValueUtilities;
 
 /**
@@ -20,15 +22,15 @@ import er.extensions.foundation.ERXValueUtilities;
 public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 
 	public static final NSArray<String> leftControllerDependentKeys = 
-		new NSArray<String>("task","isEntityInspectable");
+		new NSArray<String>("task","entity","isEntityInspectable","object.isNonNull");
 	public static final NSArray<String> rightControllerDependentKeys = 
-		new NSArray<String>("task","isEntityDeletable","isEntityEditable","object.canDelete","object.canUpdate","readOnly");
+		new NSArray<String>("task","entity","isEntityDeletable","isEntityEditable","object.canDelete","object.canUpdate","readOnly");
 	public static final NSArray<String> toManyRelationshipDependentKeys =
-		new NSArray<String>("task","parentRelationship","frame","isEntityEditable","readOnly","entity");
+		new NSArray<String>("task","entity","parentRelationship","frame","isEntityEditable","readOnly");
 	public static final NSArray<String> toOneRelationshipDependentKeys =
-		new NSArray<String>("task","parentRelationship","frame","isEntityDeletable","isEntityEditable","isEntityInspectable","readOnly","object.canDelete","object.canUpdate","entity");
+		new NSArray<String>("task","entity","parentRelationship","frame","isEntityDeletable","isEntityEditable","isEntityInspectable","readOnly","object.canDelete","object.canUpdate","object.isNonNull");
 	public static final NSArray<String> inspectControllerDependentKeys = 
-		new NSArray<String>("task","frame","isEntityDeletable","isEntityEditable","readOnly","object.canDelete","object.canUpdate");
+		new NSArray<String>("task","entity","frame","isEntityDeletable","isEntityEditable","readOnly","object.canDelete","object.canUpdate");
 	public static final NSArray<String> editControllerDependentKeys = 
 		new NSArray<String>("task","subTask","tabCount","tabIndex");
 	public static final NSArray<String> listControllerDependentKeys = 
@@ -65,15 +67,26 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 		return dependentKeys.objectForKey(keyPath);
 	}
 	
+	private Class<?> classForEntity(EOEntity entity) {
+		try {
+			return Class.forName(entity.className());
+		} catch(ClassNotFoundException e) {
+			throw NSForwardException._runtimeExceptionForThrowable(e);
+		}
+	}
+	
 	public Object leftControllerChoices(D2WContext c) {
 		NSMutableArray<String> choices = new NSMutableArray<String>();
+		EOEntity e = c.entity();
+		boolean nullInterface = ERXNonNullObjectInterface.class.isAssignableFrom(classForEntity(e));
+		boolean isNonNull = ERXValueUtilities.booleanValue(c.valueForKeyPath("object.isNonNull"));
 		boolean isEntityInspectable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityInspectable"));
 		String task = c.task();
 		
 		if("select".equals(task)) {
 			choices.add("_select");
 		}
-		if(isEntityInspectable){
+		if(isEntityInspectable && (isNonNull || (!nullInterface))){
 			String choice = "editRelationship".equals(task)?"_inspectRelated":"_inspect";
 			choices.add(choice);
 		}
@@ -84,22 +97,26 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 		NSMutableArray<String> choices = new NSMutableArray<String>();
 		EOEnterpriseObject eo = (EOEnterpriseObject)c.valueForKey("object");
 		EORelationship rel = (EORelationship)c.valueForKey("parentRelationship");
+		EOEntity e = c.entity();
+		boolean unguarded = !ERXGuardedObjectInterface.class.isAssignableFrom(classForEntity(e));
 		boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
 		boolean isEntityDeletable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityDeletable"));
-		boolean readOnly = ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		boolean canUpdate = eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():unguarded;
+		boolean canDelete = eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canDelete():unguarded;
+		boolean isEntityWritable = !ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
 		String task = c.task();
 		
-		if(!readOnly && isEntityEditable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():true) {
+		if(isEntityWritable && isEntityEditable && canUpdate) {
 			if("editRelationship".equals(task)) {
 				choices.add("_editRelated");
 			} else if(!"edit".equals(task)) {
 				choices.add("_edit");
 			}
 		}
-		if("editRelationship".equals(task) && !rel.ownsDestination()) {
+		if("editRelationship".equals(task) && (!rel.ownsDestination())) {
 			choices.add("_removeRelated");
 		}
-		if(!readOnly && isEntityDeletable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canDelete():true) {
+		if(isEntityWritable && isEntityDeletable && canDelete) {
 			if("edit".equals(task) || "inspect".equals(task)) {
 				choices.add("_deleteReturn");
 			} else {
@@ -114,15 +131,16 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 		EORelationship rel = (EORelationship)c.valueForKey("parentRelationship");
 		EOEntity e = c.entity();
 		boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
-		boolean readOnly = ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		boolean isEntityWritable = !ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		boolean isConcrete = !e.isAbstractEntity();
 		
 		if(!c.frame()) {
 			choices.add("_returnRelated");
 		}
-		if(rel.inverseRelationship() == null || !readOnly ) {
+		if(rel.inverseRelationship() == null || isEntityWritable) {
 			choices.add("_queryRelated");
 		}
-		if(!readOnly && isEntityEditable && !e.isAbstractEntity() && e.subEntities().isEmpty()) {
+		if(isEntityWritable && isEntityEditable && isConcrete && e.subEntities().isEmpty()) {
 			choices.add("_createRelated");
 		}
 		return choices;
@@ -133,30 +151,36 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 		EOEnterpriseObject eo = (EOEnterpriseObject)c.valueForKey("object");
 		EORelationship rel = (EORelationship)c.valueForKey("parentRelationship");
 		EOEntity e = c.entity();
+		boolean nullInterface = ERXNonNullObjectInterface.class.isAssignableFrom(classForEntity(e));
+		boolean isNonNull = ERXValueUtilities.booleanValue(c.valueForKeyPath("object.isNonNull"));
+		boolean unguarded = !ERXGuardedObjectInterface.class.isAssignableFrom(classForEntity(e));
 		boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
 		boolean isEntityDeletable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityDeletable"));
 		boolean isEntityInspectable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityInspectable"));
-		boolean readOnly = ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		boolean canUpdate = eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():unguarded;
+		boolean canDelete = eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canDelete():unguarded;
+		boolean isEntityWritable = !ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		boolean isConcrete = !e.isAbstractEntity();
 
 		if(!c.frame()) {
 			choices.add("_returnRelated");
 		}
-		if(rel.inverseRelationship() == null || !readOnly ) {
+		if(rel.inverseRelationship() == null || isEntityWritable ) {
 			choices.add("_queryRelated");
 		}
-		if(isEntityInspectable) {
+		if(isEntityInspectable && (isNonNull || (!nullInterface))){
 			choices.add("_inspectRelated");
 		}
-		if(!readOnly && isEntityEditable && !e.isAbstractEntity() && e.subEntities().isEmpty()) {
+		if(isEntityWritable && isEntityEditable && isConcrete && e.subEntities().isEmpty()) {
 			choices.add("_createRelated");
 		}
-		if(!readOnly && isEntityEditable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():true) {
+		if(isEntityWritable && isEntityEditable && canUpdate) {
 			choices.add("_editRelated");
 			if(!rel.ownsDestination()) {
 				choices.add("_removeRelated");
 			}
 		}
-		if(!readOnly && isEntityDeletable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canDelete():true) {
+		if(isEntityWritable && isEntityDeletable && canDelete) {
 			choices.add("_delete");
 		}
 		return choices;
@@ -165,17 +189,21 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 	public Object inspectControllerChoices(D2WContext c) {
 		NSMutableArray<String> choices = new NSMutableArray<String>();
 		EOEnterpriseObject eo = (EOEnterpriseObject)c.valueForKey("object");
+		EOEntity e = c.entity();
+		boolean unguarded = !ERXGuardedObjectInterface.class.isAssignableFrom(classForEntity(e));
 		boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
 		boolean isEntityDeletable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityDeletable"));
-		boolean readOnly = ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
+		boolean canUpdate = eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():unguarded;
+		boolean canDelete = eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canDelete():unguarded;
+		boolean isEntityWritable = !ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
 
 		if(!c.frame()) {
 			choices.add("_return");
 		}
-		if(!readOnly && isEntityEditable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canUpdate():true) {
+		if(isEntityWritable && isEntityEditable && canUpdate) {
 			choices.add("_edit");
 		}
-		if(!readOnly && isEntityDeletable && eo instanceof ERXGuardedObjectInterface?((ERXGuardedObjectInterface)eo).canDelete():true) {
+		if(isEntityWritable && isEntityDeletable && canDelete) {
 			choices.add("_deleteReturn");
 		}
 		return choices;
