@@ -34,9 +34,7 @@ do a better job of the direct actions and work in some
 sort of automated SEO stuff.  Sometimes the RSS is a
 bit wonky, but I'm not quite sure why. I'd like to
 change how I'm handling the property level stuff in the
-rss anyway. I need to separate out the the repetitions
-from the components for lists/inspects similar to how
-ERD2W does it.  I still need to add tabbed interfaces.
+rss anyway.
 I'm considering adding some ajax-y things, but I think
 I would rather start that in a new framework.  I need
 to add nice calendars for day, week, and year view. I'd
@@ -49,13 +47,11 @@ qualifiers for list DA urls. I'd like to update the
 derived counts to be less hackish and possibly work
 across many-to-many joins. I need to update the localized
 key printing strategy. There's a ERDPageRunner
-something or other that looks handy for that. I need
-to create a language link menu instead of just a
-popup menu. I need to revisit the localized page titles.
+something or other that looks handy for that.
+I need to revisit the localized page titles.
 I need to look at banner localizations again. I'd like to revise
-the current html to be a bit better structured. I need
-to fix the query boolean to use radio buttons instead of
-just a popup menu. I'd like to add support for captioning
+the current html to be a bit better structured.
+I'd like to add support for captioning
 the podcasts. I need to look at ERAttachments url encoding
 of file names in the HTML, since it doesn't seem to escape
 ampersands and that causes pink error boxes in the XHTML.
