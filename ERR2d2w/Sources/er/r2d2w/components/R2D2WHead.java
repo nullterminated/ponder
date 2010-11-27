@@ -1,13 +1,43 @@
 package er.r2d2w.components;
 
+import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOSession;
+import com.webobjects.directtoweb.D2WContext;
+import com.webobjects.foundation.NSSelector;
 
-import er.directtoweb.components.ERD2WHead;
+import er.directtoweb.ERD2WFactory;
+import er.directtoweb.components.ERD2WStatelessComponent;
+import er.extensions.eof.ERXKey;
 
-public class R2D2WHead extends ERD2WHead {
+public class R2D2WHead extends ERD2WStatelessComponent {
+	
+	protected static final D2WContext _d2wContext = 
+		new D2WContext((WOSession) null);
+	
+	private static final NSSelector<D2WContext> _sel = 
+		new NSSelector<D2WContext>("d2wContext");
+	private static final ERXKey<D2WContext> _d2wContextKey = 
+		new ERXKey<D2WContext>("d2wContext");
+	private static final ERXKey<String> _displayNameForPageConfigurationKey = 
+		new ERXKey<String>("displayNameForPageConfiguration");
 
 	public R2D2WHead(WOContext context) {
-        super(context);
-    }
-	
+		super(context);
+	}
+
+	public String displayNameForPageConfiguration() {
+		WOComponent page = context().page();
+		if (_sel.implementedByObject(page)) {
+			D2WContext context = _d2wContextKey.valueInObject(page);
+			return _displayNameForPageConfigurationKey.valueInObject(context);
+		} else {
+			synchronized (_d2wContext) {
+				String dynamicPage = ERD2WFactory.pageConfigurationFromPage(page);
+				_d2wContext.setDynamicPage(dynamicPage);
+				return _displayNameForPageConfigurationKey.valueInObject(_d2wContext);
+			}
+		}
+	}
+
 }
