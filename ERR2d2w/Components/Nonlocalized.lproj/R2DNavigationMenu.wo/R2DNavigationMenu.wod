@@ -1,0 +1,56 @@
+Level1Items: WORepetition {
+	list = level1Items;
+	item = aNavigationItem;
+}
+
+Level2Items: WORepetition {
+	list = level2Items;
+	item = aNavigationItem;
+}
+
+Level3Items: WORepetition {
+	list = level3Items;
+	item = aNavigationItem;
+}
+
+L1NavObject: R2DNavigationMenuItem {
+	navigationItem = aNavigationItem;
+    level=1;
+}
+
+L2NavObject: R2DNavigationMenuItem {
+	navigationItem = aNavigationItem;
+	level=2;
+}
+
+L3NavObject: R2DNavigationMenuItem {
+	navigationItem = aNavigationItem;
+    level=3;
+}
+
+MenuLevel1: WOGenericContainer {
+	elementName = "ul";
+	class = "nav l1";
+}
+
+MenuLevel2: WOGenericContainer {
+	elementName = "ul";
+	class = "nav l2";
+}
+
+MenuLevel3: WOGenericContainer {
+	elementName = "ul";
+	class = "nav l3";
+}
+
+ShowLevel1: WOConditional {
+	condition = level1Items.count;
+}
+
+ShowLevel2: WOConditional {
+	condition = showLevel2;
+}
+
+ShowLevel3: WOConditional {
+	condition = showLevel3;
+}

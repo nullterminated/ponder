@@ -1,0 +1,67 @@
+ActivityMarker: WOImage {
+	filename = "NewMarker.gif";
+	framework = "ERExtensions";
+}
+
+DisplayName: WOString {
+	value = displayName;
+}
+
+HasActivity: WOConditional {
+	condition = hasActivityAndIsEnabled;
+}
+
+HasAction: WOConditional {
+	condition = navigationItem.action.trim.length;
+}
+
+HasDirectAction: WOConditional {
+	condition = hasDirectAction;
+}
+
+HasHREF: WOConditional {
+	condition = navigationItem.href.trim.length;
+}
+
+HasPageName: WOConditional {
+	condition = navigationItem.pageName.trim.length;
+}
+
+ListItem: WOGenericContainer {
+	elementName = "li";
+}
+
+MeetsDisplayConditions: WOConditional {
+	condition = meetsDisplayConditions;
+}
+
+NavAction: ERXLinkButton {
+	action = action;
+	disabled = isDisabled;
+	string = navigationItem.displayName;
+	submit = false;
+}
+
+NavDirectAction: ERXLinkButton {
+	actionClass = navigationItem.directActionClass;
+	directActionName = navigationItem.uneditedDirectActionName;
+	disabled = isDisabled;
+	queryDictionary = queryDictionary;
+	string = navigationItem.displayName;
+	submit = false;
+}
+
+NavHREF: ERXLinkButton {
+	disabled = isDisabled;
+	href = navigationItem.href;
+	string = navigationItem.displayName;
+	submit = false;
+}
+
+NavPageName: ERXLinkButton {
+	disabled = isDisabled;
+	pageName = navigationItem.pageName;
+	queryDictionary = queryDictionary;
+	string = navigationItem.displayName;
+	submit = false;
+}
