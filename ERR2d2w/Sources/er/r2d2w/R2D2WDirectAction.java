@@ -145,7 +145,7 @@ public class R2D2WDirectAction extends ERXDirectAction {
     public WOActionResults performActionNamed(String actionName) {
     	WOActionResults result = null;
     	
-    	if(ERXLocalizer.isLocalizationEnabled()) {
+    	if(ERXLocalizer.isLocalizationEnabled() && context().hasSession()) {
     		ERXSession session = (ERXSession)session();
     		String languageCode = context().request().stringFormValueForKey(LANGUAGE_KEY);
     		String localizerCode = session.localizer().languageCode();
