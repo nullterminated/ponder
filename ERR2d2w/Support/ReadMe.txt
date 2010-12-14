@@ -27,14 +27,10 @@ so I can clear my workspace a bit :)
 
 TODO
 
-Some things are currently works in progress. I need to
-revise the JavaMail stuff because I'm sure I'm using
-that incorrectly at the moment.  I am also wanting to
+Some things are currently works in progress. 
+I am also wanting to
 do a better job of the direct actions and work in some
-sort of automated SEO stuff.  Sometimes the RSS is a
-bit wonky, but I'm not quite sure why. I'd like to
-change how I'm handling the property level stuff in the
-rss anyway.
+sort of automated SEO stuff.
 I'm considering adding some ajax-y things, but I think
 I would rather start that in a new framework.  I need
 to add nice calendars for day, week, and year view. I'd
@@ -51,17 +47,13 @@ something or other that looks handy for that.
 I need to revisit the localized page titles.
 I need to look at banner localizations again. I'd like to revise
 the current html to be a bit better structured.
-I'd like to add support for captioning
-the podcasts. I need to look at ERAttachments url encoding
+I need to look at ERAttachments url encoding
 of file names in the HTML, since it doesn't seem to escape
 ampersands and that causes pink error boxes in the XHTML.
 Add headings to the error and instruction panels. Just
 revise those anyway, and possibly dump put the errors
 beside the appropriate form fields instead of just in
-panels. Figure out a new way to capture height, width,
-and duration of uploaded movie files since QT4J seems to
-be failing with exceptions instead of just being
-deprecated now. Add a new list repetition that does
+panels. Add a new list repetition that does
 'baseball cards' instead of a table. Add a 'tree' inspect
 view that allows for threaded discussions and such.
 
