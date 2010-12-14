@@ -14,13 +14,8 @@ Languages: WORepetition {
 LanguageLink: ERXLinkButton {
 	action = languageAction;
 	disabled = isSelected;
-	hreflang = languageCode;
+	hreflang = hrefLang;
 	rel = "alternate";
 	string = displayStringForLanguage;
 	"xml:lang" = languageCode;
-}
-
-SelectedSpan: WOGenericContainer {
-	elementName = "span";
-	omitTags = isNotSelected;
 }

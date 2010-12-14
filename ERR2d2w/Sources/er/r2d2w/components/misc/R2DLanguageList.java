@@ -50,6 +50,14 @@ public class R2DLanguageList extends ERXStatelessComponent {
 	}
 
 	/**
+	 * @return the language code
+	 */
+	public String hrefLang() {
+		if(isSelected()) { return null; }
+		return ERXLocalizer.localizerForLanguage(languageOption()).languageCode();
+	}
+
+	/**
 	 * @return the name for the language localized in that language
 	 */
 	public String displayStringForLanguage() {
