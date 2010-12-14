@@ -1,4 +1,4 @@
-#Mon Dec 13 21:15:13 EST 2010
+#Mon Dec 13 21:44:02 EST 2010
 eclipse.preferences.version=1
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo/R2D2WCalendarNavigationBar.html=UTF-8
@@ -60,7 +60,6 @@ encoding//Components/Nonlocalized.lproj/R2D2WHintString.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WHintString.wo/R2D2WHintString.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WHintString.wo/R2D2WHintString.wod=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WHintString.wo/R2D2WHintString.woo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2D2WListRSSPage.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WMessagePage.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WMessagePage.wo/R2D2WMessagePage.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WMessagePage.wo/R2D2WMessagePage.wod=UTF-8
@@ -157,9 +156,6 @@ encoding//Components/Nonlocalized.lproj/R2DPieChart.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DPieChart.wo/R2DPieChart.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DPieChart.wo/R2DPieChart.wod=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DPieChart.wo/R2DPieChart.woo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DPodcastButton.wo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DRSSButton.wo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DRSSLink.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DSaveButton.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DSaveButton.wo/R2DSaveButton.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DSaveButton.wo/R2DSaveButton.wod=UTF-8
