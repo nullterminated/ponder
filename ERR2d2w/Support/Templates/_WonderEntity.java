@@ -15,10 +15,10 @@ import er.extensions.foundation.*;
 
 #if ($entity.parentSet)
     #set ($parentClass = ${entity.parent.classNameWithDefault})
-    #set ($parentClazzClass = "${entity.parent.classNameWithOptionalPackage}.${entity.parent.classNameWithoutPackage}Clazz")
+    #set ($parentClazzClass = "${entity.parent.classNameWithOptionalPackage}.${entity.parent.classNameWithoutPackage}Clazz<T>")
 #else
     #set ($parentClass = "ERXGenericRecord")
-    #set ($parentClazzClass = "ERXGenericRecord.ERXGenericRecordClazz<${entity.classNameWithOptionalPackage}>")
+    #set ($parentClazzClass = "ERXGenericRecord.ERXGenericRecordClazz<T>")
 #end
 
 @SuppressWarnings("all")
@@ -61,22 +61,12 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
   public static final String ${relationship.uppercaseUnderscoreName}_KEY = ${relationship.uppercaseUnderscoreName}.key();
 #end
 
-  public static class _${entity.classNameWithoutPackage}Clazz extends ${parentClazzClass} {
+  public static class _${entity.classNameWithoutPackage}Clazz<T extends ${entity.classNameWithOptionalPackage}> extends ${parentClazzClass} {
     /* more clazz methods here */
   }
 
   private static Logger LOG = Logger.getLogger(${entity.prefixClassNameWithoutPackage}.class);
 
-#if (!$entity.partialEntitySet)
-  public $entity.classNameWithOptionalPackage localInstanceIn(EOEditingContext editingContext) {
-    $entity.classNameWithOptionalPackage localInstance = ($entity.classNameWithOptionalPackage)EOUtilities.localInstanceOfObject(editingContext, this);
-    if (localInstance == null) {
-      throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
-    }
-    return localInstance;
-  }
-
-#end
 #foreach ($attribute in $entity.sortedClassAttributes)
 #if (!$attribute.inherited)
 	
@@ -158,7 +148,6 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
     	addObjectToBothSidesOfRelationshipWithKey(value, ${entity.prefixClassNameWithoutPackage}.${relationship.uppercaseUnderscoreName}_KEY);
     }
   }
-  
 #end
 #end
 #foreach ($relationship in $entity.sortedClassToManyRelationships)
@@ -207,7 +196,7 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
       fetchSpec.setIsDeep(true);
       results = (NSArray<${relationship.actualDestination.classNameWithDefault}>)editingContext().objectsWithFetchSpecification(fetchSpec);
 #else
-      results = ${relationship.actualDestination.classNameWithDefault}.fetch${relationship.actualDestination.pluralName}(editingContext(), fullQualifier, sortOrderings);
+      results = ${relationship.actualDestination.classNameWithDefault}.clazz.objectsMatchingQualifier(editingContext(), fullQualifier, sortOrderings);
 #end
     }
     else {
@@ -323,63 +312,6 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 #end
     return eo;
   }
-#if (!$entity.partialEntitySet)
-
-  public static NSArray<${entity.classNameWithOptionalPackage}> fetchAll${entity.pluralName}(EOEditingContext editingContext) {
-    return ${entity.prefixClassNameWithoutPackage}.fetchAll${entity.pluralName}(editingContext, null);
-  }
-
-  public static NSArray<${entity.classNameWithOptionalPackage}> fetchAll${entity.pluralName}(EOEditingContext editingContext, NSArray<EOSortOrdering> sortOrderings) {
-    return ${entity.prefixClassNameWithoutPackage}.fetch${entity.pluralName}(editingContext, null, sortOrderings);
-  }
-
-  public static NSArray<${entity.classNameWithOptionalPackage}> fetch${entity.pluralName}(EOEditingContext editingContext, EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
-    ERXFetchSpecification<${entity.classNameWithOptionalPackage}> fetchSpec = new ERXFetchSpecification<${entity.classNameWithOptionalPackage}>(${entity.prefixClassNameWithoutPackage}.ENTITY_NAME, qualifier, sortOrderings);
-    fetchSpec.setIsDeep(true);
-    NSArray<${entity.classNameWithOptionalPackage}> eoObjects = fetchSpec.fetchObjects(editingContext);
-    return eoObjects;
-  }
-
-  public static ${entity.classNameWithOptionalPackage} fetch${entity.name}(EOEditingContext editingContext, String keyName, Object value) {
-    return ${entity.prefixClassNameWithoutPackage}.fetch${entity.name}(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
-  }
-
-  public static ${entity.classNameWithOptionalPackage} fetch${entity.name}(EOEditingContext editingContext, EOQualifier qualifier) {
-    NSArray<${entity.classNameWithOptionalPackage}> eoObjects = ${entity.prefixClassNameWithoutPackage}.fetch${entity.pluralName}(editingContext, qualifier, null);
-    ${entity.classNameWithOptionalPackage} eoObject;
-    int count = eoObjects.count();
-    if (count == 0) {
-      eoObject = null;
-    }
-    else if (count == 1) {
-      eoObject = eoObjects.objectAtIndex(0);
-    }
-    else {
-      throw new IllegalStateException("There was more than one ${entity.name} that matched the qualifier '" + qualifier + "'.");
-    }
-    return eoObject;
-  }
-
-  public static ${entity.classNameWithOptionalPackage} fetchRequired${entity.name}(EOEditingContext editingContext, String keyName, Object value) {
-    return ${entity.prefixClassNameWithoutPackage}.fetchRequired${entity.name}(editingContext, new EOKeyValueQualifier(keyName, EOQualifier.QualifierOperatorEqual, value));
-  }
-
-  public static ${entity.classNameWithOptionalPackage} fetchRequired${entity.name}(EOEditingContext editingContext, EOQualifier qualifier) {
-    ${entity.classNameWithOptionalPackage} eoObject = ${entity.prefixClassNameWithoutPackage}.fetch${entity.name}(editingContext, qualifier);
-    if (eoObject == null) {
-      throw new NoSuchElementException("There was no ${entity.name} that matched the qualifier '" + qualifier + "'.");
-    }
-    return eoObject;
-  }
-
-  public static ${entity.classNameWithOptionalPackage} localInstanceIn(EOEditingContext editingContext, ${entity.classNameWithOptionalPackage} eo) {
-    ${entity.classNameWithOptionalPackage} localInstance = (eo == null) ? null : ERXEOControlUtilities.localInstanceOfObject(editingContext, eo);
-    if (localInstance == null && eo != null) {
-      throw new IllegalStateException("You attempted to localInstance " + eo + ", which has not yet committed.");
-    }
-    return localInstance;
-  }
-#end
 #foreach ($fetchSpecification in $entity.sortedFetchSpecs)
 #if (true || $fetchSpecification.distinctBindings.size() > 0)
   public static NSArray#if ($fetchSpecification.fetchEnterpriseObjects)<${entity.className}>#else<NSDictionary>#end fetch${fetchSpecification.capitalizedName}(EOEditingContext editingContext, NSDictionary<String, Object> bindings) {

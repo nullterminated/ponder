@@ -10,8 +10,8 @@ public#if (${entity.abstractEntity}) abstract#end class ${entity.classNameWithou
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(${entity.classNameWithoutPackage}.class);
 
-    public static final ${entity.classNameWithoutPackage}Clazz clazz = new ${entity.classNameWithoutPackage}Clazz();
-    public static class ${entity.classNameWithoutPackage}Clazz extends ${entity.prefixClassNameWithOptionalPackage}.${entity.prefixClassNameWithoutPackage}Clazz {
+    public static final ${entity.classNameWithoutPackage}Clazz<${entity.classNameWithoutPackage}> clazz = new ${entity.classNameWithoutPackage}Clazz<${entity.classNameWithoutPackage}>();
+    public static class ${entity.classNameWithoutPackage}Clazz<T extends ${entity.classNameWithoutPackage}> extends ${entity.prefixClassNameWithOptionalPackage}.${entity.prefixClassNameWithoutPackage}Clazz<T> {
         /* more clazz methods here */
     }
 
