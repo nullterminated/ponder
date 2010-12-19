@@ -55,6 +55,7 @@
     0 : propertyKey = 'rightControllerAction' => branchChoices = "rightControllerChoices" [ERDDelayedKeyValueAssignment],
     0 : *true* => calendarNavigationBarComponentName = "R2D2WCalendarNavigationBar" [com.webobjects.directtoweb.Assignment],
     0 : smartAttribute.className like '*Crypto*' => qualifierOperators = ("=", "<>") [com.webobjects.directtoweb.Assignment],
+    0 : *true* => navigationButtonContentComponentName = "defaultButtonContentComponentName" [er.directtoweb.ERDKeyValueAssignment],
     0 : componentName = 'R2D2WEditLargeString' => hintString = "R2D2W.maxLengthMessage" [er.directtoweb.ERDDelayedLocalizedAssignment],
     0 : (task = 'editRelationship' and parentRelationship.isToMany = 1) => toManyControllerChoices = (null) [R2DDefaultBranchChoicesAssignment],
     0 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => toOneControllerChoices = (null) [R2DDefaultBranchChoicesAssignment],

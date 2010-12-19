@@ -33,4 +33,14 @@ public class R2DNavigationMenuItem extends ERXNavigationMenuItem {
 			|| (actionClass != null && actionClass.trim().length() > 0) ;
 	}
 	
+	public String itemClass() {
+		StringBuilder sb = new StringBuilder(20);
+		if(isSelected()) {
+			sb.append(sb.length() == 0?"selected":" selected");
+		}
+		if(isDisabled()) {
+			sb.append(sb.length() == 0?"disabled":" disabled");
+		}
+		return sb.toString();
+	}
 }
