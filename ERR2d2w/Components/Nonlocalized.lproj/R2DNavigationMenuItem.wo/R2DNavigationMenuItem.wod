@@ -1,13 +1,4 @@
-ActivityMarker: WOImage {
-	filename = "NewMarker.gif";
-	framework = "ERExtensions";
-}
-
 DisplayName: WOComponentContent {
-}
-
-HasActivity: WOConditional {
-	condition = hasActivityAndIsEnabled;
 }
 
 HasAction: WOConditional {

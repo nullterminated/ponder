@@ -41,6 +41,9 @@ public class R2DNavigationMenuItem extends ERXNavigationMenuItem {
 		if(isDisabled()) {
 			sb.append(sb.length() == 0?"disabled":" disabled");
 		}
+		if(hasActivity()) {
+			sb.append(sb.length() == 0?"activity":" activity");
+		}
 		return sb.toString();
 	}
 }
