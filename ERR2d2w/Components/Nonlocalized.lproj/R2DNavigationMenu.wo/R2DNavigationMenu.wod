@@ -5,12 +5,12 @@ Level1Items: WORepetition {
 
 Level2Items: WORepetition {
 	list = level2Items;
-	item = aNavigationItem;
+	item = navigationItem;
 }
 
 Level3Items: WORepetition {
 	list = level3Items;
-	item = aNavigationItem;
+	item = navigationItem;
 }
 
 L1NavObject: R2DNavigationMenuItem {
@@ -46,7 +46,6 @@ MenuLevel3: WOGenericContainer {
 NavButtonComponent: WOSwitchComponent {
 	WOComponentName = navigationButtonContentComponentName;
 	localContext = navContext;
-	buttonLabel = navigationItem.displayName;
 }
 
 ShowLevel1: WOConditional {
