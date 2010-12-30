@@ -39,21 +39,6 @@ InspectComponent: ERXD2WInspect {
 	settings = settings;
 }
 
-InspectRepetition: WOSwitchComponent {
-	WOComponentName = d2wContext.toOneRepetitionComponentName;
-	localContext = d2wContext;
-	object = selectedObject;
-}
-
-IsToMany: WOConditional {
-	condition = isRelationshipToMany;
-}
-
-IsToOne: WOConditional {
-	condition = isRelationshipToMany;
-	negate = true;
-}
-
 ListComponent: ERXD2WSelect {
 	action = selectAction;
 	dataSource = selectDataSource;

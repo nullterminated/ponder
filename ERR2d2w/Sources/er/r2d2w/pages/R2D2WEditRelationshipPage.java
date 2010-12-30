@@ -24,7 +24,6 @@ import com.webobjects.foundation.NSSelector;
 import er.directtoweb.pages.ERD2WPage;
 import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXDisplayGroup;
-import er.extensions.batching.ERXBatchingDisplayGroup;
 import er.extensions.eof.ERXConstant;
 import er.extensions.eof.ERXEOAccessUtilities;
 import er.extensions.eof.ERXEOControlUtilities;
@@ -36,7 +35,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	private EOEnterpriseObject masterObject, objectToAddToRelationship, objectInRelationship;
 	private String relationshipKey;
 	private boolean isRelationshipToMany;
-	private WODisplayGroup relationshipDisplayGroup;
+	private ERXDisplayGroup<EOEnterpriseObject> relationshipDisplayGroup;
 	private EODataSource selectDataSource;
 	private String inspectConfigurationName;
 	
@@ -102,15 +101,15 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 				
 				dg.fetch();
 				if(!isRelationshipToMany) {
-					setObject((EOEnterpriseObject)relationshipDisplayGroup().selectedObject());
+					setObject(relationshipDisplayGroup().selectedObject());
 				}
 			}
 		}
 	}
 	
-	public WODisplayGroup relationshipDisplayGroup() {
+	public ERXDisplayGroup<EOEnterpriseObject> relationshipDisplayGroup() {
 		if(relationshipDisplayGroup == null) {
-			createDisplayGroup();
+			relationshipDisplayGroup = new ERXDisplayGroup<EOEnterpriseObject>();
 			setSortOrderingsOnDisplayGroup(sortOrderings(), relationshipDisplayGroup);
 			relationshipDisplayGroup.setNumberOfObjectsPerBatch(numberOfObjectsPerBatch());
 		}
@@ -118,7 +117,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	}
 	
 	public EOEnterpriseObject selectedObject() {
-		return (EOEnterpriseObject)relationshipDisplayGroup().selectedObject();
+		return relationshipDisplayGroup().selectedObject();
 	}
 	
 	public void setSelectedObject(EOEnterpriseObject selectedObject) {
@@ -217,23 +216,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 		}
 		dg.setSortOrderings(sortOrderings);
 	}
-	
-	/**
-	 * Creates the display group
-	 */
-	protected void createDisplayGroup() {
-		boolean useBatchingDisplayGroup = useBatchingDisplayGroup();
-		relationshipDisplayGroup = useBatchingDisplayGroup?new ERXBatchingDisplayGroup<EOEnterpriseObject>():new ERXDisplayGroup<EOEnterpriseObject>();
-	}
-
-	/**
-	 * Checks the d2wContext for useBatchingDisplayGroup and returns it.
-	 * 
-	 */
-	public boolean useBatchingDisplayGroup() {
-		return ERXValueUtilities.booleanValue(d2wContext().valueForKey("useBatchingDisplayGroup"));
-	}
-		
+			
 	public boolean isRelationshipToMany() {
 		return isRelationshipToMany;
 	}
