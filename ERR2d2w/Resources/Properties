@@ -10,7 +10,6 @@ er.extensions.foundation.ERXPatcher.DynamicElementsPatches.appendComponentIdenti
 
 # ERR2D2W
 #er.r2d2w.ERR2d2w.createsDerivedCounts=true
-#er.r2d2w.ERR2d2w.printLocalizableKeys=true
 #er.r2d2w.ERR2d2w.ignoreModels=(ERAttachment,erprototypes)
 
 # GZip Responses
