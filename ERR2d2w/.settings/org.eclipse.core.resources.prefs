@@ -1,4 +1,4 @@
-#Wed Dec 29 21:49:25 EST 2010
+#Fri Dec 31 17:40:15 EST 2010
 eclipse.preferences.version=1
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2D2WCalendarNavigationBar.wo/R2D2WCalendarNavigationBar.html=UTF-8
@@ -128,10 +128,6 @@ encoding//Components/Nonlocalized.lproj/R2DFeedItemDescription.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DFeedItemDescription.wo/R2DFeedItemDescription.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DFeedItemDescription.wo/R2DFeedItemDescription.wod=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DFeedItemDescription.wo/R2DFeedItemDescription.woo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInfoPanel.wo=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInfoPanel.wo/R2DInfoPanel.html=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInfoPanel.wo/R2DInfoPanel.wod=UTF-8
-encoding//Components/Nonlocalized.lproj/R2DInfoPanel.wo/R2DInfoPanel.woo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DMonthView.wo=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DMonthView.wo/R2DMonthView.html=UTF-8
 encoding//Components/Nonlocalized.lproj/R2DMonthView.wo/R2DMonthView.wod=UTF-8
@@ -179,7 +175,6 @@ encoding//Components/R2DEmptyListMessage.api=UTF-8
 encoding//Components/R2DErrorPanel.api=UTF-8
 encoding//Components/R2DFeedEnclosure.api=UTF-8
 encoding//Components/R2DFeedItemDescription.api=UTF-8
-encoding//Components/R2DInfoPanel.api=UTF-8
 encoding//Components/R2DMonthView.api=UTF-8
 encoding//Components/R2DPieChart.api=UTF-8
 encoding//Components/R2DWeekView.api=UTF-8
@@ -209,7 +204,6 @@ encoding//Sources/er/r2d2w/components/R2DDebuggingComponentHelp.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2DErrorPanel.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2DFeedEnclosure.java=UTF-8
 encoding//Sources/er/r2d2w/components/R2DFeedItemDescription.java=UTF-8
-encoding//Sources/er/r2d2w/components/R2DInfoPanel.java=UTF-8
 encoding//Sources/er/r2d2w/components/calendar/R2D2WCalendarNavigationBar.java=UTF-8
 encoding//Sources/er/r2d2w/components/calendar/R2DDayView.java=UTF-8
 encoding//Sources/er/r2d2w/components/calendar/R2DMonthView.java=UTF-8
