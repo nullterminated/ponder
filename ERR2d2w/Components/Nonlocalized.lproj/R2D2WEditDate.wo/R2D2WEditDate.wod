@@ -1,7 +1,7 @@
 EditDate: WOTextField {
 	class = d2wContext.propertyClasses;
 	id = labelID;
-	title = d2wContext.inputInfo;
+	title = d2wContext.tooltip;
 	value = dateString;
 }
 

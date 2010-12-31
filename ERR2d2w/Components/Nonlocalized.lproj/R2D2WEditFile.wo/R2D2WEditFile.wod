@@ -16,7 +16,7 @@ FileUpload: WOFileUpload {
 	overwrite = true;
 	id = labelID;
 	class = componentClasses;
-	title = d2wContext.inputInfo;
+	title = d2wContext.tooltip;
 	accept = acceptTypes;
 }
 

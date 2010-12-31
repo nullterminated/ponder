@@ -1,10 +1,10 @@
 (
     0 : *true* => pageClasses = (null) [R2DClassAssignment],
+    0 : *true* => tooltip = (null) [R2DDefaultUIStringAssignment],
     0 : *true* => calendarView = (null) [R2DDelayedUserPreferenceAssignment],
     0 : *true* => sortOrdering = (null) [R2DDelayedUserPreferenceAssignment],
     0 : entity != null => tableCaption = (null) [R2DDefaultUIStringAssignment],
     0 : entity != null => tableSummary = (null) [R2DDefaultUIStringAssignment],
-    0 : propertyKey != null => inputInfo = (null) [R2DDefaultUIStringAssignment],
     0 : *true* => nullString = "R2D2W.nullString" [ERDDelayedLocalizedAssignment],
     0 : *true* => trueString = "R2D2W.trueString" [ERDDelayedLocalizedAssignment],
     0 : *true* => altText = "R2D2W.defaultAltText" [ERDDelayedLocalizedAssignment],

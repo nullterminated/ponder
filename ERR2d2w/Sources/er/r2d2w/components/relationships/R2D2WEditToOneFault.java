@@ -11,7 +11,7 @@ public class R2D2WEditToOneFault extends ERD2WEditToOneFault {
     }
 
     public String helpString() {
-    	String helpString = (String)d2wContext().valueForKey("inputInfo");
+    	String helpString = (String)d2wContext().valueForKey("tooltip");
     	if(helpString==null) {
     		helpString = ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("R2D2W.editToOneFault.helpString", d2wContext());
     	}

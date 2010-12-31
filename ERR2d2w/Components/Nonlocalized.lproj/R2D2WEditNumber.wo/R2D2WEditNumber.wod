@@ -2,7 +2,7 @@ EditNumber: WOTextField {
 	class = d2wContext.propertyClasses;
 	id = labelID;
 	size = length;
-	title = d2wContext.inputInfo;
+	title = d2wContext.tooltip;
 	useDecimalNumber = isDecimalNumber;
 	value = stringValue;
 }

@@ -4,7 +4,7 @@ EditString: WOTextField {
 	formatter = d2wContext.formatObject;
 	maxlength = d2wContext.maxLength;
 	size = length;
-	title = d2wContext.inputInfo;
+	title = d2wContext.tooltip;
 	value = value;
 }
 

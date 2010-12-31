@@ -14,14 +14,14 @@ import er.extensions.localization.ERXLocalizer;
 
 public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLocalizableAssignmentInterface {
 	public static final String ATTRIBUTE_ABBR = "attributeAbbr";
-	public static final String INPUT_INFO = "inputInfo";
+	public static final String TOOLTIP = "tooltip";
 	public static final String TABLE_CAPTION = "tableCaption";
 	public static final String TABLE_SUMMARY = "tableSummary";
 	public static final String DYNAMIC_PAGE_PREFIX = "Page.";
 	
 	private static final NSArray<String> attributeAbbrDependentKeys = 
 		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey });
-	private static final NSArray<String> inputInfoDependentKeys = 
+	private static final NSArray<String> tooltipDependentKeys = 
 		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey });
 	private static final NSArray<String> tableCaptionDependentKeys = 
 		new NSArray<String>(new String[] { D2WModel.DynamicPageKey });
@@ -30,14 +30,14 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	
 	private static final NSArray<NSArray<String>> allKeys = 
 		new NSArray<NSArray<String>>(attributeAbbrDependentKeys)
-		.arrayByAddingObject(inputInfoDependentKeys)
+		.arrayByAddingObject(tooltipDependentKeys)
 		.arrayByAddingObject(tableCaptionDependentKeys)
 		.arrayByAddingObject(tableSummaryDependentKeys);
 	
 	private static final NSDictionary<String, NSArray<String>> dependentKeyDict = 
 		new NSDictionary<String, NSArray<String>>(allKeys, new NSArray<String>(
 				new String[] {ATTRIBUTE_ABBR,
-						INPUT_INFO,
+						TOOLTIP,
 						TABLE_CAPTION,
 						TABLE_SUMMARY}));
 
@@ -71,11 +71,11 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 		return result;
 	}
 	
-	public String inputInfo(D2WContext c) {
+	public String tooltip(D2WContext c) {
 		String result = null;
 		if(c.propertyKey() != null && c.entity() != null) {
 			StringBuilder sb = new StringBuilder(100);
-			String key = sb.append(c.entity().name()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.propertyKey()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(INPUT_INFO).toString();
+			String key = sb.append(c.entity().name()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.propertyKey()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TOOLTIP).toString();
 			result = localizedStringForKey(key, c);
 		}
 		return result;

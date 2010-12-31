@@ -12,7 +12,7 @@ public class R2D2WEditToManyFault extends ERD2WEditToManyFault {
     }
 
     public String helpString() {
-    	String helpString = (String)d2wContext().valueForKey("inputInfo");
+    	String helpString = (String)d2wContext().valueForKey("tooltip");
     	if(helpString==null) {
     		helpString = ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("R2D2W.editToManyFault.helpString", d2wContext());
     	}

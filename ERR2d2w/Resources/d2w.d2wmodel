@@ -1,11 +1,11 @@
 {
   "rules" = (
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "R2DClassAssignment"; "keyPath" = "pageClasses"; }; }, 
+    {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "R2DDefaultUIStringAssignment"; "keyPath" = "tooltip"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "R2DDelayedUserPreferenceAssignment"; "keyPath" = "calendarView"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "R2DDelayedUserPreferenceAssignment"; "keyPath" = "sortOrdering"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "lhs" = {"class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; "key" = "entity"; "selectorName" = "isNotEqualTo"; "value" = {"class" = "com.webobjects.foundation.NSKeyValueCoding$Null"; }; }; "rhs" = {"class" = "R2DDefaultUIStringAssignment"; "keyPath" = "tableCaption"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "lhs" = {"class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; "key" = "entity"; "selectorName" = "isNotEqualTo"; "value" = {"class" = "com.webobjects.foundation.NSKeyValueCoding$Null"; }; }; "rhs" = {"class" = "R2DDefaultUIStringAssignment"; "keyPath" = "tableSummary"; }; }, 
-    {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "lhs" = {"class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; "key" = "propertyKey"; "selectorName" = "isNotEqualTo"; "value" = {"class" = "com.webobjects.foundation.NSKeyValueCoding$Null"; }; }; "rhs" = {"class" = "R2DDefaultUIStringAssignment"; "keyPath" = "inputInfo"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERDDelayedLocalizedAssignment"; "keyPath" = "nullString"; "value" = "R2D2W.nullString"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERDDelayedLocalizedAssignment"; "keyPath" = "trueString"; "value" = "R2D2W.trueString"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERDDelayedLocalizedAssignment"; "keyPath" = "altText"; "value" = "R2D2W.defaultAltText"; }; }, 

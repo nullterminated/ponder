@@ -6,7 +6,7 @@ LanguageMenu: ERXLanguageMenu {
 	id = labelID;
 	language = objectPropertyValue;
 	noSelectionString = noSelectionString;
-	title = d2wContext.inputInfo;
+	title = d2wContext.tooltip;
 }
 
 PropertyLabel: WOGenericContainer {

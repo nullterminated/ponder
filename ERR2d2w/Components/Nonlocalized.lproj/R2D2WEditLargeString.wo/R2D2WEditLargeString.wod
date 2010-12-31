@@ -4,7 +4,7 @@ EditString: WOText {
 	disabled = d2wContext.disabled;
 	id = labelID;
 	rows = d2wContext.rows;
-	title = d2wContext.inputInfo;
+	title = d2wContext.tooltip;
 	value = value;
 }
 
