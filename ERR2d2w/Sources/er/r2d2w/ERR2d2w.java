@@ -9,10 +9,8 @@ import com.webobjects.eoaccess.EOEntityClassDescription;
 import com.webobjects.eoaccess.EOModel;
 import com.webobjects.eoaccess.EOModelGroup;
 import com.webobjects.eoaccess.EORelationship;
-import com.webobjects.eocontrol.EOClassDescription;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSForwardException;
-import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSNotification;
 import com.webobjects.foundation.NSNotificationCenter;
 import com.webobjects.foundation.NSSelector;
@@ -21,7 +19,6 @@ import er.directtoweb.ERDirectToWeb;
 import er.extensions.ERXExtensions;
 import er.extensions.ERXFrameworkPrincipal;
 import er.extensions.eof.ERXConstant;
-import er.extensions.eof.ERXModelGroup;
 import er.extensions.foundation.ERXProperties;
 import er.extensions.foundation.ERXRetainer;
 import er.r2d2w.delegates.PreferenceHandlerDelegate;
@@ -50,7 +47,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 	@Override
     public void finishInitialization() {
         // Initialized shared data
-		if(printLocalizableKeys() || createsDerivedCounts()) {
+		if(createsDerivedCounts()) {
 			NSNotificationCenter.defaultCenter().addObserver(this,
 	    	        new NSSelector<Void>("applicationDidFinishLaunching",
 	    	                ERXConstant.NotificationClassArray),
@@ -86,13 +83,6 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
         return ERXProperties.booleanForKeyWithDefault("er.r2d2w.ERR2d2w.createsDerivedCounts", false);
     }
 
-    /**
-     * Checks the system property <code>er.directtoweb.ERDirectToWeb.printLocalizableKeys</code>.
-     */
-    public static boolean printLocalizableKeys() {
-        return ERXProperties.booleanForKeyWithDefault("er.r2d2w.ERR2d2w.printLocalizableKeys", false);
-    }
-    
     public static NSArray<String> modelsToIgnore() {
     	return ERXProperties.arrayForKeyWithDefault("er.r2d2w.ERR2d2w.ignoreModels", NSArray.EmptyArray);
     }
@@ -105,106 +95,12 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     		if(modelsToIgnore().contains(model.name())) {
     			continue;
     		}
-    		
-	    	if(printLocalizableKeys()) {
-	    		printLocalizableStringsKeys(model);
-	    	}
 	    	
 	    	if(createsDerivedCounts()) {
 	    		createDerivedCountAttributes(model);
 	    	}
     	}
     }
-    
-    public static void printLocalizableStringsKeys(EOModel model) {
-    	
-		log.debug("Localizable keys for model: " + model.name());
-		NSMutableArray<String> propKeys = new NSMutableArray<String>();
-		StringBuilder requiredKeys = new StringBuilder("/* Required keys for Entity and Attribute localization */\n\n");
-		StringBuilder recommendedKeys = new StringBuilder("/* Recommended keys for improved accessibility */\n\n");
-		StringBuilder optionalKeys = new StringBuilder("/* Optional keys for input instructions */\n\n");
-		StringBuilder pageTitleKeys = new StringBuilder("/* Page Title Keys */\n\n");
-
-		// Build key strings
-		for(EOEntity entity: model.entities()) {
-			
-			EOClassDescription ecd = entity.classDescriptionForInstances();
-			
-			// Entity keys
-			requiredKeys.append("\"Entity.name.").append(entity.name()).append("\" = \"\";\n");
-			recommendedKeys.append("\"Entity.name.").append(entity.name()).append(".tableCaption\" = \"\";\n");
-			recommendedKeys.append("\"Entity.name.").append(entity.name()).append(".tableSummary\" = \"\";\n");
-			optionalKeys.append("/* Input instructions for entity: ").append(entity.name()).append(" */\n");
-			
-			pageTitleKeys.append("\"PageTitle.Create").append(entity.name()).append("\" = \"\";\n");
-			pageTitleKeys.append("\"PageTitle.ConfirmDelete").append(entity.name()).append("\" = \"\";\n");
-			pageTitleKeys.append("\"PageTitle.Edit").append(entity.name()).append("\" = \"\";\n");
-			pageTitleKeys.append("\"PageTitle.Inspect").append(entity.name()).append("\" = \"\";\n");
-			pageTitleKeys.append("\"PageTitle.List").append(entity.name()).append("\" = \"\";\n");
-			pageTitleKeys.append("\"PageTitle.Query").append(entity.name()).append("\" = \"\";\n");
-			
-			// Attribute keys
-			NSMutableArray<String> attrKeys = new NSMutableArray<String>();
-			for(String attrName: ecd.attributeKeys()){
-				EOAttribute attr = entity.attributeNamed(attrName);
-				if(attr.userInfo() != null && attr.userInfo().containsKey(ERXModelGroup.LANGUAGES_KEY)) {
-					attrName = attrName.substring(0, attrName.lastIndexOf("_"));
-					if(attrKeys.contains(attrName)) { continue; }
-					attrKeys.add(attrName);
-				}
-				if(propKeys.contains(attrName)) {
-					requiredKeys.append("/* Name collision: Be advised, PropertyKey.").append(attrName).append(" is shared by multiple entities! */\n");
-					recommendedKeys.append("/* Name collision: Be advised, PropertyKey.").append(attrName).append(".attributeAbbr is shared by multiple entities! */\n");
-					optionalKeys.append("/* Name collision: Be advised, PropertyKey.").append(attrName).append(".inputInfo is shared by multiple entities! */\n");
-				} else {
-					propKeys.add(attrName);
-					requiredKeys.append("\"PropertyKey.").append(attrName).append("\" = \"\";\n");
-					recommendedKeys.append("\"PropertyKey.").append(attrName).append(".attributeAbbr\" = \"\";\n");
-					optionalKeys.append("\"PropertyKey.").append(attrName).append(".inputInfo\" = \"\";\n");
-				}
-			}
-			
-			// Relationship keys
-			for(String toOne: ecd.toOneRelationshipKeys()) {
-				if(propKeys.contains(toOne)) {
-					requiredKeys.append("/* Name collision: Be advised, PropertyKey.").append(toOne).append(" is shared by multiple entities! */\n");
-					recommendedKeys.append("/* Name collision: Be advised, PropertyKey.").append(toOne).append(".attributeAbbr is shared by multiple entities! */\n");
-					optionalKeys.append("/* Name collision: Be advised, PropertyKey.").append(toOne).append(".inputInfo is shared by multiple entities! */\n");
-				} else {
-					propKeys.add(toOne);
-					requiredKeys.append("\"PropertyKey.").append(toOne).append("\" = \"\";\n");
-					recommendedKeys.append("\"PropertyKey.").append(toOne).append(".attributeAbbr\" = \"\";\n");
-					optionalKeys.append("\"PropertyKey.").append(toOne).append(".inputInfo\" = \"\";\n");						
-				}
-			}
-			for(String toMany: ecd.toManyRelationshipKeys()) {
-				if(propKeys.contains(toMany)) {
-					requiredKeys.append("/* Name collision: Be advised, PropertyKey.").append(toMany).append(" is shared by multiple entities! */\n");
-					recommendedKeys.append("/* Name collision: Be advised, PropertyKey.").append(toMany).append(".attributeAbbr is shared by multiple entities! */\n");
-					optionalKeys.append("/* Name collision: Be advised, PropertyKey.").append(toMany).append(".inputInfo is shared by multiple entities! */\n");
-				} else {
-					propKeys.add(toMany);
-					requiredKeys.append("\"PropertyKey.").append(toMany).append("\" = \"\";\n");
-					recommendedKeys.append("\"PropertyKey.").append(toMany).append(".attributeAbbr\" = \"\";\n");
-					optionalKeys.append("\"PropertyKey.").append(toMany).append(".inputInfo\" = \"\";\n");
-				}
-			}
-			
-			// Just spacing to make things easier to read
-			requiredKeys.append("\n");
-			recommendedKeys.append("\n");
-			optionalKeys.append("\n");
-			pageTitleKeys.append("\n");
-		}
-		
-		// Print strings to console
-		StringBuilder message = new StringBuilder("Localizable keys for model: ").append(model.name()).append("\n{\n");
-		message.append(requiredKeys.toString()).append("\n");
-		message.append(recommendedKeys.toString()).append("\n");
-		message.append(optionalKeys.toString()).append("\n");
-		message.append(pageTitleKeys.toString()).append("}\n");
-		log.debug(message.toString());
-	}
     
     //FIXME: this is a MySQL only hack right now.  Hoping to make this
     //more general purpose later.

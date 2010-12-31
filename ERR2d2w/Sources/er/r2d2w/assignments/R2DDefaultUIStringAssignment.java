@@ -9,38 +9,27 @@ import com.webobjects.foundation.NSKeyValueCodingAdditions;
 
 import er.directtoweb.assignments.ERDAssignment;
 import er.directtoweb.assignments.ERDLocalizableAssignmentInterface;
-import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.localization.ERXLocalizer;
 
 
 public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLocalizableAssignmentInterface {
 	public static final String ATTRIBUTE_ABBR = "attributeAbbr";
-	public static final String BANNER_STRING = "bannerString";
-	public static final String DISPLAY_NAME_FOR_DYNAMIC_PAGE = "displayNameForPageConfiguration";
 	public static final String INPUT_INFO = "inputInfo";
 	public static final String TABLE_CAPTION = "tableCaption";
 	public static final String TABLE_SUMMARY = "tableSummary";
-
-	private static final String defaultPageTitleKey = "PageTitle.DefaultPageTitle";
-	private static final String subTaskKey = "subTask";
+	public static final String DYNAMIC_PAGE_PREFIX = "Page.";
 	
 	private static final NSArray<String> attributeAbbrDependentKeys = 
-		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey });
-	private static final NSArray<String> bannerStringDependentKeys =
-		new NSArray<String>(new String[] {D2WModel.TaskKey, subTaskKey});
-	private static final NSArray<String> displayNameForPageConfigurationDependentKeys = 
-		new NSArray<String>(new String[] { D2WModel.DynamicPageKey });
+		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey });
 	private static final NSArray<String> inputInfoDependentKeys = 
-		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey });
+		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey });
 	private static final NSArray<String> tableCaptionDependentKeys = 
-		new NSArray<String>(new String[] { D2WModel.EntityKey });
+		new NSArray<String>(new String[] { D2WModel.DynamicPageKey });
 	private static final NSArray<String> tableSummaryDependentKeys = 
-		new NSArray<String>(new String[] { D2WModel.EntityKey });
+		new NSArray<String>(new String[] { D2WModel.DynamicPageKey });
 	
 	private static final NSArray<NSArray<String>> allKeys = 
 		new NSArray<NSArray<String>>(attributeAbbrDependentKeys)
-		.arrayByAddingObject(bannerStringDependentKeys)
-		.arrayByAddingObject(displayNameForPageConfigurationDependentKeys)
 		.arrayByAddingObject(inputInfoDependentKeys)
 		.arrayByAddingObject(tableCaptionDependentKeys)
 		.arrayByAddingObject(tableSummaryDependentKeys);
@@ -48,18 +37,10 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	private static final NSDictionary<String, NSArray<String>> dependentKeyDict = 
 		new NSDictionary<String, NSArray<String>>(allKeys, new NSArray<String>(
 				new String[] {ATTRIBUTE_ABBR,
-						BANNER_STRING,
-						DISPLAY_NAME_FOR_DYNAMIC_PAGE,
 						INPUT_INFO,
 						TABLE_CAPTION,
 						TABLE_SUMMARY}));
 
-	private static final StringBuilder propertyKeyBuilder = new StringBuilder("PropertyKey.");
-	private static final StringBuilder entityNameBuilder = new StringBuilder("Entity.name.");
-	private static final StringBuilder taskBuilder = new StringBuilder("ERD2W.tasks.");
-	private static final StringBuilder pageTitleBuilder = new StringBuilder("PageTitle.");
-	
-	
 	public R2DDefaultUIStringAssignment(EOKeyValueUnarchiver u) {
 		super(u);
 	}
@@ -82,84 +63,51 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	
 	public String attributeAbbr(D2WContext c) {
 		String result = null;
-		ERXLocalizer loc = ERXLocalizer.currentLocalizer();
-		String locKey = null;
-		if(c.propertyKey() != null) {
-			locKey = propertyKeyBuilder.append(c.propertyKey()).append(NSKeyValueCodingAdditions.KeyPathSeparator).append(ATTRIBUTE_ABBR).toString();
-			propertyKeyBuilder.setLength(12);
-			result = (loc.valueForKey(locKey) == null)?null:loc.localizedTemplateStringForKeyWithObject(locKey, c);
+		if(c.propertyKey() != null && c.entity() != null) {
+			StringBuilder sb = new StringBuilder(100);
+			String key = sb.append(c.entity().name()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.propertyKey()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(ATTRIBUTE_ABBR).toString();
+			result = localizedStringForKey(key, c);
 		}
 		return result;
 	}
 	
-	public String bannerString(D2WContext c) {
-		String result = null;
-		if(c.task() != null) {
-			ERXLocalizer loc = ERXLocalizer.currentLocalizer();
-			String locKey = null;
-			
-			taskBuilder.append(c.task());
-			if(!ERXStringUtilities.stringIsNullOrEmpty((String)c.valueForKey(subTaskKey))) {
-				taskBuilder.append(NSKeyValueCodingAdditions.KeyPathSeparator).append(c.valueForKey(subTaskKey));
-			}
-			locKey = taskBuilder.toString();
-			taskBuilder.setLength(12);
-			result = (loc.valueForKey(locKey) == null)?null:loc.localizedTemplateStringForKeyWithObject(locKey, c);
-		}
-		return result;
-	}
-	
-	public String displayNameForPageConfiguration(D2WContext c) {
-		String result = null;
-		ERXLocalizer loc = ERXLocalizer.currentLocalizer();
-		
-		if(c.dynamicPage() != null) {
-			String locKey = pageTitleBuilder.append(c.dynamicPage()).toString();
-			pageTitleBuilder.setLength(10);
-			result = (loc.valueForKey(locKey)==null)?null:loc.localizedTemplateStringForKeyWithObject(locKey, c);
-		}
-		
-		if(result==null){
-			result = loc.localizedTemplateStringForKeyWithObject(defaultPageTitleKey, c);
-		}
-		
-		return result;
-	}
-
 	public String inputInfo(D2WContext c) {
 		String result = null;
-		ERXLocalizer loc = ERXLocalizer.currentLocalizer();
-		String locKey = null;
-		if(c.propertyKey() != null) {
-			locKey = propertyKeyBuilder.append(c.propertyKey()).append(NSKeyValueCodingAdditions.KeyPathSeparator).append(INPUT_INFO).toString();
-			propertyKeyBuilder.setLength(12);
-			result = (loc.valueForKey(locKey) == null)?null:loc.localizedTemplateStringForKeyWithObject(locKey, c);
+		if(c.propertyKey() != null && c.entity() != null) {
+			StringBuilder sb = new StringBuilder(100);
+			String key = sb.append(c.entity().name()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.propertyKey()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(INPUT_INFO).toString();
+			result = localizedStringForKey(key, c);
 		}
 		return result;
 	}
 	
 	public String tableCaption(D2WContext c) {
 		String result = null;
-		ERXLocalizer loc = ERXLocalizer.currentLocalizer();
-		String locKey = null;
-		if(c.entity() != null) {
-			locKey = entityNameBuilder.append(c.entity().name()).append(NSKeyValueCodingAdditions.KeyPathSeparator).append(TABLE_CAPTION).toString();
-			entityNameBuilder.setLength(12);
-			result = (loc.valueForKey(locKey) == null)?null:loc.localizedTemplateStringForKeyWithObject(locKey, c);
+		if(c.dynamicPage() != null && c.dynamicPage().length() > 0) {
+			StringBuilder entityNameBuilder = new StringBuilder(100);
+			String key = entityNameBuilder.append(DYNAMIC_PAGE_PREFIX).append(c.dynamicPage()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TABLE_CAPTION).toString();
+			result = localizedStringForKey(key, c);
 		}
 		return result;
 	}
 	
 	public String tableSummary(D2WContext c) {
 		String result = null;
-		ERXLocalizer loc = ERXLocalizer.currentLocalizer();
-		String locKey = null;
-		if(c.entity() != null) {
-			locKey = entityNameBuilder.append(c.entity().name()).append(NSKeyValueCodingAdditions.KeyPathSeparator).append(TABLE_SUMMARY).toString();
-			entityNameBuilder.setLength(12);
-			result = (loc.valueForKey(locKey) == null)?null:loc.localizedTemplateStringForKeyWithObject(locKey, c);
+		if(c.dynamicPage() != null && c.dynamicPage().length() > 0) {
+			StringBuilder entityNameBuilder = new StringBuilder(100);
+			String key = entityNameBuilder.append(DYNAMIC_PAGE_PREFIX).append(c.dynamicPage()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TABLE_SUMMARY).toString();
+			result = localizedStringForKey(key, c);
 		}
 		return result;
 	}
 	
+	public String localizedStringForKey(String key, D2WContext c) {
+		String template = (String)ERXLocalizer.currentLocalizer().valueForKey(key);
+		if(template == null) {
+			template = "";
+			ERXLocalizer.currentLocalizer().takeValueForKey(template, key);
+		}
+		if(template.length() == 0) { return null; }
+		return ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject(template, c);
+	}
 }

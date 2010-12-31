@@ -3,8 +3,8 @@ AboveDisplayPropertyKeys: R2D2WExtraDisplayPropertyKeys {
 	extraPropertiesKey = "aboveDisplayPropertyKeys";
 }
 
-Banner: WOSwitchComponent {
-	WOComponentName = d2wContext.bannerComponentName;
+Header: WOSwitchComponent {
+	WOComponentName = d2wContext.headerComponentName;
 	localContext = d2wContext;
 }
 
