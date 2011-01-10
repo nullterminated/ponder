@@ -102,7 +102,7 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	}
 	
 	public String localizedStringForKey(String key, D2WContext c) {
-		String template = (String)ERXLocalizer.currentLocalizer().valueForKey(key);
+		String template = ERXLocalizer.currentLocalizer().localizedStringForKey(key);
 		if(template == null) {
 			template = "";
 			ERXLocalizer.currentLocalizer().takeValueForKey(template, key);
