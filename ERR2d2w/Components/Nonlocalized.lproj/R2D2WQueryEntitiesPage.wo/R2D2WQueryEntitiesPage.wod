@@ -32,6 +32,7 @@ QueryForm: ERXWOForm {
 
 QueryLink: ERXLinkButton {
 	action = showRegularQueryAction;
+	submit = false;
 	string = d2wContext.moreOptionsButtonLabel;
 }
 
