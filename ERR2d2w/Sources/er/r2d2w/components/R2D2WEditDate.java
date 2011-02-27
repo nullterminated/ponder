@@ -1,90 +1,75 @@
 package er.r2d2w.components;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.Format;
+
+import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
-import com.webobjects.foundation.NSTimestamp;
+import com.webobjects.foundation.NSForwardException;
 import com.webobjects.foundation.NSValidation;
 
-import er.directtoweb.components.ERDCustomEditComponent;
-import er.extensions.appserver.ERXSession;
+import er.directtoweb.components.ERD2WStatelessComponent;
 import er.extensions.foundation.ERXStringUtilities;
-import er.extensions.localization.ERXLocalizer;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
 
-public class R2D2WEditDate extends ERDCustomEditComponent {
-	public static final String DEFAULT_DATE_FORMAT = "MM/dd/yyyy";
+public class R2D2WEditDate extends ERD2WStatelessComponent {
+	private static final Logger log = Logger.getLogger(R2D2WEditDate.class);
+    private static final String _COMPONENT_CLASS = "date";
+
+    private String labelID;
 	private String dateString;
 
 	public R2D2WEditDate(WOContext context) {
 		super(context);
 	}
 
+    public void reset() {
+    	super.reset();
+    	dateString = null;
+    	labelID = null;
+    }
+
 	public void appendToResponse(WOResponse r, WOContext c) {
-		NSTimestamp date = (NSTimestamp) objectPropertyValue();
+		Object date = objectPropertyValue();
 		if (date != null) {
-			try {
-				dateString = dateFormatter().format(date);
-			} catch (IllegalArgumentException nsfe) {
-				log.debug("Failed to format date value:" + nsfe);
-			}
+			setDateString(dateFormatter().format(date));
 		} else {
-			dateString = null;
+			setDateString(null);
 		}
 		super.appendToResponse(r, c);
 	}
 
-	public Object value() {
-		return dateString;
-	}
-
 	public void takeValuesFromRequest(WORequest request, WOContext context) {
 		super.takeValuesFromRequest(request, context);
-		NSTimestamp date = null;
+		Object obj = null;
 		try {
-			if (dateString != null) {
-				Date d = dateFormatter().parse(dateString);
-				date = new NSTimestamp(d);
+			if (dateString() != null) {
+				obj = dateFormatter().parseObject(dateString());
 			}
 			if (object() != null) {
-				object().validateTakeValueForKeyPath(date, key());
+				object().validateTakeValueForKeyPath(obj, propertyKey());
 			}
 		} catch (java.text.ParseException npse) {
 			log.debug("java.text.ParseException:" + npse);
-			ERXValidationException v = ERXValidationFactory.defaultFactory().createException(object(), key(), dateString, "InvalidDateFormatException");
-			parent().validationFailedWithException(v, date, key());
+			ERXValidationException v = ERXValidationFactory.defaultFactory().createException(object(), propertyKey(), dateString(), "InvalidDateFormatException");
+			parent().validationFailedWithException(v, obj, propertyKey());
 		} catch (NSValidation.ValidationException v) {
 			log.debug("NSValidation.ValidationException:" + v);
-			parent().validationFailedWithException(v, date, key());
+			parent().validationFailedWithException(v, obj, propertyKey());
 		} catch (Exception e) {
-			log.debug("Exception:" + e);
-			parent().validationFailedWithException(e, date, key());
+			//FIXME this does not seem to work
+//			log.debug("Exception:" + e);
+//			parent().validationFailedWithException(e, obj, propertyKey());
+			throw NSForwardException._runtimeExceptionForThrowable(e);
 		}
 	}
 
-	public SimpleDateFormat dateFormatter() {
-		SimpleDateFormat result = new SimpleDateFormat(formatPattern(), 
-				ERXLocalizer.currentLocalizer().locale());
-		if(ERXSession.class.isAssignableFrom(session().getClass()) &&
-				ERXSession.autoAdjustTimeZone()) {
-			result.setTimeZone(((ERXSession)session()).timeZone());
-		}
+	public Format dateFormatter() {
+		Format result = (Format)d2wContext().valueForKey("formatObject");
 		return result;
-	}
-
-	public String formatPattern() {
-		String format = (String)d2wContext().valueForKey("formatter");
-		if(format == null) {
-			format = ERXLocalizer.currentLocalizer().localizedStringForKey("R2D2W.dateFormat");
-		}
-		if(format == null) {
-			format = DEFAULT_DATE_FORMAT;
-		}
-		return format;
 	}
 
 	/**
@@ -102,19 +87,10 @@ public class R2D2WEditDate extends ERDCustomEditComponent {
 		this.dateString = dateString;
 	}
 	
-    private static final String _COMPONENT_CLASS = "date";
-	private String labelID;
-    
     public String componentClasses() {
     	return _COMPONENT_CLASS;
     }
     
-    public void reset() {
-    	super.reset();
-    	dateString = null;
-    	labelID = null;
-    }
-
 	public String labelID() {
 		if(labelID == null) {
 			labelID = ERXStringUtilities.safeIdentifierName(context().elementID(), "id", '_');

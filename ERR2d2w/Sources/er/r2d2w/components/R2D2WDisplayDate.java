@@ -1,9 +1,10 @@
 package er.r2d2w.components;
 
 import com.webobjects.appserver.WOContext;
-import com.webobjects.directtoweb.D2WDisplayDate;
 
-public class R2D2WDisplayDate extends D2WDisplayDate {
+import er.directtoweb.components.ERD2WStatelessComponent;
+
+public class R2D2WDisplayDate extends ERD2WStatelessComponent {
 
 	public R2D2WDisplayDate(WOContext context) {
         super(context);

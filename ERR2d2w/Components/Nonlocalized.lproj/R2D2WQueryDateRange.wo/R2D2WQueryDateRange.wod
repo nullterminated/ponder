@@ -3,9 +3,8 @@ Hint: R2D2WHintString {
 }
 
 MaxField: WOTextField {
-	dateformat = d2wContext.formatter;
 	id = maxID;
-	value = maxValue;
+	value = maxDateString;
 }
 
 MaxLabel: WOGenericContainer {
@@ -19,9 +18,8 @@ MaxString: ERXLocalizedString {
 }
 
 MinField: WOTextField {
-	dateformat = d2wContext.formatter;
 	id = minID;
-	value = minValue;
+	value = minDateString;
 }
 
 MinLabel: WOGenericContainer {

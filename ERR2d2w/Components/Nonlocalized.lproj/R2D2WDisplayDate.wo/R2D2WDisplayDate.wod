@@ -1,5 +1,5 @@
 Date: WOString {
-	dateformat = d2wContext.formatter;
+	formatter = d2wContext.formatObject;
 	value = objectPropertyValue;
 	valueWhenEmpty = d2wContext.valueWhenEmpty;
 }
