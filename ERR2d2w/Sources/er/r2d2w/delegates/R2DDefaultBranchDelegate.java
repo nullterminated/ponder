@@ -162,17 +162,18 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
         // If we have a validation delegate, validate the query values before actually performing the query.
         ERDQueryValidationDelegate queryValidationDelegate = page.queryValidationDelegate();
         if (queryValidationDelegate != null) {
-            page.clearValidationFailed();
-            page.setErrorMessage(null);
+//        	page.clearValidationFailed();
+//        	page.setErrorMessage(null);
             try {
                 queryValidationDelegate.validateQuery(page);
             } catch (NSValidation.ValidationException ex) {
     			page.setErrorMessage(ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("CouldNotQuery", ex));
     			page.validationFailedWithException(ex, null, "queryExceptionKey");
     		}
-            if (page.hasErrors()) {
-                return sender.context().page();
-            }
+        }
+
+        if (page.hasErrors()) {
+            return sender.context().page();
         }
 
         D2WContext c = d2wContext(sender);
@@ -254,6 +255,8 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 				EOEnterpriseObject obj = ERXEOAccessUtilities.refetchFailedObject(ec, e);
 				page.setErrorMessage(ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("CouldNotSavePleaseReapply", c));
 				page.validationFailedWithException(e, obj, "CouldNotSavePleaseReapply");
+			} else {
+				throw e;
 			}
 		} finally {
 			try {
