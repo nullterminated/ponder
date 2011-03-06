@@ -1,10 +1,6 @@
 To use this framework, I would recommend you work with 
 Project Wonder source in your workspace.  You can find 
-instructions on how to do this on the wiki.  The patches 
-folder in this directory contains patches for project 
-wonder on which this framework depends.  You will need 
-to apply these patches to your wonder source in order for 
-everything to work correctly.  
+instructions on how to do this on the wiki.
 
 The Project Templates.zip file is a compressed archive of 
 project templates for use with this framework. See the 
@@ -41,11 +37,7 @@ the other side of the relationship. I'd like to use
 ERXQualifierTraversal in the methods that build up
 qualifiers for list DA urls. I'd like to update the
 derived counts to be less hackish and possibly work
-across many-to-many joins. I need to update the localized
-key printing strategy. There's a ERDPageRunner
-something or other that looks handy for that.
-I need to revisit the localized page titles.
-I need to look at banner localizations again. I'd like to revise
+across many-to-many joins. I'd like to revise
 the current html to be a bit better structured.
 I need to look at ERAttachments url encoding
 of file names in the HTML, since it doesn't seem to escape
@@ -54,7 +46,6 @@ Add headings to the error and instruction panels. Just
 revise those anyway, and possibly dump put the errors
 beside the appropriate form fields instead of just in
 panels. Add a new list repetition that does
-'baseball cards' instead of a table. Add a 'tree' inspect
-view that allows for threaded discussions and such.
+ERDInspects instead of a table.
 
 Yeah, just a few things to fix. :)
