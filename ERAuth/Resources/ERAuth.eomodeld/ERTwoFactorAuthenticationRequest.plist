@@ -1,0 +1,28 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = inetAddress; 
+            name = inetAddress; 
+            prototypeName = ipAddress; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = requestDate; 
+            name = requestDate; 
+            prototypeName = jodaDateTime; 
+        }, 
+        {columnName = subtype; name = subtype; prototypeName = varchar50; }, 
+        {columnName = username; name = username; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (id, inetAddress, requestDate, subtype, username); 
+    className = "er.auth.model.ERTwoFactorAuthenticationRequest"; 
+    classProperties = (inetAddress, requestDate, subtype, username); 
+    externalName = ERAuthenticationRequest; 
+    fetchSpecificationDictionary = {}; 
+    name = ERTwoFactorAuthenticationRequest; 
+    parent = ERAuthenticationRequest; 
+    primaryKeyAttributes = (id); 
+    restrictingQualifier = "subtype = \"ERTwoFactorAuthenticationRequest\""; 
+}

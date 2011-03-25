@@ -1,0 +1,63 @@
+CredentialRecovery: WOSubmitButton {
+	actionClass = "ERAuthDirectAction";
+	directActionName = "credentialRecovery";
+	value = localizer.ERAuth.forgotCredentialsLabel;
+}
+
+LoginForm: ERXWOForm {
+	actionClass = "DirectAction";
+	class = "login";
+	?__cid = context.contextID;
+	?__lcid = lastCID;
+	//TODO make secure binding
+	//secure = true;
+}
+
+LoginLegend: WOString {
+	value = localizer.ERAuth.loginLegend;
+}
+
+LoginRequestType: WOHiddenField {
+	name = "entityName";
+	value = requestType;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = pageWrapperName;
+}
+
+PasswordField: WOPasswordField {
+	name = "password";
+	value = password;
+}
+
+PasswordLabel: WOString {
+	value = localizer.ERAuth.passwordLabel;
+}
+
+Return: WOHyperlink {
+	actionClass = "ERAuthDirectAction";
+	directActionName = "return";
+	string = localizer.ERD2W.returnButtonLabel;
+	?__lcid = lastCID;
+}
+
+ShowReturn: WOConditional {
+	condition = ^omitReturn;
+	negate = true;
+}
+
+SignIn: WOSubmitButton {
+	actionClass = "ERAuthDirectAction";
+	directActionName = "login";
+	value = localizer.ERAuth.signInButtonLabel;
+}
+
+UsernameField: WOTextField {
+	name = "username";
+	value = username;
+}
+
+UsernameLabel: WOString {
+	value = localizer.ERAuth.usernameLabel;
+}

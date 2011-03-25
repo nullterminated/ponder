@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wodefinitions>
+        <wo class="ERADefaultLogin.java" wocomponentcontent="false">
+
+        <binding name="pageWrapperName"/>
+        <validation message="'pageWrapperName' is a required binding.">
+            <unbound name="pageWrapperName"/>
+        </validation>
+        <binding name="username"/>
+        <binding name="password"/>
+        <binding defaults="Boolean" name="rememberMe"/>
+    </wo>
+</wodefinitions>

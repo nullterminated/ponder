@@ -1,0 +1,63 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = authenticationFailed; 
+            name = authenticationFailed; 
+            prototypeName = flag; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = authenticationFailureType; 
+            name = authenticationFailureType; 
+            prototypeName = javaEnum; 
+            valueClassName = "er.auth.model.enums.ERTwoFactorAuthenticationFailure"; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = authenticationRequestID; 
+            name = authenticationRequestID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = subtype; name = subtype; prototypeName = varchar50; }, 
+        {
+            allowsNull = Y; 
+            columnName = userID; 
+            name = userID; 
+            prototypeName = globalID; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        authenticationFailed, 
+        authenticationFailureType, 
+        authenticationRequestID, 
+        id, 
+        subtype, 
+        userID
+    ); 
+    className = "er.auth.model.ERTwoFactorAuthenticationResponse"; 
+    classProperties = (
+        authenticationFailed, 
+        authenticationFailureType, 
+        authenticationRequest, 
+        subtype, 
+        userID
+    ); 
+    externalName = ERAuthenticationResponse; 
+    fetchSpecificationDictionary = {}; 
+    name = ERTwoFactorAuthenticationResponse; 
+    parent = ERAuthenticationResponse; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERAuthenticationRequest; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = authenticationRequestID; }); 
+            name = authenticationRequest; 
+        }
+    ); 
+    restrictingQualifier = "subtype = \"ERTwoFactorAuthenticationResponse\""; 
+}

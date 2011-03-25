@@ -1,0 +1,26 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = inetAddress; 
+            name = inetAddress; 
+            prototypeName = ipAddress; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = requestDate; 
+            name = requestDate; 
+            prototypeName = jodaDateTime; 
+        }, 
+        {columnName = subtype; name = subtype; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (id, inetAddress, requestDate, subtype); 
+    className = "er.auth.model.ERAuthenticationRequest"; 
+    classProperties = (inetAddress, requestDate, subtype); 
+    externalName = ERAuthenticationRequest; 
+    fetchSpecificationDictionary = {}; 
+    isAbstractEntity = Y; 
+    name = ERAuthenticationRequest; 
+    primaryKeyAttributes = (id); 
+}

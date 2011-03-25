@@ -1,0 +1,24 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {
+            className = "er.auth.model.ERAuthenticationRequest"; 
+            name = ERAuthenticationRequest; 
+        }, 
+        {
+            className = "er.auth.model.ERAuthenticationResponse"; 
+            name = ERAuthenticationResponse; 
+        }, 
+        {
+            className = "er.auth.model.ERTwoFactorAuthenticationRequest"; 
+            name = ERTwoFactorAuthenticationRequest; 
+            parent = ERAuthenticationRequest; 
+        }, 
+        {
+            className = "er.auth.model.ERTwoFactorAuthenticationResponse"; 
+            name = ERTwoFactorAuthenticationResponse; 
+            parent = ERAuthenticationResponse; 
+        }
+    ); 
+}
