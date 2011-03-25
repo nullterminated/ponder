@@ -1,5 +1,0 @@
-Content: WOComponentContent {
-	//Although not strictly necessary, this component exists
-	//to address the excess whitespace generated when using
-	//a conditional in MailWrapper to display plaintext.
-}
