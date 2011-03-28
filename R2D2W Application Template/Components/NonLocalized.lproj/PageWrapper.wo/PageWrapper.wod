@@ -1,0 +1,66 @@
+Content: WOComponentContent {}
+
+DebugFlags: R2D2WDebugFlags {}
+
+DevStyleSheet: ERXStyleSheet {
+	filename = "dev.css";
+}
+
+FavIcon: ERXFavIcon {
+	filename = "favicon.ico";
+}
+
+Form: WOForm {
+}
+
+HasLanguages: WOConditional {
+	condition = hasMultipleLanguages;
+}
+
+Head: R2D2WHead {}
+
+HTML: WOGenericContainer {
+	elementName = "html";
+	"xml:lang" = localizer.@languageCode; //VALID
+	xmlns = "http://www.w3.org/1999/xhtml";
+}
+
+IsDevelopment: WOConditional {
+	condition = application.isDevelopmentMode;
+}
+
+Languages: R2DLanguageList {
+	language = session.language;
+	id = "availableLanguages";
+}
+
+LegendString: WOString {
+	value = localizer.TimeZoneLegend;
+}
+
+Navigation: R2DNavigationMenu {
+	navigationContext = navigationContext;
+}
+
+SkipNav: ERXLocalizedString {
+	value = "PageWrapper.skipNav";
+}
+
+StyleSheet: ERXStyleSheet {
+	filename = "default.css";
+}
+
+Submit: ERXLinkButton {
+	action = submitAction;
+	value = session.localizer.ERD2W.pickButtonLabel;
+}
+
+TimeZoneLabel: WOString {
+	value = localizer.TimeZoneLabel;
+}
+
+TimeZoneMenu: R2DTimeZoneMenu {
+	list = availableTimeZones;
+	selection = session.timeZone;
+	id = "timeZoneMenu";
+}

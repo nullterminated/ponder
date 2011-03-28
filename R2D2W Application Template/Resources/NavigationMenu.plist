@@ -1,0 +1,18 @@
+(
+	{
+		name = Root;
+		children = (ItemOne,ItemTwo,ItemThree);
+	},
+	{
+		name = ItemOne;
+		directActionName = "default";
+	},
+	{
+		name = ItemTwo;
+		directActionName = "default";
+	},
+	{
+		name = ItemThree;
+		directActionName = "default";
+	}
+)
