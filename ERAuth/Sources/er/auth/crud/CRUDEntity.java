@@ -1,4 +1,4 @@
-package er.auth.interfaces;
+package er.auth.crud;
 
 
 public interface CRUDEntity {

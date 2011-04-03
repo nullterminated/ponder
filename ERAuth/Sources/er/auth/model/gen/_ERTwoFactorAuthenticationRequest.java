@@ -8,7 +8,7 @@ import java.math.*;
 import java.util.*;
 import org.apache.log4j.Logger;
 
-import er.auth.interfaces.*;
+import er.auth.crud.*;
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
 

@@ -40,6 +40,7 @@ public class ERAuth extends ERXFrameworkPrincipal {
 	
 	@Override
 	public void finishInitialization() {
+		//Set the auth clazz factory to prevent clazz duplication 
 		EOEnterpriseObjectClazz.setFactory(new ERAuthClazzFactory());
 	}
 
