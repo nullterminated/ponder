@@ -17,7 +17,7 @@ import er.extensions.eof.ERXNonNullObjectInterface;
 import er.extensions.foundation.ERXValueUtilities;
 
 /**
- * A delayed assignment for object related actions.
+ * An assignment for object related actions.
  */
 public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 
