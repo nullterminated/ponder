@@ -113,7 +113,7 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 				choices.add("_edit");
 			}
 		}
-		if("editRelationship".equals(task) && (!rel.ownsDestination())) {
+		if("editRelationship".equals(task) && rel != null && (!rel.ownsDestination())) {
 			choices.add("_removeRelated");
 		}
 		if(isEntityWritable && isEntityDeletable && canDelete) {
