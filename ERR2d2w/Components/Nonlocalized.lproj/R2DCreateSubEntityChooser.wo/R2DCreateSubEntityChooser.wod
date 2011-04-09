@@ -12,11 +12,15 @@ CreateEntityLegend: WOString {
 }
 
 EntityPopup: WOPopUpButton {
-	list = possibleSubEntities;
+	list = createSubEntities;
 	item = subEntity;
 	selection = selectedEntity;
 	noSelectionString = d2wContext.noSelectionStringValue;
 	displayString = displayNameForEntity;
+}
+
+HasSubEntities: WOConditional {
+	condition = createSubEntities.count;
 }
 
 ParentEntityName: WOString {

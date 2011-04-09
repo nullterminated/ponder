@@ -13,7 +13,6 @@ import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSKeyValueCoding;
-import com.webobjects.foundation.NSMutableArray;
 
 import er.directtoweb.components.ERDCustomComponent;
 import er.extensions.appserver.ERXWOContext;
@@ -26,6 +25,7 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 	private EOEntity selectedEntity;
 	private String labelID;
 	private D2WContext ctx;
+	private NSArray<EOEntity> createSubEntities;
 	
 	public R2DCreateSubEntityChooser(WOContext context) {
 		super(context);
@@ -37,29 +37,15 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 		}
 		return ctx;
 	}
-
-	public NSArray<EOEntity> possibleSubEntities() {
-		D2WContext c = ctx();
-		NSArray<EOEntity> e = new NSArray<EOEntity>(d2wContext().entity());
-		return availableSubEntities(e, c);
+	
+	@SuppressWarnings("unchecked")
+	public NSArray<EOEntity> createSubEntities() {
+		if(createSubEntities == null) {
+			createSubEntities = (NSArray<EOEntity>) d2wContext().valueForKey("createSubEntities");
+		}
+		return createSubEntities;
 	}
 	
-	protected NSArray<EOEntity> availableSubEntities(NSArray<EOEntity> entities, D2WContext c) {
-		NSMutableArray<EOEntity> result = new NSMutableArray<EOEntity>();
-		for(EOEntity e : entities) {
-			if(!e.isAbstractEntity()){
-				c.setEntity(e);
-				boolean isEntityEditable = ERXValueUtilities.booleanValue(c.valueForKey("isEntityEditable"));
-				boolean readOnly = ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
-				if(!readOnly && isEntityEditable) {
-					result.add(e);
-				}
-			}
-			result.addObjectsFromArray(availableSubEntities(e.subEntities(), c));
-		}
-		return result;
-	}
-
 	/**
 	 * @return the subEntity
 	 */
