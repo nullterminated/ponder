@@ -31,3 +31,7 @@ AttributeComponent: WOSwitchComponent {
 ComponentDebug: R2DDebuggingComponentHelp {
 	localContext = d2wContext;
 }
+
+DisplayProperty: WOConditional {
+	condition = d2wContext.displayProperty;
+}
