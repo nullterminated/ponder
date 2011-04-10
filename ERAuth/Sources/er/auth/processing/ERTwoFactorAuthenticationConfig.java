@@ -7,17 +7,17 @@ import com.webobjects.appserver.WOComponent;
 public class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, ERCredentialRecoveryConfig {
 	protected final String userEntityName;
 	protected final String usernameKeyPath;
-	protected final String passwordKeyPath;
+	protected final String storedPasswordKeyPath;
 	protected final ERTwoFactorAuthenticationDelegate delegate;
 	
-	public ERTwoFactorAuthenticationConfig(String userEntityName, String usernameKeyPath, String passwordKeyPath) {
-		this(userEntityName, usernameKeyPath, passwordKeyPath, null);
+	public ERTwoFactorAuthenticationConfig(String userEntityName, String usernameKeyPath, String storedPasswordKeyPath) {
+		this(userEntityName, usernameKeyPath, storedPasswordKeyPath, null);
 	}
 	
-	public ERTwoFactorAuthenticationConfig(String userEntityName, String usernameKeyPath, String passwordKeyPath, ERTwoFactorAuthenticationDelegate delegate) {
+	public ERTwoFactorAuthenticationConfig(String userEntityName, String usernameKeyPath, String storedPasswordKeyPath, ERTwoFactorAuthenticationDelegate delegate) {
 		this.userEntityName = userEntityName;
 		this.usernameKeyPath = usernameKeyPath;
-		this.passwordKeyPath = passwordKeyPath;
+		this.storedPasswordKeyPath = storedPasswordKeyPath;
 		this.delegate = delegate == null?new ERTwoFactorAuthenticationDelegate():delegate;
 	}
 	
@@ -45,10 +45,16 @@ public class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, 
 		return usernameKeyPath;
 	}
 	
-	public String passwordKeyPath() {
-		return passwordKeyPath;
+	public String storedPasswordKeyPath() {
+		return storedPasswordKeyPath;
 	}
 	
+	/**
+	 * Verifies that the password entered matches the password stored in the database.
+	 * @param enteredPassword the entered password
+	 * @param storedPassword the stored password
+	 * @return true if the passwords match
+	 */
 	public boolean verifyPassword(String enteredPassword, Object storedPassword) {
 		return storedPassword.equals(enteredPassword);
 	}

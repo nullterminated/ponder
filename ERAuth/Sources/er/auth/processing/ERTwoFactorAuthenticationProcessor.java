@@ -33,8 +33,8 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 		EOQualifier q = ERXQ.equals(config.usernameKeyPath(), authRequest.username());
 		ERXFetchSpecification<EOEnterpriseObject> fs = 
 			new ERXFetchSpecification<EOEnterpriseObject>(config.userEntityName(), q, null);
-		if(config.passwordKeyPath().indexOf(EOKeyValueCodingAdditions.KeyPathSeparator) != -1) {
-			String prefetch = ERXStringUtilities.keyPathWithoutLastProperty(config.passwordKeyPath());
+		if(config.storedPasswordKeyPath().indexOf(EOKeyValueCodingAdditions.KeyPathSeparator) != -1) {
+			String prefetch = ERXStringUtilities.keyPathWithoutLastProperty(config.storedPasswordKeyPath());
 			fs.setPrefetchingRelationshipKeyPaths(new NSArray<String>(prefetch));
 		}
 		NSArray<EOEnterpriseObject> users = fs.fetchObjects(ec);
@@ -46,11 +46,11 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 			break;
 		case 1:
 			EOEnterpriseObject eo = users.lastObject();
-			Object password = eo.valueForKeyPath(config.passwordKeyPath());
+			Object storedPassword = eo.valueForKeyPath(config.storedPasswordKeyPath());
 			EOGlobalID gid = ec.globalIDForObject(eo);
 			ERXKeyGlobalID kgid = ERXKeyGlobalID.globalIDForGID((EOKeyGlobalID)gid);
 			response.setUserID(kgid);
-			if(config.verifyPassword(authRequest.password(), password)) {
+			if(config.verifyPassword(authRequest.password(), storedPassword)) {
 				response.setAuthenticationFailed(Boolean.FALSE);
 				ERStageManager.INSTANCE.setActor(eo);
 			} else {
