@@ -7,12 +7,6 @@ er.extensions.ERXSession.autoAdjustTimeZone=true
 # Migrations
 #er.migration.migrateAtStartup=true 
 #er.migration.createTablesIfNecessary=true 
-#er.migration.modelNames=ERAttachment,ERCoreBusinessLogic,ERPointOfSale,MyEOModel,ERMail
-#ERAttachment.MigrationClassPrefix=er.attachment.migrations.ERAttachment
-#ERCoreBusinessLogic.MigrationClassPrefix=er.corebusinesslogic.migrations.ERCoreBusinessLogic
-#ERPointOfSale.MigrationClassPrefix=er.pointofsale.migrations.ERPointOfSale
-#MyEOModel.MigrationClassPrefix=com.example.migrations.MyEOModel
-#ERMail.MigrationClassPrefix=er.corebusinesslogic.migrations.ERMail
 
 # Connection Dictionary
 #dbConnectURLGLOBAL=jdbc:postgresql://localhost/Example
@@ -22,14 +16,13 @@ er.extensions.ERXSession.autoAdjustTimeZone=true
 #dbConnectDriverGLOBAL=org.postgresql.Driver
 
 # ERAttachment
-er.attachment.file.filesystemPath=/path/to/uploads/${pk}${ext}
-er.attachment.file.webPath=/uploads/${pk}${ext}
-er.attachment.storageType=file
-er.attachment.proxyAsAttachment=true
+#er.attachment.file.filesystemPath=/path/to/uploads/${pk}${ext}
+#er.attachment.file.webPath=/uploads/${pk}${ext}
+#er.attachment.storageType=file
+#er.attachment.proxyAsAttachment=true
 
 # ERR2d2w
 #er.r2d2w.ERR2d2w.createsDerivedCounts=true
-#er.r2d2w.ERR2d2w.printLocalizableKeys=true
 #er.r2d2w.ERR2d2w.ignoreModels=(ERAttachment,erprototypes)
 
 # ERXEC
@@ -78,6 +71,7 @@ er.extensions.ERXApplication.DefaultEncoding=UTF-8
 #er.javamail.smtpAuth=false
 #er.javamail.smtpUser=
 #er.javamail.smtpPassword=
+#er.javamail.defaultEncoding=UTF-8
 
 # Log4j Configuration
 
