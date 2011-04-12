@@ -14,6 +14,7 @@ import com.webobjects.foundation.NSSelector;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.auth.processing.ERTwoFactorAuthenticationConfig;
 import er.directtoweb.components.ERDCustomComponent;
+import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXWOContext;
 import er.extensions.foundation.ERXSelectorUtilities;
 import er.extensions.validation.ERXValidationException;
@@ -37,17 +38,20 @@ public class ERAEditPassword extends ERDCustomComponent {
 	public void takeValuesFromRequest(WORequest request, WOContext context) {
 		super.takeValuesFromRequest(request, context);
 		ERTwoFactorAuthenticationConfig config = config();
-		boolean auth = !hasPassword() || config.verifyPassword(oldPassword(), storedPassword());
-		if (!auth) {
+		boolean hasOldPassword = oldPassword() != null;
+		boolean hasNewPassword = !(newPassword() == null && verifyPassword() == null);
+		if (hasNewPassword && (!hasOldPassword || config.verifyPassword(oldPassword(), storedPassword()))) {
 			ERXValidationException e = ERXValidationFactory.defaultFactory().createCustomException(object(),
 					"InvalidPasswordException");
 			validationFailedWithException(e, e.value(), e.key());
+			return;
 		}
-		boolean match = auth && newPassword() != null && newPassword().equals(verifyPassword());
+		boolean match = ERXExtensions.safeEquals(newPassword(), verifyPassword());
 		if (!match) {
 			ERXValidationException e = ERXValidationFactory.defaultFactory().createCustomException(object(),
 					"MismatchedPasswordException");
 			validationFailedWithException(e, e.value(), e.key());
+			return;
 		} else {
 			try {
 				object().validateTakeValueForKeyPath(newPassword(), d2wContext().propertyKey());
