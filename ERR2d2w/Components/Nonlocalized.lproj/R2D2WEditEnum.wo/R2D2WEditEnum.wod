@@ -15,4 +15,5 @@ EditEnum: R2DToOneRelationship {
     sourceObject = object;
     uiStyle = d2wContext.toOneUIStyle;
 	uniqueID = d2wContext.uniqueID;
+	disabled = d2wContext.disabled;
 }

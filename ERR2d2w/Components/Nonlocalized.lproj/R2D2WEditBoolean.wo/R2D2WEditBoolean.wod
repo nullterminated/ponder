@@ -10,5 +10,6 @@ Selector: R2DBooleanSelector {
 	labelString = d2wContext.displayNameForProperty;
 	selection = objectPropertyValue;
 	uiMode = d2wContext.uiStyle;
+	disabled = d2wContext.disabled;
 }
 

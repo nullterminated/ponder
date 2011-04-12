@@ -18,6 +18,7 @@ FileUpload: WOFileUpload {
 	class = componentClasses;
 	title = d2wContext.tooltip;
 	accept = acceptTypes;
+	disabled = disabled;
 }
 
 Hint: R2D2WHintString {

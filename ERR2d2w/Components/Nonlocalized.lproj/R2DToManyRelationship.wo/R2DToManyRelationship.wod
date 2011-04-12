@@ -1,4 +1,5 @@
 BrowserList: WOBrowser {
+	disabled = d2wContext.disabled;
 	displayString = theCurrentValue;
 	id = ^id;
 	item = theCurrentItem;
@@ -20,6 +21,8 @@ CheckboxFieldset: R2DCheckboxFieldset {
 	id = ^id;
 	legendString = ^propertyLabel;
 	shouldShowSelectAllButtons = ^shouldShowSelectAllButtons;
+	disabled = d2wContext.disabled;
+	
 }
 
 IsBrowserConditional: WOConditional {

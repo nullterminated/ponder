@@ -7,6 +7,7 @@ ButtonContent: WOSwitchComponent {
 EditLink: ERXLinkButton {
 	action = editValues;
 	class = "editToMany";
+	disabled = d2wContext.disabled;
 	value = browserList.count;
 	title = helpString;
 }

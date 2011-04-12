@@ -3,6 +3,7 @@ EditToOneRelationship: R2DToOneRelationship {
     destinationDisplayKey = keyWhenRelationship;
 	destinationEntityName = d2wContext.destinationEntityName;
     destinationSortKey = d2wContext.sortKey;
+    disabled = d2wContext.disabled;
     id = labelID;
     //isMandatory = d2wContext.isMandatory;
 	localizeDisplayKeys = d2wContext.localizeDisplayKeys;

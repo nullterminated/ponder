@@ -212,4 +212,10 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 		String accept = mimeTypes().componentsJoinedByString(",");
 		return ERXStringUtilities.stringIsNullOrEmpty(accept)?null:accept;
 	}
+
+	public String disabled() {
+		Object bool = d2wContext().valueForKey("disabled");
+		Boolean b = ERXValueUtilities.BooleanValueWithDefault(bool, null);
+		return Boolean.TRUE.equals(b)?"disabled":null;
+	}
 }

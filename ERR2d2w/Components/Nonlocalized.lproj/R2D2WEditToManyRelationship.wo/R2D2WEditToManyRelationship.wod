@@ -3,6 +3,7 @@ EditToManyRelationship: R2DToManyRelationship {
 	destinationDisplayKey = keyWhenRelationship;
 	destinationEntityName = d2wContext.destinationEntityName;
 	destinationSortKey = d2wContext.sortKey;
+	disabled = d2wContext.disabled;
 	id = labelID;
 	localizeDisplayKeys = d2wContext.localizeDisplayKeys;
 	possibleChoices = restrictedChoiceList;

@@ -7,6 +7,7 @@ WOPopUpButton : WOPopUpButton {
 	class = ^class;
 	style = ^style;
 	id = labelID;
+	disabled = ^disabled;
 }
 
 RadioButtonFieldset: R2DRadioButtonFieldset {
@@ -39,6 +40,7 @@ DisplayName: WOString {
 WOCheckbox: WOCheckBox {
 	checked = ^selection;
 	class = ^class;
+	disabled = ^disabled;
 	id = labelID;
 	style = ^style;
 }
