@@ -219,7 +219,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		if(eo == null || propertyKey == null) { 
 			throw new IllegalStateException("object and/or propertyKey is null");
 		}
-		boolean b = CRUDUtility.canReadProperty(auth(c), eo, propertyKey);
+		boolean b = CRUDUtility.canUpdateProperty(auth(c), eo, propertyKey);
 		return Boolean.valueOf(b);
 	}
 	
