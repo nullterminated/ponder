@@ -1,11 +1,11 @@
 (
     0 : *true* => crudAuthorization = "er.auth.crud.NoAccessAuthorization" [ERDDelayedObjectCreationAssignment],
+    10 : task = 'edit' => disabled = (null) [ERADefaultAuthorizationAssignment],
     10 : *true* => createSubEntities = (null) [ERADefaultAuthorizationAssignment],
+    10 : task = 'inspect' => displayProperty = (null) [ERADefaultAuthorizationAssignment],
     10 : task = 'inspect' => inspectControllerChoices = (null) [ERADefaultAuthorizationAssignment],
     10 : propertyKey = 'leftControllerAction' => leftControllerChoices = (null) [ERADefaultAuthorizationAssignment],
     10 : propertyKey = 'rightControllerAction' => rightControllerChoices = (null) [ERADefaultAuthorizationAssignment],
-    10 : (task = 'edit' and (propertyType = 'a' or propertyType = 'r')) => disabled = (null) [ERADefaultAuthorizationAssignment],
     10 : (task = 'editRelationship' and parentRelationship.isToMany = 1) => toManyControllerChoices = (null) [ERADefaultAuthorizationAssignment],
-    10 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => toOneControllerChoices = (null) [ERADefaultAuthorizationAssignment],
-    10 : ((task = 'edit' or task = 'inspect') and (propertyType = 'a' or propertyType = 'r')) => displayProperty = (null) [ERADefaultAuthorizationAssignment]
+    10 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => toOneControllerChoices = (null) [ERADefaultAuthorizationAssignment]
 )
