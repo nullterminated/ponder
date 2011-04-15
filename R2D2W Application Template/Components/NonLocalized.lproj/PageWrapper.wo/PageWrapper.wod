@@ -50,7 +50,7 @@ StyleSheet: ERXStyleSheet {
 	filename = "default.css";
 }
 
-Submit: ERXLinkButton {
+Submit: ERXLinkButton5 {
 	action = submitAction;
 	value = session.localizer.ERD2W.pickButtonLabel;
 }

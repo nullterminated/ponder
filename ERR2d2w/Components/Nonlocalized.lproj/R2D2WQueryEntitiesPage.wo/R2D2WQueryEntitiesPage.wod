@@ -30,13 +30,13 @@ QueryForm: ERXWOForm {
 	secure = d2wContext.secureForm;
 }
 
-QueryLink: ERXLinkButton {
+QueryLink: ERXLinkButton5 {
 	action = showRegularQueryAction;
 	submit = false;
 	string = d2wContext.moreOptionsButtonLabel;
 }
 
-SearchButton: ERXLinkButton {
+SearchButton: ERXLinkButton5 {
 	action = queryAction;
 	value = d2wContext.findButtonLabel;
 }

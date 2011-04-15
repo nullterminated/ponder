@@ -4,7 +4,7 @@ ButtonContent: WOSwitchComponent {
 	WOComponentName = d2wContext.buttonContentComponentName;
 }
 
-EditLink: ERXLinkButton {
+EditLink: ERXLinkButton5 {
 	action = editValues;
 	class = "editToMany";
 	disabled = d2wContext.disabled;

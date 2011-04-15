@@ -45,7 +45,7 @@ KeyField: WOTextField {
 	value = key;
 }
 
-OnOffLink: ERXLinkButton {
+OnOffLink: ERXLinkButton5 {
 	action = toggleRuleTracing;
 	string = ruleTracingState;
 }
@@ -59,11 +59,11 @@ ParentConfig: WOString {
 	valueWhenEmpty = "No Parent Configuration";
 }
 
-ShowDefaultECLink: ERXLinkButton {
+ShowDefaultECLink: ERXLinkButton5 {
 	action = showDefaultEditingContext;
 }
 
-ShowECLink: ERXLinkButton {
+ShowECLink: ERXLinkButton5 {
 	action = showEditingContext;
 }
 
@@ -90,7 +90,7 @@ TemplateName: WOString {
 	valueWhenEmpty = "Now this is very strange";
 }
 
-ToggleComponentNameDebugging: ERXLinkButton {
+ToggleComponentNameDebugging: ERXLinkButton5 {
 	action = toggleComponentNameDebugging;
 }
 

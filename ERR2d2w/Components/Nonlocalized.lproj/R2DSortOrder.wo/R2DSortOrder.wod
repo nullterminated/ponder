@@ -1,4 +1,4 @@
-SortButton: ERXLinkButton {
+SortButton: ERXLinkButton5 {
 	action = toggleClicked;
 	class = sortClass;
 	string = displayKey;

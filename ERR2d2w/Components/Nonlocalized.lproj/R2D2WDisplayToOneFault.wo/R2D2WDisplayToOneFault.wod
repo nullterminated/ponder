@@ -1,4 +1,4 @@
-InspectAction: ERXLinkButton {
+InspectAction: ERXLinkButton5 {
 	class = "inspectToOne";
 	directActionName = directActionName;
 	queryDictionary = queryDictionary;
@@ -6,7 +6,7 @@ InspectAction: ERXLinkButton {
 	title = helpString;
 }
 
-InspectLink: ERXLinkButton {
+InspectLink: ERXLinkButton5 {
 	action = toOneAction;
 	class = "inspectToOne";
 	string = d2wContext.displayNameForProperty;

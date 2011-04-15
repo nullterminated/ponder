@@ -1,4 +1,4 @@
-InspectEntityButton: ERXLinkButton {
+InspectEntityButton: ERXLinkButton5 {
 	action = inspectEntity;
 	title = inspectEntityTitle;
 	value = inspectEntityLabel;

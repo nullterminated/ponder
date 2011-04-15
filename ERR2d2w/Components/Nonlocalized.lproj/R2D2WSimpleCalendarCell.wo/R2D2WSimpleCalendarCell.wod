@@ -1,4 +1,4 @@
-DateLink: ERXLinkButton {
+DateLink: ERXLinkButton5 {
 	action = selectDateAction;
 	disabled = ^rangeGrouper.hasNoObjectsForCurrentDate;
 }

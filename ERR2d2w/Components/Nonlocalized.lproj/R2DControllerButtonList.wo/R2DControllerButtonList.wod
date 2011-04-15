@@ -4,7 +4,7 @@ BranchChoices: WORepetition {
 	checkHashCodes = false;
 }
 
-BranchButton: ERXLinkButton {
+BranchButton: ERXLinkButton5 {
 	action = performAction;
 	class = d2wContext.branch.branchButtonID;
 	value = d2wContext.branch.branchButtonLabel;

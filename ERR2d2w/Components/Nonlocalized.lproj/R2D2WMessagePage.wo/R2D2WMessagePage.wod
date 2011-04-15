@@ -1,4 +1,4 @@
-BranchButton: ERXLinkButton {
+BranchButton: ERXLinkButton5 {
 	action = nextPageAction;
 	class = d2wContext.branch.branchButtonID;
 	value = d2wContext.branch.branchButtonLabel;
@@ -59,7 +59,7 @@ Message: WOString {
 	value = message;
 }
 
-OkButton: ERXLinkButton {
+OkButton: ERXLinkButton5 {
 	action = nextPage;
 	class = "ok";
 	value = d2wContext.okButtonLabel;

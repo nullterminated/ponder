@@ -1,4 +1,4 @@
-BranchButton: ERXLinkButton {
+BranchButton: ERXLinkButton5 {
 	action = nextPageAction;
 	class = d2wContext.branch.branchButtonID;
 	value = d2wContext.branch.branchButtonLabel;
@@ -16,7 +16,7 @@ BranchRepetition: WORepetition {
 	checkHashCodes = false;
 }
 
-CancelButton: ERXLinkButton {
+CancelButton: ERXLinkButton5 {
 	action = cancelAction;
 	class = "cancel";
 	value = d2wContext.cancelButtonLabel;
@@ -76,7 +76,7 @@ Message: WOString {
 	escapeHTML = false;
 }
 
-OkButton: ERXLinkButton {
+OkButton: ERXLinkButton5 {
 	action = nextPageAction;
 	class = "ok";
 	value = d2wContext.okButtonLabel;

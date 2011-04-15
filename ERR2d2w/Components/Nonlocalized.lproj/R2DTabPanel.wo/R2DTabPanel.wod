@@ -18,12 +18,12 @@ IsSelectedTab: WOConditional {
 	negate = true;
 }
 
-SelectedTabItem: ERXLinkButton {
+SelectedTabItem: ERXLinkButton5 {
 	href = "#";
 	value = currentTabName;
 }
 
-TabItem: ERXLinkButton {
+TabItem: ERXLinkButton5 {
 	action = switchSubmitTab;
 	name = currentTabNameWithoutSpaces;
 	value = currentTabName;

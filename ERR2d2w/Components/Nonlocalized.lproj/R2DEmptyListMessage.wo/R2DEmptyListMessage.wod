@@ -1,4 +1,4 @@
-CreateObjectLink : ERXLinkButton {
+CreateObjectLink : ERXLinkButton5 {
 	action = createObject;
 }
 

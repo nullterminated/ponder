@@ -10,7 +10,7 @@ HasMoreCrumbs: WOConditional {
 	condition = hasMoreCrumbs;
 }
 
-NextPageLink: ERXLinkButton {
+NextPageLink: ERXLinkButton5 {
 	action = ^page.nextPage;
 	string = nextPageString;
 }

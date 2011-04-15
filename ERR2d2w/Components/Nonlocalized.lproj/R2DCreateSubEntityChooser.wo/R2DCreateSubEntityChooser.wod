@@ -1,4 +1,4 @@
-CreateButton: ERXLinkButton {
+CreateButton: ERXLinkButton5 {
 	action = createAction;
 	value = d2wContext.createButtonLabel;
 }

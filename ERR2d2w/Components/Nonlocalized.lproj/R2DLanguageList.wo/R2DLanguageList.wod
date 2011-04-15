@@ -11,7 +11,7 @@ Languages: WORepetition {
 	list = availableLanguages;
 }
 
-LanguageLink: ERXLinkButton {
+LanguageLink: ERXLinkButton5 {
 	action = languageAction;
 	disabled = isSelected;
 	hreflang = hrefLang;

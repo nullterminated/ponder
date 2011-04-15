@@ -4,7 +4,7 @@ ButtonContent: WOSwitchComponent {
 	WOComponentName = d2wContext.buttonContentComponentName;
 }
 
-EditRelationship: ERXLinkButton {
+EditRelationship: ERXLinkButton5 {
 	action = editRelationship;
 	class = "editToOne";
 	disabled = d2wContext.disabled;
@@ -12,7 +12,7 @@ EditRelationship: ERXLinkButton {
 	title = helpString;
 }
 
-InspectObject: ERXLinkButton {
+InspectObject: ERXLinkButton5 {
 	action = toOneAction;
 	class = "inspectToOne";
 	string = toOneDescription;

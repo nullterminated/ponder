@@ -26,14 +26,14 @@ MeetsDisplayConditions: WOConditional {
 	condition = meetsDisplayConditions;
 }
 
-NavAction: ERXLinkButton {
+NavAction: ERXLinkButton5 {
 	action = action;
 	disabled = isDisabled;
 	string = navigationItem.displayName;
 	submit = false;
 }
 
-NavDirectAction: ERXLinkButton {
+NavDirectAction: ERXLinkButton5 {
 	actionClass = navigationItem.directActionClass;
 	directActionName = navigationItem.uneditedDirectActionName;
 	disabled = isDisabled;
@@ -42,14 +42,14 @@ NavDirectAction: ERXLinkButton {
 	submit = false;
 }
 
-NavHREF: ERXLinkButton {
+NavHREF: ERXLinkButton5 {
 	disabled = isDisabled;
 	href = navigationItem.href;
 	string = navigationItem.displayName;
 	submit = false;
 }
 
-NavPageName: ERXLinkButton {
+NavPageName: ERXLinkButton5 {
 	disabled = isDisabled;
 	pageName = navigationItem.pageName;
 	queryDictionary = queryDictionary;

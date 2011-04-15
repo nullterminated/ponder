@@ -1,4 +1,4 @@
-InspectLink: ERXLinkButton {
+InspectLink: ERXLinkButton5 {
 	action = inspectArrayAction;
 	class = "inspectToMany";
 	string = relationshipCount;
