@@ -1,4 +1,4 @@
-<project name="ServletTest" default="build" basedir=".">
+<project name="${projectName}" default="build" basedir=".">
 	<target name="build" depends="init.build,build.woapp,javaclient,ssdd,war,split,package" />
 
 	<target name="install" depends="init.install,build.woapp,javaclient,ssdd,war,split,package" />
