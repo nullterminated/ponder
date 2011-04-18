@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>R2D2W Application Template</name>
+	<name>${projectName}</name>
 	<comment></comment>
 	<projects>
 	</projects>
