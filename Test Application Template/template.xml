@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template name = "Test Application Template">
+  <inputs>
+    <input name = "basePackage" type = "Package">
+      <question>
+Base test application package
+      </question>
+      <default>your.testapp</default>
+    </input>
+    <input name = "testClassesPrefix" type = "String">
+      <question>
+A prefix to differentiate your test 
+classes from others, such as those 
+of JUnit. (Example: Entering "My" 
+will generate a base TestCase class 
+named "MyTestCase")
+      </question>
+      <default>My</default>
+    </input>
+    <input name = "initialTestPackage" type = "Package">
+      <question>
+The package of a framework class 
+you wish to test
+      </question>
+      <default>com.mydomain.myframework</default>
+    </input>
+    <input name = "initialTestClassName" type = "String">
+      <question>
+The initial class you wish to test
+      </question>
+      <default>MyClass</default>
+    </input>
+  </inputs>
+</template>
