@@ -236,7 +236,8 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 					eo.validateForUpdate();
 				}
 			}
-			if(shouldSaveChanges(c) && ec.hasChanges()) {
+			boolean hasChanges = ec.hasChanges();
+			if(shouldSaveChanges(c) && hasChanges) {
 				try {
 					ec.saveChanges();
 					nextPage = _nextPageFromDelegate(page);
@@ -246,6 +247,8 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 					if(shouldRevertUponSaveFailure(c)) { shouldRevert = true; }
 					throw e;
 				}
+			} else if(!hasChanges) {
+				nextPage = _nextPageFromDelegate(page);
 			}
 		} catch(NSValidation.ValidationException e) {
 			page.setErrorMessage(ERXLocalizer.currentLocalizer().localizedTemplateStringForKeyWithObject("CouldNotSave", e));
