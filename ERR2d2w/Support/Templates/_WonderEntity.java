@@ -67,6 +67,10 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 
   private static Logger LOG = Logger.getLogger(${entity.prefixClassNameWithoutPackage}.class);
 
+  public ${entity.classNameWithOptionalPackage}.${entity.classNameWithoutPackage}Clazz clazz() {
+    return ${entity.classNameWithOptionalPackage}.clazz;
+  }
+  
 #foreach ($attribute in $entity.sortedClassAttributes)
 #if (!$attribute.inherited)
 	
