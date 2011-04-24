@@ -8,13 +8,12 @@ import java.math.*;
 import java.util.*;
 import org.apache.log4j.Logger;
 
-import er.auth.crud.*;
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
 
 @SuppressWarnings("all")
-public abstract class _ERTwoFactorAuthenticationRequest extends er.auth.model.ERAuthenticationRequest implements CRUDEntity {
+public abstract class _ERTwoFactorAuthenticationRequest extends er.auth.model.ERAuthenticationRequest {
   public static final String ENTITY_NAME = "ERTwoFactorAuthenticationRequest";
 
   // Attribute Keys
@@ -33,45 +32,16 @@ public abstract class _ERTwoFactorAuthenticationRequest extends er.auth.model.ER
 
   // Relationships
 
+  public static class _ERTwoFactorAuthenticationRequestClazz<T extends er.auth.model.ERTwoFactorAuthenticationRequest> extends er.auth.model.ERAuthenticationRequest.ERAuthenticationRequestClazz<T> {
+    /* more clazz methods here */
+  }
+
   private static Logger LOG = Logger.getLogger(_ERTwoFactorAuthenticationRequest.class);
 
   public er.auth.model.ERTwoFactorAuthenticationRequest.ERTwoFactorAuthenticationRequestClazz clazz() {
     return er.auth.model.ERTwoFactorAuthenticationRequest.clazz;
   }
   
-  public static class _ERTwoFactorAuthenticationRequestClazz<T extends er.auth.model.ERTwoFactorAuthenticationRequest> extends er.auth.model.ERAuthenticationRequest.ERAuthenticationRequestClazz<T> implements CRUDClazz {
-    /* more clazz methods here */
-    public boolean canCreate(CRUDAuthorization auth) {
-      return auth.canCreate(er.auth.model.ERTwoFactorAuthenticationRequest.clazz);
-    }
-    public boolean canQuery(CRUDAuthorization auth) {
-        return auth.canQuery(er.auth.model.ERTwoFactorAuthenticationRequest.clazz);
-    }
-    public EOQualifier restrictingQualifier(CRUDAuthorization auth) {
-        return auth.restrictingQualifier(er.auth.model.ERTwoFactorAuthenticationRequest.clazz);
-    }
-  }
-
-  public boolean canDelete(CRUDAuthorization auth) {
-    return auth.canDelete((er.auth.model.ERTwoFactorAuthenticationRequest)this);
-  }
-  
-  public boolean canRead(CRUDAuthorization auth) {
-	    return auth.canRead((er.auth.model.ERTwoFactorAuthenticationRequest)this);
-  }
-  
-  public boolean canReadProperty(CRUDAuthorization auth, String propertyKey) {
-	    return auth.canReadProperty((er.auth.model.ERTwoFactorAuthenticationRequest)this, propertyKey);
-  }
-  
-  public boolean canUpdate(CRUDAuthorization auth) {
-	    return auth.canUpdate((er.auth.model.ERTwoFactorAuthenticationRequest)this);
-  }
-  
-  public boolean canUpdateProperty(CRUDAuthorization auth, String propertyKey) {
-	    return auth.canUpdateProperty((er.auth.model.ERTwoFactorAuthenticationRequest)this, propertyKey);
-  }
-
 	
   public String username() {
     return (String) storedValueForKey(_ERTwoFactorAuthenticationRequest.USERNAME_KEY);

@@ -8,13 +8,12 @@ import java.math.*;
 import java.util.*;
 import org.apache.log4j.Logger;
 
-import er.auth.crud.*;
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
 
 @SuppressWarnings("all")
-public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGenericRecord implements CRUDEntity {
+public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGenericRecord {
   public static final String ENTITY_NAME = "ERAuthenticationResponse";
 
   // Attribute Keys
@@ -35,45 +34,16 @@ public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGen
   // Relationships
   public static final String AUTHENTICATION_REQUEST_KEY = AUTHENTICATION_REQUEST.key();
 
+  public static class _ERAuthenticationResponseClazz<T extends er.auth.model.ERAuthenticationResponse> extends ERXGenericRecord.ERXGenericRecordClazz<T> {
+    /* more clazz methods here */
+  }
+
   private static Logger LOG = Logger.getLogger(_ERAuthenticationResponse.class);
 
   public er.auth.model.ERAuthenticationResponse.ERAuthenticationResponseClazz clazz() {
     return er.auth.model.ERAuthenticationResponse.clazz;
   }
   
-  public static class _ERAuthenticationResponseClazz<T extends er.auth.model.ERAuthenticationResponse> extends ERXGenericRecord.ERXGenericRecordClazz<T> implements CRUDClazz {
-    /* more clazz methods here */
-    public boolean canCreate(CRUDAuthorization auth) {
-      return auth.canCreate(er.auth.model.ERAuthenticationResponse.clazz);
-    }
-    public boolean canQuery(CRUDAuthorization auth) {
-        return auth.canQuery(er.auth.model.ERAuthenticationResponse.clazz);
-    }
-    public EOQualifier restrictingQualifier(CRUDAuthorization auth) {
-        return auth.restrictingQualifier(er.auth.model.ERAuthenticationResponse.clazz);
-    }
-  }
-
-  public boolean canDelete(CRUDAuthorization auth) {
-    return auth.canDelete((er.auth.model.ERAuthenticationResponse)this);
-  }
-  
-  public boolean canRead(CRUDAuthorization auth) {
-	    return auth.canRead((er.auth.model.ERAuthenticationResponse)this);
-  }
-  
-  public boolean canReadProperty(CRUDAuthorization auth, String propertyKey) {
-	    return auth.canReadProperty((er.auth.model.ERAuthenticationResponse)this, propertyKey);
-  }
-  
-  public boolean canUpdate(CRUDAuthorization auth) {
-	    return auth.canUpdate((er.auth.model.ERAuthenticationResponse)this);
-  }
-  
-  public boolean canUpdateProperty(CRUDAuthorization auth, String propertyKey) {
-	    return auth.canUpdateProperty((er.auth.model.ERAuthenticationResponse)this, propertyKey);
-  }
-
 	
   public Boolean authenticationFailed() {
     return (Boolean) storedValueForKey(_ERAuthenticationResponse.AUTHENTICATION_FAILED_KEY);

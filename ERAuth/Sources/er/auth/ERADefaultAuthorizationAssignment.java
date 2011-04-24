@@ -15,8 +15,6 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSForwardException;
 import com.webobjects.foundation.NSMutableArray;
 
-import er.auth.crud.CRUDAuthorization;
-import er.auth.crud.CRUDUtility;
 import er.directtoweb.assignments.ERDAssignment;
 import er.directtoweb.assignments.delayed.ERDDelayedAssignment;
 import er.extensions.eof.ERXGuardedObjectInterface;
@@ -72,7 +70,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		if ("select".equals(c.task())) {
 			choices.add("_select");
 		}
-		if (CRUDUtility.canRead(auth(c), object(c))) {
+		if (CRUDAuthorization.CAN_READ.invoke(auth(c), object(c))) {
 			String choice = "editRelationship".equals(c.task()) ? "_inspectRelated" : "_inspect";
 			choices.add(choice);
 		}
@@ -92,7 +90,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		String task = c.task();
 		CRUDAuthorization auth = auth(c);
 
-		if (isEntityWritable && CRUDUtility.canUpdate(auth, eo) && canUpdate) {
+		if (isEntityWritable && CRUDAuthorization.CAN_UPDATE.invoke(auth, eo) && canUpdate) {
 			if ("editRelationship".equals(task)) {
 				choices.add("_editRelated");
 			} else if (!"edit".equals(task)) {
@@ -112,7 +110,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 			}
 
 		}
-		if (isEntityWritable && CRUDUtility.canDelete(auth, eo) && canDelete) {
+		if (isEntityWritable && CRUDAuthorization.CAN_DELETE.invoke(auth, eo) && canDelete) {
 			choices.add("_delete");
 		}
 		return choices;
@@ -130,12 +128,12 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		}
 		CRUDAuthorization auth = auth(c);
 		if(rel != null) {
-			boolean canQuery = CRUDUtility.canQuery(auth, rel.destinationEntity().name());
+			boolean canQuery = CRUDAuthorization.CAN_QUERY.invoke(auth, rel.destinationEntity().name());
 			if (!rel.ownsDestination() && canQuery) {
 				choices.add("_queryRelated");
 			}
 		}
-		if (isEntityWritable && CRUDUtility.canCreate(auth, e.name()) && isConcrete && e.subEntities().isEmpty()) {
+		if (isEntityWritable && CRUDAuthorization.CAN_CREATE.invoke(auth, e.name()) && isConcrete && e.subEntities().isEmpty()) {
 			choices.add("_createRelated");
 		}
 		return choices;
@@ -161,19 +159,19 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		if (rel.inverseRelationship() == null || isEntityWritable) {
 			choices.add("_queryRelated");
 		}
-		if (eo != null && CRUDUtility.canRead(auth, eo)) {
+		if (eo != null && CRUDAuthorization.CAN_READ.invoke(auth, eo)) {
 			choices.add("_inspectRelated");
 		}
-		if (isEntityWritable && CRUDUtility.canCreate(auth, e.name()) && isConcrete && e.subEntities().isEmpty()) {
+		if (isEntityWritable && CRUDAuthorization.CAN_CREATE.invoke(auth, e.name()) && isConcrete && e.subEntities().isEmpty()) {
 			choices.add("_createRelated");
 		}
-		if (isEntityWritable && CRUDUtility.canUpdate(auth, eo) && canUpdate) {
+		if (isEntityWritable && CRUDAuthorization.CAN_UPDATE.invoke(auth, eo) && canUpdate) {
 			choices.add("_editRelated");
 			if (!rel.ownsDestination()) {
 				choices.add("_removeRelated");
 			}
 		}
-		if (isEntityWritable && CRUDUtility.canDelete(auth, eo) && canDelete) {
+		if (isEntityWritable && CRUDAuthorization.CAN_DELETE.invoke(auth, eo) && canDelete) {
 			choices.add("_delete");
 		}
 		return choices;
@@ -194,10 +192,10 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		if (!c.frame()) {
 			choices.add("_return");
 		}
-		if (isEntityWritable && CRUDUtility.canUpdate(auth, eo) && canUpdate) {
+		if (isEntityWritable && CRUDAuthorization.CAN_UPDATE.invoke(auth, eo) && canUpdate) {
 			choices.add("_edit");
 		}
-		if (isEntityWritable && CRUDUtility.canDelete(auth, eo) && canDelete) {
+		if (isEntityWritable && CRUDAuthorization.CAN_DELETE.invoke(auth, eo) && canDelete) {
 			choices.add("_deleteReturn");
 		}
 		return choices;
@@ -209,7 +207,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		if(eo == null || propertyKey == null) { 
 			throw new IllegalStateException("object and/or propertyKey is null");
 		}
-		boolean b = CRUDUtility.canReadProperty(auth(c), eo, propertyKey);
+		boolean b = CRUDAuthorization.CAN_READ_PROPERTY.invoke(auth(c), eo, propertyKey);
 		return Boolean.valueOf(b);
 	}
 	
@@ -219,7 +217,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		if(eo == null || propertyKey == null) { 
 			throw new IllegalStateException("object and/or propertyKey is null");
 		}
-		boolean b = CRUDUtility.canUpdateProperty(auth(c), eo, propertyKey);
+		boolean b = CRUDAuthorization.CAN_UPDATE_PROPERTY.invoke(auth(c), eo, propertyKey);
 		return Boolean.valueOf(b);
 	}
 	
@@ -245,7 +243,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 		for(EOEntity e : entities) {
 			if(!e.isAbstractEntity()){
 				c.setEntity(e);
-				boolean canCreate = CRUDUtility.canCreate(auth(c), e.name());
+				boolean canCreate = CRUDAuthorization.CAN_CREATE.invoke(auth(c), e.name());
 				boolean readOnly = e.isReadOnly() || ERXValueUtilities.booleanValue(c.valueForKey("readOnly"));
 				if(!readOnly && canCreate) {
 					result.add(e);

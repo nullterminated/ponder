@@ -10,7 +10,6 @@ import java.math.*;
 import java.util.*;
 import org.apache.log4j.Logger;
 
-import er.auth.crud.*;
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
 
@@ -23,7 +22,7 @@ import er.extensions.foundation.*;
 #end
 
 @SuppressWarnings("all")
-public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($entity.parentClassNameSet)${entity.parentClassName}#elseif ($entity.partialEntitySet)er.extensions.partials.ERXPartial<${entity.partialEntity.className}>#elseif ($entity.parentSet)${entity.parent.classNameWithDefault}#elseif ($EOGenericRecord)${EOGenericRecord}#else ERXGenericRecord#end implements CRUDEntity {
+public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($entity.parentClassNameSet)${entity.parentClassName}#elseif ($entity.partialEntitySet)er.extensions.partials.ERXPartial<${entity.partialEntity.className}>#elseif ($entity.parentSet)${entity.parent.classNameWithDefault}#elseif ($EOGenericRecord)${EOGenericRecord}#else ERXGenericRecord#end {
 #if ($entity.partialEntitySet)
   public static final String ENTITY_NAME = "$entity.partialEntity.name";
 #else
@@ -62,45 +61,16 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
   public static final String ${relationship.uppercaseUnderscoreName}_KEY = ${relationship.uppercaseUnderscoreName}.key();
 #end
 
+  public static class _${entity.classNameWithoutPackage}Clazz<T extends ${entity.classNameWithOptionalPackage}> extends ${parentClazzClass} {
+    /* more clazz methods here */
+  }
+
   private static Logger LOG = Logger.getLogger(${entity.prefixClassNameWithoutPackage}.class);
 
   public ${entity.classNameWithOptionalPackage}.${entity.classNameWithoutPackage}Clazz clazz() {
     return ${entity.classNameWithOptionalPackage}.clazz;
   }
   
-  public static class _${entity.classNameWithoutPackage}Clazz<T extends ${entity.classNameWithOptionalPackage}> extends ${parentClazzClass} implements CRUDClazz {
-    /* more clazz methods here */
-    public boolean canCreate(CRUDAuthorization auth) {
-      return auth.canCreate(${entity.classNameWithOptionalPackage}.clazz);
-    }
-    public boolean canQuery(CRUDAuthorization auth) {
-        return auth.canQuery(${entity.classNameWithOptionalPackage}.clazz);
-    }
-    public EOQualifier restrictingQualifier(CRUDAuthorization auth) {
-        return auth.restrictingQualifier(${entity.classNameWithOptionalPackage}.clazz);
-    }
-  }
-
-  public boolean canDelete(CRUDAuthorization auth) {
-    return auth.canDelete((${entity.classNameWithOptionalPackage})this);
-  }
-  
-  public boolean canRead(CRUDAuthorization auth) {
-	    return auth.canRead((${entity.classNameWithOptionalPackage})this);
-  }
-  
-  public boolean canReadProperty(CRUDAuthorization auth, String propertyKey) {
-	    return auth.canReadProperty((${entity.classNameWithOptionalPackage})this, propertyKey);
-  }
-  
-  public boolean canUpdate(CRUDAuthorization auth) {
-	    return auth.canUpdate((${entity.classNameWithOptionalPackage})this);
-  }
-  
-  public boolean canUpdateProperty(CRUDAuthorization auth, String propertyKey) {
-	    return auth.canUpdateProperty((${entity.classNameWithOptionalPackage})this, propertyKey);
-  }
-
 #foreach ($attribute in $entity.sortedClassAttributes)
 #if (!$attribute.inherited)
 	
