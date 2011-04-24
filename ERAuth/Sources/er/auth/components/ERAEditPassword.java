@@ -30,6 +30,7 @@ public class ERAEditPassword extends ERDCustomComponent {
 	private String oldID;
 	private String newID;
 	private String verifyID;
+	private EOEnterpriseObject object;
 
 	public ERAEditPassword(WOContext context) {
 		super(context);
@@ -40,7 +41,13 @@ public class ERAEditPassword extends ERDCustomComponent {
 		ERTwoFactorAuthenticationConfig config = config();
 		boolean hasOldPassword = oldPassword() != null;
 		boolean hasNewPassword = !(newPassword() == null && verifyPassword() == null);
-		if (hasNewPassword && (!hasOldPassword || config.verifyPassword(oldPassword(), storedPassword()))) {
+		
+		//If all fields are empty, return
+		if(!hasOldPassword && !hasNewPassword) { return; }
+		
+		//If the stored password is not null and password field does not match it, throw
+		boolean hasPassword = hasPassword();
+		if (hasPassword && (!hasOldPassword || !config.verifyPassword(oldPassword(), storedPassword()))) {
 			ERXValidationException e = ERXValidationFactory.defaultFactory().createCustomException(object(),
 					"InvalidPasswordException");
 			validationFailedWithException(e, e.value(), e.key());
@@ -59,10 +66,6 @@ public class ERAEditPassword extends ERDCustomComponent {
 				validationFailedWithException(e, e.object(), e.key());
 			}
 		}
-	}
-
-	public EOEnterpriseObject object() {
-		return (EOEnterpriseObject) d2wContext().valueForKey("object");
 	}
 
 	public ERTwoFactorAuthenticationConfig config() {
@@ -157,6 +160,14 @@ public class ERAEditPassword extends ERDCustomComponent {
 	 */
 	public void setVerifyPassword(String verifyPassword) {
 		this.verifyPassword = verifyPassword;
+	}
+
+	public EOEnterpriseObject object() {
+		return object;
+	}
+
+	public void setObject(EOEnterpriseObject object) {
+		this.object = object;
 	}
 
 	/**
