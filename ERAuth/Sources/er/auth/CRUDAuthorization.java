@@ -3,6 +3,7 @@ package er.auth;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOQualifier;
 
+import er.corebusinesslogic.ERCoreBusinessLogic;
 import er.extensions.eof.EOEnterpriseObjectClazz;
 
 public class CRUDAuthorization {
@@ -23,6 +24,10 @@ public class CRUDAuthorization {
 	public static final ERASelector<EOQualifier, CRUDAuthorization> RESTRICTING_QUERY_QUALIFIER =
 		new ERASelector<EOQualifier, CRUDAuthorization>("restrictingQueryQualifier", CRUDAuthorization.class, new Class<?>[]{EOEnterpriseObject.class});
 
+	public boolean isActor(EOEnterpriseObject eo) {
+		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
+	}
+	
 	public <T extends EOEnterpriseObject> Boolean canCreate(EOEnterpriseObjectClazz<T> clazz) {
 		return Boolean.FALSE;
 	}
