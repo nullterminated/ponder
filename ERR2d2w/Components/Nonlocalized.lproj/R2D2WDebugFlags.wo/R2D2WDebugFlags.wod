@@ -3,9 +3,10 @@ Show: WOConditional {
 }
 
 Log4J: ERXLinkButton5 {
-	actionClass = "R2D2WDirectAction";
+	actionClass = "ERXDirectAction";
 	directActionName = "log4j";
 	string = "Log4J";
+	target = "log4j";
 }
 
 D2W: ERXLinkButton5 {
@@ -27,17 +28,24 @@ Dump: ERXLinkButton5 {
 	actionClass = "ERXDirectAction";
 	directActionName = "dumpCreatedKeys";
 	string = "Created keys";
+	target = "dumpLocalizedKeys";
 }
+
 WOStats: ERXLinkButton5 {
 	action = statisticsPage;
 	string = "WOStats";
+	target = "stats";
 }
+
 Localization: ERXLinkButton5 {
 	actionClass = "ERXDirectAction";
 	directActionName = "editLocalizedFiles";
 	string = "Localization";
+	target = "localizer";
 }
+
 Test: ERXLinkButton5 {
 	actionClass = "er.selenium.SeleniumStartTesting";
 	string = "Run Test";
+	target = "selenium";
 }
