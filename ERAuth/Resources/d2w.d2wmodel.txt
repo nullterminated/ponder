@@ -7,5 +7,6 @@
     10 : propertyKey = 'leftControllerAction' => leftControllerChoices = (null) [ERADefaultAuthorizationAssignment],
     10 : propertyKey = 'rightControllerAction' => rightControllerChoices = (null) [ERADefaultAuthorizationAssignment],
     10 : (task = 'editRelationship' and parentRelationship.isToMany = 1) => toManyControllerChoices = (null) [ERADefaultAuthorizationAssignment],
-    10 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => toOneControllerChoices = (null) [ERADefaultAuthorizationAssignment]
+    10 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => toOneControllerChoices = (null) [ERADefaultAuthorizationAssignment],
+    20 : task = 'queryAll' => visibleEntityNames = (null) [ERADefaultAuthorizationAssignment]
 )

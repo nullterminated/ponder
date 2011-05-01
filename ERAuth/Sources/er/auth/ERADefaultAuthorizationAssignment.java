@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.webobjects.appserver.WOSession;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WModel;
+import com.webobjects.directtoweb.D2WUtils;
 import com.webobjects.eoaccess.EOEntity;
 import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eocontrol.EOEnterpriseObject;
@@ -250,6 +251,20 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 				}
 			}
 			result.addObjectsFromArray(_createSubEntities(e.subEntities(), c));
+		}
+		return result;
+	}
+	
+	public NSArray<String> visibleEntityNames(D2WContext c) {
+		NSArray<String> names = D2WUtils.smartDefaultEntityNames();
+		final int count = names.count();
+		final CRUDAuthorization auth = auth(c);
+		NSMutableArray<String> result = new NSMutableArray<String>(count);
+		for(int i = 0; i < count; ++i) {
+			String name = names.objectAtIndex(i);
+			if(CRUDAuthorization.CAN_QUERY.invoke(auth, name)) {
+				result.addObject(name);
+			}
 		}
 		return result;
 	}
