@@ -1,0 +1,310 @@
+#Preference handling
+er.corebusinesslogic.ERCoreUserPreferences.handlerClassName=er.r2d2w.delegates.PreferenceHandlerDelegate
+
+#Auto adjust WOString and WOTextfield for session.timeZone
+er.extensions.ERXSession.autoAdjustTimeZone=true
+
+# Migrations
+er.migration.migrateAtStartup=true 
+er.migration.createTablesIfNecessary=true 
+
+# Connection Dictionary
+#dbConnectURLGLOBAL=jdbc:postgresql://localhost/Example
+#dbConnectUserGLOBAL=postgres
+#dbConnectPasswordGLOBAL=mypassword
+#dbEOPrototypesEntityGLOBAL=EOJDBCPostgresqlPrototypes
+#dbConnectDriverGLOBAL=org.postgresql.Driver
+
+#H2 connection
+dbConnectURLGLOBAL=jdbc:h2:file://tmp/AuthExample
+
+# Because H2 doesn't have deferred fk constraints
+com.webobjects.eoaccess.ERXEntityDependencyOrderingDelegate.active=true
+
+# ERAttachment
+er.attachment.file.filesystemPath=/path/to/uploads/${pk}${ext}
+er.attachment.file.webPath=/uploads/${pk}${ext}
+er.attachment.storageType=file
+er.attachment.proxyAsAttachment=true
+
+# ERR2d2w
+#er.r2d2w.ERR2d2w.createsDerivedCounts=true
+#er.r2d2w.ERR2d2w.ignoreModels=(ERAttachment,erprototypes)
+
+# ERXEC
+er.extensions.ERXApplication.useEditingContextUnlocker=true
+er.extensions.ERXEC.defaultAutomaticLockUnlock=true
+er.extensions.ERXEC.useSharedEditingContext=false
+er.extensions.ERXEC.defaultCoalesceAutoLocks=true
+er.extensions.ERXEC.useUnlocker=true
+er.extensions.ERXEC.safeLocking=true
+
+# GZip Responses
+er.extensions.ERXApplication.responseCompressionEnabled=true
+er.extensions.ERXApplication.responseCompressionTypes=("application/x-javascript", "application/xhtml+xml", "application/xml")
+
+# Secure session cookies
+#er.extensions.ERXSession.useSecureSessionCookies=true
+
+# Localization
+ERXLanguages=(en,ja)
+er.extensions.ERXGenericRecord.localizationShouldFallbackToDefaultLanguage=true
+er.extensions.ERXLocalizer.availableLanguages=(English,Japanese)
+er.extensions.ERXLocalizer.defaultLanguage=English
+er.extensions.ERXLocalizer.fileNamesToWatch=("Localizable.strings","ValidationTemplate.strings")
+#er.extensions.ERXLocalizer.useLocalizedFormatters=true
+
+# Project Encoding
+er.extensions.ERXApplication.DefaultEncoding=UTF-8
+
+# Click to Open
+#wolips.password=password
+#wolips.host=localhost
+#wolips.port=9485
+#er.component.clickToOpen=true
+#er.extensions.ERXApplication.developmentMode=true
+# These two are unnecessary if using the Ajax framework in Wonder
+#wolips.prototype.framework=app
+#wolips.prototype.fileName=prototype.js
+
+# ERJavaMail
+#er.javamail.adminEmail=admin@yourhost.com
+#er.javamail.centralize=false
+#er.javamail.debugEnabled=false
+#er.javamail.milliSecondsWaitIfSenderOverflowed=6000
+#er.javamail.smtpHost=your.smtpserver.com
+#er.javamail.smtpAuth=false
+#er.javamail.smtpUser=
+#er.javamail.smtpPassword=
+
+# Log4j Configuration
+
+# Set root category priority to DEBUG and its only appender to A1.
+log4j.rootCategory=DEBUG, A1
+
+# A1 is set to be a FileAppender which outputs to System.out.
+log4j.appender.A1=org.apache.log4j.ConsoleAppender
+
+# A1 uses PatternLayout.
+log4j.appender.A1.layout=er.extensions.logging.ERXPatternLayout
+log4j.appender.A1.layout.ConversionPattern=%-5p (%F:%L) - %m%n
+# Note that (%F:%L) is fairly slow and shouldn't be used in performance intensive logging
+
+# Custom Categories - These are the main categories and sub categories
+# that are used in frameworks.
+# Base Category
+log4j.logger.er=INFO
+
+# Here are a few log4j sub-categories that are interesting.
+# Don't forget that in developement mode this file will get reloaded
+# everytime it changes, so if you say want to turn adaptor debugging
+# on in the middle of the app simply set the below category to debug.
+# Very handy.
+
+# ERExtensions
+# Transaction - Switching this to debug will start the sql ouputting.
+log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+
+# Fixes - Turning this on will show all the models that are loaded
+log4j.logger.er.extensions.fixes.ERSharedEOLoader=INFO
+
+er.extensions.ERXNSLogLog4jBridge=INFO
+
+#log4j.logger.er.eo.ERXGenericRecord=DEBUG
+#log4j.logger.er.validation.ERXEntityClassDescription=DEBUG
+#log4j.logger.er.default.ERXEntityClassDescription=DEBUG
+#log4j.logger.er.extensions.ERXApplication.RequestHandling=DEBUG
+
+log4j.logger.er.extensions.ERXDatabaseContextDelegate=WARN
+log4j.logger.er.extensions.ERXConfigurationManager=INFO
+log4j.logger.ognl.helperfunction.WOHelperFunctionParser=WARN
+
+log4j.category.com.webobjects.eoaccess.ERXModel=WARN
+log4j.logger.er.directtoweb.rules.ERD2WTraceRuleFiringEnabled=DEBUG
+log4j.logger.org.apache.commons=INFO
+log4j.category.er.extensions.appserver.ERXApplication$JarChecker=WARN
+
+
+
+# ERMimeTypes
+er.attachment.mimeTypes=application/binhex,application/gzip,application/javascript,application/java-archive,application/jnlp,application/macbinary,application/pdf,application/vnd.rn-realaudio,application/vnd.rn-realmedia,application/x-sit,application/zip,audio/aiff,audio/basic,audio/mpeg,audio/mp4,audio/wav,image/bmp,image/gif,image/jpeg,image/jp2,image/png,image/svg+xml,image/tiff,image/vnd.adobe.photoshop,image/vnd.microsoft.icon,text/directory,text/html,text/plain,text/rtf,text/xml,video/3gpp,video/3gpp2,video/x-ms-asf,video/x-ms-asx,video/mp4,video/mpeg,video/msvideo,video/quicktime,video/x-ms-wm,video/x-ms-wma,video/x-ms-wmp,video/x-ms-wmv,text/x-diff,application/x-octet-stream
+
+er.attachment.mimeType.application/binhex.name=BinHex archive
+er.attachment.mimeType.application/binhex.uti=com.apple.binhex-archive
+er.attachment.mimeType.application/binhex.extensions=hqx
+
+er.attachment.mimeType.application/gzip.name=Gzip archive
+er.attachment.mimeType.application/gzip.uti=org.gnu.gnu-zip-archive
+er.attachment.mimeType.application/gzip.extensions=gz,gzip,tgz
+
+er.attachment.mimeType.application/javascript.name=JavaScript
+er.attachment.mimeType.application/javascript.uti=com.netscape.javascript-​source
+er.attachment.mimeType.application/javascript.extensions=js,jscript	
+
+er.attachment.mimeType.application/java-archive.name=Java Archive
+er.attachment.mimeType.application/java-archive.uti=com.sun.java-archive
+er.attachment.mimeType.application/java-archive.extensions=jar
+
+er.attachment.mimeType.application/jnlp.name=Java Web Start
+er.attachment.mimeType.application/jnlp.uti=com.sun.java-web-start
+er.attachment.mimeType.application/jnlp.extensions=jnlp
+
+er.attachment.mimeType.application/macbinary.name=MacBinary archive
+er.attachment.mimeType.application/macbinary.uti=com.apple.macbinary-​archive
+er.attachment.mimeType.application/macbinary.extensions=bin
+
+er.attachment.mimeType.application/pdf.name=Adobe Portable Document Format
+er.attachment.mimeType.application/pdf.uti=com.adobe.pdf
+er.attachment.mimeType.application/pdf.extensions=pdf
+
+er.attachment.mimeType.application/vnd.rn-realaudio.name=RealMedia audio
+er.attachment.mimeType.application/vnd.rn-realaudio.uti=com.real.realaudio
+er.attachment.mimeType.application/vnd.rn-realaudio.extensions=ra,ram
+
+er.attachment.mimeType.application/vnd.rn-realmedia.name=RealMedia
+er.attachment.mimeType.application/vnd.rn-realmedia.uti=com.real.realmedia
+er.attachment.mimeType.application/vnd.rn-realmedia.extensions=rm
+
+er.attachment.mimeType.application/x-Shockwave-Flash.name=Shockwave Flash
+er.attachment.mimeType.application/x-Shockwave-Flash.extensions=swf,flv
+
+er.attachment.mimeType.application/x-sit.name=Stuffit archive
+er.attachment.mimeType.application/x-sit.uti=com.allume.stuffit-archive
+er.attachment.mimeType.application/x-sit.extensions=sit,sitx
+
+er.attachment.mimeType.application/zip.name=Zip archive
+er.attachment.mimeType.application/zip.uti=com.pkware.zip-archive
+er.attachment.mimeType.application/zip.extensions=zip
+
+er.attachment.mimeType.audio/aiff.name=AIFF Audio
+er.attachment.mimeType.audio/aiff.uti=public.aiff-audio
+er.attachment.mimeType.audio/aiff.extensions=aiff,aif,aifc,
+
+er.attachment.mimeType.audio/basic.name=μLaw Audio
+er.attachment.mimeType.audio/basic.uti=public.ulaw-audio
+er.attachment.mimeType.audio/basic.extensions=au,ulw,snd
+
+er.attachment.mimeType.audio/mpeg.name=MPEG-1 Layer 3 Audio
+er.attachment.mimeType.audio/mpeg.uti=public.mp3
+er.attachment.mimeType.audio/mpeg.extensions=mp3
+
+er.attachment.mimeType.audio/mp4.name=MPEG-4 Audio
+er.attachment.mimeType.audio/mp4.uti=public.mpeg-4-audio
+er.attachment.mimeType.audio/mp4.extensions=m4a
+
+er.attachment.mimeType.audio/wav.name=Waveform audio
+er.attachment.mimeType.audio/wav.uti=com.microsoft.waveform-audio
+er.attachment.mimeType.audio/wav.extensions=wav,wave
+
+er.attachment.mimeType.font/opentype.name=OpenType Font
+er.attachment.mimeType.font/opentype.extensions=otf
+
+er.attachment.mimeType.font/truetype.name=TrueType Font
+er.attachment.mimeType.font/truetype.extensions=ttf
+
+er.attachment.mimeType.image/bmp.name=Windows bitmap image
+er.attachment.mimeType.image/bmp.uti=com.microsoft.bmp 
+er.attachment.mimeType.image/bmp.extensions=bmp
+
+er.attachment.mimeType.image/gif.name=GIF Image
+er.attachment.mimeType.image/gif.uti=com.compuserve.gif
+er.attachment.mimeType.image/gif.extensions=gif
+
+er.attachment.mimeType.image/jpeg.name=JPEG Image
+er.attachment.mimeType.image/jpeg.uti=public.jpeg
+er.attachment.mimeType.image/jpeg.extensions=jpg,jpeg,jfif,jfi
+
+er.attachment.mimeType.image/jp2.name=JPEG 2000 Image
+er.attachment.mimeType.image/jp2.uti=public.jpeg-2000
+er.attachment.mimeType.image/jp2.extensions=jp2
+
+er.attachment.mimeType.image/png.name=Portable Network Graphics
+er.attachment.mimeType.image/png.uti=public.png
+er.attachment.mimeType.image/png.extensions=png
+
+er.attachment.mimeType.image/svg+xml.name=Scalable Vector Graphics
+er.attachment.mimeType.image/svg+xml.extensions=svg
+
+er.attachment.mimeType.image/tiff.name=Tagged Image File Format
+er.attachment.mimeType.image/tiff.uti=public.tiff
+er.attachment.mimeType.image/tiff.extensions=tiff,tif
+
+er.attachment.mimeType.image/vnd.adobe.photoshop.name=Photoshop Document
+er.attachment.mimeType.image/vnd.adobe.photoshop.uti=com.adobe.photoshop-​image
+er.attachment.mimeType.image/vnd.adobe.photoshop.extensions=psd
+
+er.attachment.mimeType.image/vnd.microsoft.icon.name=Windows icon
+er.attachment.mimeType.image/vnd.microsoft.icon.uti=com.microsoft.ico 
+er.attachment.mimeType.image/vnd.microsoft.icon.extensions=ico
+
+er.attachment.mimeType.text/directory.name=vCard (electronic business card)
+er.attachment.mimeType.text/directory.uti=public.vcard
+er.attachment.mimeType.text/directory.extensions=vcf,vcard
+
+er.attachment.mimeType.text/html.name=Hyper Text Markup Language 
+er.attachment.mimeType.text/html.uti=public.html
+er.attachment.mimeType.text/html.extensions=html,htm
+
+er.attachment.mimeType.text/plain.name=Plain Text
+er.attachment.mimeType.text/plain.uti=public.plain-text
+er.attachment.mimeType.text/plain.extensions=txt
+
+er.attachment.mimeType.text/rtf.name=Rich Text
+er.attachment.mimeType.text/rtf.uti=public.rtf
+er.attachment.mimeType.text/rtf.extensions=rtf
+
+er.attachment.mimeType.text/xml.name=eXtensible Markup Language
+er.attachment.mimeType.text/xml.uti=public.xml
+er.attachment.mimeType.text/xml.extensions=xml
+
+er.attachment.mimeType.video/3gpp.name=3GPP movie
+er.attachment.mimeType.video/3gpp.uti=public.3gpp
+er.attachment.mimeType.video/3gpp.extensions=3gp,3gpp
+
+er.attachment.mimeType.video/3gpp2.name=3GPP2 movie
+er.attachment.mimeType.video/3gpp2.uti=public.3gpp2
+er.attachment.mimeType.video/3gpp2.extensions=3g2,3gp2
+
+er.attachment.mimeType.video/x-ms-asf.name=Microsoft Advanced Systems Format
+er.attachment.mimeType.video/x-ms-asf.uti=com.microsoft.advanced-​systems-format
+er.attachment.mimeType.video/x-ms-asf.extensions=asf
+
+er.attachment.mimeType.video/x-ms-asx.name=Microsoft Advanced Stream Redirector
+er.attachment.mimeType.video/x-ms-asx.uti=com.microsoft.advanced-​stream-redirector
+er.attachment.mimeType.video/x-ms-asx.extensions=asx
+
+er.attachment.mimeType.video/mp4.name=MPEG-4
+er.attachment.mimeType.video/mp4.uti=public.mpeg-4
+er.attachment.mimeType.video/mp4.extensions=mp4,m4v
+
+er.attachment.mimeType.video/mpeg.name=MPEG video
+er.attachment.mimeType.video/mpeg.uti=public.mpeg
+er.attachment.mimeType.video/mpeg.extensions=mpg,mpeg,m15,m75,mp2,mpa,mpv,mpv2,mpe
+
+er.attachment.mimeType.video/msvideo.name=AVI movie
+er.attachment.mimeType.video/msvideo.uti=public.avi
+er.attachment.mimeType.video/msvideo.extensions=avi,vfw,divx,xvid
+
+er.attachment.mimeType.video/quicktime.name=QuickTime Movie
+er.attachment.mimeType.video/quicktime.uti=com.apple.quicktime-movie 
+er.attachment.mimeType.video/quicktime.extensions=mov,qt
+
+er.attachment.mimeType.video/x-ms-wm.name=Windows Media
+er.attachment.mimeType.video/x-ms-wm.uti=com.microsoft.windows-​media-wm
+er.attachment.mimeType.video/x-ms-wm.extensions=wm
+
+er.attachment.mimeType.video/x-ms-wma.name=Windows Media
+er.attachment.mimeType.video/x-ms-wma.uti=com.microsoft.windows-​media-wma
+er.attachment.mimeType.video/x-ms-wma.extensions=wma
+
+er.attachment.mimeType.video/x-ms-wmp.name=Windows Media
+er.attachment.mimeType.video/x-ms-wmp.uti=com.microsoft.windows-​media-wmp
+er.attachment.mimeType.video/x-ms-wmp.extensions=wmp
+
+er.attachment.mimeType.video/x-ms-wmv.name=Windows Media
+er.attachment.mimeType.video/x-ms-wmv.uti=com.microsoft.windows-​media-wmv
+er.attachment.mimeType.video/x-ms-wmv.extensions=wmv
+
+er.attachment.mimeType.text/x-diff.extensions=patch
+
+er.attachment.mimeType.application/x-octet-stream.extensions=dat

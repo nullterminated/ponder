@@ -1,0 +1,8 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {className = "er.authexample.model.Credential"; name = Credential; }, 
+        {className = "er.authexample.model.User"; name = User; }
+    ); 
+}

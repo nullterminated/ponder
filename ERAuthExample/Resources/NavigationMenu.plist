@@ -1,0 +1,24 @@
+(
+	{
+		name = Root;
+		children = (QueryAll,CreateUser,Login,Logout);
+	},
+	{
+		name = QueryAll;
+		directActionName = "QueryAllEntities";
+	},
+	{
+		name = CreateUser;
+		directActionName = "CreateUser";
+	},
+	{
+		name = Login;
+		directActionName = "Login";
+	},
+	{
+		name = Logout;
+		directActionClass = "ERXDirectAction";
+		directActionName = "logout";
+		conditions = ("session.objectStore.user.isNonNull");
+	}
+)
