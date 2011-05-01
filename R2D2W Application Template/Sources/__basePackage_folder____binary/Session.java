@@ -3,10 +3,6 @@ package ${basePackage};
 
 import org.apache.log4j.Logger;
 
-import com.webobjects.appserver.WOContext;
-import com.webobjects.appserver.WOResponse;
-import com.webobjects.eocontrol.EOEnterpriseObject;
-
 import er.extensions.appserver.ERXSession;
 
 public class Session extends ERXSession {
