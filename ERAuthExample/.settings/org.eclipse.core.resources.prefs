@@ -1,9 +1,11 @@
-#Sun Apr 10 21:52:19 MST 2011
+#Sun May 01 21:38:00 MST 2011
 eclipse.preferences.version=1
 encoding//Resources/English.lproj/Localizable.strings=UTF-16BE
 encoding//Resources/English.lproj/Localizable.strings__binary=UTF-16BE
 encoding//Resources/English.lproj/ValidationTemplate.strings=UTF-16BE
 encoding//Resources/English.lproj/ValidationTemplate.strings__binary=UTF-16BE
+encoding//Resources/Japanese.lproj/Localizable.strings=UTF-16BE
 encoding//Resources/Japanese.lproj/Localizable.strings__binary=UTF-16BE
+encoding//Resources/Japanese.lproj/ValidationTemplate.strings=UTF-16BE
 encoding//Resources/Japanese.lproj/ValidationTemplate.strings__binary=UTF-16BE
 encoding/Components=UTF-8
