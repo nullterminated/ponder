@@ -166,14 +166,22 @@ GroupHeader: WOGenericContainer {
 LeftActionColgroup: WOGenericContainer {
 	elementName = "colgroup";
 	class = "left actions";
+	omitTags = isNotMultipleSections;
 }
 
 RightActionColgroup: WOGenericContainer {
 	elementName = "colgroup";
 	class = "right actions";
+	omitTags = isNotMultipleSections;
 }
 
-ActionCol: WOGenericElement {
+LeftActionCol: WOGenericElement {
+	class = "left actions";
+	elementName = "col";
+}
+
+RightActionCol: WOGenericElement {
+	class = "right actions";
 	elementName = "col";
 }
 
