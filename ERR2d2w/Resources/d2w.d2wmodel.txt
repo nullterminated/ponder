@@ -215,6 +215,6 @@
     55 : (task = 'inspect' and smartRelationship.destinationEntity.name like '*Attachment' and smartRelationship.isToMany = 0) => componentName = "R2D2WDisplayFile" [com.webobjects.directtoweb.Assignment],
     55 : (task = 'list' and smartRelationship.destinationEntity.name like '*Attachment' and smartRelationship.isToMany = 0) => componentName = "R2D2WDisplayToOneFault" [com.webobjects.directtoweb.Assignment],
     200 : subTask = 'wizard' => tabComponentName = "ERDEmptyPageWrapper" [com.webobjects.directtoweb.Assignment],
-    200 : not (parentRelationship.isToMany = 1) => showBatchNavigation = "false" [com.webobjects.directtoweb.BooleanAssignment],
+    200 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => showBatchNavigation = "false" [com.webobjects.directtoweb.BooleanAssignment],
     201 : *true* => batchSize = (null) [R2DDelayedUserPreferenceAssignment]
 )
