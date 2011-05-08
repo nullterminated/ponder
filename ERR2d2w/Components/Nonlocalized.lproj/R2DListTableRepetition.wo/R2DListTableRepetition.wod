@@ -46,6 +46,7 @@ Col: WOGenericElement {
 GroupingColgroup: WOGenericContainer {
 	elementName = "colgroup";
 	class = "grouping";
+	omitTags = isNotMultipleSections;
 }
 
 GroupingCol: WOGenericElement {
@@ -153,7 +154,7 @@ AttributeComponent: WOSwitchComponent {
 GroupHeaderTall: WOGenericContainer {
 	elementName = "th";
 	rowspan = "2";
-	scope = "col";
+	scope = "colgroup";
 	class = "grouping";
 }
 
@@ -189,14 +190,14 @@ LeftActionHeaderTall: WOGenericContainer {
 	elementName = "th";
 	class = "left actions";
 	rowspan = 2;
-	scope = "col";
+	scope = "colgroup";
 }
 
 RightActionHeaderTall: WOGenericContainer {
 	elementName = "th";
 	class = "right actions";
 	rowspan = 2;
-	scope = "col";
+	scope = "colgroup";
 }
 
 LeftActionHeader: WOGenericContainer {
