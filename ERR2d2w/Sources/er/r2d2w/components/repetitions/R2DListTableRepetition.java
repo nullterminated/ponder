@@ -1,6 +1,7 @@
 package er.r2d2w.components.repetitions;
 
 import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSKeyValueCoding;
 import com.webobjects.foundation.NSKeyValueCodingAdditions;
@@ -116,5 +117,15 @@ public class R2DListTableRepetition extends ERDAttributeRepetition {
 			sb.append(' ').append(groupingHeaderID());
 		}
 		return sb.toString();
+	}
+
+	public int groupingHeaderRowspan() {
+		return sublist().count() + 1;
+	}
+
+	public String objectRowClass() {
+		WODisplayGroup displayGroup = (WODisplayGroup)valueForBinding("displayGroup");
+		Object o = d2wContext().valueForKey("object");
+		return displayGroup.displayedObjects().indexOf(o) % 2 == 0?"odd":"even";
 	}
 }

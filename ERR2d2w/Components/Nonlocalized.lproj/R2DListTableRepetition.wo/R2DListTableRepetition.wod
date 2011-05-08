@@ -113,16 +113,12 @@ GroupingObjectRepetition: WORepetition {
 
 ObjectTableRow: WOGenericContainer {
 	elementName = "tr";
-}
-
-IsFirstRow: WOConditional {
-	condition = index;
-	negate = true;
+	class = objectRowClass;
 }
 
 GroupingHeader: WOGenericContainer {
 	elementName = "th";
-	rowspan = sublist.count;
+	rowspan = groupingHeaderRowspan;
 	scope = "rowgroup";
 	id = groupingHeaderID;
 }
