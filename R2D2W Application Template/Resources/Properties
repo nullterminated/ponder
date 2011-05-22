@@ -46,8 +46,10 @@ er.extensions.ERXGenericRecord.localizationShouldFallbackToDefaultLanguage=true
 er.extensions.ERXLocalizer.availableLanguages=(English,Japanese)
 er.extensions.ERXLocalizer.defaultLanguage=English
 er.extensions.ERXLocalizer.fileNamesToWatch=("Localizable.strings","ValidationTemplate.strings")
-er.extensions.ERXLocalizer.frameworkSearchPath=(app,ERR2d2w,ERDirectToWeb,ERExtensions)
-er.extensions.ERXLocalizer.useLocalizedFormatters=true
+er.extensions.ERXNavigationManager.localizeDisplayKeys=true
+#er.extensions.ERXLocalizer.frameworkSearchPath=(app,ERR2d2w,ERDirectToWeb,ERExtensions)
+#er.extensions.ERXLocalizer.useLocalizedFormatters=true
+
 
 # Project Encoding
 er.extensions.ERXApplication.DefaultEncoding=UTF-8
