@@ -1,0 +1,3 @@
+(
+    20 : (task = 'edit' and smartRelationship != null) => componentName = "ERDEditRelationship" [com.webobjects.directtoweb.Assignment]
+)
