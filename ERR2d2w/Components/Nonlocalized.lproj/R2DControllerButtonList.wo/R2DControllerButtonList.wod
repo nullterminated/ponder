@@ -27,6 +27,5 @@ LI: WOGenericContainer {
 
 UL: WOGenericContainer {
 	elementName = "ul";
-	class = ^class;
-	id = ^id;
+	class = "actions";
 }
