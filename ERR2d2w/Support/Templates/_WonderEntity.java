@@ -29,51 +29,15 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
   public static final String ENTITY_NAME = "$entity.name";
 #end
 
-  // Attribute Keys
-#foreach ($attribute in $entity.sortedClassAttributes)
-#set ($langs = false)
-#set ($langs = $attribute.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $attribute.entity.model.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $ERXLanguages)
-#end
-#end
-#if ($langs)
-#foreach ($lang in $langs)
-  public static final ERXKey<$attribute.javaClassName> ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()} = new ERXKey<$attribute.javaClassName>("$attribute.name.concat('_').concat($lang)");
-#end
-#else
-  public static final ERXKey<$attribute.javaClassName> ${attribute.uppercaseUnderscoreName} = new ERXKey<$attribute.javaClassName>("$attribute.name");
-#end
-#end
-
-  // Relationship Keys
-#foreach ($relationship in $entity.sortedClassRelationships)
-  public static final ERXKey<$relationship.actualDestination.classNameWithDefault> ${relationship.uppercaseUnderscoreName} = new ERXKey<$relationship.actualDestination.classNameWithDefault>("$relationship.name");
-#end
-
   // Attributes
 #foreach ($attribute in $entity.sortedClassAttributes)
-#set ($langs = false)
-#set ($langs = $attribute.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $attribute.entity.model.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $ERXLanguages)
-#end
-#end
-#if ($langs)
-#foreach ($lang in $langs)
-  public static final String ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY = ${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}.key();
-#end
-#else
+  public static final ERXKey<$attribute.javaClassName> ${attribute.uppercaseUnderscoreName} = new ERXKey<$attribute.javaClassName>("$attribute.name");
   public static final String ${attribute.uppercaseUnderscoreName}_KEY = ${attribute.uppercaseUnderscoreName}.key();
-#end
 #end
 
   // Relationships
 #foreach ($relationship in $entity.sortedClassRelationships)
+  public static final ERXKey<$relationship.actualDestination.classNameWithDefault> ${relationship.uppercaseUnderscoreName} = new ERXKey<$relationship.actualDestination.classNameWithDefault>("$relationship.name");
   public static final String ${relationship.uppercaseUnderscoreName}_KEY = ${relationship.uppercaseUnderscoreName}.key();
 #end
 
@@ -89,41 +53,6 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
   
 #foreach ($attribute in $entity.sortedClassAttributes)
 #if (!$attribute.inherited)
-#set ($langs = false)
-#set ($langs = $attribute.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $attribute.entity.model.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $ERXLanguages)
-#end
-#end
-#if ($langs)
-#foreach ($lang in $langs)
-#if ($attribute.userInfo.ERXConstantClassName)
-  public $attribute.userInfo.ERXConstantClassName ${attribute.name}_${lang}() {
-    Number value = (Number)storedValueForKey(${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY);
-    return ($attribute.userInfo.ERXConstantClassName)value;
-  }
-
-  public void set${attribute.capitalizedName}_${lang}($attribute.userInfo.ERXConstantClassName value) {
-    takeStoredValueForKey(value, ${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY);
-  }
-
-#else
-  public $attribute.javaClassName ${attribute.name}_${lang}() {
-    return ($attribute.javaClassName) storedValueForKey(${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY);
-  }
-
-  public void set${attribute.capitalizedName}_${lang}($attribute.javaClassName value) {
-    if (${entity.prefixClassNameWithoutPackage}.LOG.isDebugEnabled()) {
-    	${entity.prefixClassNameWithoutPackage}.LOG.debug( "updating $attribute.name.concat('_').concat($lang) from " + ${attribute.name}_${lang}() + " to " + value);
-    }
-    takeStoredValueForKey(value, ${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_${lang.toUpperCase()}_KEY);
-  }
-
-#end
-#end
-#else
 #if ($attribute.userInfo.ERXConstantClassName)
   public $attribute.userInfo.ERXConstantClassName ${attribute.name}() {
     Number value = (Number)storedValueForKey(${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_KEY);
@@ -136,17 +65,24 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 
 #else
   public $attribute.javaClassName ${attribute.name}() {
+#if ($attribute.userInfo.ERXLanguages)
+	return ${attribute.uppercaseUnderscoreName}.valueInObject(this);
+#else
     return ($attribute.javaClassName) storedValueForKey(${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_KEY);
+#end
   }
 
   public void set${attribute.capitalizedName}($attribute.javaClassName value) {
     if (${entity.prefixClassNameWithoutPackage}.LOG.isDebugEnabled()) {
     	${entity.prefixClassNameWithoutPackage}.LOG.debug( "updating $attribute.name from " + ${attribute.name}() + " to " + value);
     }
+#if ($attribute.userInfo.ERXLanguages)
+	${attribute.uppercaseUnderscoreName}.takeValueInObject(value, this);
+#else
     takeStoredValueForKey(value, ${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_KEY);
+#end
   }
 
-#end
 #end
 #end
 #end
@@ -299,63 +235,6 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 #end
 #end
 
-  public #if (!$entity.partialEntitySet)static #end${entity.classNameWithOptionalPackage}#if (!$entity.partialEntitySet) create#else init#end${entity.name}(EOEditingContext editingContext#foreach ($attribute in $entity.sortedClassAttributes)
-#set ($langs = false)
-#set ($langs = $attribute.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $attribute.entity.model.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $ERXLanguages)
-#end
-#end
-#if (!$attribute.allowsNull)
-#set ($restrictingQualifierKey = 'false')
-#foreach ($qualifierKey in $entity.restrictingQualifierKeys)#if ($attribute.name == $qualifierKey)#set ($restrictingQualifierKey = 'true')#end#end
-#if ($restrictingQualifierKey == 'false')
-#if ($langs)#foreach ($lang in $langs)#if ($attribute.userInfo.ERXConstantClassName), ${attribute.userInfo.ERXConstantClassName}#else, ${attribute.javaClassName}#end ${attribute.name}_${lang}#end#else#if ($attribute.userInfo.ERXConstantClassName), ${attribute.userInfo.ERXConstantClassName}#else, ${attribute.javaClassName}#end ${attribute.name}#end
-#end
-#end
-#end
-#foreach ($relationship in $entity.sortedClassToOneRelationships)
-#if ($relationship.mandatory && !($relationship.ownsDestination && $relationship.propagatesPrimaryKey)), ${relationship.actualDestination.classNameWithDefault} ${relationship.name}#end
-#end
-) {
-    ${entity.classNameWithOptionalPackage} eo = (${entity.classNameWithOptionalPackage})#if ($entity.partialEntitySet)this;#else EOUtilities.createAndInsertInstance(editingContext, ${entity.prefixClassNameWithoutPackage}.ENTITY_NAME);#end
-    
-#foreach ($attribute in $entity.sortedClassAttributes)
-#set ($langs = false)
-#set ($langs = $attribute.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $attribute.entity.model.userInfo.ERXLanguages)
-#if ($langs && !($langs.size() > 0))
-#set ($langs = $ERXLanguages)
-#end
-#end
-#if (!$attribute.allowsNull)
-#set ($restrictingQualifierKey = 'false')
-#foreach ($qualifierKey in $entity.restrictingQualifierKeys) 
-#if ($attribute.name == $qualifierKey)
-#set ($restrictingQualifierKey = 'true')
-#end
-#end
-#if ($restrictingQualifierKey == 'false')
-#if ($langs)
-#foreach ($lang in $langs)
-	eo.set${attribute.capitalizedName}_${lang}(${attribute.name}_${lang});
-#end
-#else
-	eo.set${attribute.capitalizedName}(${attribute.name});
-#end
-#end
-#end
-#end
-#foreach ($relationship in $entity.sortedClassToOneRelationships)
-#if ($relationship.mandatory && !($relationship.ownsDestination && $relationship.propagatesPrimaryKey))
-    eo.set${relationship.capitalizedName}Relationship(${relationship.name});
-#end
-#end
-    return eo;
-  }
 #foreach ($fetchSpecification in $entity.sortedFetchSpecs)
 #if (true || $fetchSpecification.distinctBindings.size() > 0)
   public static NSArray#if ($fetchSpecification.fetchEnterpriseObjects)<${entity.className}>#else<NSDictionary>#end fetch${fetchSpecification.capitalizedName}(EOEditingContext editingContext, NSDictionary<String, Object> bindings) {
