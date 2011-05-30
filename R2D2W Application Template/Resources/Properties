@@ -1,6 +1,9 @@
 #Preference handling
 er.corebusinesslogic.ERCoreUserPreferences.handlerClassName=er.r2d2w.delegates.PreferenceHandlerDelegate
 
+#ERXModernizr
+er.extensions.components.ERXModernizr.modernizrFileName=js/modernizr-1.7.min.js
+
 #Auto adjust WOString and WOTextfield for session.timeZone
 er.extensions.ERXSession.autoAdjustTimeZone=true
 

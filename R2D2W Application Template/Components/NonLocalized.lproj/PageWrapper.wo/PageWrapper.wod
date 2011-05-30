@@ -38,6 +38,8 @@ LegendString: WOString {
 	value = localizer.TimeZoneLegend;
 }
 
+Modernizr: ERXModernizr {}
+
 Navigation: R2DNavigationMenu {
 	navigationContext = navigationContext;
 }

@@ -13,5 +13,6 @@ public class Session extends ERXSession {
 		
 		setStoresIDsInCookies(true);
 		setStoresIDsInURLs(false);
+		_javaScriptEnabled = Boolean.FALSE;
 	}
 }
