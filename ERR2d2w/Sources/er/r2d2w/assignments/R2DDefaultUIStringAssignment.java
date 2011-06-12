@@ -84,9 +84,16 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	public String tableCaption(D2WContext c) {
 		String result = null;
 		if(c.dynamicPage() != null && c.dynamicPage().length() > 0) {
-			StringBuilder entityNameBuilder = new StringBuilder(100);
-			String key = entityNameBuilder.append(DYNAMIC_PAGE_PREFIX).append(c.dynamicPage()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TABLE_CAPTION).toString();
+			StringBuilder sb = new StringBuilder(100);
+			sb.append(DYNAMIC_PAGE_PREFIX);
+			sb.append(c.dynamicPage());
+			sb.append(NSKeyValueCodingAdditions._KeyPathSeparatorChar);
+			sb.append(TABLE_CAPTION);
+			String key = sb.toString();
 			result = localizedStringForKey(key, c);
+		}
+		if(result == null) {
+			result = (String)c.valueForKey("displayNameForEntity");
 		}
 		return result;
 	}
