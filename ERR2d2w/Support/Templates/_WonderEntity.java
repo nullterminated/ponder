@@ -64,25 +64,21 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
   }
 
 #else
+#if (!($attribute.userInfo.ERXLanguages))
   public $attribute.javaClassName ${attribute.name}() {
-#if ($attribute.userInfo.ERXLanguages)
-	return ${attribute.uppercaseUnderscoreName}.valueInObject(this);
-#else
     return ($attribute.javaClassName) storedValueForKey(${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_KEY);
-#end
   }
 
+#end
+#if (!($attribute.userInfo.ERXLanguages))
   public void set${attribute.capitalizedName}($attribute.javaClassName value) {
     if (${entity.prefixClassNameWithoutPackage}.LOG.isDebugEnabled()) {
     	${entity.prefixClassNameWithoutPackage}.LOG.debug( "updating $attribute.name from " + ${attribute.name}() + " to " + value);
     }
-#if ($attribute.userInfo.ERXLanguages)
-	${attribute.uppercaseUnderscoreName}.takeValueInObject(value, this);
-#else
     takeStoredValueForKey(value, ${entity.prefixClassNameWithoutPackage}.${attribute.uppercaseUnderscoreName}_KEY);
-#end
   }
 
+#end
 #end
 #end
 #end
