@@ -21,7 +21,7 @@ import er.javamail.ERJavaMail;
 public class ERAuth extends ERXFrameworkPrincipal {
 	public static final Class<?>[] REQUIRES = new Class[] {ERCoreBusinessLogic.class, ERJavaMail.class};
 	
-	protected static ERAuth sharedInstance;
+	protected static volatile ERAuth sharedInstance;
 	
 	private static final Logger log = Logger.getLogger(ERAuth.class);
 	
@@ -46,7 +46,11 @@ public class ERAuth extends ERXFrameworkPrincipal {
 
 	public static ERAuth sharedInstance() {
 		if(sharedInstance == null) {
-			sharedInstance = sharedInstance(ERAuth.class);
+			synchronized (ERAuth.class) {
+				if(sharedInstance == null) {
+					sharedInstance = sharedInstance(ERAuth.class);
+				}
+			}
 		}
 		return sharedInstance;
 	}
