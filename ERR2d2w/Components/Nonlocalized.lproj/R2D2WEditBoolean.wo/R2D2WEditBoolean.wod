@@ -11,5 +11,6 @@ Selector: R2DBooleanSelector {
 	selection = objectPropertyValue;
 	uiMode = d2wContext.uiStyle;
 	disabled = d2wContext.disabled;
+	class = d2wContext.propertyClasses;
 }
 

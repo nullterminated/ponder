@@ -46,7 +46,7 @@ WOCheckbox: WOCheckBox {
 }
 
 PropertyLabel: WOGenericContainer {
-	class = d2wContext.propertyClasses;
+	class = ^class;
 	elementName = "label";
 	for = labelID;
 }
