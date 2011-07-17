@@ -29,7 +29,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     public static final Logger log = Logger.getLogger(ERR2d2w.class);
     public final static Class<?>[] REQUIRES = new Class[] {ERXExtensions.class, ERDirectToWeb.class};
 
-    protected static ERR2d2w sharedInstance;
+    protected static volatile ERR2d2w sharedInstance;
 
     // Registers the class as the framework principal
     static {
