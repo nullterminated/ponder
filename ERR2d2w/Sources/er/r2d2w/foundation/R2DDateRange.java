@@ -201,7 +201,7 @@ public class R2DDateRange {
 	}
 
 	public int hashCode() {
-		return (new Long(getTime()).hashCode()) ^ (new Long(duration()).hashCode());
+		return Long.valueOf(getTime()).hashCode() ^ Long.valueOf(duration()).hashCode();
 	}
 
 	public R2DMutableDateRange mutableClone() {

@@ -251,7 +251,7 @@ public class R2DLog4JConfiguration extends ERD2WPage {
 	}
 
 	public String rowClass() {
-		String classes = index() % 2 == 1?"even":"odd";
+		String classes = index() % 2 == 0?"odd":"even";
 		String level = (logger().getLevel() == null)?"unset":logger().getLevel().toString().toLowerCase();
 		classes = ERXStringUtilities.stringByAppendingCSSClass(classes, level);
 		return classes;
