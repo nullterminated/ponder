@@ -39,7 +39,11 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
 
     public static ERR2d2w sharedInstance() {
         if (sharedInstance == null) {
-            sharedInstance = sharedInstance(ERR2d2w.class);
+        	synchronized (ERR2d2w.class) {
+        		if(sharedInstance == null) {
+        			sharedInstance = sharedInstance(ERR2d2w.class);
+        		}
+        	}
         }
         return sharedInstance;
     }
