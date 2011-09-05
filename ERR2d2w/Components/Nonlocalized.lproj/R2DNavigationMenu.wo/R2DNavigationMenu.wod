@@ -29,18 +29,18 @@ L3NavObject: R2DNavigationMenuItem {
 }
 
 MenuLevel1: WOGenericContainer {
-	elementName = "ul";
-	class = "nav l1";
+	elementName = "nav";
+	class = "l1";
 }
 
 MenuLevel2: WOGenericContainer {
-	elementName = "ul";
-	class = "nav l2";
+	elementName = "nav";
+	class = "l2";
 }
 
 MenuLevel3: WOGenericContainer {
-	elementName = "ul";
-	class = "nav l3";
+	elementName = "nav";
+	class = "l3";
 }
 
 NavButtonComponent: WOSwitchComponent {
