@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
 ul#debugFlags {
-	border: 1px solid grey;
+	border: 1px solid;
 	border-left: none;
 	position: fixed;
-	bottom: 0;
+	bottom: 28px;
 	left: 0;
 	background: white;
 	opacity: 0.6;
-	width: 10px;
+	width: 1em;
 	overflow: hidden;
 	margin: 0;
 	padding: 0;
@@ -16,26 +16,19 @@ ul#debugFlags {
 
 ul#debugFlags:hover {
 	opacity: 1.0;
-	width: 100px;
+	width: 9em;
 }
 
-ul#debugFlags a.button,
 ul#debugFlags li {
+	display: block;
 	white-space: nowrap;
 }
 
-ul#debugFlags a.button button {
-	background: none;
-	border: none;
-}
-
-ul#debugFlags a.button,
-ul#debugFlags a.button button {
+ul#debugFlags li a {
 	display: block;
-	width: 100%;
-	text-align: left;
+	padding: 0 0 0 1em;
 }
 
-ul#debugFlags a.button button:hover {
-	background: #ccc;
+ul#debugFlags li:hover {
+	background-color: #DDDED7;
 }

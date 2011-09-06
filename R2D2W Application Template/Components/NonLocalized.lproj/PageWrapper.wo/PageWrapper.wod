@@ -66,3 +66,7 @@ TimeZoneMenu: R2DTimeZoneMenu {
 	selection = session.timeZone;
 	id = "timeZoneMenu";
 }
+
+WOLToolbar: WOLToolBar {
+	
+}

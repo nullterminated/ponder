@@ -9,6 +9,7 @@
 	<classpathentry exported="true" kind="con" path="WOFramework/ERR2d2w"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/ERAttachment"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/ERCoreBusinessLogic"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/WOLips"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/JavaDirectToWeb"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/JavaDTWGeneration"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/JavaEOAccess"/>

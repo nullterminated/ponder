@@ -1,61 +1,518 @@
 @charset "UTF-8";
 
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
-	margin:0;
-	padding:0;
+/*************/
+/* CSS Reset */
+/*************/
+
+/*
+ * 1. Correct text resizing oddly in IE6/7 when body font-size is set using em units
+ * 2. Prevent iOS text size adjust on device orientation change, without disabling user zoom: h5bp.com/g
+ */
+html {
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	padding: 0;
+	margin: 0;
 }
 
-table {
-	border-collapse:collapse;
-	border-spacing:0;
+body {
+	font: 1em Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+	line-height: 1.618;
+	margin: 0;
+	padding: 0;
 }
 
-fieldset,img { 
-	border:0;
+*:focus, input, button, a, select {
+	outline-color: #C6D8DA;
 }
 
-address,caption,cite,code,dfn,em,strong,th,var {
+::-moz-selection, ::selection {
+	background: #fe57a1;
+	color: #fff;
+	text-shadow: none;
+}
+
+/* HTML5 display definitions */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, dialog {
+	display: block;
+}
+
+audio, canvas, video {
+	/* Corrects inline-block not defined in IE6/7/8 and FF3 */
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+audio:not([controls]) {
+	display: none;
+}
+
+[hidden] {
+	/* new HTML5 hidden attribute */
+	display: none;
+}
+
+
+/* Headings */
+
+h1,h2,h3,h4,h5,h6 {
+	//margin: 0 0 0.5ex 0;
+	padding: 0;
+	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1 {
+	font-size: 2.618em;
+}
+
+h2 {
+	font-size: 2.0em;
+}
+
+h3 {
+	font-size: 1.618em;
+}
+
+h4 {
+	font-size: 1.236em;
+}
+
+h5 {
+	font-size: 1em;
+	font-weight: bold;
+}
+
+h6 {
+	font-size: 1em;
+	font-style: oblique;
+}
+
+/* Inline Elements */
+
+img, abbr, acronym {
+	border: 0;
+}
+
+abbr[title], acronym[title], dfn[title] {
+	border-bottom: 1px dotted;
+	cursor: help;
+}
+
+tt, code, kbd, samp {
+	font-family: "Courier New", Courier, monospace;
+	font-style: normal;
+	font-weight: normal;
+}
+
+strong, b {
+	font-style: normal;
+	font-weight: bold;
+}
+
+cite, em, i, var {
+	font-style: italic;
+	font-weight: normal;
+}
+
+dfn {
+	font-style: normal;
+	font-weight: normal;
+}
+
+q:lang(en) {
+	quotes: "“" "”" "‘" "’";
+}
+
+var:before {
+	content: "«";
+}
+
+var:after {
+	content: "»";
+}
+
+s {
+	text-decoration: line-through;
+}
+
+small {
+	font-size: 0.618em;
+}
+
+sub, sup {
+	font-size: 0.764em;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup {
+	top: -0.5em;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+/* Form Elements */
+
+form {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+/* 
+ * 1. Correct color not inheriting in IE6/7/8/9 
+ * 2. Correct alignment displayed oddly in IE6/7 
+ */
+legend {
+	border: 0;
+	*margin-left: -7px;
+	padding: 0;
+}
+
+label {
+	font-weight: bold;
+}
+
+label[for] {
+	cursor: pointer;
+}
+
+/*
+ * 1. Correct font-size not inheriting in all browsers
+ * 2. Remove margins in FF3/4 S5 Chrome
+ * 3. Define consistent vertical alignment display in all browsers
+ */
+button, input, select, textarea {
+	font-size: 100%;
+	margin: 0;
+	vertical-align: baseline;
+	*vertical-align: middle;
+}
+
+/*
+ * 1. Define line-height as normal to match FF3/4 (set using !important in the UA stylesheet)
+ * 2. Correct inner spacing displayed oddly in IE6/7
+ */
+button, input {
+	line-height: normal;
+	*overflow: visible;
+}
+
+/*
+ * Reintroduce inner spacing in 'table' to avoid overlap and whitespace issues in IE6/7
+ */
+table button, table input {
+	*overflow: auto;
+}
+
+/*
+ * 1. Display hand cursor for clickable form elements
+ * 2. Allow styling of clickable form elements in iOS
+ */
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+input {
+	padding: 0;
+}
+
+textarea {
+	padding: 0;
+}
+
+select, input[type="file"], input[type="radio"], input[type="checkbox"] {
+	cursor: pointer;
+}
+
+/*
+ * Consistent box sizing and appearance
+ */
+input[type="checkbox"], input[type="radio"] {
+	box-sizing: border-box;
+}
+
+/*
+input[type="search"] {
+	-webkit-appearance: textfield;
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+*/
+
+/* 
+ * Remove inner padding and border in FF3/4: h5bp.com/l 
+ */
+
+button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
+
+/* 
+ * 1. Remove default vertical scrollbar in IE6/7/8/9 
+ * 2. Allow only vertical resizing
+ */
+
+textarea { overflow: auto; vertical-align: top; resize: vertical; }
+
+/* Colors for form validity */
+input:valid, textarea:valid {  }
+input:invalid, textarea:invalid { background-color: #f0dddd; }
+
+/* Block Elements */
+
+/* Add and/or remove tags as your baseline grid needs */
+p, blockquote, pre, address, hr, form, table, fieldset, menu, h1, h2, h3, h4, h5, h6, img, figure, figcaption, button {
+	margin-bottom: 0.618ex;
+}
+
+address {
 	font-style:normal;
 	font-weight:normal;
 }
 
-ol,ul {
-	list-style:none;
+blockquote {
+	margin: 0 0 0 1.618em;
+	padding: 0 0 0 1em;
+	border-left: 4px solid;
 }
 
-caption,th {
-	text-align:left;
+p {
+	margin: 0 0 0.618em 0;
+	padding: 0;
+	text-indent: 2.618em;
+	max-width: 39em;
 }
 
-h1,h2,h3,h4,h5,h6 {
-	font-size:100%;
-	font-weight:normal;
-}
-
-q:before,q:after {
-	content:'';
-}
-
-abbr,acronym { 
-	border:0;
-}
-
-a.button {
-	text-decoration: none;
-}
-
-a.button button {
+pre {
 	margin: 0;
 	padding: 0;
-	background: none;
+}
+
+/* Lists */
+
+ul { 
+	list-style-position:outside;
+	list-style-type: disc;
+}
+
+ol {
+	list-style-position:outside;
+	list-style-type: decimal;
+}
+
+li {
+	margin: 0;
+	padding: 0;
+}
+
+ul, ol {
+	margin: 0 0 1.618em 1.618em;
+	padding: 0;
+}
+
+li ul, li ol  {
+	margin: 0 0 0 1.618em;
+}
+
+dt {
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+dl {
+	margin: 0 0 1.618em 0;
+	padding: 0;
+}
+
+dd {
+	margin: 0 0 0 1.618em;
+	padding: 0;
+}
+
+ul ul, ol ul {
+	list-style-type: circle;
+}
+
+ol ol ul, ol ul ul, ul ol ul, ul ul ul {
+	list-style-type: square;
+}
+
+/* Table Elements */
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 	border: none;
-	cursor: pointer;
+	caption-side: top;
+	table-layout: fixed;
+	width: 100%;
 }
 
-a.button button[disabled] {
-	cursor: auto;
+caption {
+	text-align: center;
+	font-style: normal;
+	font-weight: normal;
+	font-size: larger;
 }
 
-.nav li {
+tbody, thead, tfoot, colgroup, th {
+	border: 1px solid;
+}
+
+tr, td {
+	border: none;
+}
+
+th, td {
+	margin: 0;
+	padding: 0 1ex;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: left;
+	font-style: normal;
+}
+
+th {
+	font-weight: bold;
+}
+
+tbody th, th[scope='colgroup'] {
+	text-align: center;
+	white-space: normal;
+}
+
+/************/
+/* Site CSS */
+/************/
+
+/* Colors */
+
+a[href] {
+	color: #334433;
+}
+
+a[href]:hover {
+	color: #334433;
+}
+
+tr.even {
+	background-color: #aabbbb;
+}
+
+ul.errors {
+	border: 1px solid red;
+}
+
+ul.actions {
+	list-style-type: none;
+	margin: 0;
+}
+
+ul.actions > li {
 	display: inline;
+	white-space: nowrap;
+}
+
+ul.actions > li + li {
+	margin-left: 1ex;
+}
+
+ul#availableLanguages {
+	list-style-type: none;
+	margin: 0;
+}
+
+ul#availableLanguages li {
+	display: inline;
+}
+
+/* Accessibility */
+
+.concealed, a#skipNavigation {
+	position: absolute;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	padding: 0;
+	border: 0;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+a#skipNavigation:focus {
+	position: static;
+}
+
+/* Print styles
+---------------------------------------- */
+
+/* Print styles inlined to avoid extra HTTP connection */
+
+@media print {
+	* {
+		background: transparent !important;
+		color: black !important; /* Black prints faster: sanbeiji.com/archives/953 */
+		text-shadow: none !important;
+		filter: none !important;
+		-ms-filter: none !important;
+	}
+
+	a, a:visited {
+		text-decoration: underline;
+	}
+
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
+
+	/* Do not show javascript and internal links */
+	a[href^="javascript:"]:after, a[href^="#"]:after {
+		content: ""; 
+	}
+
+	/* Printing Tables: css-discuss.incutio.com/wiki/Printing_Tables */
+	thead {
+		display: table-header-group;
+	}
+
+	tr, img {
+		page-break-inside: avoid;
+	}
+
+	@page {
+		margin: 0.5cm;
+	}
+
+	p, h2, h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	h2, h3 {
+		page-break-after: avoid;
+	}
 }
