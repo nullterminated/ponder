@@ -17,5 +17,6 @@ LanguageLink: ERXLinkButton5 {
 	hreflang = hrefLang;
 	rel = "alternate";
 	string = displayStringForLanguage;
+	submit = false;
 	"xml:lang" = languageCode;
 }
