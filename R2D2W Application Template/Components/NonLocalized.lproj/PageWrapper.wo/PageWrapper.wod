@@ -1,16 +1,18 @@
+AppIcon: ERXFavIcon {
+	filename = "img/appicon.png";
+	type = "touch";
+}
+
 Content: WOComponentContent {}
 
 DebugFlags: R2D2WDebugFlags {}
 
 DevStyleSheet: ERXStyleSheet {
-	filename = "dev.css";
+	filename = "css/dev.css";
 }
 
 FavIcon: ERXFavIcon {
-	filename = "favicon.ico";
-}
-
-Form: WOForm {
+	filename = "img/favicon.ico";
 }
 
 HasLanguages: WOConditional {
@@ -34,10 +36,6 @@ Languages: R2DLanguageList {
 	id = "availableLanguages";
 }
 
-LegendString: WOString {
-	value = localizer.TimeZoneLegend;
-}
-
 Modernizr: ERXModernizr {}
 
 Navigation: R2DNavigationMenu {
@@ -49,22 +47,11 @@ SkipNav: ERXLocalizedString {
 }
 
 StyleSheet: ERXStyleSheet {
-	filename = "default.css";
+	filename = "css/default.css";
 }
 
-Submit: ERXLinkButton5 {
-	action = submitAction;
-	value = session.localizer.ERD2W.pickButtonLabel;
-}
-
-TimeZoneLabel: WOString {
-	value = localizer.TimeZoneLabel;
-}
-
-TimeZoneMenu: R2DTimeZoneMenu {
-	list = availableTimeZones;
-	selection = session.timeZone;
-	id = "timeZoneMenu";
+TimeZoneDetector: ERXTimeZoneDetector {
+	preferredTimeZoneIDs = availableTimeZones;
 }
 
 WOLToolbar: WOLToolBar {
