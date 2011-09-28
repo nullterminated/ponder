@@ -318,6 +318,7 @@ ol {
 li {
 	margin: 0;
 	padding: 0;
+	vertical-align: text-top; /* IE7 center aligns */
 }
 
 ul, ol {
