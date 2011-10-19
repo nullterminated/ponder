@@ -318,7 +318,6 @@ ol {
 li {
 	margin: 0;
 	padding: 0;
-	vertical-align: text-top; /* IE7 center aligns */
 }
 
 ul, ol {
@@ -485,12 +484,12 @@ tt, code, kbd, samp {
 
 /* Colors for form validity */
 
-input:valid, textarea:valid {
-
-}
-
 input:invalid, textarea:invalid {
 	background-color: #f0dddd;
+}
+
+input:focus, input:valid, textarea:valid {
+	background-color: white;
 }
 
 /* Colors */
