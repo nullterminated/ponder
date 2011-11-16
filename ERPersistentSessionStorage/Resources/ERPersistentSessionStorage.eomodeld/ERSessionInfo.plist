@@ -1,0 +1,14 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = sessionData; name = sessionData; prototypeName = blob; }, 
+        {columnName = sessionID; name = sessionID; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (id, sessionData, sessionID); 
+    className = "er.persistentsessionstorage.model.ERSessionInfo"; 
+    classProperties = (sessionData, sessionID); 
+    externalName = ERSessionInfo; 
+    fetchSpecificationDictionary = {}; 
+    name = ERSessionInfo; 
+    primaryKeyAttributes = (id); 
+}
