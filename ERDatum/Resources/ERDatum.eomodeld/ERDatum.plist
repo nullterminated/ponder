@@ -1,0 +1,31 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = datumObjectID; 
+            name = datumObjectID; 
+            prototypeName = longNumber; 
+        }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {columnName = subtype; name = subtype; prototypeName = varchar50; }, 
+        {columnName = type; name = type; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (datumObjectID, id, subtype, type); 
+    className = "er.datum.model.ERDatum"; 
+    classProperties = (datumObject, subtype, type); 
+    externalName = ERDatum; 
+    fetchSpecificationDictionary = {}; 
+    isAbstractEntity = Y; 
+    name = ERDatum; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERDatumObject; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = datumObjectID; }); 
+            name = datumObject; 
+        }
+    ); 
+}

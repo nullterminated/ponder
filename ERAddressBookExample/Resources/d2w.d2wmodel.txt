@@ -1,0 +1,7 @@
+(
+    20 : (task = 'edit' and smartRelationship != null) => componentName = "ERDEditRelationship" [com.webobjects.directtoweb.Assignment],
+    100 : *true* => isEntityEditable = "true" [com.webobjects.directtoweb.BooleanAssignment],
+    100 : entity.name = 'ERABContact' => displayPropertyKeys = ("givenName", "familyName") [com.webobjects.directtoweb.Assignment],
+    100 : entity.name = 'ERABContact' => displayPropertyKeys = ("givenName", "middleName", "familyName") [com.webobjects.directtoweb.Assignment],
+    100 : ((task = 'edit' or task = 'inspect') and entity.name = 'ERABContact' and not (propertyKey like '*Action')) => componentName = "R2D2WEditString" [com.webobjects.directtoweb.Assignment]
+)

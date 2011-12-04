@@ -1,0 +1,38 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {
+            className = "er.addressbookexample.model.ERABAddress"; 
+            name = ERABAddress; 
+            parent = ERDatumObject; 
+        }, 
+        {
+            className = "er.addressbookexample.model.ERABContact"; 
+            name = ERABContact; 
+            parent = ERDatumObject; 
+        }, 
+        {className = EOGenericRecord; name = ERABContactGroup; }, 
+        {
+            className = "er.addressbookexample.model.ERABDateDatum"; 
+            name = ERABDateDatum; 
+            parent = ERDatum; 
+        }, 
+        {
+            className = "er.addressbookexample.model.ERABEmailDatum"; 
+            name = ERABEmailDatum; 
+            parent = ERDatum; 
+        }, 
+        {className = "er.addressbookexample.model.ERABGroup"; name = ERABGroup; }, 
+        {
+            className = "er.addressbookexample.model.ERABPhoneDatum"; 
+            name = ERABPhoneDatum; 
+            parent = ERDatum; 
+        }, 
+        {
+            className = "er.addressbookexample.model.ERABStringDatum"; 
+            name = ERABStringDatum; 
+            parent = ERDatum; 
+        }
+    ); 
+}

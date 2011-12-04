@@ -1,0 +1,5 @@
+er.extensions.components.ERXModernizr.modernizrFileName=js/modernizr-1.7.js
+
+com.webobjects.eoaccess.ERXEntityDependencyOrderingDelegate.active=true
+
+dbConnectURLGLOBAL=jdbc:h2:file://tmp/ERAddressBookExample

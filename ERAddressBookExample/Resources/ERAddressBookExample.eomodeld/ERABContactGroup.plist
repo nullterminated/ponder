@@ -1,0 +1,40 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = erabContactId; 
+            name = erabContactId; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = erabGroupId; 
+            name = erabGroupId; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (erabContactId, erabGroupId); 
+    className = EOGenericRecord; 
+    externalName = ERABContactGroup; 
+    fetchSpecificationDictionary = {}; 
+    name = ERABContactGroup; 
+    primaryKeyAttributes = (erabContactId, erabGroupId); 
+    relationships = (
+        {
+            destination = ERABContact; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = erabContactId; }); 
+            name = erabContact; 
+        }, 
+        {
+            destination = ERABGroup; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = erabGroupId; }); 
+            name = erabGroup; 
+        }
+    ); 
+}

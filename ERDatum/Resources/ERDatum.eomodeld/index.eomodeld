@@ -1,0 +1,8 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {className = "er.datum.model.ERDatum"; name = ERDatum; }, 
+        {className = "er.datum.model.ERDatumObject"; name = ERDatumObject; }
+    ); 
+}

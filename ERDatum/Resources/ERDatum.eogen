@@ -1,0 +1,1 @@
+ -destination /Users/rams/Workspaces/Projects/ERDatum/Sources -extension java -java -javaTemplate _WonderEntity.java -model Resources/ERDatum.eomodeld -packagedirs -subclassDestination /Users/rams/Workspaces/Projects/ERDatum/Sources -subclassJavaTemplate WonderEntity.java -templatedir Templates -verbose -loadModelGroup -superclassPackage eogen

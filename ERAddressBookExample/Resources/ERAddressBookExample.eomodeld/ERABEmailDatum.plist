@@ -1,0 +1,36 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            definition = "erDatum.datumObjectID"; 
+            name = datumObjectID; 
+            prototypeName = longNumber; 
+        }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {definition = "erDatum.subtype"; name = subtype; prototypeName = varchar50; }, 
+        {definition = "erDatum.type"; name = type; prototypeName = varchar50; }, 
+        {columnName = value; name = value; prototypeName = varchar255; width = 254; }
+    ); 
+    attributesUsedForLocking = (datumObjectID, id, subtype, type, value); 
+    className = "er.addressbookexample.model.ERABEmailDatum"; 
+    classProperties = (datumObject, subtype, type, value); 
+    externalName = ERABEmailDatum; 
+    fetchSpecificationDictionary = {}; 
+    name = ERABEmailDatum; 
+    parent = ERDatum; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {definition = "erDatum.datumObject"; name = datumObject; }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERDatum; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = id; }); 
+            name = erDatum; 
+            ownsDestination = Y; 
+        }
+    ); 
+    restrictingQualifier = "subtype = 'erab_email'"; 
+}

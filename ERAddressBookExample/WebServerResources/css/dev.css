@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+ul#debugFlags {
+	border: 1px solid;
+	border-left: none;
+	position: fixed;
+	bottom: 28px;
+	left: 0;
+	background: white;
+	opacity: 0.6;
+	width: 1em;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+ul#debugFlags:hover {
+	opacity: 1.0;
+	width: 9em;
+}
+
+ul#debugFlags li {
+	display: block;
+	white-space: nowrap;
+}
+
+ul#debugFlags li a {
+	display: block;
+	padding: 0 0 0 1em;
+}
+
+ul#debugFlags li:hover {
+	background-color: #DDDED7;
+}

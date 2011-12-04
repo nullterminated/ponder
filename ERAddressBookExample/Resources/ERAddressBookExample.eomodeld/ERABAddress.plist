@@ -1,0 +1,46 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = contactID; 
+            name = contactID; 
+            prototypeName = longNumber; 
+        }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {
+            definition = "erDatumObject.subtype"; 
+            name = subtype; 
+            prototypeName = varchar50; 
+        }
+    ); 
+    attributesUsedForLocking = (contactID, id, subtype); 
+    className = "er.addressbookexample.model.ERABAddress"; 
+    classProperties = (contact, objectData, subtype); 
+    externalName = ERABAddress; 
+    fetchSpecificationDictionary = {}; 
+    name = ERABAddress; 
+    parent = ERDatumObject; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERABContact; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = contactID; }); 
+            name = contact; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERDatumObject; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = id; }); 
+            name = erDatumObject; 
+            ownsDestination = Y; 
+        }, 
+        {definition = "erDatumObject.objectData"; name = objectData; }
+    ); 
+    restrictingQualifier = "subtype = 'erab_address'"; 
+}

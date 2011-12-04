@@ -1,0 +1,22 @@
+{
+    attributes = ({allowsNull = N; name = id; prototypeName = id; }); 
+    attributesUsedForLocking = (id); 
+    className = "er.addressbookexample.model.ERABGroup"; 
+    classProperties = (contacts); 
+    externalName = ERABGroup; 
+    fetchSpecificationDictionary = {}; 
+    name = ERABGroup; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {definition = "erabContactGroups.erabContact"; name = contacts; }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERABContactGroup; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = erabGroupId; sourceAttribute = id; }); 
+            name = erabContactGroups; 
+            propagatesPrimaryKey = Y; 
+        }
+    ); 
+}

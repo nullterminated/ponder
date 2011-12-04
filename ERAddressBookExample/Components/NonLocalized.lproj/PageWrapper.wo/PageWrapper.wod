@@ -1,0 +1,59 @@
+AppIcon: ERXFavIcon {
+	filename = "img/appicon.png";
+	type = "touch";
+}
+
+Content: WOComponentContent {}
+
+DebugFlags: R2D2WDebugFlags {}
+
+DevStyleSheet: ERXStyleSheet {
+	filename = "css/dev.css";
+}
+
+FavIcon: ERXFavIcon {
+	filename = "img/favicon.ico";
+}
+
+HasLanguages: WOConditional {
+	condition = hasMultipleLanguages;
+}
+
+Head: R2D2WHead {}
+
+HTML: WOGenericContainer {
+	elementName = "html";
+	"xml:lang" = localizer.@languageCode; //VALID
+	xmlns = "http://www.w3.org/1999/xhtml";
+}
+
+IsDevelopment: WOConditional {
+	condition = application.isDevelopmentMode;
+}
+
+Languages: R2DLanguageList {
+	language = session.language;
+	id = "availableLanguages";
+}
+
+Modernizr: ERXModernizr {}
+
+Navigation: R2DNavigationMenu {
+	navigationContext = navigationContext;
+}
+
+SkipNav: ERXLocalizedString {
+	value = "PageWrapper.skipNav";
+}
+
+StyleSheet: ERXStyleSheet {
+	filename = "css/default.css";
+}
+
+TimeZoneDetector: ERXTimeZoneDetector {
+	preferredTimeZoneIDs = availableTimeZones;
+}
+
+WOLToolbar: WOLToolBar {
+	
+}
