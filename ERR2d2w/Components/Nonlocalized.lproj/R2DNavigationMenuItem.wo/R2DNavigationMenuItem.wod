@@ -17,11 +17,6 @@ HasPageName: WOConditional {
 	condition = navigationItem.pageName.trim.length;
 }
 
-ListItem: WOGenericContainer {
-	elementName = "li";
-	class = itemClass;
-}
-
 MeetsDisplayConditions: WOConditional {
 	condition = meetsDisplayConditions;
 }
