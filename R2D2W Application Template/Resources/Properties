@@ -42,6 +42,7 @@ er.extensions.ERXApplication.responseCompressionTypes=("application/x-javascript
 
 # Secure session cookies
 #er.extensions.ERXSession.useSecureSessionCookies=true
+er.extensions.ERXSession.useHttpOnlySessionCookies=true
 
 # Localization
 ERXLanguages=(en,ja)
