@@ -11,6 +11,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSKeyValueCoding;
 import com.webobjects.foundation.NSMutableDictionary;
 
+import er.extensions.appserver.ERXBrowser;
 import er.extensions.appserver.ERXSession;
 import er.extensions.appserver.navigation.ERXNavigationManager;
 import er.extensions.components.ERXStatelessComponent;
@@ -18,9 +19,8 @@ import er.extensions.localization.ERXLocalizer;
 import er.r2d2w.ERR2d2wUtils;
 
 public class PageWrapper extends ERXStatelessComponent {
-	private static final String acceptsXHTMLKey = "acceptsXHTML";
 	private static final NSArray<String> availableTimeZones = new NSArray<String>(new String[] { "US/Hawaii",
-			"US/Alaska", "US/Pacific", "US/Mountain", "US/Central", "US/Eastern", "GMT", "Asia/Tokyo" });
+			"US/Alaska", "US/Pacific", "US/Arizona", "US/Mountain", "US/Central", "US/Eastern", "GMT", "Asia/Tokyo" });
 
 	public PageWrapper(WOContext aContext) {
 		super(aContext);
@@ -60,14 +60,23 @@ public class PageWrapper extends ERXStatelessComponent {
 		return ERXLocalizer.availableLanguages().count() > 1;
 	}
 
-	public WOActionResults submitAction() {
-		return context().page();
-	}
-
 	/**
 	 * @return the availableTimeZones
 	 */
 	public NSArray<String> availableTimeZones() {
 		return availableTimeZones;
+	}
+
+	public String iconsURL() {
+		boolean b = context().doesGenerateCompleteURLs();
+		if(!b) { context().generateCompleteURLs(); }
+		String url = context()._urlForResourceNamed("img/icons.svg", "ERR2d2w", false);
+		if(!b) { context().generateRelativeURLs(); }
+		return url;
+	}
+
+	public boolean isWebKit() {
+		ERXBrowser browser = ERXSession.session() == null?null:ERXSession.session().browser();
+		return browser != null && (browser.isChrome() || browser.isSafari() || browser.isOmniWeb());
 	}
 }

@@ -3,13 +3,18 @@
 	<webobject name = "Head">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1"/>
-
+		<!-- TODO add description meta data -->
+		
 		<webobject name = "StyleSheet" />
 		<webobject name = "IsDevelopment"><webobject name = "DevStyleSheet"/></webobject>
 		<webobject name = "FavIcon" />
 		<webobject name = "AppIcon" />
 		<webobject name = "Modernizr"/>
 		<webobject name = "TimeZoneDetector"/>
+		<webobject name = "IsWebKit">
+			<webobject name = "BugNote"/>
+			<webobject name = "CachingWrapper"><webobject name = "ExternalContent"/></webobject>
+		</webobject>
 	</webobject>
 	<body>
 		<a id="skipNavigation" href = "#mainContent"><webobject name = "SkipNav" /></a>
