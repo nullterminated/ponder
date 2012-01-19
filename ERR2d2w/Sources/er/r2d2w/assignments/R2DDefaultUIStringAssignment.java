@@ -22,7 +22,7 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	private static final NSArray<String> attributeAbbrDependentKeys = 
 		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey });
 	private static final NSArray<String> tooltipDependentKeys = 
-		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey });
+		new NSArray<String>(new String[] { D2WModel.PropertyKeyKey, D2WModel.EntityKey, "branch" });
 	private static final NSArray<String> tableCaptionDependentKeys = 
 		new NSArray<String>(new String[] { D2WModel.DynamicPageKey });
 	private static final NSArray<String> tableSummaryDependentKeys = 
@@ -73,9 +73,14 @@ public class R2DDefaultUIStringAssignment extends ERDAssignment implements ERDLo
 	
 	public String tooltip(D2WContext c) {
 		String result = null;
-		if(c.propertyKey() != null && c.entity() != null) {
+		String branchName = (String)c.valueForKeyPath("branch.branchName");
+		if(branchName != null) {
+			StringBuilder sb = new StringBuilder(50);
+			String key = sb.append("Branch.").append(branchName).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TOOLTIP).toString();
+			result = localizedStringForKey(key, c);
+		} else if(c.propertyKey() != null && c.entity() != null) {
 			StringBuilder sb = new StringBuilder(100);
-			String key = sb.append(c.entity().name()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.propertyKey()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TOOLTIP).toString();
+			String key = sb.append(c.entity().name()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.task()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(c.propertyKey()).append(NSKeyValueCodingAdditions._KeyPathSeparatorChar).append(TOOLTIP).toString();
 			result = localizedStringForKey(key, c);
 		}
 		return result;
