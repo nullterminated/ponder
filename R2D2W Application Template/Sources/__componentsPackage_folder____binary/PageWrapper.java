@@ -42,7 +42,7 @@ public class PageWrapper extends ERXStatelessComponent {
     }
 
 	public NSKeyValueCoding navigationContext() {
-		NSKeyValueCoding _navigationContext = (NSKeyValueCoding) session().objectForKey("navigationContext");
+		NSKeyValueCoding _navigationContext = null;
 
 		if (context().page() instanceof D2WPage) {
 			_navigationContext = d2wContext();
@@ -50,8 +50,8 @@ public class PageWrapper extends ERXStatelessComponent {
 
 		if (_navigationContext == null) {
 			_navigationContext = new ERD2WContext();
-			session().setObjectForKey(_navigationContext, "navigationContext");
 		}
+		
 		ERXNavigationManager.manager().navigationStateForSession(session());
 		return _navigationContext;
 	}
