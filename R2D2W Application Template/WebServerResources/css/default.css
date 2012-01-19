@@ -488,6 +488,10 @@ nav.l1 a + a:before {
 
 /* Branch choices */
 
+td.left.actions svg, td.right.actions svg {
+	vertical-align: text-top;
+}
+
 ul.actions {
 	list-style-type: none;
 	margin: 0;
