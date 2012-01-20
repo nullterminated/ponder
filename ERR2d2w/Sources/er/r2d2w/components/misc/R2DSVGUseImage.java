@@ -12,15 +12,15 @@ public class R2DSVGUseImage extends ERD2WStatelessCustomComponentWithArgs {
     }
     
     public String href() {
-    	return (String)valueForBinding("href");
+    	return (String)valueForBinding("imageHref");
     }
     
     public String filename() {
-    	return (String)valueForBinding("filename");
+    	return (String)valueForBinding("imageFilename");
     }
     
     public String framework() {
-    	String framework = (String)valueForBinding("framework");
+    	String framework = (String)valueForBinding("imageFramework");
     	return framework == null?"app":framework;
     }
     

@@ -3,19 +3,19 @@
         <wo class="R2DSVGUseImage.java" wocomponentcontent="false">
 
         <binding name="viewBox"/>
-        <validation message="'viewBox' is a required binding.">
-            <unbound name="viewBox"/>
-        </validation>
+        
         <binding name="imageID"/>
-        <validation message="'imageID' is a required binding.">
-            <unbound name="imageID"/>
+        
+        <binding name="imageHref"/>
+        <binding name="imageFilename"/>
+        <binding name="imageFramework"/>
+    
+        <binding name="imageClass"/>
+    <binding name="imageHeight"/>
+        <binding name="imageWidth"/>
+    <binding name="localContext"/>
+        <validation message="'localContext' is a required binding.">
+            <unbound name="localContext"/>
         </validation>
-        <binding name="href"/>
-        <binding name="filename"/>
-        <binding name="framework"/>
-    <binding name="id"/>
-        <binding name="class"/>
-    <binding name="height"/>
-        <binding name="width"/>
     </wo>
 </wodefinitions>
