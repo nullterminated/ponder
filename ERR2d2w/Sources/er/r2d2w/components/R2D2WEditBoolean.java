@@ -5,6 +5,7 @@ import com.webobjects.directtoweb.D2WEditBoolean;
 import com.webobjects.foundation.NSArray;
 
 import er.extensions.foundation.ERXStringUtilities;
+import er.extensions.localization.ERXLocalizer;
 
 public class R2D2WEditBoolean extends D2WEditBoolean {
     public R2D2WEditBoolean(WOContext context) {
@@ -48,7 +49,9 @@ public class R2D2WEditBoolean extends D2WEditBoolean {
     
     public String stringForNull() {
         if(choicesNames().count() > 2) {
-            return choicesNames().objectAtIndex(2);
+            String choice = choicesNames().objectAtIndex(2);
+            choice = ERXLocalizer.currentLocalizer().localizedStringForKey(choice);
+            return choice;
         }
         return null;
     }
