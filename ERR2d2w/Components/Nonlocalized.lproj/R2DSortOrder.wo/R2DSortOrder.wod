@@ -8,3 +8,9 @@ SortButton: ERXLinkButton5 {
 Content: WOComponentContent {
 	
 }
+
+SortImage: WOSwitchComponent {
+	WOComponentName = ^d2wContext.sortImageComponentName;
+	d2wContext = ^d2wContext;
+	sortState = currentState;
+}
