@@ -1,3 +1,7 @@
+Content: WOComponentContent {
+	
+}
+
 ErrorMessage: WOString {
 	escapeHTML = false;
 	value = errorMessageItem;
