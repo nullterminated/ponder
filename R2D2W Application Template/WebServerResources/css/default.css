@@ -242,6 +242,11 @@ textarea {
 	resize: vertical;
 }
 
+input[disabled], select[disabled], textarea[disabled], 
+input[readonly], select[readonly], textarea[readonly] {
+	cursor: not-allowed;
+}
+
 /* Block Elements */
 
 /* Headings */
@@ -470,8 +475,30 @@ tr.even {
 	background-color: #aabbbb;
 }
 
-ul.errors {
-	border: 1px solid red;
+/* Message Boxes */
+
+.error.msg {
+	color: red;
+	border: 1px solid;
+	background-color: #ffeaea;
+	-webkit-box-shadow: 0 1px 5px 1px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 1px 5px 1px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 5px 1px rgba(0,0,0,0.5);
+	margin: 0 1em 1em;
+	padding: 0 0 1ex;
+}
+
+.error.msg h4 {
+	background-color: red;
+	margin: 0;
+	padding: 0 1em 0.5ex;
+	margin: 0 0 0.5ex;
+	color: white;
+}
+
+.error.msg svg, .error.msg ul {
+	vertical-align: top;
+	display: inline-block;
 }
 
 /* Navigation */
@@ -505,6 +532,16 @@ ul.actions > li {
 
 ul.actions > li + li {
 	margin-left: 1ex;
+}
+
+/* Image icons */
+
+span.boolTrue svg, span.boolFalse svg, span.boolNull svg {
+	vertical-align: text-top;
+}
+
+.sort svg {
+	vertical-align: text-top;
 }
 
 /* Language choices */
