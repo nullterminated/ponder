@@ -41,6 +41,7 @@
     0 : task = 'queryAll' => belowControllerChoices = "queryAllControllerChoices" [ERDKeyValueAssignment],
     0 : *true* => loginWrapperComponentName = "ERDEmptyPageWrapper" [com.webobjects.directtoweb.Assignment],
     0 : *true* => tableHeaderComponentName = "R2DSimpleTableHeader" [com.webobjects.directtoweb.Assignment],
+    0 : *true* => errorDialogTitle = "R2D2W.errorDialogTitle" [er.directtoweb.ERDDelayedLocalizedAssignment],
     0 : *true* => contentWrapperComponentName = "R2D2WContentWrapper" [com.webobjects.directtoweb.Assignment],
     0 : *true* => tableCaptionComponentName = "R2DSimpleTableCaption" [com.webobjects.directtoweb.Assignment],
     0 : *true* => belowDisplayPropertyKeys = ("belowControllerAction") [com.webobjects.directtoweb.Assignment],

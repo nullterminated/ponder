@@ -4,6 +4,10 @@ ErrorPanel: R2DErrorDictionaryPanel {
 	extraErrorMessage = ^extraErrorMessage;
 }
 
+ErrorHeading: WOString {
+	value = ^errorDialogTitle;
+}
+
 ErrorIcon: R2DSVGUseImage {
 	localContext = d2wContext;
 	imageID = "stop_icon";

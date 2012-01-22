@@ -454,6 +454,15 @@
       "author" = "0"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
+        "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
+        "keyPath" = "errorDialogTitle"; 
+        "value" = "R2D2W.errorDialogTitle"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
         "class" = "com.webobjects.directtoweb.Assignment"; 
         "keyPath" = "contentWrapperComponentName"; 
         "value" = "R2D2WContentWrapper"; 
