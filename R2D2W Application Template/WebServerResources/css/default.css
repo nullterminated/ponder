@@ -520,9 +520,11 @@ nav.l1 a + a:before {
 }
 
 .batchNavigation h6 {
-	display: run-in; /* Firefox does not support run-in */
 	font-style: normal;
-	margin: 0 2% 0 0;
+}
+
+.batchNavigation ul {
+	white-space: nowrap;
 }
 
 .batchNavigation ul li {
