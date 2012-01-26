@@ -155,4 +155,11 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 		middleRange = null;
 	}
 
+	public boolean hasFirstEllipsis() {
+		return middleRange().location() != 2 && middleRange().length() != 0;
+	}
+	
+	public boolean hasLastEllipsis() {
+		return middleRange().maxRange() != displayGroup().batchCount();
+	}
 }

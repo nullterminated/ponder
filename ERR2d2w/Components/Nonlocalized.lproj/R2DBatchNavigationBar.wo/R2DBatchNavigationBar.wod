@@ -49,3 +49,11 @@ BatchSizeLink: ERXLinkButton5 {
 	disabled = currentBatchSizeSelected;
 	string = batchSizeString;
 }
+
+HasFirstEllipsis: WOConditional {
+	condition = hasFirstEllipsis;
+}
+
+HasLastEllipsis: WOConditional {
+	condition = hasLastEllipsis;
+}
