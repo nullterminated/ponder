@@ -7,8 +7,6 @@ import org.apache.log4j.Logger;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
-import com.webobjects.foundation.NSForwardException;
-import com.webobjects.foundation.NSValidation;
 
 import er.directtoweb.components.ERD2WStatelessComponent;
 import er.extensions.foundation.ERXStringUtilities;
@@ -49,21 +47,19 @@ public class R2D2WEditDate extends ERD2WStatelessComponent {
 			if (dateString() != null) {
 				obj = dateFormatter().parseObject(dateString());
 			}
+		} catch (Exception e) {
+			log.debug("Exception:" + e);
+			ERXValidationException v = ERXValidationFactory.defaultFactory().createException(object(), propertyKey(), dateString(), "InvalidDateFormatException");
+			parent().validationFailedWithException(v, obj, propertyKey());
+		}
+		
+		try {
 			if (object() != null) {
 				object().validateTakeValueForKeyPath(obj, propertyKey());
 			}
-		} catch (java.text.ParseException npse) {
-			log.debug("java.text.ParseException:" + npse);
-			ERXValidationException v = ERXValidationFactory.defaultFactory().createException(object(), propertyKey(), dateString(), "InvalidDateFormatException");
-			parent().validationFailedWithException(v, obj, propertyKey());
-		} catch (NSValidation.ValidationException v) {
-			log.debug("NSValidation.ValidationException:" + v);
-			parent().validationFailedWithException(v, obj, propertyKey());
-		} catch (Exception e) {
-			//FIXME this does not seem to work
-//			log.debug("Exception:" + e);
-//			parent().validationFailedWithException(e, obj, propertyKey());
-			throw NSForwardException._runtimeExceptionForThrowable(e);
+		} catch (ValidationException e) {
+			log.debug("NSValidation.ValidationException:" + e);
+			parent().validationFailedWithException(e, obj, propertyKey());
 		}
 	}
 
