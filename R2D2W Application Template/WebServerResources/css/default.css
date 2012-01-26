@@ -513,6 +513,32 @@ nav.l1 a + a:before {
 	border-left: 2px solid;
 }
 
+/*Batch Navigation */
+
+.batchNavigation {
+	text-align: center;
+}
+
+.batchNavigation h6 {
+	display: run-in; /* Firefox does not support run-in */
+	font-style: normal;
+	margin: 0 2% 0 0;
+}
+
+.batchNavigation ul li {
+	display: inline;
+}
+
+.batchNavigation a {
+	display: inline-block;
+	border: 1px solid;
+	padding: 1em;
+	width: 1.618em;
+	height: 1.618em;
+	text-align: center;
+	border-radius: 1ex;
+}
+
 /* Branch choices */
 
 td.left.actions svg, td.right.actions svg {

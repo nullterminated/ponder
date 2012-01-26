@@ -9,12 +9,6 @@ FirstBatch: ERXLinkButton5 {
 	string = "1";
 }
 
-MiddleSpan: WOGenericContainer {
-	elementName = "span";
-	class = "middle";
-	omitTags = middleRange.isEmpty;
-}
-
 BatchRepetition: WORepetition {
 	count = middleRange.length;
 	index = index;
@@ -32,10 +26,6 @@ LastBatch: ERXLinkButton5 {
 	class = "batch";
 	disabled = isLastBatchSelected;
 	string = ^displayGroup.batchCount;
-}
-
-HasAvailableBatchSizes: WOConditional {
-	condition = ^d2wContext.availableBatchSizes.count;
 }
 
 AvailableBatchSizes: WORepetition {
@@ -56,4 +46,12 @@ HasFirstEllipsis: WOConditional {
 
 HasLastEllipsis: WOConditional {
 	condition = hasLastEllipsis;
+}
+
+PageNumber: WOString {
+	value = localizer.R2DBatchNavigationBar.page;
+}
+
+ItemsPerPage: WOString {
+	value = localizer.R2DBatchNavigationBar.items_per_page;
 }
