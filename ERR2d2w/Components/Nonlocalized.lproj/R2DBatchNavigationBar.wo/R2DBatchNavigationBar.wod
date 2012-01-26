@@ -1,114 +1,51 @@
-BatchCount: WOString {
-	value = ^displayGroup.batchCount;
-}
-
-BatchIndex: WOTextField {
-	id = batchIndexID;
-	numberformat = "0";
-	size = 4;
-	value = currentBatchIndex;
-}
-
-BatchPage: WOGenericContainer {
-	class = "batchPage";
-	elementName = "div";
-}
-
-BatchSize: WOGenericContainer {
-	class = "batchSize";
-	elementName = "div";
-}
-
-BatchSizeLabel: WOGenericContainer {
-	elementName = "label";
-	for = batchSizeID;
-}
-
-Content: WOComponentContent {
-}
-
-DGHasQualifier: ERXNonNullConditional {
-	condition = displayGroup.qualifier;
-}
-
-EntityName: WOString {
-	value = ^objectName;
-}
-
-EntityNameConditional: WOConditional {
-	condition = hasObjectName;
-}
-
-FilteredObjectsCount: WOString {
-	value = filteredObjectsCount;
-}
-
-HasMultipleBatches: WOConditional {
+HasBatches: WOConditional {
 	condition = ^displayGroup.hasMultipleBatches;
 }
 
-IndexLabel: WOGenericContainer {
-	elementName = "label";
-	for = batchIndexID;
+FirstBatch: ERXLinkButton5 {
+	action = selectFirstBatch;
+	class = "batch";
+	disabled = isFirstBatchSelected;
+	string = "1";
 }
 
-ItemsPerBatch: WOTextField {
-	id = batchSizeID;
-	numberformat = "0";
-	size = 4;
-	value = numberOfObjectsPerBatch;
+MiddleSpan: WOGenericContainer {
+	elementName = "span";
+	class = "middle";
+	omitTags = middleRange.isEmpty;
 }
 
-ItemsPerPage: ERXLocalizedString {
-	value = "ERXBatchNavigationBar.items_per_page"; 
+BatchRepetition: WORepetition {
+	count = middleRange.length;
+	index = index;
 }
 
-LeftArrow: ERXLinkButton5 {	
-    action = displayPreviousBatch;
-    class = "navPrev";
-    value = session.localizer.R2DBatchNavigationBar.previous;
+MiddleBatch: ERXLinkButton5 {
+	action = selectMiddleBatch;
+	class = "batch";
+	disabled = isMiddleBatchSelected;
+	string = batchIndex;
 }
 
-LeftArrowContent: WOSwitchComponent {
-	buttonLabel = session.localizer.R2DBatchNavigationBar.previous;
-	localContext = ^d2wContext;
-	WOComponentName = ^d2wContext.previousBatchButtonContentComponentName;
+LastBatch: ERXLinkButton5 {
+	action = selectLastBatch;
+	class = "batch";
+	disabled = isLastBatchSelected;
+	string = ^displayGroup.batchCount;
 }
 
-ObjectsCount: WOString {
-	value = objectCount;
+HasAvailableBatchSizes: WOConditional {
+	condition = ^d2wContext.availableBatchSizes.count;
 }
 
-Of: ERXLocalizedString {
-	value = "ERXBatchNavigationBar.of"; 
+AvailableBatchSizes: WORepetition {
+	list = ^d2wContext.availableBatchSizes;
+	item = batchSize;
 }
 
-OptionalForm: ERXWOForm {
-	disabled = context.isInForm;
+BatchSizeLink: ERXLinkButton5 {
+	action = selectBatchSize;
+	class = "batchSize";
+	disabled = currentBatchSizeSelected;
+	string = batchSizeString;
 }
-
-Page: ERXLocalizedString {
-	value = "ERXBatchNavigationBar.page"; 
-}
-
-RightArrow: ERXLinkButton5 {
-    action = displayNextBatch;
-    class = "navNext";
-	value = session.localizer.R2DBatchNavigationBar.next;
-}
-
-RightArrowContent: WOSwitchComponent {
-	buttonLabel = session.localizer.R2DBatchNavigationBar.next;
-	localContext = ^d2wContext;
-	WOComponentName = ^d2wContext.nextBatchButtonContentComponentName;
-}
-
-SortComponent: WOSortOrderManyKey {
-	displayGroup = ^displayGroup;
-	keyList = ^sortKeyList;
-}
-
-SortKeyListConditional: WOConditional {
-	condition = hasSortKeyList;
-}
-

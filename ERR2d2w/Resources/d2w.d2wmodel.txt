@@ -1,6 +1,7 @@
 (
     0 : *true* => pageClasses = (null) [R2DClassAssignment],
     0 : *true* => tooltip = (null) [R2DDefaultUIStringAssignment],
+    0 : *true* => batchLimit = "7" [com.webobjects.directtoweb.Assignment],
     0 : *true* => calendarView = (null) [R2DDelayedUserPreferenceAssignment],
     0 : *true* => sortOrdering = (null) [R2DDelayedUserPreferenceAssignment],
     0 : *true* => createSubEntities = (null) [R2DDefaultSubEntitiesAssignment],
@@ -42,6 +43,7 @@
     0 : *true* => loginWrapperComponentName = "ERDEmptyPageWrapper" [com.webobjects.directtoweb.Assignment],
     0 : *true* => tableHeaderComponentName = "R2DSimpleTableHeader" [com.webobjects.directtoweb.Assignment],
     0 : *true* => errorDialogTitle = "R2D2W.errorDialogTitle" [er.directtoweb.ERDDelayedLocalizedAssignment],
+    0 : *true* => availableBatchSizes = ("5", "10", "25", "100", "0") [com.webobjects.directtoweb.Assignment],
     0 : *true* => contentWrapperComponentName = "R2D2WContentWrapper" [com.webobjects.directtoweb.Assignment],
     0 : *true* => tableCaptionComponentName = "R2DSimpleTableCaption" [com.webobjects.directtoweb.Assignment],
     0 : *true* => belowDisplayPropertyKeys = ("belowControllerAction") [com.webobjects.directtoweb.Assignment],

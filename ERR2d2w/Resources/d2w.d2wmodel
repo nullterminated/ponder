@@ -20,6 +20,15 @@
       "author" = "0"; 
       "class" = "com.webobjects.directtoweb.Rule"; 
       "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "batchLimit"; 
+        "value" = "7"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
         "class" = "R2DDelayedUserPreferenceAssignment"; 
         "keyPath" = "calendarView"; 
       }; 
@@ -457,6 +466,21 @@
         "class" = "er.directtoweb.ERDDelayedLocalizedAssignment"; 
         "keyPath" = "errorDialogTitle"; 
         "value" = "R2D2W.errorDialogTitle"; 
+      }; 
+    }, 
+    {
+      "author" = "0"; 
+      "class" = "com.webobjects.directtoweb.Rule"; 
+      "rhs" = {
+        "class" = "com.webobjects.directtoweb.Assignment"; 
+        "keyPath" = "availableBatchSizes"; 
+        "value" = (
+          "5", 
+          "10", 
+          "25", 
+          "100", 
+          "0"
+        ); 
       }; 
     }, 
     {
