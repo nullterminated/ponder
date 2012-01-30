@@ -54,7 +54,6 @@ import er.extensions.foundation.ERXDictionaryUtilities;
 import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.localization.ERXLocalizer;
-import er.r2d2w.components.misc.R2DLog4JConfiguration;
 
 public class R2D2WDirectAction extends ERXDirectAction {
     protected static final Logger log = Logger.getLogger(ERD2WDirectAction.class);
