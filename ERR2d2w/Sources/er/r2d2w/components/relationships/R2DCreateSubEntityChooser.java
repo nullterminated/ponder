@@ -8,6 +8,7 @@ import com.webobjects.directtoweb.ERD2WContext;
 import com.webobjects.directtoweb.ERD2WUtilities;
 import com.webobjects.directtoweb.EditRelationshipPageInterface;
 import com.webobjects.eoaccess.EOEntity;
+import com.webobjects.eoaccess.EOModelGroup;
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EOClassDescription;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -22,11 +23,13 @@ import er.extensions.eof.ERXGenericRecord;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2DCreateSubEntityChooser extends ERDCustomComponent {
-	private EOEntity subEntity;
-	private EOEntity selectedEntity;
+	private transient EOEntity subEntity;
+	private transient EOEntity selectedEntity;
+	private String subEntityName;
+	private String selectedEntityName;
 	private String labelID;
 	private D2WContext ctx;
-	private NSArray<EOEntity> createSubEntities;
+	private transient NSArray<EOEntity> createSubEntities;
 	
 	public R2DCreateSubEntityChooser(WOContext context) {
 		super(context);
@@ -51,6 +54,9 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 	 * @return the subEntity
 	 */
 	public EOEntity subEntity() {
+		if(subEntity == null && subEntityName != null) {
+			subEntity = EOModelGroup.defaultGroup().entityNamed(subEntityName);
+		}
 		return subEntity;
 	}
 
@@ -59,12 +65,16 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 	 */
 	public void setSubEntity(EOEntity subEntity) {
 		this.subEntity = subEntity;
+		this.subEntityName = subEntity == null?null:subEntity.name();
 	}
 
 	/**
 	 * @return the selectedEntity
 	 */
 	public EOEntity selectedEntity() {
+		if(selectedEntity == null && selectedEntityName != null) {
+			selectedEntity = EOModelGroup.defaultGroup().entityNamed(selectedEntityName);
+		}
 		return selectedEntity;
 	}
 
@@ -73,6 +83,7 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 	 */
 	public void setSelectedEntity(EOEntity selectedEntity) {
 		this.selectedEntity = selectedEntity;
+		this.selectedEntityName = selectedEntity == null?null:selectedEntity.name();
 	}
 
 	/**
