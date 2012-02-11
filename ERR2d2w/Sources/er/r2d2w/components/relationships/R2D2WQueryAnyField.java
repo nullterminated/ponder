@@ -8,6 +8,7 @@ import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WModel;
+import com.webobjects.directtoweb.ERD2WContext;
 import com.webobjects.eoaccess.EOAttribute;
 import com.webobjects.eoaccess.EOEntity;
 import com.webobjects.foundation.NSArray;
@@ -55,7 +56,7 @@ public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
 	
 	public D2WContext relationshipContext() {
 		if(relationshipContext == null) {
-			relationshipContext = new D2WContext(session());
+			relationshipContext = ERD2WContext.newContext(session());
 			relationshipContext.setTask("query");
 			relationshipContext.setEntity(relationship()==null?entity():relationship().destinationEntity());
 		}

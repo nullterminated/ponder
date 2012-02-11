@@ -2,8 +2,8 @@ package er.r2d2w.components;
 
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
-import com.webobjects.appserver.WOSession;
 import com.webobjects.directtoweb.D2WContext;
+import com.webobjects.directtoweb.ERD2WContext;
 import com.webobjects.foundation.NSSelector;
 
 import er.directtoweb.ERD2WFactory;
@@ -13,7 +13,7 @@ import er.extensions.eof.ERXKey;
 public class R2D2WHead extends ERD2WStatelessComponent {
 	
 	protected static final D2WContext _d2wContext = 
-		new D2WContext((WOSession) null);
+			ERD2WContext.newContext();
 	
 	private static final NSSelector<D2WContext> _sel = 
 		new NSSelector<D2WContext>("d2wContext");

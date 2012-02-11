@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import com.webobjects.appserver.WOSession;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WModel;
+import com.webobjects.directtoweb.ERD2WContext;
 import com.webobjects.eoaccess.EOEntity;
 import com.webobjects.eocontrol.EOKeyValueUnarchiver;
 import com.webobjects.foundation.NSArray;
@@ -36,7 +37,7 @@ public class R2DDefaultSubEntitiesAssignment extends ERDAssignment {
 	
 	public NSArray<EOEntity> createSubEntities(D2WContext c) {
 		WOSession session = (WOSession)c.valueForKey(D2WModel.SessionKey);
-		D2WContext subContext = new D2WContext(session);
+		D2WContext subContext = ERD2WContext.newContext(session);
 		NSArray<EOEntity> e = new NSArray<EOEntity>(c.entity());
 		return _createSubEntities(e, subContext);
 	}

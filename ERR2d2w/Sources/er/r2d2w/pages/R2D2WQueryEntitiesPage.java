@@ -3,6 +3,7 @@ package er.r2d2w.pages;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WModel;
+import com.webobjects.directtoweb.ERD2WContext;
 import com.webobjects.eoaccess.EOAttribute;
 import com.webobjects.foundation.NSArray;
 
@@ -18,7 +19,7 @@ public class R2D2WQueryEntitiesPage extends ERD2WQueryEntitiesPage {
     
     protected D2WContext relationshipContext() {
     	if(relationshipContext == null) {
-    		relationshipContext = new D2WContext(session());
+    		relationshipContext = ERD2WContext.newContext(session());
         	relationshipContext.setTask("query");
     	}
     	return relationshipContext;

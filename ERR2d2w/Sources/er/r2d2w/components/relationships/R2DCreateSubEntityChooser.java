@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2WContext;
+import com.webobjects.directtoweb.ERD2WContext;
 import com.webobjects.directtoweb.ERD2WUtilities;
 import com.webobjects.directtoweb.EditRelationshipPageInterface;
 import com.webobjects.eoaccess.EOEntity;
@@ -33,7 +34,7 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 	
 	private D2WContext ctx() {
 		if(ctx == null) {
-			ctx = new D2WContext(session());
+			ctx = ERD2WContext.newContext(session());
 		}
 		return ctx;
 	}
