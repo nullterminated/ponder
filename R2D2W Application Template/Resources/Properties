@@ -1,3 +1,7 @@
+WOAllowConcurrentRequestHandling=true
+#WOStatisticsPassword=password
+WODefaultUndoStackLimit=0
+
 #Preference handling
 er.corebusinesslogic.ERCoreUserPreferences.handlerClassName=er.r2d2w.delegates.PreferenceHandlerDelegate
 
@@ -105,7 +109,7 @@ log4j.logger.er=INFO
 
 # ERExtensions
 # Transaction - Switching this to debug will start the sql ouputting.
-log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=INFO
 
 # Fixes - Turning this on will show all the models that are loaded
 log4j.logger.er.extensions.fixes.ERSharedEOLoader=INFO
@@ -122,6 +126,5 @@ log4j.logger.er.extensions.ERXConfigurationManager=INFO
 log4j.logger.ognl.helperfunction.WOHelperFunctionParser=WARN
 
 log4j.category.com.webobjects.eoaccess.ERXModel=WARN
-log4j.logger.er.directtoweb.rules.ERD2WTraceRuleFiringEnabled=DEBUG
 log4j.logger.org.apache.commons=INFO
 log4j.category.er.extensions.appserver.ERXApplication$JarChecker=WARN

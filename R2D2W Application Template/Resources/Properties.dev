@@ -1,1 +1,4 @@
+log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=DEBUG
+log4j.logger.er.directtoweb.rules.ERD2WTraceRuleFiringEnabled=DEBUG
+
 er.extensions.components.ERXModernizr.modernizrFileName=js/modernizr-1.7.js
