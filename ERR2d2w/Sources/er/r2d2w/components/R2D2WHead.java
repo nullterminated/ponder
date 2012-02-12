@@ -11,7 +11,13 @@ import er.directtoweb.components.ERD2WStatelessComponent;
 import er.extensions.eof.ERXKey;
 
 public class R2D2WHead extends ERD2WStatelessComponent {
-	
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected static final D2WContext _d2wContext = 
 			ERD2WContext.newContext();
 	

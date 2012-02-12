@@ -20,6 +20,13 @@ import er.extensions.localization.ERXLocalizer;
 import er.r2d2w.ERR2d2w;
 
 public class R2DDisplayPropertyKeysAssignment extends ERDAssignment implements ERDLocalizableAssignmentInterface {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final boolean fallbackDefault = ERXGenericRecord.localizationShouldFallbackToDefaultLanguage();
 	private static final NSArray<String> displayPropertyKeysDependentKeys = 
 		new NSArray<String>(new String[] { D2WModel.EntityKey , D2WModel.TaskKey , D2WModel.DynamicPageKey });

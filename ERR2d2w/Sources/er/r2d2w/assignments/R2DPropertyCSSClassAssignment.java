@@ -11,6 +11,13 @@ import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2DPropertyCSSClassAssignment extends ERDDelayedAssignment {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String ERROR_CLASS = "error";
 	public static final String MANDATORY_CLASS = "mandatory";
 

@@ -11,7 +11,13 @@ import er.extensions.components.ERXStatelessComponent;
 import er.extensions.foundation.ERXDictionaryUtilities;
 
 public class R2DPieChart extends ERXStatelessComponent {
-	
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final int rx = 160;
 	private static final int ry = 80;
 	private static final int cx = 180;

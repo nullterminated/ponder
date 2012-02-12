@@ -15,6 +15,13 @@ import er.directtoweb.assignments.ERDAssignment;
 import er.extensions.eof.ERXEC;
 
 public class R2DDefaultUserEntityAssignment extends ERDAssignment {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static final String PROTOTYPE_KEY = "erPrototype";
 	public static final String DUMMY_ENTITY_KEY = "dummyEntity";
 	public static final String DEFAULT_USER_ENTITY_KEY = "defaultUserEntity";

@@ -13,6 +13,12 @@ import er.extensions.foundation.ERXSelectorUtilities;
 
 public class R2DDelayedSelectorInvocationAssignment 
 		extends ERDDelayedAssignment implements ERDComputingAssignmentInterface {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public R2DDelayedSelectorInvocationAssignment(EOKeyValueUnarchiver u) { super(u); }
 	public R2DDelayedSelectorInvocationAssignment(String key, Object value) { super(key, value); }

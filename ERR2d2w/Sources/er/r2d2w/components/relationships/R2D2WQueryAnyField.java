@@ -25,6 +25,13 @@ import er.extensions.localization.ERXLocalizer;
 import er.r2d2w.assignments.R2DDefaultUserEntityAssignment;
 
 public class R2D2WQueryAnyField extends ERD2WStatelessComponent {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final NSArray<String> stringQualifierOperators = new NSArray<String>(new String[]{"starts with", "contains", "ends with", "is", "like"});
 	private static final NSArray<String> relationalQualifierOperators = new NSArray<String>(new String[]{"=", "<>", "<", ">", "<=", ">="});
 	private static final NSArray<String> standardQualifierOperators = stringQualifierOperators.arrayByAddingObjectsFromArray(relationalQualifierOperators);
