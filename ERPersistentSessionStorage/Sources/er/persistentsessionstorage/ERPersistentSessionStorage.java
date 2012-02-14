@@ -10,7 +10,6 @@ import com.webobjects.foundation.NSNotificationCenter;
 import com.webobjects.foundation.NSSelector;
 
 import er.extensions.ERXFrameworkPrincipal;
-import er.extensions.foundation.ERXSelectorUtilities;
 
 public class ERPersistentSessionStorage extends ERXFrameworkPrincipal {
 
@@ -47,7 +46,7 @@ public class ERPersistentSessionStorage extends ERXFrameworkPrincipal {
 		
 		//Set up notifications for newly created sessions
 		NSNotificationCenter nc = NSNotificationCenter.defaultCenter();
-		NSSelector sel = ERXSelectorUtilities.notificationSelector("enableSessionDistribution");
+		NSSelector<Void> sel = new NSSelector<Void>("enableSessionDistribution", new Class[] {NSNotification.class});
 		nc.addObserver(this, sel, WOSession.SessionDidCreateNotification, null);
 	}
 	
