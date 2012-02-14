@@ -1,0 +1,4 @@
+#The number of seconds for which a session may be idle before it times out.
+#The default is 3600 seconds (one hour). A value of 0 means sessions never
+#time out.
+#WOSessionTimeOut=0
