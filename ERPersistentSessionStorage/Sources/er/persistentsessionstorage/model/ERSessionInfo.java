@@ -14,6 +14,13 @@ import com.webobjects.foundation.NSData;
 import com.webobjects.foundation.NSForwardException;
 
 public class ERSessionInfo extends er.persistentsessionstorage.model.eogen._ERSessionInfo {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger log = Logger.getLogger(ERSessionInfo.class);
 
 	public static final ERSessionInfoClazz<ERSessionInfo> clazz = new ERSessionInfoClazz<ERSessionInfo>();
@@ -71,6 +78,8 @@ public class ERSessionInfo extends er.persistentsessionstorage.model.eogen._ERSe
 		} catch (IOException e) {
 			log.warn("Failed to deserialize session", e);
 		} catch (ClassNotFoundException e) {
+			log.warn("Failed to deserialize session", e);
+		} catch (RuntimeException e) {
 			log.warn("Failed to deserialize session", e);
 		} finally {
 			if (ois != null) {
