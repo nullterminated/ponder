@@ -25,7 +25,9 @@ public class ERPersistentSessionStorage0 extends ERXMigrationDatabase.Migration 
 		erSessionInfoTable.newBlobColumn("sessionData", false);
 		erSessionInfoTable.newStringColumn("sessionID", 50, false);
 
+		erSessionInfoTable.addIndex("sessionID_idx", erSessionInfoTable.existingColumnNamed("sessionID"));
+
 		erSessionInfoTable.create();
-		erSessionInfoTable.setPrimaryKey("id");
+	 	erSessionInfoTable.setPrimaryKey("id");
 	}
 }

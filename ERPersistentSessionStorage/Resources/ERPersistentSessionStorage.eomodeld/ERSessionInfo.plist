@@ -4,9 +4,18 @@
         {columnName = sessionData; name = sessionData; prototypeName = blob; }, 
         {columnName = sessionID; name = sessionID; prototypeName = varchar50; }
     ); 
-    attributesUsedForLocking = (id, sessionData, sessionID); 
+    attributesUsedForLocking = (id, sessionID); 
     className = "er.persistentsessionstorage.model.ERSessionInfo"; 
     classProperties = (sessionData, sessionID); 
+    entityIndexes = (
+        {
+            attributes = (sessionID); 
+            constraint = none; 
+            indexType = clustered; 
+            name = "sessionID_idx"; 
+            order = asc; 
+        }
+    ); 
     externalName = ERSessionInfo; 
     fetchSpecificationDictionary = {}; 
     name = ERSessionInfo; 
