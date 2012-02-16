@@ -10,7 +10,7 @@
     entityIndexes = (
         {
             attributes = (sessionID); 
-            constraint = none; 
+            constraint = distinct; 
             indexType = clustered; 
             name = "sessionID_idx"; 
             order = asc; 
