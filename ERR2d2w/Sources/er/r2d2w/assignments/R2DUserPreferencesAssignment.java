@@ -21,9 +21,6 @@ public class R2DUserPreferencesAssignment extends ERDAssignment {
 	/** Logging support */
     public static final Logger log = Logger.getLogger(R2DUserPreferencesAssignment.class);
 	
-	private static final NSArray<String> dependentKeys = 
-		new NSArray<String>(new String[] { "session", "session.objectStore.user"});
-	
 	public R2DUserPreferencesAssignment(EOKeyValueUnarchiver u) {
 		super(u);
 	}
@@ -41,7 +38,7 @@ public class R2DUserPreferencesAssignment extends ERDAssignment {
 	}
 
 	public NSArray<String> dependentKeys(String keyPath) {
-		return dependentKeys;
+		return null;
 	}
 
 	public Object userPreferences(D2WContext c) {
