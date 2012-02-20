@@ -2,3 +2,11 @@
 #The default is 3600 seconds (one hour). A value of 0 means sessions never
 #time out.
 #WOSessionTimeOut=0
+
+#The WOSessionStore removes session automatically at a specific interval.
+#The problem is it does not check to see if the session is distributed.
+#In order to prevent one instance from removing a session which another 
+#instance might be using, we turn it off by making the interval the max
+#integer value possible. This should be sufficient to prevent premature
+#session deletion unless you plan on having an app uptimes > 24 days.
+_WOSessionReclaimingInterval=2147483

@@ -17,6 +17,8 @@ public abstract class _ERSessionInfo extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "ERSessionInfo";
 
   // Attributes
+  public static final ERXKey<NSTimestamp> EXPIRATION_DATE = new ERXKey<NSTimestamp>("expirationDate");
+  public static final String EXPIRATION_DATE_KEY = EXPIRATION_DATE.key();
   public static final ERXKey<NSData> SESSION_DATA = new ERXKey<NSData>("sessionData");
   public static final String SESSION_DATA_KEY = SESSION_DATA.key();
   public static final ERXKey<String> SESSION_ID = new ERXKey<String>("sessionID");
@@ -34,6 +36,17 @@ public abstract class _ERSessionInfo extends  ERXGenericRecord {
     return er.persistentsessionstorage.model.ERSessionInfo.clazz;
   }
   
+  public NSTimestamp expirationDate() {
+    return (NSTimestamp) storedValueForKey(_ERSessionInfo.EXPIRATION_DATE_KEY);
+  }
+
+  public void setExpirationDate(NSTimestamp value) {
+    if (_ERSessionInfo.LOG.isDebugEnabled()) {
+    	_ERSessionInfo.LOG.debug( "updating expirationDate from " + expirationDate() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERSessionInfo.EXPIRATION_DATE_KEY);
+  }
+
   public NSData sessionData() {
     return (NSData) storedValueForKey(_ERSessionInfo.SESSION_DATA_KEY);
   }

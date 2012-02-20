@@ -1,12 +1,17 @@
 {
     attributes = (
+        {
+            columnName = expirationDate; 
+            name = expirationDate; 
+            prototypeName = dateTime; 
+        }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
         {columnName = sessionData; name = sessionData; prototypeName = blob; }, 
         {columnName = sessionID; name = sessionID; prototypeName = varchar50; }
     ); 
     attributesUsedForLocking = (id, sessionID); 
     className = "er.persistentsessionstorage.model.ERSessionInfo"; 
-    classProperties = (sessionData, sessionID); 
+    classProperties = (expirationDate, sessionData, sessionID); 
     entityIndexes = (
         {
             attributes = (sessionID); 

@@ -21,6 +21,7 @@ public class ERPersistentSessionStorage0 extends ERXMigrationDatabase.Migration 
 	@Override
 	public void upgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
 		ERXMigrationTable erSessionInfoTable = database.newTableNamed("ERSessionInfo");
+		erSessionInfoTable.newTimestampColumn("expirationDate", false);
 		erSessionInfoTable.newIntegerColumn("id", false);
 		erSessionInfoTable.newBlobColumn("sessionData", false);
 		erSessionInfoTable.newStringColumn("sessionID", 50, false);
