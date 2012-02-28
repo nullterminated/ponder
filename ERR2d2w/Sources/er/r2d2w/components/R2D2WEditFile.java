@@ -19,7 +19,7 @@ import er.attachment.processors.ERAttachmentProcessor;
 import er.attachment.processors.IERAttachmentProcessorDelegate;
 import er.attachment.utils.ERMimeType;
 import er.attachment.utils.ERMimeTypeManager;
-import er.directtoweb.components.ERDCustomEditComponent;
+import er.directtoweb.components.ERD2WStatelessCustomComponentWithArgs;
 import er.directtoweb.pages.ERD2WPage;
 import er.extensions.foundation.ERXFileUtilities;
 import er.extensions.foundation.ERXProperties;
@@ -28,13 +28,13 @@ import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.validation.ERXValidationFactory;
 import er.r2d2w.interfaces.R2DAttachmentContainer;
 
-public class R2D2WEditFile extends ERDCustomEditComponent {
+public class R2D2WEditFile extends ERD2WStatelessCustomComponentWithArgs {
 	/**
 	 * Do I need to update serialVersionUID?
 	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	/** logging support */
     public final static Logger log = Logger.getLogger(R2D2WEditFile.class);
@@ -64,7 +64,7 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 	    			ERAttachment oldAttachment = (ERAttachment)objectPropertyValue();
 	    			if(oldAttachment != null) { oldAttachment.delete(); }
 	    		}
-	    		setObjectPropertyValue(attachment); 
+	    		object().takeValueForKey(attachment, d2wContext().propertyKey()); 
 	    	}
 		}
 		return result;
@@ -83,9 +83,9 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
     			mt = mtm.mimeTypeForExtension(ext, false);
     		}
     		if(mt == null) {
-    			validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), key(), mimeType, "UnsupportedMimeTypeException"), mimeType, key());
+    			validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), d2wContext().propertyKey(), mimeType, "UnsupportedMimeTypeException"), mimeType, d2wContext().propertyKey());
     		} else if (mimeTypes().count() > 0 && !mimeTypes().contains(mt.mimeType())) {
-    			validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), key(), mimeType, "UnacceptableMimeTypeException"), mimeType, key());
+    			validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), d2wContext().propertyKey(), mimeType, "UnacceptableMimeTypeException"), mimeType, d2wContext().propertyKey());
     		} else {
     			setMimeType(mt.mimeType());
     		}
@@ -120,10 +120,10 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
     			((R2DAttachmentContainer) delegate).setUpload(upload);
     		}
     		processor.setDelegate(delegate);
-    		result = processor.process(editingContext, upload, filePath(), mimeType(), configurationName, ownerID);
+    		result = processor.process(object().editingContext(), upload, filePath(), mimeType(), configurationName, ownerID);
     	} catch (IOException e) {
     		log.debug(e.getMessage());
-			validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), key(), filePath(), "UploadFailedException"), filePath(), key());
+			validationFailedWithException(ERXValidationFactory.defaultFactory().createException(object(), d2wContext().propertyKey(), filePath(), "UploadFailedException"), filePath(), d2wContext().propertyKey());
     	}
     	
     	return result;
@@ -133,7 +133,6 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
     	return _COMPONENT_CLASS;
     }
     
-    //TODO this component should probably be stateless. Needs lots of reworking though.
     public void reset() {
     	super.reset();
     	filePath = null;
