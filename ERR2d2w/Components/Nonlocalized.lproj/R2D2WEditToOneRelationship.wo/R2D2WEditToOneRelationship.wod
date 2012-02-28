@@ -15,8 +15,8 @@ EditToOneRelationship: R2DToOneRelationship {
     relationshipKey = d2wContext.propertyKey;
     size = d2wContext.size;
     sortCaseInsensitive = d2wContext.sortCaseInsensitive;
-    sourceEntityName = object.entityName;
-    sourceObject = object;
+    sourceEntityName = d2wContext.object.entityName;
+    sourceObject = d2wContext.object;
     uiStyle = d2wContext.toOneUIStyle;
 	uniqueID = d2wContext.uniqueID;
 }

@@ -1,6 +1,7 @@
 package er.r2d2w.components.relationships;
 
 import com.webobjects.appserver.WOContext;
+import com.webobjects.eocontrol.EOEnterpriseObject;
 
 import er.directtoweb.components.relationships.ERD2WEditToManyRelationship;
 import er.extensions.foundation.ERXStringUtilities;
@@ -33,5 +34,12 @@ public class R2D2WEditToManyRelationship extends ERD2WEditToManyRelationship {
 		}
 		return labelID;
 	}
+	
+	public EOEnterpriseObject object() {
+		return (EOEnterpriseObject) d2wContext().valueForKey("object");
+	}
 
+	public void setObject(EOEnterpriseObject object) {
+		d2wContext().takeValueForKey(object, "object");
+	}
 }

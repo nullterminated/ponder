@@ -12,7 +12,7 @@ EditToManyRelationship: R2DToManyRelationship {
 	size = d2wContext.size;
     sortCaseInsensitive = d2wContext.sortCaseInsensitive;
 	sourceEntityName = d2wContext.entity.name;
-	sourceObject = object;
+	sourceObject = d2wContext.object;
 	uiStyle = d2wContext.toManyUIStyle;
 	// isMandatory = d2wContext.relationship.isMandatory;
 	// maxColumns = d2wContext.numCols;
