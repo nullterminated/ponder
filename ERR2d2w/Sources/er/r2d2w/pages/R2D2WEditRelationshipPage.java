@@ -375,6 +375,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 		out.writeObject(relationshipDisplayGroup);
 		out.writeObject(selectDataSource);
 		out.writeObject(inspectConfigurationName);
+		out.writeObject(d2wContext().valueForKey("inlineTask"));
 	}
 	
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
@@ -388,6 +389,10 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 		relationshipDisplayGroup = (ERXDisplayGroup<EOEnterpriseObject>) in.readObject();
 		selectDataSource = (EODataSource) in.readObject();
 		inspectConfigurationName = (String) in.readObject();
+		String inlineTask = (String) in.readObject();
+		if(inlineTask != null) {
+			d2wContext().takeValueForKey(inlineTask, "inlineTask");
+		}
 		
 		masterObjectAndRelationshipKey = new NSArray<Object>(masterObject, relationshipKey);
 		
