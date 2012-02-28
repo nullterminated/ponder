@@ -68,7 +68,7 @@ PageWrapper: WOSwitchComponent {
 	WOComponentName = pageWrapperName;
 }
 
-QueryComponent: ERD2WQuery {
+QueryComponent: ERXD2WQuery {
 	action = queryAction;
 	entityName = entity.name;
 	queryDataSource = selectDataSource;

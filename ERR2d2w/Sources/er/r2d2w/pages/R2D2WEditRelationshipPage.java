@@ -1,5 +1,9 @@
 package er.r2d2w.pages;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
 import org.apache.commons.lang.StringUtils;
 
 import com.webobjects.appserver.WOComponent;
@@ -12,13 +16,11 @@ import com.webobjects.eoaccess.EOEntity;
 import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EODataSource;
-import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EODetailDataSource;
 import com.webobjects.eocontrol.EOEnterpriseObject;
-import com.webobjects.eocontrol.EOObjectStoreCoordinator;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
-import com.webobjects.foundation.NSNotificationCenter;
 import com.webobjects.foundation.NSSelector;
 
 import er.directtoweb.pages.ERD2WPage;
@@ -28,6 +30,7 @@ import er.extensions.eof.ERXConstant;
 import er.extensions.eof.ERXEOAccessUtilities;
 import er.extensions.eof.ERXEOControlUtilities;
 import er.extensions.foundation.ERXArrayUtilities;
+import er.extensions.foundation.ERXEOSerializationUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelationshipPageInterface, SelectPageInterface {
@@ -38,7 +41,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private NSArray<Object> masterObjectAndRelationshipKey;
+	private transient NSArray<Object> masterObjectAndRelationshipKey;
 	private EOEnterpriseObject masterObject, objectToAddToRelationship, objectInRelationship;
 	private String relationshipKey;
 	private boolean isRelationshipToMany;
@@ -46,13 +49,14 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	private EODataSource selectDataSource;
 	private String inspectConfigurationName;
 	
+	public static final String PARENT_RELATIONSHIP_KEY = "parentRelationship";
 	public static final NSSelector<Void> OBJECTS_CHANGED = new NSSelector<Void>("objectsChangedInEditingContext", ERXConstant.NotificationClassArray);
 	public static final NSSelector<Void> OBJECTS_INVALIDATED = new NSSelector<Void>("objectsInvalidatedInEditingContext", ERXConstant.NotificationClassArray);
 	
 	public R2D2WEditRelationshipPage(WOContext context) {
         super(context);
     }
-	
+
 	public boolean displayList() {
 		return "list".equals(inlineTask());
 	}
@@ -85,26 +89,16 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 				this.relationshipKey = relationshipKey;
 				EOEntity masterEntity = EOUtilities.entityForObject(masterObject.editingContext(), masterObject);
 				EORelationship rel = masterEntity.relationshipNamed(relationshipKey);
-				d2wContext().takeValueForKey(rel, "parentRelationship");
+				d2wContext().takeValueForKey(rel, PARENT_RELATIONSHIP_KEY);
 				
 				isRelationshipToMany = masterObject.isToManyKey(relationshipKey);
 				
 				WODisplayGroup dg = relationshipDisplayGroup();
 				dg.setSelectsFirstObjectAfterFetch(!isRelationshipToMany);
 				
-				NSNotificationCenter nc = NSNotificationCenter.defaultCenter();
-				EODataSource ds = dataSource();
-				EOEditingContext ec = null;
-				if(ds != null) {
-					ec = ds.editingContext();
-					nc.removeObserver(dg, EOEditingContext.ObjectsChangedInEditingContextNotification, ec);
-					nc.removeObserver(dg, EOEditingContext.InvalidatedAllObjectsInStoreNotification, ec);
-				}
-				ds = ERXEOControlUtilities.dataSourceForObjectAndKey(masterObject, relationshipKey);				
+				EODataSource ds = ERXEOControlUtilities.dataSourceForObjectAndKey(masterObject, relationshipKey);				
 				setDataSource(ds);
 				relationshipDisplayGroup().setDataSource(ds);
-				nc.addObserver(dg, OBJECTS_CHANGED, EOEditingContext.ObjectsChangedInEditingContextNotification, ec);
-				nc.addObserver(dg, OBJECTS_INVALIDATED, EOObjectStoreCoordinator.InvalidatedAllObjectsInStoreNotification, ec);
 				
 				dg.fetch();
 				if(!isRelationshipToMany) {
@@ -369,5 +363,38 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	 */
 	public void setInspectConfigurationName(String inspectConfigurationName) {
 		this.inspectConfigurationName = inspectConfigurationName;
+	}
+
+	private void writeObject(ObjectOutputStream out) throws IOException {
+		ERXEOSerializationUtilities.writeEO(out, masterObject);
+		ERXEOSerializationUtilities.writeEO(out, objectToAddToRelationship);
+		ERXEOSerializationUtilities.writeEO(out, objectInRelationship);
+		out.writeObject(relationshipKey);
+		out.writeBoolean(isRelationshipToMany);
+		out.writeObject(relationshipDisplayGroup.dataSource());
+		out.writeObject(relationshipDisplayGroup);
+		out.writeObject(selectDataSource);
+		out.writeObject(inspectConfigurationName);
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+		masterObject = ERXEOSerializationUtilities.readEO(in);
+		objectToAddToRelationship = ERXEOSerializationUtilities.readEO(in);
+		objectInRelationship = ERXEOSerializationUtilities.readEO(in);
+		relationshipKey = (String) in.readObject();
+		isRelationshipToMany = in.readBoolean();
+		EODetailDataSource ds = (EODetailDataSource) in.readObject();
+		ds.qualifyWithRelationshipKey(relationshipKey, masterObject);
+		relationshipDisplayGroup = (ERXDisplayGroup<EOEnterpriseObject>) in.readObject();
+		selectDataSource = (EODataSource) in.readObject();
+		inspectConfigurationName = (String) in.readObject();
+		
+		masterObjectAndRelationshipKey = new NSArray<Object>(masterObject, relationshipKey);
+		
+		if(masterObject != null && relationshipKey != null) {
+			EOEntity masterEntity = EOUtilities.entityForObject(masterObject.editingContext(), masterObject);
+			EORelationship rel = masterEntity.relationshipNamed(relationshipKey);
+			d2wContext().takeValueForKey(rel, PARENT_RELATIONSHIP_KEY);
+		}
 	}
 }
