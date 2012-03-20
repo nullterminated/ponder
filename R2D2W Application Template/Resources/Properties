@@ -1,6 +1,5 @@
 WOAllowConcurrentRequestHandling=true
 #WOStatisticsPassword=password
-WODefaultUndoStackLimit=0
 
 #Preference handling
 er.corebusinesslogic.ERCoreUserPreferences.handlerClassName=er.r2d2w.delegates.PreferenceHandlerDelegate
