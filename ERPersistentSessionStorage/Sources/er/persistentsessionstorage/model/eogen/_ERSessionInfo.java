@@ -19,6 +19,8 @@ public abstract class _ERSessionInfo extends  ERXGenericRecord {
   // Attributes
   public static final ERXKey<NSTimestamp> EXPIRATION_DATE = new ERXKey<NSTimestamp>("expirationDate");
   public static final String EXPIRATION_DATE_KEY = EXPIRATION_DATE.key();
+  public static final ERXKey<Integer> INT_LOCK = new ERXKey<Integer>("intLock");
+  public static final String INT_LOCK_KEY = INT_LOCK.key();
   public static final ERXKey<NSData> SESSION_DATA = new ERXKey<NSData>("sessionData");
   public static final String SESSION_DATA_KEY = SESSION_DATA.key();
   public static final ERXKey<String> SESSION_ID = new ERXKey<String>("sessionID");
@@ -45,6 +47,17 @@ public abstract class _ERSessionInfo extends  ERXGenericRecord {
     	_ERSessionInfo.LOG.debug( "updating expirationDate from " + expirationDate() + " to " + value);
     }
     takeStoredValueForKey(value, _ERSessionInfo.EXPIRATION_DATE_KEY);
+  }
+
+  public Integer intLock() {
+    return (Integer) storedValueForKey(_ERSessionInfo.INT_LOCK_KEY);
+  }
+
+  public void setIntLock(Integer value) {
+    if (_ERSessionInfo.LOG.isDebugEnabled()) {
+    	_ERSessionInfo.LOG.debug( "updating intLock from " + intLock() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERSessionInfo.INT_LOCK_KEY);
   }
 
   public NSData sessionData() {

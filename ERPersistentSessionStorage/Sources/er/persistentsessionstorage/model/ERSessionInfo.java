@@ -36,6 +36,13 @@ public class ERSessionInfo extends er.persistentsessionstorage.model.eogen._ERSe
 	 */
 	public void init(EOEditingContext ec) {
 		super.init(ec);
+		setIntLock(Integer.valueOf(0));
+	}
+	
+	public void willUpdate() {
+		super.willUpdate();
+		Integer lock = Integer.valueOf(intLock().intValue() + 1);
+		setIntLock(lock);
 	}
 
 	public WOSession session() {

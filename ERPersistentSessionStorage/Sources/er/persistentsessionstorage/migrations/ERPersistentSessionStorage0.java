@@ -23,6 +23,7 @@ public class ERPersistentSessionStorage0 extends ERXMigrationDatabase.Migration 
 		ERXMigrationTable erSessionInfoTable = database.newTableNamed("ERSessionInfo");
 		erSessionInfoTable.newTimestampColumn("expirationDate", false);
 		erSessionInfoTable.newIntegerColumn("id", false);
+		erSessionInfoTable.newIntegerColumn("intLock", false);
 		erSessionInfoTable.newBlobColumn("sessionData", false);
 		erSessionInfoTable.newStringColumn("sessionID", 50, false);
 
