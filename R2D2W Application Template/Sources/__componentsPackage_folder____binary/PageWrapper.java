@@ -49,7 +49,7 @@ public class PageWrapper extends ERXStatelessComponent {
 		}
 
 		if (_navigationContext == null) {
-			_navigationContext = new ERD2WContext();
+			_navigationContext = ERD2WContext.newContext();
 		}
 		
 		ERXNavigationManager.manager().navigationStateForSession(session());
