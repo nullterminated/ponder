@@ -6,6 +6,7 @@ import com.webobjects.appserver.WOContext;
 import er.auth.ERAuthDirectAction;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.extensions.components.ERXStatelessComponent;
+
 //TODO make secure
 public class ERATwoFactorLogin extends ERXStatelessComponent {
 	private String username;
@@ -115,5 +116,13 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 	
 	public void setLastCID(String cid) {
 		this.lcid = cid;
+	}
+
+	public String passwordFieldName() {
+		return ERTwoFactorAuthenticationRequest.PASSWORD_KEY;
+	}
+
+	public String usernameFieldName() {
+		return ERTwoFactorAuthenticationRequest.USERNAME_KEY;
 	}
 }

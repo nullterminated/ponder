@@ -27,7 +27,7 @@ PageWrapper: WOSwitchComponent {
 }
 
 PasswordField: WOPasswordField {
-	name = "password";
+	name = passwordFieldName;
 	value = password;
 }
 
@@ -54,7 +54,7 @@ SignIn: WOSubmitButton {
 }
 
 UsernameField: WOTextField {
-	name = "username";
+	name = usernameFieldName;
 	value = username;
 }
 
