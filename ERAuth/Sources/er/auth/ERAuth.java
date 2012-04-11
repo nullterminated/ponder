@@ -27,15 +27,13 @@ public class ERAuth extends ERXFrameworkPrincipal {
 	
 	private static NSMutableDictionary<String, ERAuthenticationProcessor<?>> _processors;
 	
-	static {
-		_processors = new NSMutableDictionary<String, ERAuthenticationProcessor<?>>();
-		_processors.setObjectForKey(new ERTwoFactorAuthenticationProcessor(), ERTwoFactorAuthenticationRequest.ENTITY_NAME);
-	}
-	
 	// Registers the class as the framework principal
 	static {
     	log.debug("Static Initializer for ERAuth");
 		setUpFrameworkPrincipalClass(ERAuth.class);
+		_processors = new NSMutableDictionary<String, ERAuthenticationProcessor<?>>();
+		_processors.setObjectForKey(new ERTwoFactorAuthenticationProcessor(), ERTwoFactorAuthenticationRequest.ENTITY_NAME);
+		ERStageManager.INSTANCE.getClass();
 	}
 	
 	@Override
