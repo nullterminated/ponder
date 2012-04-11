@@ -29,7 +29,7 @@ public class ERAuth0 extends ERXMigrationDatabase.Migration {
 	 	erAuthenticationRequestTable.setPrimaryKey("id");
 
 		ERXMigrationTable erAuthenticationResponseTable = database.newTableNamed("ERAuthenticationResponse");
-		erAuthenticationResponseTable.newIntBooleanColumn("authenticationFailed", false);
+		erAuthenticationResponseTable.newFlagBooleanColumn("authenticationFailed", false);
 		erAuthenticationResponseTable.newStringColumn("authenticationFailureType", 50, true);
 		erAuthenticationResponseTable.newIntegerColumn("authenticationRequestID", false);
 		erAuthenticationResponseTable.newIntegerColumn("id", false);
