@@ -515,23 +515,23 @@ nav.l1 a + a:before {
 
 /*Batch Navigation */
 
-.batchNavigation {
+.pagination {
 	text-align: center;
 }
 
-.batchNavigation h6 {
+.pagination h6 {
 	font-style: normal;
 }
 
-.batchNavigation ul {
+.pagination ul {
 	white-space: nowrap;
 }
 
-.batchNavigation ul li {
+.pagination ul li {
 	display: inline;
 }
 
-.batchNavigation a {
+.pagination a {
 	display: inline-block;
 	border: 1px solid;
 	padding: 1em;
