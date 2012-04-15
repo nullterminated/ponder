@@ -11,8 +11,12 @@ public class ERR2d2wUtils {
 
 	public static Boolean acceptsXHTML(WORequest request) {
 		NSArray<String> acceptTypes = request.headersForKey(acceptKey);
-		boolean result = acceptTypes.contains(xhtmlType);
-		return Boolean.valueOf(result);
+		for(int i = 0, count = acceptTypes.count(); i < count; ++i) {
+			if(acceptTypes.objectAtIndex(i).indexOf(xhtmlType) > -1) {
+				return Boolean.TRUE;
+			}
+		}
+		return Boolean.FALSE;
 	}
 	
 	public static void setXHTMLContentType(WOResponse response) {
