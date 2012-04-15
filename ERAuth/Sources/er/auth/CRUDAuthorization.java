@@ -3,10 +3,9 @@ package er.auth;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOQualifier;
 
-import er.corebusinesslogic.ERCoreBusinessLogic;
 import er.extensions.eof.EOEnterpriseObjectClazz;
 
-public class CRUDAuthorization {
+public interface CRUDAuthorization {
 	public static final ERASelector<Boolean, CRUDAuthorization> CAN_CREATE =
 		new ERASelector<Boolean, CRUDAuthorization>("canCreate", CRUDAuthorization.class, new Class<?>[]{EOEnterpriseObjectClazz.class});
 	public static final ERASelector<Boolean, CRUDAuthorization> CAN_READ =
@@ -24,39 +23,19 @@ public class CRUDAuthorization {
 	public static final ERASelector<EOQualifier, CRUDAuthorization> RESTRICTING_QUERY_QUALIFIER =
 		new ERASelector<EOQualifier, CRUDAuthorization>("restrictingQueryQualifier", CRUDAuthorization.class, new Class<?>[]{EOEnterpriseObject.class});
 
-	public boolean isActor(EOEnterpriseObject eo) {
-		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
-	}
+	public <T extends EOEnterpriseObject> Boolean canCreate(EOEnterpriseObjectClazz<T> clazz);
 	
-	public <T extends EOEnterpriseObject> Boolean canCreate(EOEnterpriseObjectClazz<T> clazz) {
-		return Boolean.FALSE;
-	}
+	public Boolean canDelete(EOEnterpriseObject eo);
 	
-	public Boolean canDelete(EOEnterpriseObject eo) {
-		return Boolean.FALSE;
-	}
+	public <T extends EOEnterpriseObject> Boolean canQuery(EOEnterpriseObjectClazz<T> clazz);
 	
-	public <T extends EOEnterpriseObject> Boolean canQuery(EOEnterpriseObjectClazz<T> clazz) {
-		return Boolean.FALSE;
-	}
+	public Boolean canRead(EOEnterpriseObject eo);
 	
-	public Boolean canRead(EOEnterpriseObject eo) {
-		return Boolean.FALSE;
-	}
+	public Boolean canReadProperty(EOEnterpriseObject eo, String keyPath);
 	
-	public Boolean canReadProperty(EOEnterpriseObject eo, String keyPath) {
-		return Boolean.FALSE;
-	}
+	public Boolean canUpdate(EOEnterpriseObject eo);
 	
-	public Boolean canUpdate(EOEnterpriseObject eo) {
-		return Boolean.FALSE;
-	}
+	public Boolean canUpdateProperty(EOEnterpriseObject eo, String keyPath);
 	
-	public Boolean canUpdateProperty(EOEnterpriseObject eo, String keyPath) {
-		return Boolean.FALSE;
-	}
-	
-	public <T extends EOEnterpriseObject> EOQualifier restrictingQueryQualifier(EOEnterpriseObjectClazz<T> clazz) {
-		return null;
-	}
+	public <T extends EOEnterpriseObject> EOQualifier restrictingQueryQualifier(EOEnterpriseObjectClazz<T> clazz);
 }

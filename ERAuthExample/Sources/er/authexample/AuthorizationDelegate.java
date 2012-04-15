@@ -8,45 +8,54 @@ import er.authexample.model.User;
 import er.authexample.model.User.UserClazz;
 import er.corebusinesslogic.ERCoreBusinessLogic;
 import er.extensions.eof.EOEnterpriseObjectClazz;
+import er.extensions.qualifiers.ERXFalseQualifier;
 
-public class AuthorizationDelegate extends CRUDAuthorization {
+public class AuthorizationDelegate implements CRUDAuthorization {
 
+	public boolean isActor(EOEnterpriseObject eo) {
+		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
+	}
+	
 	@Override
 	public <T extends EOEnterpriseObject> Boolean canCreate(EOEnterpriseObjectClazz<T> clazz) {
-		// TODO Auto-generated method stub
-		return super.canCreate(clazz);
+		return Boolean.FALSE;
 	}
 
 	@Override
 	public Boolean canDelete(EOEnterpriseObject eo) {
-		// TODO Auto-generated method stub
-		return super.canDelete(eo);
+		return Boolean.FALSE;
 	}
 
 	@Override
 	public <T extends EOEnterpriseObject> Boolean canQuery(EOEnterpriseObjectClazz<T> clazz) {
-		// TODO Auto-generated method stub
-		return super.canQuery(clazz);
+		return Boolean.FALSE;
 	}
 
 	@Override
 	public Boolean canRead(EOEnterpriseObject eo) {
-		// TODO Auto-generated method stub
-		return super.canRead(eo);
+		return Boolean.FALSE;
 	}
 
 	@Override
 	public Boolean canReadProperty(EOEnterpriseObject eo, String keyPath) {
-		// TODO Auto-generated method stub
-		return super.canReadProperty(eo, keyPath);
+		return Boolean.FALSE;
 	}
 
 	@Override
 	public Boolean canUpdate(EOEnterpriseObject eo) {
-		// TODO Auto-generated method stub
-		return super.canUpdate(eo);
+		return Boolean.FALSE;
 	}
 	
+	@Override
+	public Boolean canUpdateProperty(EOEnterpriseObject eo, String keyPath) {
+		return Boolean.FALSE;
+	}
+
+	@Override
+	public <T extends EOEnterpriseObject> EOQualifier restrictingQueryQualifier(EOEnterpriseObjectClazz<T> clazz) {
+		return new ERXFalseQualifier();
+	}
+
 	public Boolean canCreate(UserClazz<User> clazz) {
 		return Boolean.TRUE;
 	}
@@ -76,18 +85,6 @@ public class AuthorizationDelegate extends CRUDAuthorization {
 		if(eo.isNewObject()) { return Boolean.TRUE; }
 		if(keypath.equals(User.USERNAME_KEY)) { return Boolean.FALSE; }
 		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
-	}
-
-	@Override
-	public Boolean canUpdateProperty(EOEnterpriseObject eo, String keyPath) {
-		// TODO Auto-generated method stub
-		return super.canUpdateProperty(eo, keyPath);
-	}
-
-	@Override
-	public <T extends EOEnterpriseObject> EOQualifier restrictingQueryQualifier(EOEnterpriseObjectClazz<T> clazz) {
-		// TODO Auto-generated method stub
-		return super.restrictingQueryQualifier(clazz);
 	}
 
 }
