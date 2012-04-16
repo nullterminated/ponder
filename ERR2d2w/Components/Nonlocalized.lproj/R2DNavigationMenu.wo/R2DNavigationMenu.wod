@@ -1,3 +1,18 @@
+Checkbox: WOGenericElement {
+	elementName = "input";
+	type = "checkbox";
+	id = checkboxID;
+}
+
+IsSelected: WOConditional {
+	condition = isSelected;
+}
+
+Label: WOGenericContainer {
+	elementName = "label";
+	for = checkboxID;
+}
+
 Level1Items: WORepetition {
 	list = level1Items;
 	item = navigationItem;
@@ -28,24 +43,13 @@ L3NavObject: R2DNavigationMenuItem {
     level=3;
 }
 
-MenuLevel1: WOGenericContainer {
-	elementName = "nav";
-	class = "l1";
-}
-
-MenuLevel2: WOGenericContainer {
-	elementName = "nav";
-	class = "l2";
-}
-
-MenuLevel3: WOGenericContainer {
-	elementName = "nav";
-	class = "l3";
-}
-
 NavButtonComponent: WOSwitchComponent {
 	WOComponentName = navigationButtonContentComponentName;
 	localContext = navContext;
+}
+
+NavLabel: ERXLocalizedString {
+	value = "R2DNavigationMenu.navMenuLabel";
 }
 
 ShowLevel1: WOConditional {

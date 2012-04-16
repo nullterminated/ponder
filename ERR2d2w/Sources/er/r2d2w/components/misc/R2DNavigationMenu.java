@@ -1,8 +1,10 @@
 package er.r2d2w.components.misc;
 
 import com.webobjects.appserver.WOContext;
+import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSKeyValueCoding;
 
+import er.extensions.appserver.ERXWOContext;
 import er.extensions.appserver.navigation.ERXNavigationItem;
 import er.extensions.appserver.navigation.ERXNavigationMenu;
 import er.r2d2w.components.buttons.R2DDefaultButtonContent;
@@ -14,9 +16,15 @@ public class R2DNavigationMenu extends ERXNavigationMenu {
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
+	private String checkboxID;
 
 	public R2DNavigationMenu(WOContext context) {
 		super(context);
+	}
+	
+	public void reset() {
+		super.reset();
+		checkboxID = null;
 	}
 
 	public ERXNavigationItem navigationItem() {
@@ -38,5 +46,21 @@ public class R2DNavigationMenu extends ERXNavigationMenu {
 	
 	public NSKeyValueCoding navContext() {
 		return navigationContext();
+	}
+	
+	public boolean isSelected() {
+        NSArray<?> state = navigationState().state();
+        boolean isSelected = !navigationState().isDisabled() && state != null && state.containsObject(navigationItem().name());
+        return isSelected;
+	}
+
+	/**
+	 * @return the checkboxID
+	 */
+	public String checkboxID() {
+		if(checkboxID == null) {
+			checkboxID = ERXWOContext.safeIdentifierName(context(), false);
+		}
+		return checkboxID;
 	}
 }

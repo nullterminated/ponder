@@ -1,3 +1,28 @@
-<webobject name = "ShowLevel1"><webobject name = "MenuLevel1"><webobject name = "Level1Items"><webobject name = "L1NavObject"><webobject name = "NavButtonComponent"/></webobject></webobject></webobject></webobject>
-<webobject name = "ShowLevel2"><webobject name = "MenuLevel2"><webobject name = "Level2Items"><webobject name = "L2NavObject"><webobject name = "NavButtonComponent"/></webobject></webobject></webobject></webobject>
-<webobject name = "ShowLevel3"><webobject name = "MenuLevel3"><webobject name = "Level3Items"><webobject name = "L3NavObject"><webobject name = "NavButtonComponent"/></webobject></webobject></webobject></webobject>
+<webobject name = "ShowLevel1">
+	<nav>
+		<webobject name = "Checkbox"/><webobject name = "Label"><webobject name = "NavLabel"/></webobject>
+		<ul>
+			<webobject name = "Level1Items"><li>
+				<webobject name = "L1NavObject"><webobject name = "NavButtonComponent"/></webobject>
+				<webobject name = "IsSelected">
+					<webobject name = "ShowLevel2">
+						<ul>
+							<webobject name = "Level2Items"><li>
+								<webobject name = "L2NavObject"><webobject name = "NavButtonComponent"/></webobject>
+								<webobject name = "IsSelected">
+									<webobject name = "ShowLevel3">
+										<ul>
+											<webobject name = "Level3Items"><li>
+												<webobject name = "L3NavObject"><webobject name = "NavButtonComponent"/></webobject>
+											</li></webobject>
+										</ul>
+									</webobject>
+								</webobject>
+							</li></webobject>
+						</ul>
+					</webobject>	
+				</webobject>
+			</li></webobject>
+		</ul>
+	</nav>
+</webobject>
