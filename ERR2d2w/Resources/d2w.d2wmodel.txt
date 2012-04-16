@@ -94,6 +94,7 @@
     5 : propertyKey = 'belowControllerAction' => componentName = "R2DControllerButtonList" [com.webobjects.directtoweb.Assignment],
     5 : propertyKey = 'rightControllerAction' => componentName = "R2DControllerButtonList" [com.webobjects.directtoweb.Assignment],
     5 : propertyKey = 'createSubentitiesAction' => componentName = "R2DCreateSubEntityChooser" [com.webobjects.directtoweb.Assignment],
+    5 : not (pageConfiguration like '*Embedded*') => pageController = "er.r2d2w.delegates.R2DDefaultBranchDelegate" [ERDDelayedObjectCreationAssignment],
     5 : (task = 'editRelationship' and entity.subEntities.count > 0) => belowDisplayPropertyKeys = ("createSubentitiesAction", "belowControllerAction") [com.webobjects.directtoweb.Assignment],
     5 : (session.objectStore.modernizr.svg = 1 and not (session.browser.isChrome = 1 or session.browser.isSafari = 1 or session.browser.isOmniWeb = 1)) => imageFilename = "img/icons.svg" [com.webobjects.directtoweb.Assignment],
     6 : *true* => valueWhenEmpty = "" [com.webobjects.directtoweb.Assignment],
