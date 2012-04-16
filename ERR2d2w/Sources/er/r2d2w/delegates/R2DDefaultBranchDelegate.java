@@ -378,7 +378,10 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 		EditRelationshipPageInterface erpi = ERD2WUtilities.enclosingComponentOfClass(sender, EditRelationshipPageInterface.class);
 		if(erpi != null) {
 			EOEnterpriseObject eo = (EOEnterpriseObject)NSKeyValueCoding.Utility.valueForKey(erpi, "masterObject");
-			if(eo != null) {eo.editingContext().saveChanges();}
+			if(eo != null) {
+				//FIXME can throw exceptions
+				eo.editingContext().saveChanges();
+			}
 			if(erpi instanceof D2WPage) {
 				nextPage = _nextPageFromDelegate((D2WPage)erpi);
 			}
