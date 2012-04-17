@@ -20,6 +20,7 @@ IsSelectedTab: WOConditional {
 
 SelectedTabItem: ERXLinkButton5 {
 	href = "#";
+	disabled = true;
 	value = currentTabName;
 }
 
