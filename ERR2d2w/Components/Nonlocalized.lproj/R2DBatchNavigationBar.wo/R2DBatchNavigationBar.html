@@ -1,24 +1,14 @@
 <div class="pagination">
 	<webobject name = "HasBatches">
 		<h6><webobject name = "PageNumber"/></h6>
-		<ul class="batchIndexes">
-			<li><webobject name = "FirstBatch"/></li>
-			<webobject name = "HasFirstEllipsis">
-				<li>...</li>
-			</webobject>
-			<webobject name = "BatchRepetition">
-				<li><webobject name = "MiddleBatch"/></li>
-			</webobject>
-			<webobject name = "HasLastEllipsis">
-				<li>...</li>
-			</webobject>
-			<li><webobject name = "LastBatch"/></li>
+		<webobject name = "OrderedList">
+			<webobject name = "BatchRepetition"><li><webobject name = "BatchIndexLink"/></li></webobject>
+		</webobject>
+	</webobject>
+	<webobject name = "DisplayBatchSizes">
+		<h6><webobject name = "ItemsPerPage"/></h6>
+		<ul class="batchSizes">
+			<webobject name = "AvailableBatchSizes"><li><webobject name = "BatchSizeLink"/></li></webobject>
 		</ul>
 	</webobject>
-	<h6><webobject name = "ItemsPerPage"/></h6>
-	<ul class="batchSizes">
-		<webobject name = "AvailableBatchSizes">
-			<li><webobject name = "BatchSizeLink"/></li>
-		</webobject>
-	</ul>
 </div>

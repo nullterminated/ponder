@@ -2,34 +2,25 @@ HasBatches: WOConditional {
 	condition = ^displayGroup.hasMultipleBatches;
 }
 
-FirstBatch: ERXLinkButton5 {
-	action = selectFirstBatch;
-	class = "batch";
-	disabled = isFirstBatchSelected;
-	string = "1";
+OrderedList: WOGenericContainer {
+	elementName = "ol";
+	class = "pages";
+	start = startValue;
 }
 
 BatchRepetition: WORepetition {
-	count = middleRange.length;
+	count = batchLimit;
 	index = index;
 }
 
-MiddleBatch: ERXLinkButton5 {
-	action = selectMiddleBatch;
-	class = "batch";
-	disabled = isMiddleBatchSelected;
+BatchIndexLink: ERXLinkButton5 {
+	action = selectBatch;
+	disabled = isCurrentBatch;
 	string = batchIndex;
 }
 
-LastBatch: ERXLinkButton5 {
-	action = selectLastBatch;
-	class = "batch";
-	disabled = isLastBatchSelected;
-	string = ^displayGroup.batchCount;
-}
-
 AvailableBatchSizes: WORepetition {
-	list = ^d2wContext.availableBatchSizes;
+	list = availableBatchSizes;
 	item = batchSize;
 }
 
@@ -40,18 +31,14 @@ BatchSizeLink: ERXLinkButton5 {
 	string = batchSizeString;
 }
 
-HasFirstEllipsis: WOConditional {
-	condition = hasFirstEllipsis;
-}
-
-HasLastEllipsis: WOConditional {
-	condition = hasLastEllipsis;
-}
-
 PageNumber: WOString {
 	value = localizer.R2DBatchNavigationBar.page;
 }
 
 ItemsPerPage: WOString {
 	value = localizer.R2DBatchNavigationBar.items_per_page;
+}
+
+DisplayBatchSizes: WOConditional {
+	condition = hasMultipleBatchSizes;
 }

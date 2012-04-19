@@ -1,11 +1,13 @@
 package er.r2d2w.components.misc;
 
+import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.directtoweb.D2WContext;
+import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSNotificationCenter;
-import com.webobjects.foundation.NSRange;
 
 import er.extensions.components.ERXStatelessComponent;
 import er.extensions.eof.ERXConstant;
@@ -17,12 +19,13 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	private WODisplayGroup displayGroup;
 	private transient D2WContext d2wContext;
 	private Object batchSize;
-	private NSRange middleRange;
+	private NSArray<Integer> availableBatchSizes;
+	private Integer batchStart;
 	private Integer index;
 
 	public R2DBatchNavigationBar(WOContext context) {
@@ -34,7 +37,9 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 		displayGroup = null;
 		d2wContext = null;
 		batchSize = null;
-		middleRange = null;
+		availableBatchSizes = null;
+		batchStart = null;
+		index = null;
 	}
 
 	public WODisplayGroup displayGroup() {
@@ -49,6 +54,11 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 			d2wContext = (D2WContext) valueForBinding("d2wContext");
 		}
 		return d2wContext;
+	}
+	
+	public int batchLimit() {
+		int batchLimit = ERXValueUtilities.intValue(d2wContext().valueForKey("batchLimit"));
+		return batchLimit;
 	}
 
 	/**
@@ -81,57 +91,74 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 		return displayGroup().numberOfObjectsPerBatch() == batchSize;
 	}
 
-	public void selectFirstBatch() {
-		displayGroup().setCurrentBatchIndex(1);
-	}
-
-	public boolean isFirstBatchSelected() {
-		return displayGroup().currentBatchIndex() == 1;
-	}
-
-	public void selectLastBatch() {
-		displayGroup().setCurrentBatchIndex(displayGroup().batchCount());
-	}
-
-	public boolean isLastBatchSelected() {
-		return displayGroup().currentBatchIndex() == displayGroup().batchCount();
-	}
-
-	/**
-	 * @return the middleRange
-	 */
-	public NSRange middleRange() {
-		if(middleRange == null) {
-			int batchCount = displayGroup().batchCount();
-			if(batchCount == 2) {
-				middleRange = new NSRange(2,0);
-				return middleRange;
-			}
-			int currentBatch = displayGroup().currentBatchIndex();
-			int batchLimit = ERXValueUtilities.intValue(d2wContext().valueForKey("batchLimit"));
-			batchLimit = Math.max(batchLimit, 5);
-			batchLimit = Math.min(batchLimit, batchCount);
-			int centerBatch = batchLimit/2 + batchLimit%2;
-			int length = batchLimit - 2;
-			int location;
-			if(currentBatch <= centerBatch) {
-				location = 2;
-			} else if(currentBatch > batchCount - centerBatch) {
-				location = batchCount - batchLimit + 2;
-			} else {
-				location = currentBatch - centerBatch + 2;
-			}
-			middleRange = new NSRange(location, length);
-		}
-		return middleRange;
-	}
-
 	public String batchSizeString() {
 		if(ERXValueUtilities.intValue(batchSize()) == 0) {
 			String all = localizer().localizedStringForKey("R2DBatchSize.all");
 			return all;
 		}
 		return String.valueOf(batchSize());
+	}
+
+	/**
+	 * @return the availableBatchSizes
+	 */
+	public NSArray<Integer> availableBatchSizes() {
+		if(availableBatchSizes == null) {
+			NSArray<Object> rawSizes = (NSArray<Object>) d2wContext().valueForKey("availableBatchSizes");
+			if(rawSizes != null) {
+				NSMutableArray<Integer> sizes = new NSMutableArray<Integer>();
+				int allObjects = displayGroup().allObjects().count();
+				for(int i = 0, count = rawSizes.count(); i < count; ++i) {
+					int size = ERXValueUtilities.intValue(rawSizes.objectAtIndex(i));
+					if(size < allObjects) {
+						sizes.addObject(Integer.valueOf(size));
+					}
+				}
+				availableBatchSizes = sizes.immutableClone();
+			} else {
+				availableBatchSizes = NSArray.emptyArray();
+			}
+		}
+		return availableBatchSizes;
+	}
+
+	public boolean hasMultipleBatchSizes() {
+		return availableBatchSizes().count() > 1;
+	}
+
+	public Integer startValue() {
+		if(batchStart == null) {
+			int batchCount = displayGroup().batchCount();
+			int currentBatch = displayGroup().currentBatchIndex();
+			int batchLimit = batchLimit();
+			batchLimit = Math.max(batchLimit, 5);
+			batchLimit = Math.min(batchLimit, batchCount);
+			int centerBatch = batchLimit/2 + batchLimit%2;
+			if(currentBatch <= centerBatch) {
+				batchStart = 1;
+			} else if(currentBatch > batchCount - centerBatch) {
+				batchStart = batchCount - batchLimit + 1;
+			} else {
+				batchStart = currentBatch - centerBatch + 1;
+			}
+		}
+		return batchStart;
+	}
+
+	/**
+	 * @return the batchIndex
+	 */
+	public Integer batchIndex() {
+		return startValue().intValue() + index().intValue();
+	}
+
+	public WOActionResults selectBatch() {
+		displayGroup().setCurrentBatchIndex(batchIndex());
+		return null;
+	}
+
+	public boolean isCurrentBatch() {
+		return displayGroup().currentBatchIndex() == batchIndex().intValue();
 	}
 
 	/**
@@ -146,27 +173,5 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 	 */
 	public void setIndex(Integer index) {
 		this.index = index;
-	}
-
-	public String batchIndex() {
-		return String.valueOf(middleRange().location() + index().intValue());
-	}
-
-	public boolean isMiddleBatchSelected() {
-		int currentBatch = displayGroup().currentBatchIndex();
-		return currentBatch == middleRange().location() + index().intValue();
-	}
-
-	public void selectMiddleBatch() {
-		displayGroup().setCurrentBatchIndex(middleRange().location() + index().intValue());
-		middleRange = null;
-	}
-
-	public boolean hasFirstEllipsis() {
-		return middleRange().location() != 2 && middleRange().length() != 0;
-	}
-	
-	public boolean hasLastEllipsis() {
-		return middleRange().maxRange() != displayGroup().batchCount();
 	}
 }
