@@ -1,5 +1,7 @@
 package er.authexample;
 
+import com.webobjects.eocontrol.EOEnterpriseObject;
+
 import er.auth.processing.ERTwoFactorAuthenticationConfig;
 import er.auth.processing.ERTwoFactorAuthenticationDelegate;
 import er.authexample.model.User;
@@ -14,8 +16,9 @@ public class AuthConfig extends ERTwoFactorAuthenticationConfig {
 	 * Overriden to verify password stored as a hash
 	 */
 	@Override
-	public boolean verifyPassword(String enteredPassword, Object storedPassword) {
+	public boolean verifyPassword(EOEnterpriseObject eo, String enteredPassword) {
+		User user = (User)eo;
 		String hash = User.hashedPassword(enteredPassword);
-		return storedPassword.equals(hash);
+		return user.password().equals(hash);
 	}
 }

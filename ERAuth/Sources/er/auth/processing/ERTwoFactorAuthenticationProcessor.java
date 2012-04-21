@@ -46,11 +46,10 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 			break;
 		case 1:
 			EOEnterpriseObject eo = users.lastObject();
-			Object storedPassword = eo.valueForKeyPath(config.storedPasswordKeyPath());
 			EOGlobalID gid = ec.globalIDForObject(eo);
 			ERXKeyGlobalID kgid = ERXKeyGlobalID.globalIDForGID((EOKeyGlobalID)gid);
 			response.setUserID(kgid);
-			if(config.verifyPassword(authRequest.password(), storedPassword)) {
+			if(config.verifyPassword(eo, authRequest.password())) {
 				response.setAuthenticationFailed(Boolean.FALSE);
 				ERStageManager.INSTANCE.setActor(eo);
 			} else {

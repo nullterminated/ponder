@@ -2,9 +2,10 @@ package er.auth.processing;
 
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
+import com.webobjects.eocontrol.EOEnterpriseObject;
 
 
-public class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, ERCredentialRecoveryConfig {
+public abstract class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, ERCredentialRecoveryConfig {
 	protected final String userEntityName;
 	protected final String usernameKeyPath;
 	protected final String storedPasswordKeyPath;
@@ -18,7 +19,7 @@ public class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, 
 		this.userEntityName = userEntityName;
 		this.usernameKeyPath = usernameKeyPath;
 		this.storedPasswordKeyPath = storedPasswordKeyPath;
-		this.delegate = delegate == null?new ERTwoFactorAuthenticationDelegate():delegate;
+		this.delegate = delegate;
 	}
 	
 	@Override
@@ -52,10 +53,8 @@ public class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, 
 	/**
 	 * Verifies that the password entered matches the password stored in the database.
 	 * @param enteredPassword the entered password
-	 * @param storedPassword the stored password
+	 * @param user the user eo
 	 * @return true if the passwords match
 	 */
-	public boolean verifyPassword(String enteredPassword, Object storedPassword) {
-		return storedPassword.equals(enteredPassword);
-	}
+	public abstract boolean verifyPassword(EOEnterpriseObject user, String enteredPassword);
 }

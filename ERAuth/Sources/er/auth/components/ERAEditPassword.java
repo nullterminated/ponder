@@ -48,7 +48,7 @@ public class ERAEditPassword extends ERDCustomComponent {
 		try {
 			//If the stored password is not null and password field does not match it, throw
 			boolean hasPassword = hasPassword();
-			if (hasPassword && (!hasOldPassword || !config.verifyPassword(oldPassword(), storedPassword()))) {
+			if (hasPassword && (!hasOldPassword || !config.verifyPassword(object(), oldPassword()))) {
 				ERXValidationException e = ERXValidationFactory.defaultFactory().createCustomException(object(),
 						"InvalidPasswordException");
 				validationFailedWithException(e, e.value(), e.key());
