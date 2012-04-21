@@ -9,11 +9,12 @@ import er.extensions.appserver.navigation.ERXNavigationItem;
 import er.extensions.appserver.navigation.ERXNavigationMenu;
 import er.r2d2w.components.buttons.R2DDefaultButtonContent;
 
-public class R2DNavigationMenu extends ERXNavigationMenu {	
+public class R2DNavigationMenu extends ERXNavigationMenu {
 	/**
-	 * Do I need to update serialVersionUID?
-	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
-	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 * Do I need to update serialVersionUID? See section 5.6 <cite>Type Changes
+	 * Affecting Serialization</cite> on page 51 of the <a
+	 * href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object
+	 * Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
 	private String checkboxID;
@@ -21,7 +22,7 @@ public class R2DNavigationMenu extends ERXNavigationMenu {
 	public R2DNavigationMenu(WOContext context) {
 		super(context);
 	}
-	
+
 	public void reset() {
 		super.reset();
 		checkboxID = null;
@@ -37,30 +38,39 @@ public class R2DNavigationMenu extends ERXNavigationMenu {
 	}
 
 	public String navigationButtonContentComponentName() {
-		String name = (String)navigationContext().valueForKey("navigationButtonContentComponentName");
-		if(name == null) {
+		String name = (String) navigationContext().valueForKey("navigationButtonContentComponentName");
+		if (name == null) {
 			name = R2DDefaultButtonContent.class.getSimpleName();
 		}
 		return name;
 	}
-	
+
 	public NSKeyValueCoding navContext() {
 		return navigationContext();
 	}
-	
+
 	public boolean isSelected() {
-        NSArray<?> state = navigationState().state();
-        boolean isSelected = !navigationState().isDisabled() && state != null && state.containsObject(navigationItem().name());
-        return isSelected;
+		NSArray<?> state = navigationState().state();
+		boolean isSelected = !navigationState().isDisabled() && state != null
+				&& state.containsObject(navigationItem().name());
+		return isSelected;
 	}
 
 	/**
 	 * @return the checkboxID
 	 */
 	public String checkboxID() {
-		if(checkboxID == null) {
+		if (checkboxID == null) {
 			checkboxID = ERXWOContext.safeIdentifierName(context(), false);
 		}
 		return checkboxID;
+	}
+
+	public boolean omitListItem() {
+		return !itemMeetsDisplayConditions();
+	}
+
+	public boolean itemMeetsDisplayConditions() {
+		return navigationItem().meetsDisplayConditionsInComponent(this);
 	}
 }

@@ -28,6 +28,11 @@ Level3Items: WORepetition {
 	item = navigationItem;
 }
 
+ListItem: WOGenericContainer {
+	elementName = "li";
+	omitTags = omitListItem;
+}
+
 L1NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
     level=1;
