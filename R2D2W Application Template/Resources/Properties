@@ -110,6 +110,27 @@ log4j.logger.er=INFO
 # Transaction - Switching this to debug will start the sql ouputting.
 log4j.logger.er.transaction.adaptor.EOAdaptorDebugEnabled=INFO
 
+
+## Enable delegate to emit SQL debugging info. The Logger used is
+## log4j.category.er.extensions.ERXAdaptorChannelDelegate.sqlLogging
+er.extensions.ERXAdaptorChannelDelegate.enabled=true
+
+## How long a statement must run to cause a log message. Messages with longer than
+## error also emit a stack-trace
+er.extensions.ERXAdaptorChannelDelegate.trace.milliSeconds.debug=0
+er.extensions.ERXAdaptorChannelDelegate.trace.milliSeconds.info=100
+er.extensions.ERXAdaptorChannelDelegate.trace.milliSeconds.warn=2000
+er.extensions.ERXAdaptorChannelDelegate.trace.milliSeconds.error=15000
+
+## MaxLength of the message
+er.extensions.ERXAdaptorChannelDelegate.trace.maxLength = 3000
+
+## What entities to watch
+er.extensions.ERXAdaptorChannelDelegate.trace.entityMatchPattern = .*
+
+## Actually set the log level
+log4j.logger.er.extensions.ERXAdaptorChannelDelegate.sqlLogging=INFO
+
 # Fixes - Turning this on will show all the models that are loaded
 log4j.logger.er.extensions.fixes.ERSharedEOLoader=INFO
 
