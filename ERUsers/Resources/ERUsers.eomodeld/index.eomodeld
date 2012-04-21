@@ -1,0 +1,8 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {className = "er.users.model.ERCredential"; name = ERCredential; }, 
+        {className = "er.users.model.ERUser"; name = ERUser; }
+    ); 
+}

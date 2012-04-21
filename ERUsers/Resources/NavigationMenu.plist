@@ -1,0 +1,17 @@
+(
+	{
+		name = Login;
+		directActionName = "Login";
+		children = (CreateERUser);
+	},
+	{
+		name = Logout;
+		directActionClass = "ERXDirectAction";
+		directActionName = "logout";
+		conditions = ("session.objectStore.user.isNonNull");
+	},
+	{
+		name = CreateERUser;
+		directActionName = "CreateERUser";
+	}
+)

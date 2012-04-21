@@ -1,0 +1,45 @@
+{
+    attributes = (
+        {columnName = dateCreated; name = dateCreated; prototypeName = jodaDateTime; }, 
+        {
+            columnName = emailAddress; 
+            name = emailAddress; 
+            prototypeName = varchar255; 
+            width = 254; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            columnName = password; 
+            name = password; 
+            prototypeName = varchar100; 
+            width = 128; 
+        }, 
+        {columnName = salt; name = salt; prototypeName = varchar255; width = 174; }, 
+        {columnName = username; name = username; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (emailAddress, id, password, salt, username); 
+    className = "er.users.model.ERUser"; 
+    classProperties = (credentials, dateCreated, emailAddress, password, salt, username); 
+    entityIndexes = (
+        {
+            attributes = (username); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "username_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERUser; 
+    fetchSpecificationDictionary = {}; 
+    name = ERUser; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCredential; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
+            name = credentials; 
+        }
+    ); 
+}
