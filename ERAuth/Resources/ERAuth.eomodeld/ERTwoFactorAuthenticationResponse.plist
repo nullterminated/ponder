@@ -65,6 +65,11 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = id; sourceAttribute = authenticationRequestID; }); 
             name = twoFactorAuthenticationRequest; 
+            userInfo = {
+                "_EntityModeler" = {
+                    documentation = "Two factor requests are always related to a two factor response. This relationship allows fetching against two factor request specific attributes."; 
+                }; 
+            }; 
         }
     ); 
     restrictingQualifier = "subtype = \"ERTwoFactorAuthenticationResponse\""; 
