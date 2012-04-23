@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
+import er.extensions.validation.ERXValidationException;
+import er.extensions.validation.ERXValidationFactory;
+
 public class ERTwoFactorAuthenticationResponse extends er.auth.model.gen._ERTwoFactorAuthenticationResponse {
 	/**
 	 * Key for non class property twoFactorAuthenticationRequest
@@ -28,5 +31,18 @@ public class ERTwoFactorAuthenticationResponse extends er.auth.model.gen._ERTwoF
 
 	protected String _subtype() {
 		return ENTITY_NAME;
+	}
+	
+	/**
+	 * Enforces the requirement that only two factor requests may be related to two factor responses.
+	 * @param request the two factor request
+	 * @return the two factor request
+	 */
+	public ERAuthenticationRequest validateAuthenticationRequest(ERAuthenticationRequest request) {
+		if(request instanceof ERTwoFactorAuthenticationRequest) {
+			return request;
+		}
+		ERXValidationException ex = ERXValidationFactory.defaultFactory().createException(this, AUTHENTICATION_REQUEST_KEY, request, ERXValidationException.InvalidValueException);
+		throw ex;
 	}
 }
