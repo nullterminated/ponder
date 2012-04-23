@@ -5,6 +5,11 @@ import org.apache.log4j.Logger;
 import com.webobjects.eocontrol.EOEditingContext;
 
 public class ERTwoFactorAuthenticationResponse extends er.auth.model.gen._ERTwoFactorAuthenticationResponse {
+	/**
+	 * Key for non class property twoFactorAuthenticationRequest
+	 */
+	public static final String TWO_FACTOR_AUTHENTICATION_REQUEST_KEY = "twoFactorAuthenticationRequest";
+	
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(ERTwoFactorAuthenticationResponse.class);
 

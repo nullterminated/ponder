@@ -57,6 +57,14 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = id; sourceAttribute = authenticationRequestID; }); 
             name = authenticationRequest; 
+        }, 
+        {
+            destination = ERTwoFactorAuthenticationRequest; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = authenticationRequestID; }); 
+            name = twoFactorAuthenticationRequest; 
         }
     ); 
     restrictingQualifier = "subtype = \"ERTwoFactorAuthenticationResponse\""; 
