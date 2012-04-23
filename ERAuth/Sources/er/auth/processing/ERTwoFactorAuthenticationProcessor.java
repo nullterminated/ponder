@@ -16,10 +16,11 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableDictionary;
 
 import er.auth.ERStageManager;
+import er.auth.model.ERAuthenticationRequest;
+import er.auth.model.ERAuthenticationResponse;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.auth.model.ERTwoFactorAuthenticationResponse;
 import er.auth.model.enums.ERTwoFactorAuthenticationFailure;
-import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXFetchSpecification;
 import er.extensions.eof.ERXKeyGlobalID;
 import er.extensions.eof.ERXQ;
@@ -54,22 +55,24 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 				"er.auth.processing.ERTwoFactorAuthenticationProcessor.lockDuration", 3600000);
 	}
 
-	public DateTime lockedUntil(String username) {
+	public DateTime lockedUntil(ERTwoFactorAuthenticationRequest authRequest) {
 		if (invalidPasswordLimit() <= 0 || lockDuration() <= 0) {
 			log.debug("Authentication locking disabled");
 			return null;
 		}
 
+		DateTime lockDate = authRequest.requestDate().minus(lockDuration());
 		ERXSortOrderings so = 
 				ERTwoFactorAuthenticationResponse.AUTHENTICATION_REQUEST.dot(ERTwoFactorAuthenticationRequest.REQUEST_DATE).descs();
 		String usernameKeyPath = ERXQ.keyPath(ERTwoFactorAuthenticationResponse.TWO_FACTOR_AUTHENTICATION_REQUEST_KEY, ERTwoFactorAuthenticationRequest.USERNAME_KEY);
 		EOQualifier q = 
-				ERXQ.equals(usernameKeyPath, username)
-				.and(ERTwoFactorAuthenticationResponse.AUTHENTICATION_FAILURE_TYPE.eq(ERTwoFactorAuthenticationFailure.INVALID_PASSWORD));
+				ERXQ.equals(usernameKeyPath, authRequest.username())
+				.and(ERTwoFactorAuthenticationResponse.AUTHENTICATION_FAILURE_TYPE.eq(ERTwoFactorAuthenticationFailure.INVALID_PASSWORD))
+				.and(ERAuthenticationResponse.AUTHENTICATION_REQUEST.dot(ERAuthenticationRequest.INET_ADDRESS).eq(authRequest.inetAddress()))
+				.and(ERTwoFactorAuthenticationResponse.AUTHENTICATION_REQUEST.dot(ERAuthenticationRequest.REQUEST_DATE).greaterThanOrEqualTo(lockDate));
 		ERXFetchSpecification<ERTwoFactorAuthenticationResponse> fs = 
 				new ERXFetchSpecification<ERTwoFactorAuthenticationResponse>(ERTwoFactorAuthenticationResponse.ENTITY_NAME, q, so);
-		fs.setFetchLimit(invalidPasswordLimit());
-		NSArray<ERTwoFactorAuthenticationResponse> responses = fs.fetchObjects(ERXEC.newEditingContext());
+		NSArray<ERTwoFactorAuthenticationResponse> responses = fs.fetchObjects(authRequest.editingContext());
 		if (responses.isEmpty() 
 				|| responses.count() < invalidPasswordLimit()
 				|| !ERTwoFactorAuthenticationResponse.AUTHENTICATION_FAILED.isFalse().filtered(responses).isEmpty()) {
@@ -79,7 +82,7 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 	}
 
 	public WOActionResults authenticate(ERTwoFactorAuthenticationRequest authRequest) {
-		DateTime lockDate = lockedUntil(authRequest.username());
+		DateTime lockDate = lockedUntil(authRequest);
 		NSMutableDictionary<String, Object> exceptionContext = null;
 
 		ERTwoFactorAuthenticationConfig config = ERTwoFactorAuthenticationRequest.clazz.authenticationConfig();
