@@ -1,5 +1,7 @@
 (
+    0 : pageConfiguration = 'Login' => validationDelegateClassName = "er.users.LoginValidationDelegate" [com.webobjects.directtoweb.Assignment],
     10 : *true* => loginComponentNames = ("ERATwoFactorLogin") [com.webobjects.directtoweb.Assignment],
+    10 : pageConfiguration = 'Login' => errorDialogTitle = "Login.errorDialogTitle" [ERDDelayedLocalizedAssignment],
     10 : entity.model.name = 'ERUsers' => crudAuthorization = "er.users.AuthorizationDelegate.INSTANCE" [ERDEnumAssignment],
     10 : (task = 'edit' and entity.name = 'ERUser') => shouldValidateBeforeSave = "false" [com.webobjects.directtoweb.BooleanAssignment],
     10 : (not (task = 'edit') and entity.name = 'ERUser') => displayPropertyKeys = ("username", "emailAddress") [com.webobjects.directtoweb.Assignment],
