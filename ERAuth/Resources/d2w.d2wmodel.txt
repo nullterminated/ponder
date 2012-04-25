@@ -1,5 +1,6 @@
 (
     0 : *true* => crudAuthorization = "er.auth.crud.CRUDAuthorization" [ERDDelayedObjectCreationAssignment],
+    0 : pageConfiguration = 'Login' => validationDelegateClassName = "er.auth.LoginValidationDelegate" [com.webobjects.directtoweb.Assignment],
     10 : task = 'edit' => disabled = (null) [ERADefaultAuthorizationAssignment],
     10 : *true* => createSubEntities = (null) [ERADefaultAuthorizationAssignment],
     10 : task = 'inspect' => displayProperty = (null) [ERADefaultAuthorizationAssignment],

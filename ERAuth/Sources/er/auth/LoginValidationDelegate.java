@@ -1,4 +1,4 @@
-package er.users;
+package er.auth;
 
 import er.directtoweb.pages.ERD2WPage;
 import er.directtoweb.pages.ERD2WPage.ValidationDelegate;
