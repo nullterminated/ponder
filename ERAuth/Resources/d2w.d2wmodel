@@ -1,6 +1,6 @@
 {
   "rules" = (
-    {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERDDelayedObjectCreationAssignment"; "keyPath" = "crudAuthorization"; "value" = "er.auth.crud.CRUDAuthorization"; }; }, 
+    {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERDEnumAssignment"; "keyPath" = "crudAuthorization"; "value" = "er.auth.DefaultCRUDAuthorization.INSTANCE"; }; }, 
     {"author" = "0"; "class" = "com.webobjects.directtoweb.Rule"; "lhs" = {"class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; "key" = "pageConfiguration"; "selectorName" = "isEqualTo"; "value" = "Login"; }; "rhs" = {"class" = "com.webobjects.directtoweb.Assignment"; "keyPath" = "validationDelegateClassName"; "value" = "er.auth.LoginValidationDelegate"; }; }, 
     {"author" = "10"; "class" = "com.webobjects.directtoweb.Rule"; "lhs" = {"class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; "key" = "task"; "selectorName" = "isEqualTo"; "value" = "edit"; }; "rhs" = {"class" = "ERADefaultAuthorizationAssignment"; "keyPath" = "disabled"; }; }, 
     {"author" = "10"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERADefaultAuthorizationAssignment"; "keyPath" = "createSubEntities"; }; }, 
