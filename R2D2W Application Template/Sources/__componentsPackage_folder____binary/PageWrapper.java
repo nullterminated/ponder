@@ -19,6 +19,13 @@ import er.extensions.localization.ERXLocalizer;
 import er.r2d2w.ERR2d2wUtils;
 
 public class PageWrapper extends ERXStatelessComponent {
+	/**
+	 * Do I need to update serialVersionUID?
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private static final NSArray<String> availableTimeZones = new NSArray<String>(new String[] { "US/Hawaii",
 			"US/Alaska", "US/Pacific", "US/Arizona", "US/Mountain", "US/Central", "US/Eastern", "GMT", "Asia/Tokyo" });
 
@@ -65,18 +72,5 @@ public class PageWrapper extends ERXStatelessComponent {
 	 */
 	public NSArray<String> availableTimeZones() {
 		return availableTimeZones;
-	}
-
-	public String iconsURL() {
-		boolean b = context().doesGenerateCompleteURLs();
-		if(!b) { context().generateCompleteURLs(); }
-		String url = context()._urlForResourceNamed("img/icons.svg", "ERR2d2w", false);
-		if(!b) { context().generateRelativeURLs(); }
-		return url;
-	}
-
-	public boolean isWebKit() {
-		ERXBrowser browser = ERXSession.session() == null?null:ERXSession.session().browser();
-		return browser != null && (browser.isChrome() || browser.isSafari() || browser.isOmniWeb());
 	}
 }

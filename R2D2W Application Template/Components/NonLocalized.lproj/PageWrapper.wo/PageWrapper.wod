@@ -3,25 +3,12 @@ AppIcon: ERXFavIcon {
 	type = "touch";
 }
 
-BugNote: WOString {
-	escapeHTML = false;
-	value = "<!-- Wasteful inline svg due to WebKit bug 12499 -->";
-}
-
-CachingWrapper: ERXCachingWrapper {
-	entryName = "icons";
-}
-
 Content: WOComponentContent {}
 
 DebugFlags: R2D2WDebugFlags {}
 
 DevStyleSheet: ERXStyleSheet {
 	filename = "css/dev.css";
-}
-
-ExternalContent: ERXExternalContent {
-	url = iconsURL;
 }
 
 FavIcon: ERXFavIcon {
@@ -42,10 +29,6 @@ HTML: WOGenericContainer {
 
 IsDevelopment: WOConditional {
 	condition = application.isDevelopmentMode;
-}
-
-IsWebKit: WOConditional {
-	condition = isWebKit;
 }
 
 Languages: R2DLanguageList {
