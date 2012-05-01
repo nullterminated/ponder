@@ -3,6 +3,7 @@
 		name = Login;
 		directActionName = "Login";
 		children = (CreateERUser);
+		secure = "true";
 	},
 	{
 		name = Logout;
