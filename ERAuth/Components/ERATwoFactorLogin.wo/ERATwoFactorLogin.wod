@@ -9,8 +9,7 @@ LoginForm: ERXWOForm {
 	class = "login";
 	?__cid = context.contextID;
 	?__lcid = lastCID;
-	//TODO make secure binding
-	//secure = true;
+	secure = true;
 }
 
 LoginLegend: WOString {

@@ -7,7 +7,6 @@ import er.auth.ERAuthDirectAction;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.extensions.components.ERXStatelessComponent;
 
-//TODO make secure
 public class ERATwoFactorLogin extends ERXStatelessComponent {
 	/**
 	 * Do I need to update serialVersionUID?
