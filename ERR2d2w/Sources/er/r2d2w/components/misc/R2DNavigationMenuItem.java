@@ -6,6 +6,7 @@ import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSMutableDictionary;
 
 import er.extensions.appserver.navigation.ERXNavigationMenuItem;
+import er.extensions.components.ERXComponentUtilities;
 
 public class R2DNavigationMenuItem extends ERXNavigationMenuItem {
 	/**
@@ -52,5 +53,14 @@ public class R2DNavigationMenuItem extends ERXNavigationMenuItem {
 			sb.append(sb.length() == 0?"activity":" activity");
 		}
 		return sb.toString();
+	}
+	
+	public Boolean secureInContext() {
+		Boolean secure = navigationItem().secureInContext(this);
+		if(secure == null) {
+			boolean defaultValue = context().request().isSecure();
+			secure = ERXComponentUtilities.booleanValueForBinding(this, "secure", defaultValue);
+		}
+		return secure;
 	}
 }

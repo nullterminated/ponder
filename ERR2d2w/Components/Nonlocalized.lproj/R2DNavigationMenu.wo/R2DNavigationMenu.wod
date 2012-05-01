@@ -36,16 +36,19 @@ ListItem: WOGenericContainer {
 L1NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
     level=1;
+    secure = navContext.secure; //VALID
 }
 
 L2NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
 	level=2;
+    secure = navContext.secure; //VALID
 }
 
 L3NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
     level=3;
+    secure = navContext.secure; //VALID
 }
 
 NavButtonComponent: WOSwitchComponent {

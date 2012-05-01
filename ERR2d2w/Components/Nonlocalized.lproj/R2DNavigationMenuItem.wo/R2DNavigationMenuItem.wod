@@ -26,6 +26,7 @@ NavAction: ERXLinkButton5 {
 	disabled = isDisabled;
 	string = navigationItem.displayName;
 	submit = false;
+	secure = secureInContext;
 }
 
 NavDirectAction: ERXLinkButton5 {
@@ -35,6 +36,7 @@ NavDirectAction: ERXLinkButton5 {
 	queryDictionary = queryDictionary;
 	string = navigationItem.displayName;
 	submit = false;
+	secure = secureInContext;
 }
 
 NavHREF: ERXLinkButton5 {
@@ -50,4 +52,5 @@ NavPageName: ERXLinkButton5 {
 	queryDictionary = queryDictionary;
 	string = navigationItem.displayName;
 	submit = false;
+	secure = secureInContext;
 }
