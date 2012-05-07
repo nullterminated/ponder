@@ -12,5 +12,6 @@
     20 : task = 'queryAll' => visibleEntityNames = (null) [ERADefaultAuthorizationAssignment],
     50 : pageConfiguration like 'Login*' => task = "login" [com.webobjects.directtoweb.Assignment],
     50 : pageConfiguration like 'Login*' => entity = "*all*" [er.directtoweb.ERDDefaultModelAssignment],
-    50 : pageConfiguration like 'Login*' => pageName = "templateNameForLoginPage" [er.directtoweb.ERDKeyValueAssignment]
+    50 : pageConfiguration like 'Login*' => pageName = "templateNameForLoginPage" [er.directtoweb.ERDKeyValueAssignment],
+    75 : task = 'login' => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment]
 )

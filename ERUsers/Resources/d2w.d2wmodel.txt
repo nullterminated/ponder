@@ -5,5 +5,6 @@
     10 : (task = 'edit' and entity.name = 'ERUser') => shouldValidateBeforeSave = "false" [com.webobjects.directtoweb.BooleanAssignment],
     10 : (not (task = 'edit') and entity.name = 'ERUser') => displayPropertyKeys = ("username", "emailAddress") [com.webobjects.directtoweb.Assignment],
     10 : (task = 'edit' and entity.name = 'ERUser') => displayPropertyKeys = ("username", "clearPassword", "emailAddress") [com.webobjects.directtoweb.Assignment],
-    50 : (task = 'edit' and entity.name = 'ERUser' and propertyKey = 'clearPassword') => componentName = "ERAEditPassword" [com.webobjects.directtoweb.Assignment]
+    50 : (task = 'edit' and entity.name = 'ERUser' and propertyKey = 'clearPassword') => componentName = "ERAEditPassword" [com.webobjects.directtoweb.Assignment],
+    75 : (task = 'edit' and entity.name = 'ERUser') => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment]
 )

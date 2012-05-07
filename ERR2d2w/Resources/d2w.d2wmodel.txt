@@ -48,6 +48,7 @@
     0 : *true* => belowDisplayPropertyKeys = ("belowControllerAction") [com.webobjects.directtoweb.Assignment],
     0 : task = 'inspect' => belowControllerChoices = "inspectControllerChoices" [ERDDelayedKeyValueAssignment],
     0 : *true* => emptyAttachmentComponentName = "R2D2WDisplayEmptyFile" [com.webobjects.directtoweb.Assignment],
+    0 : *true* => secureForm = "session.context.request.isSecure" [com.webobjects.directtoweb.BooleanAssignment],
     0 : task = 'queryAll' => belowControllerChoices = "queryAllControllerChoices" [ERDDelayedKeyValueAssignment],
     0 : propertyKey = 'leftControllerAction' => leftControllerChoices = (null) [R2DDefaultBranchChoicesAssignment],
     0 : *true* => availableCalendarViews = ("DAY", "WEEK", "MONTH", "YEAR") [com.webobjects.directtoweb.Assignment],
