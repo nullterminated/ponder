@@ -29,6 +29,7 @@ Next: ERXLinkButton5 {
 
 OptionalForm: ERXWOForm {
 	disabled = context.isInForm;
+	secure = d2wContext.secureForm;
 }
 
 Previous: ERXLinkButton5 {

@@ -27,6 +27,7 @@ CurrentValue: WOString {
 
 D2WKeyForm: ERXWOForm {
 	disabled = context.isInForm;
+	secure = d2wContext.secureForm;
 }
 
 DefaultEC: WOString {

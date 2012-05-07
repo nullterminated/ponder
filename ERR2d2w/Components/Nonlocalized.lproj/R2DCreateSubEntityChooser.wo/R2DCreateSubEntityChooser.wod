@@ -5,6 +5,7 @@ CreateButton: ERXLinkButton5 {
 
 CreateEntityForm: ERXWOForm {
 	disabled = context.isInForm;
+	secure = d2wContext.secureForm;
 }
 
 CreateEntityLegend: WOString {
