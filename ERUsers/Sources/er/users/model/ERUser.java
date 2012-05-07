@@ -16,6 +16,7 @@ import er.corebusinesslogic.ERCoreUserInterface;
 import er.extensions.crypting.ERXCrypto;
 import er.extensions.eof.ERXFetchSpecification;
 import er.extensions.eof.ERXKey;
+import er.extensions.net.ERXEmailValidator;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
 
@@ -29,6 +30,8 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static final ERXEmailValidator emailValidator = new ERXEmailValidator(false, false);
 
 	private static final Logger log = Logger.getLogger(ERUser.class);
 
@@ -225,5 +228,14 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		}
 
 		return clearPassword;
+	}
+	
+	public String validateEmailAddress(String emailAddress) {
+		if(!emailValidator.isValidEmailAddress(emailAddress, 100, true)) {
+			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
+			ERXValidationException ex = factory.createException(this, EMAIL_ADDRESS_KEY, emailAddress, ERXValidationException.InvalidValueException);
+			throw ex;
+		}
+		return emailAddress;
 	}
 }
