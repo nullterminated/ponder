@@ -10,14 +10,10 @@ import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 
 import er.auth.model.ERAuthenticationRequest;
-import er.auth.model.ERAuthenticationRequest.ERAuthenticationRequestClazz;
-import er.auth.processing.ERAuthenticationConfig;
 import er.auth.processing.ERAuthenticationProcessor;
-import er.auth.processing.ERCredentialRecoveryConfig;
 import er.extensions.appserver.ERXDirectAction;
 import er.extensions.appserver.ERXRequest;
 import er.extensions.appserver.ERXWOContext;
-import er.extensions.eof.EOEnterpriseObjectClazz;
 import er.extensions.eof.ERXEC;
 import er.extensions.validation.ERXExceptionHolder;
 
@@ -31,23 +27,6 @@ public class ERAuthDirectAction extends ERXDirectAction {
 		super(r);
 	}
     
-    public WOActionResults credentialRecoveryAction() {
-		ERXRequest request = (ERXRequest)request();
-		String entityName = request.stringFormValueForKey("entityName");
-		EOEnterpriseObjectClazz<?> clazz = EOEnterpriseObjectClazz.clazzForEntityNamed(entityName);
-		if(clazz instanceof ERAuthenticationRequest.ERAuthenticationRequestClazz) {
-			ERAuthenticationRequestClazz<ERAuthenticationRequest> authClazz = 
-				(ERAuthenticationRequestClazz<ERAuthenticationRequest>)clazz;
-			ERAuthenticationConfig config = authClazz.authenticationConfig();
-			if(config instanceof ERCredentialRecoveryConfig) {
-				ERCredentialRecoveryConfig crConfig = (ERCredentialRecoveryConfig)config;
-				return crConfig.credentialRecoveryPage();
-			}
-			
-		}
-		return badRequest();
-    }
-	
 	public WOActionResults returnAction() {
 		WOComponent page = lastPreviousPageFromRequest();
 		return page == null?defaultAction():page;

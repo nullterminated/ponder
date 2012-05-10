@@ -1,9 +1,3 @@
-CredentialRecovery: WOSubmitButton {
-	actionClass = "ERAuthDirectAction";
-	directActionName = "credentialRecovery";
-	value = localizer.ERAuth.forgotCredentialsLabel;
-}
-
 LoginForm: ERXWOForm {
 	actionClass = "DirectAction";
 	class = "login";

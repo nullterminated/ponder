@@ -1,11 +1,10 @@
 package er.auth.processing;
 
-import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 
 
-public abstract class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig, ERCredentialRecoveryConfig {
+public abstract class ERTwoFactorAuthenticationConfig implements ERAuthenticationConfig {
 	protected final String userEntityName;
 	protected final String usernameKeyPath;
 	protected final String storedPasswordKeyPath;
@@ -32,11 +31,6 @@ public abstract class ERTwoFactorAuthenticationConfig implements ERAuthenticatio
 		return delegate.failurePage();
 	}
 	
-	@Override
-	public WOActionResults credentialRecoveryPage() {
-		return delegate.credentialRecoveryPage();
-	}
-
 	@Override
 	public WOComponent loginSuccessPage() {
 		return delegate.successPage();
