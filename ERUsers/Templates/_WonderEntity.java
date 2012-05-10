@@ -31,7 +31,7 @@ public abstract class ${entity.prefixClassNameWithoutPackage} extends #if ($enti
 
   // Attributes
 #foreach ($attribute in $entity.sortedClassAttributes)
-  public static final ERXKey<$attribute.javaClassName> ${attribute.uppercaseUnderscoreName} = new ERXKey<$attribute.javaClassName>("$attribute.name");
+  public static final ERXKey<$attribute.javaClassName.replace('$','.')> ${attribute.uppercaseUnderscoreName} = new ERXKey<$attribute.javaClassName.replace('$','.')>("$attribute.name");
   public static final String ${attribute.uppercaseUnderscoreName}_KEY = ${attribute.uppercaseUnderscoreName}.key();
 #end
 
