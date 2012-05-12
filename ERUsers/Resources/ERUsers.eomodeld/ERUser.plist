@@ -8,6 +8,7 @@
             width = 254; 
         }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = lastSeen; name = lastSeen; prototypeName = jodaDateTime; }, 
         {
             columnName = password; 
             name = password; 
@@ -19,7 +20,17 @@
     ); 
     attributesUsedForLocking = (emailAddress, id, password, salt, username); 
     className = "er.users.model.ERUser"; 
-    classProperties = (credentials, dateCreated, emailAddress, password, salt, username); 
+    classProperties = (
+        challengeResponses, 
+        credentials, 
+        dateCreated, 
+        emailAddress, 
+        lastSeen, 
+        password, 
+        resetRequests, 
+        salt, 
+        username
+    ); 
     entityIndexes = (
         {
             attributes = (username); 
@@ -35,11 +46,27 @@
     primaryKeyAttributes = (id); 
     relationships = (
         {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERChallengeResponse; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
+            name = challengeResponses; 
+            ownsDestination = Y; 
+        }, 
+        {
             destination = ERCredential; 
             isToMany = Y; 
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
             name = credentials; 
+        }, 
+        {
+            destination = ERResetRequest; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
+            name = resetRequests; 
         }
     ); 
 }

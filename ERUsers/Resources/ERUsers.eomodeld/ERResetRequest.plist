@@ -1,0 +1,40 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = Y; 
+            columnName = inetAddress; 
+            name = inetAddress; 
+            prototypeName = ipAddress; 
+        }, 
+        {columnName = requestDate; name = requestDate; prototypeName = jodaDateTime; }, 
+        {allowsNull = N; columnName = userID; name = userID; prototypeName = id; }, 
+        {columnName = uuid; name = uuid; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (id, inetAddress, userID, uuid); 
+    className = "er.users.model.ERResetRequest"; 
+    classProperties = (inetAddress, requestDate, user, uuid); 
+    entityIndexes = (
+        {
+            attributes = (uuid); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "uuid_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERResetRequest; 
+    fetchSpecificationDictionary = {}; 
+    name = ERResetRequest; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERUser; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = userID; }); 
+            name = user; 
+        }
+    ); 
+}

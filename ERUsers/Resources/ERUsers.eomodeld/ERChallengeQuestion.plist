@@ -1,0 +1,23 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = question; name = question; prototypeName = varchar255; }
+    ); 
+    attributesUsedForLocking = (id, question); 
+    className = "er.users.model.ERChallengeQuestion"; 
+    classProperties = (question); 
+    externalName = ERChallengeQuestion; 
+    fetchSpecificationDictionary = {}; 
+    name = ERChallengeQuestion; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleDeny; 
+            destination = ERChallengeResponse; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = challengeQuestionID; sourceAttribute = id; }); 
+            name = challengeResponses; 
+        }
+    ); 
+}

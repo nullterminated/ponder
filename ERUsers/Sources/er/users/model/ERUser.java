@@ -55,7 +55,9 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	 */
 	public void init(EOEditingContext ec) {
 		super.init(ec);
-		setDateCreated(new DateTime());
+		DateTime dt = new DateTime();
+		setDateCreated(dt);
+		setLastSeen(dt);
 	}
 
 	/**

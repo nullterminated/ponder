@@ -1,10 +1,15 @@
 (
     10 : *true* => loginComponentNames = ("ERATwoFactorLogin") [com.webobjects.directtoweb.Assignment],
     10 : pageConfiguration = 'Login' => errorDialogTitle = "Login.errorDialogTitle" [ERDDelayedLocalizedAssignment],
-    10 : entity.model.name = 'ERUsers' => crudAuthorization = "er.users.AuthorizationDelegate.INSTANCE" [ERDEnumAssignment],
+    10 : entity.model.name = 'ERUsers' => crudAuthorization = "er.users.delegates.AuthorizationDelegate.INSTANCE" [ERDEnumAssignment],
     10 : (task = 'edit' and entity.name = 'ERUser') => shouldValidateBeforeSave = "false" [com.webobjects.directtoweb.BooleanAssignment],
     10 : (not (task = 'edit') and entity.name = 'ERUser') => displayPropertyKeys = ("username", "emailAddress") [com.webobjects.directtoweb.Assignment],
     10 : (task = 'edit' and entity.name = 'ERUser') => displayPropertyKeys = ("username", "clearPassword", "emailAddress") [com.webobjects.directtoweb.Assignment],
+    20 : pageConfiguration = 'ForgotPassword' => task = "query" [com.webobjects.directtoweb.Assignment],
+    20 : pageConfiguration = 'ForgotPassword' => entity = (null) [er.directtoweb.ERDDefaultModelAssignment],
+    20 : pageConfiguration = 'ForgotPassword' => entityName = "ERUser" [com.webobjects.directtoweb.Assignment],
+    20 : pageConfiguration = 'ForgotPassword' => displayPropertyKeys = ("username") [com.webobjects.directtoweb.Assignment],
     50 : (task = 'edit' and entity.name = 'ERUser' and propertyKey = 'clearPassword') => componentName = "ERAEditPassword" [com.webobjects.directtoweb.Assignment],
-    75 : (task = 'edit' and entity.name = 'ERUser') => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment]
+    75 : (task = 'edit' and entity.name = 'ERUser') => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment],
+    75 : pageConfiguration = 'ForgotPassword' => pageController = "er.users.delegates.ForgotPasswordController" [ERDDelayedObjectCreationAssignment]
 )

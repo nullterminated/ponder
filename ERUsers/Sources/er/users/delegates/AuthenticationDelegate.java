@@ -1,4 +1,4 @@
-package er.users;
+package er.users.delegates;
 
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;

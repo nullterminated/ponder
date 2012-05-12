@@ -2,7 +2,7 @@
 	{
 		name = Login;
 		directActionName = "Login";
-		children = (CreateERUser);
+		children = (CreateERUser,ForgotPassword);
 		secure = "true";
 	},
 	{
@@ -14,5 +14,9 @@
 	{
 		name = CreateERUser;
 		directActionName = "CreateERUser";
+	},
+	{
+		name = ForgotPassword;
+		directActionName = "ForgotPassword";
 	}
 )

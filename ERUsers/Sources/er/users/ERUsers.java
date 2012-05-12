@@ -9,6 +9,7 @@ import er.auth.processing.ERTwoFactorAuthenticationDelegate;
 import er.corebl.ERCoreBL;
 import er.extensions.ERXExtensions;
 import er.extensions.ERXFrameworkPrincipal;
+import er.users.delegates.AuthenticationDelegate;
 import er.javamail.ERJavaMail;
 import er.users.model.ERUser;
 
