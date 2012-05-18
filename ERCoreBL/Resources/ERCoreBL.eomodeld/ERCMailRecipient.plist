@@ -1,0 +1,53 @@
+{
+    attributes = (
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {
+            allowsNull = N; 
+            columnName = mailAddressID; 
+            name = mailAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = mailMessageID; 
+            name = mailMessageID; 
+            prototypeName = longNumber; 
+        }, 
+        {columnName = type; name = type; prototypeName = type; }
+    ); 
+    attributesUsedForLocking = (id, mailAddressID, mailMessageID, type); 
+    className = "er.corebl.model.ERCMailRecipient"; 
+    classProperties = (mailAddress, mailMessage, type); 
+    entityIndexes = (
+        {
+            attributes = (mailAddressID, mailMessageID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "mailAddressID_mailMessageID_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCMailRecipient; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailRecipient; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailAddressID; }); 
+            name = mailAddress; 
+        }, 
+        {
+            destination = ERCMailMessage; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailMessageID; }); 
+            name = mailMessage; 
+        }
+    ); 
+    userInfo = {ERXAuditKeys = (type); }; 
+}

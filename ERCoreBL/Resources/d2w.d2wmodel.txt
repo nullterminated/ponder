@@ -1,0 +1,4 @@
+(
+    10 : *true* => userPreferences = "ERCoreUserPreferences.INSTANCE" [ERDEnumAssignment],
+    15 : pageConfiguration like '*MailMessage*' => entity = "ERCMailMessage" [com.webobjects.directtoweb.EntityAssignment]
+)

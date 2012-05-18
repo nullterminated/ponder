@@ -4,7 +4,7 @@ import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOQualifier;
 
 import er.auth.CRUDAuthorization;
-import er.corebusinesslogic.ERCoreBusinessLogic;
+import er.corebl.ERCoreBL;
 import er.extensions.eof.EOEnterpriseObjectClazz;
 import er.extensions.qualifiers.ERXFalseQualifier;
 import er.users.model.ERUser;
@@ -14,7 +14,7 @@ public enum AuthorizationDelegate implements CRUDAuthorization {
 	INSTANCE;
 	
 	public boolean isActor(EOEnterpriseObject eo) {
-		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
+		return eo.equals(ERCoreBL.actor(eo.editingContext()));
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public enum AuthorizationDelegate implements CRUDAuthorization {
 	}
 	
 	public Boolean canUpdate(ERUser eo) {
-		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
+		return eo.equals(ERCoreBL.actor(eo.editingContext()));
 	}
 	
 	public Boolean canRead(ERUser eo) {
@@ -85,6 +85,6 @@ public enum AuthorizationDelegate implements CRUDAuthorization {
 	public Boolean canUpdateProperty(ERUser eo, String keypath) {
 		if(eo.isNewObject()) { return Boolean.TRUE; }
 		if(keypath.equals(ERUser.USERNAME_KEY)) { return Boolean.FALSE; }
-		return eo.equals(ERCoreBusinessLogic.actor(eo.editingContext()));
+		return eo.equals(ERCoreBL.actor(eo.editingContext()));
 	}
 }

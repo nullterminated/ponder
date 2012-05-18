@@ -1,0 +1,24 @@
+{
+    attributes = (
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {columnName = prefKey; name = prefKey; prototypeName = varchar100; }, 
+        {columnName = prefValue; name = prefValue; prototypeName = varcharLarge; }, 
+        {columnName = userID; name = userID; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (id, prefKey, userID); 
+    className = "er.corebl.model.ERCPreference"; 
+    classProperties = (prefKey, prefValue, userID); 
+    entityIndexes = (
+        {
+            attributes = (userID, prefKey); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "prefKey_userID_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCPreference; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCPreference; 
+    primaryKeyAttributes = (id); 
+}

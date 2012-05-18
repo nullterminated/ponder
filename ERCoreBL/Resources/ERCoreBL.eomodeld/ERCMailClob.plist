@@ -1,0 +1,13 @@
+{
+    attributes = (
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {columnName = message; name = message; prototypeName = varcharLarge; }
+    ); 
+    attributesUsedForLocking = (id); 
+    className = "er.corebl.model.ERCMailClob"; 
+    classProperties = (message); 
+    externalName = ERCMailClob; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailClob; 
+    primaryKeyAttributes = (id); 
+}

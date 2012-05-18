@@ -1,0 +1,5 @@
+package er.corebl.mail;
+
+public enum ERCMailState {
+	DRAFT,READY_TO_BE_SENT,WAIT,PROCESSING,EXCEPTION,SENT,BOUNCED,RECEIVED;
+}

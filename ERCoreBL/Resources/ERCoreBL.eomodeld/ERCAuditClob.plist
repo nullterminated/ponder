@@ -1,0 +1,17 @@
+{
+    attributes = (
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {
+            columnName = valuesString; 
+            name = valuesString; 
+            prototypeName = varcharLarge; 
+        }
+    ); 
+    attributesUsedForLocking = (id); 
+    className = "er.corebl.model.ERCAuditClob"; 
+    classProperties = (valuesString); 
+    externalName = ERCAuditClob; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCAuditClob; 
+    primaryKeyAttributes = (id); 
+}

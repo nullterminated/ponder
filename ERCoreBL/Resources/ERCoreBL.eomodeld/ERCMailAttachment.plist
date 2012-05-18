@@ -1,0 +1,64 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = attachmentID; 
+            name = attachmentID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = filePath; 
+            name = filePath; 
+            prototypeName = varchar1000; 
+        }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {
+            allowsNull = N; 
+            columnName = mailMessageID; 
+            name = mailMessageID; 
+            prototypeName = longNumber; 
+        }, 
+        {columnName = token; name = token; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (attachmentID, filePath, id, mailMessageID, token); 
+    className = "er.corebl.model.ERCMailAttachment"; 
+    classProperties = (attachment, filePath, mailMessage, token); 
+    entityIndexes = (
+        {
+            attributes = (mailMessageID, attachmentID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "attachmentID_mailMessageID_idx"; 
+            order = asc; 
+        }, 
+        {
+            attributes = (token, mailMessageID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "mailMessageID_token_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCMailAttachment; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailAttachment; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERAttachment; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = attachmentID; }); 
+            name = attachment; 
+        }, 
+        {
+            destination = ERCMailMessage; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailMessageID; }); 
+            name = mailMessage; 
+        }
+    ); 
+}

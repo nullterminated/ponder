@@ -1,0 +1,72 @@
+{
+    attributes = (
+        {columnName = created; name = created; prototypeName = dateTime; }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {
+            allowsNull = Y; 
+            columnName = keyPath; 
+            name = keyPath; 
+            prototypeName = varchar100; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = newClobID; 
+            name = newClobID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = oldClobID; 
+            name = oldClobID; 
+            prototypeName = longNumber; 
+        }, 
+        {columnName = trailID; name = trailID; prototypeName = longNumber; }, 
+        {
+            columnName = type; 
+            name = type; 
+            prototypeName = javaEnum; 
+            valueClassName = "er.corebl.audittrail.ERCAuditTrailType"; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = userGlobalID; 
+            name = userGlobalID; 
+            prototypeName = globalID; 
+        }
+    ); 
+    attributesUsedForLocking = (id, keyPath, newClobID, oldClobID, trailID, type, userGlobalID); 
+    className = "er.corebl.model.ERCAuditTrailEntry"; 
+    classProperties = (created, keyPath, newClob, oldClob, trail, type, userGlobalID); 
+    externalName = ERCAuditTrailEntry; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCAuditTrailEntry; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCAuditClob; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = newClobID; }); 
+            name = newClob; 
+            ownsDestination = Y; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCAuditClob; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = oldClobID; }); 
+            name = oldClob; 
+            ownsDestination = Y; 
+        }, 
+        {
+            destination = ERCAuditTrail; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = trailID; }); 
+            name = trail; 
+        }
+    ); 
+}

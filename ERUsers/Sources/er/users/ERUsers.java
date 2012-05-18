@@ -6,13 +6,14 @@ import er.auth.ERAuth;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.auth.processing.ERTwoFactorAuthenticationConfig;
 import er.auth.processing.ERTwoFactorAuthenticationDelegate;
-import er.corebusinesslogic.ERCoreBusinessLogic;
+import er.corebl.ERCoreBL;
 import er.extensions.ERXExtensions;
 import er.extensions.ERXFrameworkPrincipal;
+import er.javamail.ERJavaMail;
 import er.users.model.ERUser;
 
 public class ERUsers extends ERXFrameworkPrincipal {
-	public final static Class<?>[] REQUIRES = new Class[] { ERXExtensions.class, ERAuth.class };
+	public final static Class<?>[] REQUIRES = new Class[] { ERXExtensions.class, ERAuth.class, ERCoreBL.class, ERJavaMail.class };
 
 	public static final Logger log = Logger.getLogger(ERUsers.class);
 
@@ -38,7 +39,7 @@ public class ERUsers extends ERXFrameworkPrincipal {
     @Override
 	public void finishInitialization() {
 		// Set up the user preferences relationship
-		ERCoreBusinessLogic.sharedInstance().addPreferenceRelationshipToActorEntity(ERUser.ENTITY_NAME);
+		ERCoreBL.sharedInstance().addPreferenceRelationshipToActorEntity(ERUser.ENTITY_NAME);
 
 		//Set up the auth config and delegate
 		ERTwoFactorAuthenticationDelegate delegate = new AuthenticationDelegate();

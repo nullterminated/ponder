@@ -1,0 +1,191 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = dateRead; 
+            name = dateRead; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = dateSent; 
+            name = dateSent; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = exceptionReason; 
+            name = exceptionReason; 
+            prototypeName = varchar1000; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = fromAddressID; 
+            name = fromAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = htmlClobID; 
+            name = htmlClobID; 
+            prototypeName = longNumber; 
+        }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {
+            allowsNull = Y; 
+            columnName = mailCategoryID; 
+            name = mailCategoryID; 
+            prototypeName = id; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = plainClobID; 
+            name = plainClobID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = replyToAddressID; 
+            name = replyToAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            columnName = state; 
+            name = state; 
+            prototypeName = javaEnum; 
+            valueClassName = "er.corebl.mail.ERCMailState"; 
+        }, 
+        {columnName = title; name = title; prototypeName = varchar255; }, 
+        {
+            columnName = uuid; 
+            name = uuid; 
+            prototypeName = varchar50; 
+            userInfo = {
+                "_EntityModeler" = {
+                    documentation = "The UUID is intended to identify the mail message when it is read or is a bounce."; 
+                }; 
+            }; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = xMailer; 
+            name = xMailer; 
+            prototypeName = varchar255; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        exceptionReason, 
+        fromAddressID, 
+        htmlClobID, 
+        id, 
+        mailCategoryID, 
+        plainClobID, 
+        replyToAddressID, 
+        state, 
+        title, 
+        uuid, 
+        xMailer
+    ); 
+    className = "er.corebl.model.ERCMailMessage"; 
+    classProperties = (
+        dateRead, 
+        dateSent, 
+        exceptionReason, 
+        fromAddress, 
+        htmlClob, 
+        mailAttachments, 
+        mailCategory, 
+        mailRecipients, 
+        plainClob, 
+        replyToAddress, 
+        state, 
+        title, 
+        uuid, 
+        xMailer
+    ); 
+    entityIndexes = (
+        {
+            attributes = (uuid); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "ERCMailMessage_uuid_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCMailMessage; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailMessage; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = fromAddressID; }); 
+            name = fromAddress; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCMailClob; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = htmlClobID; }); 
+            name = htmlClob; 
+            ownsDestination = Y; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCMailAttachment; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = mailMessageID; sourceAttribute = id; }); 
+            name = mailAttachments; 
+            ownsDestination = Y; 
+        }, 
+        {
+            destination = ERCMailCategory; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailCategoryID; }); 
+            name = mailCategory; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCMailRecipient; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = mailMessageID; sourceAttribute = id; }); 
+            name = mailRecipients; 
+            ownsDestination = Y; 
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCMailClob; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = plainClobID; }); 
+            name = plainClob; 
+            ownsDestination = Y; 
+        }, 
+        {
+            destination = ERCMailAddress; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = replyToAddressID; }); 
+            name = replyToAddress; 
+        }
+    ); 
+    userInfo = {
+        ERXAuditKeys = (
+            dateRead, 
+            dateSent, 
+            exceptionReason, 
+            state, 
+            "mailCategory.name", 
+            "fromAddress.emailAddress", 
+            "mailRecipients.mailAddress.emailAddress", 
+            "replyToAddress.emailAddress"
+        ); 
+    }; 
+}

@@ -8,7 +8,7 @@ import er.auth.model.ERAuthenticationRequest;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.auth.processing.ERAuthenticationProcessor;
 import er.auth.processing.ERTwoFactorAuthenticationProcessor;
-import er.corebusinesslogic.ERCoreBusinessLogic;
+import er.corebl.ERCoreBL;
 import er.extensions.ERXFrameworkPrincipal;
 import er.extensions.eof.EOEnterpriseObjectClazz;
 import er.javamail.ERJavaMail;
@@ -19,7 +19,7 @@ import er.javamail.ERJavaMail;
  *
  */
 public class ERAuth extends ERXFrameworkPrincipal {
-	public static final Class<?>[] REQUIRES = new Class[] {ERCoreBusinessLogic.class, ERJavaMail.class};
+	public static final Class<?>[] REQUIRES = new Class[] {ERCoreBL.class, ERJavaMail.class};
 	
 	protected static volatile ERAuth sharedInstance;
 	

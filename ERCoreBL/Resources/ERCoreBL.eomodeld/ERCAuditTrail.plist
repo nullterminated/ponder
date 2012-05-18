@@ -1,0 +1,34 @@
+{
+    attributes = (
+        {columnName = gid; name = gid; prototypeName = globalID; }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {columnName = isDeleted; name = isDeleted; prototypeName = flag; }
+    ); 
+    attributesUsedForLocking = (gid, id, isDeleted); 
+    className = "er.corebl.model.ERCAuditTrail"; 
+    classProperties = (entries, gid, isDeleted); 
+    entityIndexes = (
+        {
+            attributes = (gid); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "ERCAuditTrail_gid_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCAuditTrail; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCAuditTrail; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCAuditTrailEntry; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = trailID; sourceAttribute = id; }); 
+            name = entries; 
+            ownsDestination = Y; 
+        }
+    ); 
+}

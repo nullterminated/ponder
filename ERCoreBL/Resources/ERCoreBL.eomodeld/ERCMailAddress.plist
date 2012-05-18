@@ -1,0 +1,50 @@
+{
+    attributes = (
+        {
+            columnName = emailAddress; 
+            name = emailAddress; 
+            prototypeName = varchar255; 
+            width = 254; 
+        }, 
+        {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {columnName = isActive; name = isActive; prototypeName = flag; }
+    ); 
+    attributesUsedForLocking = (emailAddress, id, isActive); 
+    className = "er.corebl.model.ERCMailAddress"; 
+    classProperties = (emailAddress, isActive, optInCategories); 
+    entityIndexes = (
+        {
+            attributes = (emailAddress); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "ERCMailAddress_emailAddress_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCMailAddress; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailAddress; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERCMailAddressCategoryPreference; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = ercMailAddressId; sourceAttribute = id; }); 
+            name = ercMailAddressCategoryPreferences; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {
+            definition = "ercMailAddressCategoryPreferences.ercMailCategory"; 
+            name = optInCategories; 
+        }
+    ); 
+    userInfo = {
+        ERXAuditKeys = (
+            emailAddress, 
+            isActive, 
+            "ercMailAddressCategoryPreferences.ercMailCategory.name"
+        ); 
+    }; 
+}

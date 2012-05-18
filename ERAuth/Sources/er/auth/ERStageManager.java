@@ -5,7 +5,7 @@ import com.webobjects.foundation.NSNotification;
 import com.webobjects.foundation.NSNotificationCenter;
 import com.webobjects.foundation.NSSelector;
 
-import er.corebusinesslogic.ERCoreBusinessLogic;
+import er.corebl.ERCoreBL;
 import er.extensions.appserver.ERXSession;
 import er.extensions.appserver.ERXWOContext;
 import er.extensions.eof.ERXConstant;
@@ -27,15 +27,15 @@ public enum ERStageManager {
 	public void wakeActor(NSNotification n) {
 		ERXSession session = (ERXSession)n.object();
 		EOEnterpriseObject user = USER.valueInObject(session.objectStore());
-		ERCoreBusinessLogic.setActor(user);
+		ERCoreBL.setActor(user);
 	}
 	
 	public void sleepActor(NSNotification n) {
-		ERCoreBusinessLogic.setActor(null);
+		ERCoreBL.setActor(null);
 	}
 	
 	public void setActor(EOEnterpriseObject actor) {
-		ERCoreBusinessLogic.setActor(actor);
+		ERCoreBL.setActor(actor);
 		ERXWOContext.currentContext().session();
 		USER.takeValueInObject(actor, ERXSession.session().objectStore());
 	}

@@ -4,14 +4,10 @@
 	<classpathentry kind="con" path="WOFramework/ERExtensions"/>
 	<classpathentry kind="con" path="WOFramework/ERJars"/>
 	<classpathentry kind="con" path="WOFramework/ERPrototypes"/>
-	<classpathentry kind="con" path="WOFramework/ERCoreBL"/>
+	<classpathentry kind="con" path="WOFramework/ERJavaMail"/>
 	<classpathentry kind="con" path="WOFramework/ERDirectToWeb"/>
-	<classpathentry kind="con" path="WOFramework/ERAttributeExtension"/>
-	<classpathentry kind="con" path="WOFramework/ERAuth"/>
+	<classpathentry kind="con" path="WOFramework/ERAttachment"/>
 	<classpathentry kind="con" path="WOFramework/JavaWOExtensions"/>
-	<classpathentry kind="con" path="WOFramework/JavaDTWGeneration"/>
-	<classpathentry kind="con" path="WOFramework/JavaDirectToWeb"/>
-	<classpathentry kind="con" path="WOFramework/JavaEOProject"/>
 	<classpathentry kind="con" path="WOFramework/JavaEOAccess"/>
 	<classpathentry kind="con" path="WOFramework/JavaEOControl"/>
 	<classpathentry kind="con" path="WOFramework/JavaFoundation"/>

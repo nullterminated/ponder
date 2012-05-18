@@ -1,0 +1,40 @@
+{
+    attributes = (
+        {
+            allowsNull = N; 
+            columnName = ercMailAddressId; 
+            name = ercMailAddressId; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = ercMailCategoryId; 
+            name = ercMailCategoryId; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (ercMailAddressId, ercMailCategoryId); 
+    className = EOGenericRecord; 
+    externalName = ERCMailAddressCategoryPreference; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailAddressCategoryPreference; 
+    primaryKeyAttributes = (ercMailAddressId, ercMailCategoryId); 
+    relationships = (
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = ercMailAddressId; }); 
+            name = ercMailAddress; 
+        }, 
+        {
+            destination = ERCMailCategory; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = ercMailCategoryId; }); 
+            name = ercMailCategory; 
+        }
+    ); 
+}

@@ -6,13 +6,12 @@ import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
 import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
 
-import er.corebusinesslogic.ERCPreference;
-import er.corebusinesslogic.ERCoreUserInterface;
+import er.corebl.model.ERCPreference;
+import er.corebl.preferences.ERCoreUserInterface;
 import er.extensions.crypting.ERXCrypto;
 import er.extensions.eof.ERXFetchSpecification;
 import er.extensions.eof.ERXKey;
@@ -78,19 +77,18 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public NSArray preferences() {
-		return (NSArray) storedValueForKey(PREFERENCES_KEY);
+	@SuppressWarnings("unchecked")
+	public NSArray<ERCPreference> preferences() {
+		return (NSArray<ERCPreference>) storedValueForKey(PREFERENCES_KEY);
 	}
 
 	@Override
-	@SuppressWarnings("rawtypes")
-	public void setPreferences(NSArray preferences) {
+	public void setPreferences(NSArray<ERCPreference> preferences) {
 		takeStoredValueForKey(preferences, PREFERENCES_KEY);
 	}
 
 	@Override
-	public void newPreference(EOEnterpriseObject preference) {
+	public void newPreference(ERCPreference preference) {
 		addObjectToBothSidesOfRelationshipWithKey(preference, PREFERENCES_KEY);
 	}
 

@@ -1,0 +1,6 @@
+{
+  "rules" = (
+    {"author" = "10"; "class" = "com.webobjects.directtoweb.Rule"; "rhs" = {"class" = "ERDEnumAssignment"; "keyPath" = "userPreferences"; "value" = "ERCoreUserPreferences.INSTANCE"; }; }, 
+    {"author" = "15"; "class" = "com.webobjects.directtoweb.Rule"; "lhs" = {"class" = "com.webobjects.eocontrol.EOKeyValueQualifier"; "key" = "pageConfiguration"; "selectorName" = "isLike"; "value" = "*MailMessage*"; }; "rhs" = {"class" = "com.webobjects.directtoweb.EntityAssignment"; "keyPath" = "entity"; "value" = "ERCMailMessage"; }; }
+  ); 
+}
