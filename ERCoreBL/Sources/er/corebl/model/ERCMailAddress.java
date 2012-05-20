@@ -3,7 +3,11 @@ package er.corebl.model;
 import org.apache.log4j.Logger;
 
 import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOQualifier;
+import com.webobjects.foundation.NSArray;
 
+import er.extensions.eof.ERXBatchFetchUtilities;
+import er.extensions.eof.ERXQ;
 import er.extensions.net.ERXEmailValidator;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
@@ -42,6 +46,16 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 				result.setEmailAddress(email);
 			}
 			return result;
+		}
+		
+		public NSArray<ERCMailAddress> filterAddressesForCategory(NSArray<ERCMailAddress> addresses, ERCMailCategory category) {
+			EOQualifier qualifier = null;
+			if(category != null) {
+				ERXBatchFetchUtilities.batchFetch(addresses, OPT_IN_CATEGORIES_KEY);
+				qualifier = OPT_IN_CATEGORIES.containsObject(category);
+			}
+			qualifier = ERXQ.and(IS_ACTIVE.isTrue(), qualifier);
+			return EOQualifier.filteredArrayWithQualifier(addresses, qualifier);
 		}
 	}
 
