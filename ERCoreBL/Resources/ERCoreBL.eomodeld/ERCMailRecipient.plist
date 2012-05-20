@@ -13,11 +13,17 @@
             name = mailMessageID; 
             prototypeName = longNumber; 
         }, 
-        {columnName = type; name = type; prototypeName = type; }
+        {
+            columnName = recipientType; 
+            name = recipientType; 
+            prototypeName = javaEnum; 
+            valueClassName = "er.corebl.mail.ERCMailRecipientType"; 
+            width = 3; 
+        }
     ); 
-    attributesUsedForLocking = (id, mailAddressID, mailMessageID, type); 
+    attributesUsedForLocking = (id, mailAddressID, mailMessageID, recipientType); 
     className = "er.corebl.model.ERCMailRecipient"; 
-    classProperties = (mailAddress, mailMessage, type); 
+    classProperties = (mailAddress, mailMessage, recipientType); 
     entityIndexes = (
         {
             attributes = (mailAddressID, mailMessageID); 

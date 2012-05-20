@@ -17,8 +17,8 @@ public abstract class _ERCMailRecipient extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "ERCMailRecipient";
 
   // Attributes
-  public static final ERXKey<String> TYPE = new ERXKey<String>("type");
-  public static final String TYPE_KEY = TYPE.key();
+  public static final ERXKey<er.corebl.mail.ERCMailRecipientType> RECIPIENT_TYPE = new ERXKey<er.corebl.mail.ERCMailRecipientType>("recipientType");
+  public static final String RECIPIENT_TYPE_KEY = RECIPIENT_TYPE.key();
 
   // Relationships
   public static final ERXKey<er.corebl.model.ERCMailAddress> MAIL_ADDRESS = new ERXKey<er.corebl.model.ERCMailAddress>("mailAddress");
@@ -36,15 +36,15 @@ public abstract class _ERCMailRecipient extends  ERXGenericRecord {
     return er.corebl.model.ERCMailRecipient.clazz;
   }
   
-  public String type() {
-    return (String) storedValueForKey(_ERCMailRecipient.TYPE_KEY);
+  public er.corebl.mail.ERCMailRecipientType recipientType() {
+    return (er.corebl.mail.ERCMailRecipientType) storedValueForKey(_ERCMailRecipient.RECIPIENT_TYPE_KEY);
   }
 
-  public void setType(String value) {
+  public void setRecipientType(er.corebl.mail.ERCMailRecipientType value) {
     if (_ERCMailRecipient.LOG.isDebugEnabled()) {
-    	_ERCMailRecipient.LOG.debug( "updating type from " + type() + " to " + value);
+    	_ERCMailRecipient.LOG.debug( "updating recipientType from " + recipientType() + " to " + value);
     }
-    takeStoredValueForKey(value, _ERCMailRecipient.TYPE_KEY);
+    takeStoredValueForKey(value, _ERCMailRecipient.RECIPIENT_TYPE_KEY);
   }
 
   public er.corebl.model.ERCMailAddress mailAddress() {
