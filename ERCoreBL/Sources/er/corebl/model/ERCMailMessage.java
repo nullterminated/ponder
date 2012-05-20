@@ -170,9 +170,14 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	
 	public void validateForSave() {
 		super.validateForSave();
-		if(toAddresses().isEmpty() && ERCMailState.READY_TO_BE_SENT.equals(state())) {
-			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
-			throw factory.createCustomException(this, "RequiredToAddressException");
+		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
+		if(ERCMailState.READY_TO_BE_SENT.equals(state())) {
+			if(toAddresses().isEmpty()) {
+				throw factory.createCustomException(this, "RequiredToAddressException");
+			}
+			if(htmlClob() == null && plainClob() == null) {
+				throw factory.createCustomException(this, "RequiredMessageTextException");
+			}
 		}
 	}
 }
