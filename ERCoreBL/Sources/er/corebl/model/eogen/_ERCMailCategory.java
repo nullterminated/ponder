@@ -34,27 +34,5 @@ public abstract class _ERCMailCategory extends  ERXGenericRecord {
     return er.corebl.model.ERCMailCategory.clazz;
   }
   
-  public String detail() {
-    return (String) storedValueForKey(_ERCMailCategory.DETAIL_KEY);
-  }
-
-  public void setDetail(String value) {
-    if (_ERCMailCategory.LOG.isDebugEnabled()) {
-    	_ERCMailCategory.LOG.debug( "updating detail from " + detail() + " to " + value);
-    }
-    takeStoredValueForKey(value, _ERCMailCategory.DETAIL_KEY);
-  }
-
-  public String name() {
-    return (String) storedValueForKey(_ERCMailCategory.NAME_KEY);
-  }
-
-  public void setName(String value) {
-    if (_ERCMailCategory.LOG.isDebugEnabled()) {
-    	_ERCMailCategory.LOG.debug( "updating name from " + name() + " to " + value);
-    }
-    takeStoredValueForKey(value, _ERCMailCategory.NAME_KEY);
-  }
-
 
 }
