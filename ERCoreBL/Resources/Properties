@@ -1,2 +1,3 @@
-#The languages for the model
-#ERCoreBL0.languages=(en,ja)
+#The languages for the model.
+#English is the default, but you may override that in your app properties.
+ERCoreBL0.languages=(en)

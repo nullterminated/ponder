@@ -140,9 +140,9 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 	 	ercAuditTrailEntryTable.setPrimaryKey("id");
 
 		ERXMigrationTable ercMailCategoryTable = database.newTableNamed("ERCMailCategory");
-		ercMailCategoryTable.newStringColumn("detail", 1000, false);
+		ercMailCategoryTable.newLocalizedStringColumns("detail", 1000, false);
 		ercMailCategoryTable.newIntegerColumn("id", false);
-		ercMailCategoryTable.newStringColumn("name", 50, false);
+		ercMailCategoryTable.newLocalizedStringColumns("name", 50, false);
 
 
 		ercMailCategoryTable.create();
