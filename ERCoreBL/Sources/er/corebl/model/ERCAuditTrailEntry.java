@@ -60,12 +60,12 @@ public class ERCAuditTrailEntry extends er.corebl.model.eogen._ERCAuditTrailEntr
     public void setOldValue(Object value) {
     	ERCAuditClob values = ERCAuditClob.clazz.createAndInsertObject(editingContext());
     	values.setValuesString(NSPropertyListSerialization.stringFromPropertyList(value));
-    	setOldClob(values);
+    	addObjectToBothSidesOfRelationshipWithKey(values, OLD_CLOB_KEY);
     }
 
     public void setNewValue(Object value) {
     	ERCAuditClob values = ERCAuditClob.clazz.createAndInsertObject(editingContext());
     	values.setValuesString(NSPropertyListSerialization.stringFromPropertyList(value));
-    	setNewClob(values);
+    	addObjectToBothSidesOfRelationshipWithKey(values, NEW_CLOB_KEY);
     }
 }
