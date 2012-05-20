@@ -49,6 +49,7 @@ public class ERCMailAttachment extends er.corebl.model.eogen._ERCMailAttachment 
 	public void init(EOEditingContext ec) {
 		super.init(ec);
 		setToken(UUID.randomUUID().toString());
+		setIsInline(Boolean.FALSE);
 	}
 
 	public String cidURL() {

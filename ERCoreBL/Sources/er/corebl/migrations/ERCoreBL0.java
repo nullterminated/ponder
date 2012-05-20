@@ -49,6 +49,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 		ercMailAttachmentTable.newIntegerColumn("attachmentID", true);
 		ercMailAttachmentTable.newStringColumn("filePath", 1000, true);
 		ercMailAttachmentTable.newBigIntegerColumn("id", false);
+		ercMailAttachmentTable.newFlagBooleanColumn("isInline", false);
 		ercMailAttachmentTable.newBigIntegerColumn("mailMessageID", false);
 		ercMailAttachmentTable.newStringColumn("token", 50, false);
 
@@ -61,7 +62,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 		ERXMigrationTable ercAuditTrailTable = database.newTableNamed("ERCAuditTrail");
 		ercAuditTrailTable.newStringColumn("gid", 255, false);
 		ercAuditTrailTable.newBigIntegerColumn("id", false);
-		ercAuditTrailTable.newIntBooleanColumn("isDeleted", false);
+		ercAuditTrailTable.newFlagBooleanColumn("isDeleted", false);
 
 		ercAuditTrailTable.addUniqueIndex("ERCAuditTrail_gid_idx", ercAuditTrailTable.existingColumnNamed("gid"));
 
@@ -118,7 +119,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 		ERXMigrationTable ercMailAddressTable = database.newTableNamed("ERCMailAddress");
 		ercMailAddressTable.newStringColumn("emailAddress", 254, false);
 		ercMailAddressTable.newBigIntegerColumn("id", false);
-		ercMailAddressTable.newIntBooleanColumn("isActive", false);
+		ercMailAddressTable.newFlagBooleanColumn("isActive", false);
 
 		ercMailAddressTable.addUniqueIndex("ERCMailAddress_emailAddress_idx", ercMailAddressTable.existingColumnNamed("emailAddress"));
 

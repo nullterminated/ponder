@@ -13,6 +13,7 @@
             prototypeName = varchar1000; 
         }, 
         {allowsNull = N; columnName = id; name = id; prototypeName = longNumber; }, 
+        {columnName = isInline; name = isInline; prototypeName = flag; }, 
         {
             allowsNull = N; 
             columnName = mailMessageID; 
@@ -21,9 +22,9 @@
         }, 
         {columnName = token; name = token; prototypeName = varchar50; }
     ); 
-    attributesUsedForLocking = (attachmentID, filePath, id, mailMessageID, token); 
+    attributesUsedForLocking = (attachmentID, filePath, id, isInline, mailMessageID, token); 
     className = "er.corebl.model.ERCMailAttachment"; 
-    classProperties = (attachment, filePath, mailMessage, token); 
+    classProperties = (attachment, filePath, isInline, mailMessage, token); 
     entityIndexes = (
         {
             attributes = (mailMessageID, attachmentID); 

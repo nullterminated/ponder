@@ -19,6 +19,8 @@ public abstract class _ERCMailAttachment extends  ERXGenericRecord {
   // Attributes
   public static final ERXKey<String> FILE_PATH = new ERXKey<String>("filePath");
   public static final String FILE_PATH_KEY = FILE_PATH.key();
+  public static final ERXKey<Boolean> IS_INLINE = new ERXKey<Boolean>("isInline");
+  public static final String IS_INLINE_KEY = IS_INLINE.key();
   public static final ERXKey<String> TOKEN = new ERXKey<String>("token");
   public static final String TOKEN_KEY = TOKEN.key();
 
@@ -47,6 +49,17 @@ public abstract class _ERCMailAttachment extends  ERXGenericRecord {
     	_ERCMailAttachment.LOG.debug( "updating filePath from " + filePath() + " to " + value);
     }
     takeStoredValueForKey(value, _ERCMailAttachment.FILE_PATH_KEY);
+  }
+
+  public Boolean isInline() {
+    return (Boolean) storedValueForKey(_ERCMailAttachment.IS_INLINE_KEY);
+  }
+
+  public void setIsInline(Boolean value) {
+    if (_ERCMailAttachment.LOG.isDebugEnabled()) {
+    	_ERCMailAttachment.LOG.debug( "updating isInline from " + isInline() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERCMailAttachment.IS_INLINE_KEY);
   }
 
   public String token() {
