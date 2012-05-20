@@ -55,7 +55,7 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 	}
 
 	public String validateEmailAddress(String value) {
-		if(!clazz.emailValidator().isValidEmailAddress(value, 100, true)) {
+		if(!clazz.emailValidator().isValidEmailString(value)) {
 			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 			throw factory.createException(this, EMAIL_ADDRESS_KEY, value, ERXValidationException.InvalidValueException);
 		}
