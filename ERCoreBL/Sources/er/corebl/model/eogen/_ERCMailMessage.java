@@ -25,8 +25,8 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public static final String EXCEPTION_REASON_KEY = EXCEPTION_REASON.key();
   public static final ERXKey<er.corebl.mail.ERCMailState> STATE = new ERXKey<er.corebl.mail.ERCMailState>("state");
   public static final String STATE_KEY = STATE.key();
-  public static final ERXKey<String> TITLE = new ERXKey<String>("title");
-  public static final String TITLE_KEY = TITLE.key();
+  public static final ERXKey<String> SUBJECT = new ERXKey<String>("subject");
+  public static final String SUBJECT_KEY = SUBJECT.key();
   public static final ERXKey<String> UUID = new ERXKey<String>("uuid");
   public static final String UUID_KEY = UUID.key();
   public static final ERXKey<String> X_MAILER = new ERXKey<String>("xMailer");
@@ -102,15 +102,15 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     takeStoredValueForKey(value, _ERCMailMessage.STATE_KEY);
   }
 
-  public String title() {
-    return (String) storedValueForKey(_ERCMailMessage.TITLE_KEY);
+  public String subject() {
+    return (String) storedValueForKey(_ERCMailMessage.SUBJECT_KEY);
   }
 
-  public void setTitle(String value) {
+  public void setSubject(String value) {
     if (_ERCMailMessage.LOG.isDebugEnabled()) {
-    	_ERCMailMessage.LOG.debug( "updating title from " + title() + " to " + value);
+    	_ERCMailMessage.LOG.debug( "updating subject from " + subject() + " to " + value);
     }
-    takeStoredValueForKey(value, _ERCMailMessage.TITLE_KEY);
+    takeStoredValueForKey(value, _ERCMailMessage.SUBJECT_KEY);
   }
 
   public String uuid() {

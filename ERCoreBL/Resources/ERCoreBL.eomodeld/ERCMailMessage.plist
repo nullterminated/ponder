@@ -55,7 +55,7 @@
             prototypeName = javaEnum; 
             valueClassName = "er.corebl.mail.ERCMailState"; 
         }, 
-        {columnName = title; name = title; prototypeName = varchar255; }, 
+        {columnName = subject; name = subject; prototypeName = varchar255; }, 
         {
             columnName = uuid; 
             name = uuid; 
@@ -82,7 +82,7 @@
         plainClobID, 
         replyToAddressID, 
         state, 
-        title, 
+        subject, 
         uuid, 
         xMailer
     ); 
@@ -99,7 +99,7 @@
         plainClob, 
         replyToAddress, 
         state, 
-        title, 
+        subject, 
         uuid, 
         xMailer
     ); 

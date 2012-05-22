@@ -64,8 +64,8 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			
 			T mailMessage = createAndInsertObject(ec);
 			
-			mailMessage.setFromAddress(from);
-			mailMessage.setReplyToAddress(replyTo);
+			mailMessage.addObjectToBothSidesOfRelationshipWithKey(from, FROM_ADDRESS_KEY);
+			mailMessage.addObjectToBothSidesOfRelationshipWithKey(replyTo, REPLY_TO_ADDRESS_KEY);
 			
 			/*
 			 * Setting in this order intentionally. To overrides CC overrides BCC
@@ -80,12 +80,12 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 				mailMessage.addToRecipients(to, ERCMailRecipientType.TO);
 			}
 			
-			//Make sure the title doesn't cause a validation exception
-			int titleLength = entity().attributeNamed(TITLE_KEY).width();
-			if(subject.length() > titleLength) {
-				subject = subject.substring(0, titleLength);
+			//Make sure the subject doesn't cause a max length validation exception
+			int subjectLength = entity().attributeNamed(SUBJECT_KEY).width();
+			if(subject.length() > subjectLength) {
+				subject = subject.substring(0, subjectLength);
 			}
-			mailMessage.setTitle(subject);
+			mailMessage.validateTakeValueForKeyPath(subject, SUBJECT_KEY);
 			
 			mailMessage.setHtmlMessage(htmlMessage);
 			mailMessage.setPlainMessage(plainMessage);
@@ -184,6 +184,14 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	
 	public NSArray<ERCMailAddress> bccAddresses() {
 		return addresses(ERCMailRecipientType.BCC);
+	}
+	
+	public String validateSubject(String value) {
+		//CHECKME strip line breaks. Anything else?
+		if(value.indexOf("\r") >= 0 || value.indexOf("\n") >= 0) {
+			value = value.replaceAll("\\r\\n|\\r|\\n", " ");
+		}
+		return value;
 	}
 	
 	public void validateForSave() {

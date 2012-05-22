@@ -116,7 +116,7 @@ public enum ERCMailer {
 			mail = plain;
 		}
 
-		mail.setSubject(message.title());
+		mail.setSubject(message.subject());
 		mail.setFromAddress(message.fromAddress().emailAddress());
 		if (message.replyToAddress() != null) {
 			mail.setReplyToAddress(message.replyToAddress().emailAddress());

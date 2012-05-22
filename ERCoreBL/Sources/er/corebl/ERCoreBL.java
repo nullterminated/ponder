@@ -306,9 +306,7 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 						
 						String fromString = WOApplication.application().name() + "-" + hostName + "@" + problemEmailDomain();
 						ERCMailAddress fromAddress = ERCMailAddress.clazz.addressForEmailString(ec, fromString);
-						//CHECKME strip line breaks. Anything else?
 						String subject = WOApplication.application().name() + ": " + shortExceptionName + ": " + exceptionForTitle.getMessage();
-						subject = subject.replaceAll("\\r\\n|\\r|\\n", " ");
 						String htmlContent = standardExceptionPage.generateResponse().contentString();
 						NSArray<ERCMailAddress> toAddresses = ERCMailAddress.clazz.addressesForEmailStrings(ec, emailsForProblemRecipients());
 						ERCMailMessage.clazz.composeMailMessage(ec, fromAddress, null, toAddresses, null, null,subject, htmlContent, null, null, null);
