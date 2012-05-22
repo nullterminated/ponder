@@ -1,7 +1,6 @@
 package er.corebl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Enumeration;
 
 import org.apache.log4j.Logger;
 
@@ -107,8 +106,7 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	 */
 	public NSArray<String> emailsForProblemRecipients() {
 		if (_emailsForProblemRecipients == null) {
-			_emailsForProblemRecipients = ERXProperties.arrayForKeyWithDefault(ProblemEmailRecipientsPropertyKey,
-					NSArray.EmptyArray);
+			_emailsForProblemRecipients = ERXProperties.arrayForKeyWithDefault(ProblemEmailRecipientsPropertyKey, NSArray.EmptyArray);
 		}
 		return _emailsForProblemRecipients;
 	}
@@ -266,9 +264,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 				if (e.userInfo() != null) {
 					Object userInfo = e.userInfo();
 					if (userInfo instanceof NSDictionary) {
-						NSDictionary uid = (NSDictionary) userInfo;
-						for (Enumeration e2 = uid.keyEnumerator(); e2.hasMoreElements();) {
-							String key = (String) e2.nextElement();
+						NSDictionary<String,Object> uid = (NSDictionary<String,Object>) userInfo;
+						for (String key: uid.allKeys()) {
 							Object value = uid.objectForKey(key);
 							s.append(key + " = " + value + ";\n");
 						}
