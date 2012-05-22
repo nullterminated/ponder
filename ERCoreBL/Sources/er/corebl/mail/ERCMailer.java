@@ -50,6 +50,10 @@ public enum ERCMailer {
 
 		log.debug("Finished processing outgoing mail.");
 	}
+	
+	public void sendMailMessage(ERCMailMessage mailMessage) {
+		sendMailMessages(new NSArray<ERCMailMessage>(mailMessage));
+	}
 
 	public void sendMailMessages(NSArray<ERCMailMessage> mailMessages) {
 		if (mailMessages == null) {
