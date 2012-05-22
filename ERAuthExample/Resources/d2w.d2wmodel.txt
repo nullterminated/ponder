@@ -1,7 +1,0 @@
-(
-    100 : *true* => loginComponentNames = ("ERATwoFactorLogin") [com.webobjects.directtoweb.Assignment],
-    100 : *true* => crudAuthorization = "er.authexample.AuthorizationDelegate" [ERDDelayedObjectCreationAssignment],
-    100 : (task = 'edit' and entity.name = 'User') => shouldValidateBeforeSave = "false" [com.webobjects.directtoweb.BooleanAssignment],
-    100 : (task = 'edit' and entity.name = 'User') => displayPropertyKeys = ("username", "clearPassword", "emailAddress") [com.webobjects.directtoweb.Assignment],
-    100 : (task = 'edit' and entity.name = 'User' and propertyKey = 'clearPassword') => componentName = "ERAEditPassword" [com.webobjects.directtoweb.Assignment]
-)

@@ -1,1 +1,0 @@
- -destination Sources -extension java -java -javaTemplate _WonderEntity.java -model Resources/AuthExample.eomodeld -packagedirs -subclassDestination Sources -subclassJavaTemplate WonderEntity.java -templatedir Templates -verbose -loadModelGroup -superclassPackage base -define-EOGenericRecord ERXGenericRecord -define-CRUDAuthorization er.authexample.AuthorizationDelegate
