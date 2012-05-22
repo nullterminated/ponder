@@ -4,11 +4,14 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 
 import er.corebl.mail.ERCMailRecipientType;
 import er.corebl.mail.ERCMailState;
+import er.extensions.eof.ERXFetchSpecificationBatchIterator;
+import er.extensions.eof.ERXQ;
 import er.extensions.validation.ERXValidationFactory;
 
 public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
@@ -39,7 +42,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 *            email addresses
 		 * @param bcc
 		 *            email addresses
-		 * @param title
+		 * @param subject
 		 *            of the message
 		 * @param message
 		 *            text of the message
@@ -53,10 +56,10 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 									NSArray<ERCMailAddress> to,
 									NSArray<ERCMailAddress> cc, 
 									NSArray<ERCMailAddress> bcc, 
-									String title, 
+									String subject, 
 									String htmlMessage, 
 									String plainMessage, 
-									NSArray<ERCMailAttachment> attachements, 
+									NSArray<ERCMailAttachment> attachments, 
 									ERCMailCategory category) {
 			
 			T mailMessage = createAndInsertObject(ec);
@@ -79,19 +82,25 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			
 			//Make sure the title doesn't cause a validation exception
 			int titleLength = entity().attributeNamed(TITLE_KEY).width();
-			if(title.length() > titleLength) {
-				title = title.substring(0, titleLength);
+			if(subject.length() > titleLength) {
+				subject = subject.substring(0, titleLength);
 			}
-			mailMessage.setTitle(title);
+			mailMessage.setTitle(subject);
 			
 			mailMessage.setHtmlMessage(htmlMessage);
 			mailMessage.setPlainMessage(plainMessage);
 			
-			mailMessage.addObjectsToBothSidesOfRelationshipWithKey(attachements, MAIL_ATTACHMENTS_KEY);
+			mailMessage.addObjectsToBothSidesOfRelationshipWithKey(attachments, MAIL_ATTACHMENTS_KEY);
 			mailMessage.addObjectToBothSidesOfRelationshipWithKey(category, MAIL_CATEGORY_KEY);
 			mailMessage.setState(ERCMailState.READY_TO_BE_SENT);
 			
 			return mailMessage;
+		}
+		
+		public ERXFetchSpecificationBatchIterator batchIteratorForUnsentMessages() {
+			EOQualifier q = STATE.eq(ERCMailState.READY_TO_BE_SENT);
+			EOFetchSpecification fs = new EOFetchSpecification(ENTITY_NAME, q, null);
+			return new ERXFetchSpecificationBatchIterator(fs);
 		}
 	}
 
@@ -130,6 +139,15 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 	}
 	
+	public void removeOptOutRecipients() {
+		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.IS_ACTIVE).isFalse();
+		if(mailCategory() != null) {
+			q = ERXQ.or(q, ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.OPT_IN_CATEGORIES).containsObject(mailCategory()));
+		}
+		NSArray<ERCMailRecipient> optOut = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+		removeObjectsFromBothSidesOfRelationshipWithKey(optOut, MAIL_RECIPIENTS_KEY);
+	}
+	
 	public void setHtmlMessage(String value) {
 		boolean isBlank = StringUtils.isBlank(value);
 		if(isBlank && htmlClob() != null) {
@@ -152,20 +170,20 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 	}
 	
-	public NSArray<ERCMailAddress> recipients(ERCMailRecipientType type) {
-		return ERCMailRecipient.clazz.recipientsForMessageAndType(this, type);
+	public NSArray<ERCMailAddress> addresses(ERCMailRecipientType type) {
+		return ERCMailRecipient.clazz.addressesForMessageAndType(this, type);
 	}
 	
 	public NSArray<ERCMailAddress> toAddresses() {
-		return recipients(ERCMailRecipientType.TO);
+		return addresses(ERCMailRecipientType.TO);
 	}
 	
 	public NSArray<ERCMailAddress> ccAddresses() {
-		return recipients(ERCMailRecipientType.CC);
+		return addresses(ERCMailRecipientType.CC);
 	}
 	
 	public NSArray<ERCMailAddress> bccAddresses() {
-		return recipients(ERCMailRecipientType.BCC);
+		return addresses(ERCMailRecipientType.BCC);
 	}
 	
 	public void validateForSave() {

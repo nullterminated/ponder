@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>WebObjects Error</title>
+		<style>
+			table {
+				margin: 1em;
+			}
+			th {
+				font-weight: bold;
+				text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<table border="1">
+			<caption>WebObjects Error</caption>
+			<tbody>
+				<tr>
+					<th>Application</th>
+					<td><webobject name = "ApplicationName"/></td>
+				</tr>
+				<tr>
+					<th>Host Name</th>
+					<td><webobject name = "HostName"/></td>
+				</tr>
+				<tr>
+					<th>Date</th>
+					<td><webobject name = "Timestamp"/></td>
+				</tr>
+				<webobject name = "HasActor">
+					<tr>
+						<th>Actor</th>
+						<td><webobject name = "ActorDescription"/> (<webobject name = "ActorId"/>)</td>
+					</tr>
+				</webobject>
+				<tr>
+					<th>Error</th>
+					<td><webobject name = "ShortErrorMessage"/></td>
+				</tr>
+				<webobject name = "HasExtraInfoDictionary">
+					<tr>
+						<th>Extra Information</th>
+						<td>
+							<table border="1">
+								<webobject name = "ExtraInfoRepetition">
+									<tr>
+										<th><webobject name = "UserInfoKey"/></th>
+										<td><webobject name = "UserInfoValue"/></td>
+									</tr>
+								</webobject>
+							</table>
+						</td>
+					</tr>
+				</webobject>
+				<webobject name = "HasFormattedMessage">
+					<tr>
+						<th>Formatted Message</th>
+						<td><webobject name = "FormattedMessage"/></td>
+					</tr>
+				</webobject>
+				<tr>
+					<th>StackTrace</th>
+					<td>
+						<webobject name = "ReasonRepetition">
+							<webobject name = "ReasonString"/><br/>
+						</webobject>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</body>
+</html>

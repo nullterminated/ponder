@@ -1,0 +1,66 @@
+ApplicationName: WOString {
+    value = application.name;
+}
+
+HostName: WOString {
+	value = hostName;
+}
+
+Timestamp: WOString {
+	dateformat = "MM/dd/yyyy hh:mm:ss";
+	value = now;
+}
+
+HasActor: ERXNonNullConditional {
+	condition = actor;
+}
+
+ActorDescription: WOString {
+	value = actor.userPresentableDescription;
+}
+
+ActorId: WOString {
+	value = actor.primaryKey;//VALID
+}
+
+ShortErrorMessage: WOString {
+	value = shortErrorMessage;
+}
+
+HasExtraInfoDictionary: ERXNonNullConditional {
+	condition = extraInfo;
+}
+
+ExtraInfoRepetition: WODictionaryRepetition {
+    dictionary = extraInfo;
+    key = currentUserInfoKey;
+    item = currentUserInfoValue;
+}
+
+UserInfoKey: WOString {
+    value = currentUserInfoKey;
+    escapeHTML = false;
+}
+
+UserInfoValue: WOString {
+    value = currentUserInfoValue.toString;
+    escapeHTML = true;
+}
+
+HasFormattedMessage: ERXNonNullConditional {
+	condition = formattedMessage;
+}
+
+FormattedMessage: WOString {
+	value = formattedMessage;
+}
+
+ReasonRepetition: WORepetition {
+    list = reasonLines;
+    item = currentReasonLine;
+}
+
+ReasonString: WOString {
+    value = currentReasonLine;
+    escapeHTML = true;
+}

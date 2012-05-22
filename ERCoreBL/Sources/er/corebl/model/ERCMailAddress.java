@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSMutableArray;
 
 import er.extensions.eof.ERXBatchFetchUtilities;
 import er.extensions.eof.ERXQ;
@@ -46,6 +47,15 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 				result.setEmailAddress(email);
 			}
 			return result;
+		}
+		
+		public NSArray<ERCMailAddress> addressesForEmailStrings(EOEditingContext ec, NSArray<String> emailStrings) {
+			NSMutableArray<ERCMailAddress> addresses = new NSMutableArray<ERCMailAddress>();
+			for(String emailString: emailStrings) {
+				ERCMailAddress address = addressForEmailString(ec, emailString);
+				addresses.add(address);
+			}
+			return addresses.immutableClone();
 		}
 		
 		public NSArray<ERCMailAddress> filterAddressesForCategory(NSArray<ERCMailAddress> addresses, ERCMailCategory category) {

@@ -26,10 +26,16 @@ public class ERCMailRecipient extends er.corebl.model.eogen._ERCMailRecipient {
 			er.corebl.model.eogen._ERCMailRecipient._ERCMailRecipientClazz<T> {
 		/* more clazz methods here */
 		
-		public NSArray<ERCMailAddress> recipientsForMessageAndType(ERCMailMessage message, ERCMailRecipientType type) {
+		public NSArray<ERCMailRecipient> recipientsForMessageAndType(ERCMailMessage message, ERCMailRecipientType type) {
 			EOQualifier q = MAIL_MESSAGE.eq(message).and(RECIPIENT_TYPE.eq(type));
-			NSArray<T> recipients = objectsMatchingQualifier(message.editingContext(), q);
-			return MAIL_ADDRESS.arrayValueInObject(recipients);
+			NSArray<ERCMailRecipient> recipients = EOQualifier.filteredArrayWithQualifier(message.mailRecipients(), q);
+			return recipients;
+		}
+		
+		public NSArray<ERCMailAddress> addressesForMessageAndType(ERCMailMessage message, ERCMailRecipientType type) {
+			NSArray<ERCMailRecipient> recipients = recipientsForMessageAndType(message, type);
+			NSArray<ERCMailAddress> addresses = MAIL_ADDRESS.arrayValueInObject(recipients);
+			return addresses;
 		}
 	}
 
