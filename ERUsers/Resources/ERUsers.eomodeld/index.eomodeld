@@ -11,7 +11,6 @@
             name = ERChallengeResponse; 
         }, 
         {className = "er.users.model.ERCredential"; name = ERCredential; }, 
-        {className = "er.users.model.ERResetRequest"; name = ERResetRequest; }, 
         {className = "er.users.model.ERUser"; name = ERUser; }
     ); 
 }

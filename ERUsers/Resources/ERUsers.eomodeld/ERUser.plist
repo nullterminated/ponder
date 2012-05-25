@@ -8,26 +8,37 @@
             width = 254; 
         }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
-        {columnName = lastSeen; name = lastSeen; prototypeName = jodaDateTime; }, 
         {
             columnName = password; 
             name = password; 
             prototypeName = varchar100; 
             width = 128; 
         }, 
+        {
+            allowsNull = Y; 
+            columnName = resetRequestDate; 
+            name = resetRequestDate; 
+            prototypeName = jodaDateTime; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = resetToken; 
+            name = resetToken; 
+            prototypeName = varchar50; 
+        }, 
         {columnName = salt; name = salt; prototypeName = varchar255; width = 174; }, 
         {columnName = username; name = username; prototypeName = varchar50; }
     ); 
-    attributesUsedForLocking = (emailAddress, id, password, salt, username); 
+    attributesUsedForLocking = (emailAddress, id, password, resetToken, salt, username); 
     className = "er.users.model.ERUser"; 
     classProperties = (
         challengeResponses, 
         credentials, 
         dateCreated, 
         emailAddress, 
-        lastSeen, 
         password, 
-        resetRequests, 
+        resetRequestDate, 
+        resetToken, 
         salt, 
         username
     ); 
@@ -60,13 +71,6 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
             name = credentials; 
-        }, 
-        {
-            destination = ERResetRequest; 
-            isToMany = Y; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
-            name = resetRequests; 
         }
     ); 
 }

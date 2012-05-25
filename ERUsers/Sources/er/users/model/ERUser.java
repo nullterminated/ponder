@@ -57,7 +57,6 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		super.init(ec);
 		DateTime dt = new DateTime();
 		setDateCreated(dt);
-		setLastSeen(dt);
 	}
 
 	/**
