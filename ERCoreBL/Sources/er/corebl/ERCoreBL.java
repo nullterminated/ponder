@@ -20,6 +20,7 @@ import com.webobjects.foundation.NSLog;
 
 import er.corebl.audittrail.ERCAuditTrailHandler;
 import er.corebl.components.ERCMailableExceptionPage;
+import er.corebl.mail.ERCMailState;
 import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCMailMessage;
 import er.corebl.model.ERCPreference;
@@ -309,7 +310,7 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 						String subject = WOApplication.application().name() + ": " + shortExceptionName + ": " + exceptionForTitle.getMessage();
 						String htmlContent = standardExceptionPage.generateResponse().contentString();
 						NSArray<ERCMailAddress> toAddresses = ERCMailAddress.clazz.addressesForEmailStrings(ec, emailsForProblemRecipients());
-						ERCMailMessage.clazz.composeMailMessage(ec, fromAddress, null, toAddresses, null, null,subject, htmlContent, null, null, null);
+						ERCMailMessage.clazz.composeMailMessage(ec, ERCMailState.READY_TO_BE_SENT, fromAddress, null, toAddresses, null, null,subject, htmlContent, null, null, null);
 						ec.saveChanges();
 					} finally {
 						ec.unlock();

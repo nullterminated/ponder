@@ -51,6 +51,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 * @return created mail message for the given parameters
 		 */
 		public T composeMailMessage(EOEditingContext ec, 
+									ERCMailState state,
 									ERCMailAddress from, 
 									ERCMailAddress replyTo, 
 									NSArray<ERCMailAddress> to,
@@ -92,7 +93,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			
 			mailMessage.addObjectsToBothSidesOfRelationshipWithKey(attachments, MAIL_ATTACHMENTS_KEY);
 			mailMessage.addObjectToBothSidesOfRelationshipWithKey(category, MAIL_CATEGORY_KEY);
-			mailMessage.setState(ERCMailState.READY_TO_BE_SENT);
+			mailMessage.setState(state);
 			
 			return mailMessage;
 		}
