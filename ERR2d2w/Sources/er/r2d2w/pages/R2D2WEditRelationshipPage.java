@@ -30,7 +30,6 @@ import er.extensions.eof.ERXConstant;
 import er.extensions.eof.ERXEOAccessUtilities;
 import er.extensions.eof.ERXEOControlUtilities;
 import er.extensions.foundation.ERXArrayUtilities;
-import er.extensions.foundation.ERXEOSerializationUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelationshipPageInterface, SelectPageInterface {
@@ -39,7 +38,7 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	private transient NSArray<Object> masterObjectAndRelationshipKey;
 	private EOEnterpriseObject masterObject, objectToAddToRelationship, objectInRelationship;
@@ -366,9 +365,9 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	}
 
 	private void writeObject(ObjectOutputStream out) throws IOException {
-		ERXEOSerializationUtilities.writeEO(out, masterObject);
-		ERXEOSerializationUtilities.writeEO(out, objectToAddToRelationship);
-		ERXEOSerializationUtilities.writeEO(out, objectInRelationship);
+		out.writeObject(masterObject);
+		out.writeObject(objectToAddToRelationship);
+		out.writeObject(objectInRelationship);
 		out.writeObject(relationshipKey);
 		out.writeBoolean(isRelationshipToMany);
 		out.writeObject(relationshipDisplayGroup.dataSource());
@@ -379,9 +378,9 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	}
 	
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-		masterObject = ERXEOSerializationUtilities.readEO(in);
-		objectToAddToRelationship = ERXEOSerializationUtilities.readEO(in);
-		objectInRelationship = ERXEOSerializationUtilities.readEO(in);
+		masterObject = (EOEnterpriseObject) in.readObject();
+		objectToAddToRelationship = (EOEnterpriseObject) in.readObject();
+		objectInRelationship = (EOEnterpriseObject) in.readObject();
 		relationshipKey = (String) in.readObject();
 		isRelationshipToMany = in.readBoolean();
 		EODetailDataSource ds = (EODetailDataSource) in.readObject();

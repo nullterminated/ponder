@@ -16,8 +16,6 @@ import er.auth.processing.ERTwoFactorAuthenticationConfig;
 import er.directtoweb.components.ERDCustomComponent;
 import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXWOContext;
-import er.extensions.foundation.ERXEOSerializationUtilities;
-import er.extensions.foundation.ERXEOSerializationUtilities.SerialEOWrapper;
 import er.extensions.foundation.ERXSelectorUtilities;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
@@ -39,7 +37,7 @@ public class ERAEditPassword extends ERDCustomComponent {
 	private String oldID;
 	private String newID;
 	private String verifyID;
-	private SerialEOWrapper object;
+	private EOEnterpriseObject object;
 
 	public ERAEditPassword(WOContext context) {
 		super(context);
@@ -186,11 +184,11 @@ public class ERAEditPassword extends ERDCustomComponent {
 	}
 
 	public EOEnterpriseObject object() {
-		return object.eo();
+		return object;
 	}
 
 	public void setObject(EOEnterpriseObject object) {
-		this.object = new ERXEOSerializationUtilities.SerialEOWrapper(object);
+		this.object = object;
 	}
 
 	/**
