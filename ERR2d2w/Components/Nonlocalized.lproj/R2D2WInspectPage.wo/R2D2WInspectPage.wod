@@ -37,7 +37,7 @@ PageWrapper: WOSwitchComponent {
 }
 
 TabPanel : WOSwitchComponent {
-	WOComponentName = tabComponentName;
+	WOComponentName = d2wContext.tabComponentName;
 	selectedTab = currentTab;
 	submitActionName = switchTabActionName;
 	tabNameKey = "displayName";
