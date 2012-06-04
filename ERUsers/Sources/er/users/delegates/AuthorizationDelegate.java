@@ -7,6 +7,7 @@ import er.auth.CRUDAuthorization;
 import er.corebl.ERCoreBL;
 import er.extensions.eof.EOEnterpriseObjectClazz;
 import er.extensions.qualifiers.ERXFalseQualifier;
+import er.users.model.ERChallengeResponse;
 import er.users.model.ERUser;
 import er.users.model.ERUser.ERUserClazz;
 
@@ -86,5 +87,14 @@ public enum AuthorizationDelegate implements CRUDAuthorization {
 		if(eo.isNewObject()) { return Boolean.TRUE; }
 		if(keypath.equals(ERUser.USERNAME_KEY)) { return Boolean.FALSE; }
 		return eo.equals(ERCoreBL.actor(eo.editingContext()));
+	}
+	
+	public Boolean canUpdateProperty(ERChallengeResponse eo, String keypath) {
+		if(ERChallengeResponse.CHALLENGE_QUESTION_KEY.equals(keypath) && eo.isNewObject()) {
+			return Boolean.TRUE;
+		} else if(ERChallengeResponse.CLEAR_ANSWER_KEY.equals(keypath)) {
+			return Boolean.TRUE;
+		}
+		return Boolean.FALSE;
 	}
 }

@@ -1,7 +1,5 @@
 package er.users.model;
 
-import java.util.Random;
-
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
@@ -9,15 +7,19 @@ import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSValidation;
 
 import er.corebl.model.ERCPreference;
 import er.corebl.preferences.ERCoreUserInterface;
 import er.extensions.crypting.ERXCrypto;
 import er.extensions.eof.ERXFetchSpecification;
 import er.extensions.eof.ERXKey;
+import er.extensions.foundation.ERXProperties;
 import er.extensions.net.ERXEmailValidator;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
+import er.users.ERUsers;
+import er.users.model.enums.ERUserActivationStatus;
 
 /**
  * The user class.
@@ -47,6 +49,11 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 
 	public static class ERUserClazz<T extends ERUser> extends er.users.model.eogen._ERUser._ERUserClazz<T> {
 		/* more clazz methods here */
+		public static final String MIN_CHALLENGE_RESPONSES = "er.users.model.ERUser.clazz.minimumChallengeResponses";
+		
+		public int minimumChallengeResponses() {
+			return ERXProperties.intForKeyWithDefault(MIN_CHALLENGE_RESPONSES, 3);
+		}
 	}
 
 	/**
@@ -57,6 +64,13 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		super.init(ec);
 		DateTime dt = new DateTime();
 		setDateCreated(dt);
+		setActivationStatus(ERUserActivationStatus.PRE_ACTIVATION);
+		ERActivateUserToken token = ERActivateUserToken.clazz.createAndInsertObject(ec);
+		addObjectToBothSidesOfRelationshipWithKey(token, ACTIVATE_USER_TOKEN_KEY);
+		for(int i = 0, count = clazz.minimumChallengeResponses(); i < count; ++i) {
+			ERChallengeResponse cr = ERChallengeResponse.clazz.createAndInsertObject(ec);
+			addObjectToBothSidesOfRelationshipWithKey(cr, CHALLENGE_RESPONSES_KEY);
+		}
 	}
 
 	/**
@@ -116,27 +130,16 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	}
 
 	/**
-	 * Generates a new random 128 byte base64 encoded salt value
-	 * 
-	 * @return the salt
-	 */
-	public String generateSalt() {
-		Random random = new Random();
-		byte[] bytes = new byte[128];
-		random.nextBytes(bytes);
-		String salt = ERXCrypto.base64Encode(bytes);
-		return salt;
-	}
-
-	/**
 	 * Creates a new {@link er.users.model.ERCredential ERCredential} for the
 	 * user if a clearPassword is detected, then it sets the new password to the
 	 * hashed clearPassword.
+	 * 
+	 * This method also deletes activation tokens on users once activated.
 	 */
 	public void willUpdate() {
 		super.willUpdate();
 		if (clearPassword != null) {
-			setSalt(generateSalt());
+			setSalt(ERUsers.sharedInstance().generateSalt());
 			String hash = hashedPassword(clearPassword);
 			if (newCredential == null) {
 				newCredential = createCredentialsRelationship();
@@ -144,6 +147,11 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 			newCredential.setPassword(hash);
 			newCredential.setSalt(salt());
 			setPassword(hash);
+		}
+		
+		//FIXME removing the token is not deleting it
+		if(!ERUserActivationStatus.PRE_ACTIVATION.equals(activationStatus()) && activateUserToken() != null) {
+			removeObjectFromBothSidesOfRelationshipWithKey(activateUserToken(), ACTIVATE_USER_TOKEN_KEY);
 		}
 	}
 
@@ -155,7 +163,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	public void willInsert() {
 		super.willInsert();
 		if (clearPassword != null) {
-			setSalt(generateSalt());
+			setSalt(ERUsers.sharedInstance().generateSalt());
 			String hash = hashedPassword(clearPassword);
 			if (newCredential == null) {
 				newCredential = createCredentialsRelationship();
@@ -182,6 +190,18 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		super.didUpdate();
 		clearPassword = null;
 		newCredential = null;
+	}
+	
+	/**
+	 * Ensures the user has an authentication token if it is pre-activated
+	 */
+	public void validateForSave() throws NSValidation.ValidationException {
+		if(ERUserActivationStatus.PRE_ACTIVATION.equals(activationStatus()) && activateUserToken() == null) {
+			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
+			ERXValidationException ex = factory.createCustomException(this, "MissingActivationToken");
+			throw ex;
+		}
+		super.validateForSave();
 	}
 
 	/**
@@ -236,5 +256,15 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 			throw ex;
 		}
 		return emailAddress;
+	}
+	
+	public NSArray<ERChallengeResponse> validateChallengeResponses(NSArray<ERChallengeResponse> value) {
+		if(value.count() < clazz.minimumChallengeResponses()) {
+			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
+			ERXValidationException ex = factory.createException(this, CHALLENGE_RESPONSES_KEY, value, "MinimumChallengeResponses");
+			//TODO set the minimum number in the exception context?
+			throw ex;
+		}
+		return value;
 	}
 }

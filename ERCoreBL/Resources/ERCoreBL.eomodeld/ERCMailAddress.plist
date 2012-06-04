@@ -17,7 +17,7 @@
             attributes = (emailAddress); 
             constraint = distinct; 
             indexType = clustered; 
-            name = "ERCMailAddress_emailAddress_idx"; 
+            name = "ERCMailAddress_emailAddress_unique_idx"; 
             order = asc; 
         }
     ); 

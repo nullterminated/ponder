@@ -106,7 +106,7 @@ public class ERR2d2w extends ERXFrameworkPrincipal {
     	}
     }
     
-    //FIXME: this is a MySQL only hack right now.  Hoping to make this
+    //TODO: this is a MySQL only hack right now.  Hoping to make this
     //more general purpose later.
 	public static void createDerivedCountAttributes(EOModel model) {
 		log.debug("Model added: Begin adding derived counts");

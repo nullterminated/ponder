@@ -1,5 +1,17 @@
 {
     attributes = (
+        {
+            allowsNull = Y; 
+            columnName = activateUserTokenID; 
+            name = activateUserTokenID; 
+            prototypeName = varchar50; 
+        }, 
+        {
+            columnName = activationStatus; 
+            name = activationStatus; 
+            prototypeName = javaEnum; 
+            valueClassName = "er.users.model.enums.ERUserActivationStatus"; 
+        }, 
         {columnName = dateCreated; name = dateCreated; prototypeName = jodaDateTime; }, 
         {
             columnName = emailAddress; 
@@ -29,9 +41,20 @@
         {columnName = salt; name = salt; prototypeName = varchar255; width = 174; }, 
         {columnName = username; name = username; prototypeName = varchar50; }
     ); 
-    attributesUsedForLocking = (emailAddress, id, password, resetToken, salt, username); 
+    attributesUsedForLocking = (
+        activateUserTokenID, 
+        activationStatus, 
+        emailAddress, 
+        id, 
+        password, 
+        resetToken, 
+        salt, 
+        username
+    ); 
     className = "er.users.model.ERUser"; 
     classProperties = (
+        activateUserToken, 
+        activationStatus, 
         challengeResponses, 
         credentials, 
         dateCreated, 
@@ -56,6 +79,16 @@
     name = ERUser; 
     primaryKeyAttributes = (id); 
     relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERActivateUserToken; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = token; sourceAttribute = activateUserTokenID; }); 
+            name = activateUserToken; 
+            ownsDestination = Y; 
+            userInfo = {ERXInverseRelationshipName = user; }; 
+        }, 
         {
             deleteRule = EODeleteRuleCascade; 
             destination = ERChallengeResponse; 

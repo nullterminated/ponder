@@ -29,4 +29,9 @@ public class LoginValidationDelegate extends ValidationDelegate {
 		}
 	}
 
+	@Override
+	public void clearValidationFailed() {
+		// Does nothing
+	}
+
 }

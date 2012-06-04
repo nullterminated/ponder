@@ -3,6 +3,10 @@
     adaptorName = JDBC; 
     entities = (
         {
+            className = "er.users.model.ERActivateUserToken"; 
+            name = ERActivateUserToken; 
+        }, 
+        {
             className = "er.users.model.ERChallengeQuestion"; 
             name = ERChallengeQuestion; 
         }, 

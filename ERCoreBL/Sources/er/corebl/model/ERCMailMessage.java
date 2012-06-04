@@ -66,7 +66,10 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			T mailMessage = createAndInsertObject(ec);
 			
 			mailMessage.addObjectToBothSidesOfRelationshipWithKey(from, FROM_ADDRESS_KEY);
-			mailMessage.addObjectToBothSidesOfRelationshipWithKey(replyTo, REPLY_TO_ADDRESS_KEY);
+			
+			if(replyTo != null) {
+				mailMessage.addObjectToBothSidesOfRelationshipWithKey(replyTo, REPLY_TO_ADDRESS_KEY);
+			}
 			
 			/*
 			 * Setting in this order intentionally. To overrides CC overrides BCC
@@ -91,8 +94,14 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			mailMessage.setHtmlMessage(htmlMessage);
 			mailMessage.setPlainMessage(plainMessage);
 			
-			mailMessage.addObjectsToBothSidesOfRelationshipWithKey(attachments, MAIL_ATTACHMENTS_KEY);
-			mailMessage.addObjectToBothSidesOfRelationshipWithKey(category, MAIL_CATEGORY_KEY);
+			if(attachments != null) {
+				mailMessage.addObjectsToBothSidesOfRelationshipWithKey(attachments, MAIL_ATTACHMENTS_KEY);
+			}
+			
+			if(category != null) {
+				mailMessage.addObjectToBothSidesOfRelationshipWithKey(category, MAIL_CATEGORY_KEY);
+			}
+			
 			mailMessage.setState(state);
 			
 			return mailMessage;

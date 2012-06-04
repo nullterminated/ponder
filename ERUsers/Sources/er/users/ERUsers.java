@@ -1,5 +1,7 @@
 package er.users;
 
+import java.util.Random;
+
 import org.apache.log4j.Logger;
 
 import er.auth.ERAuth;
@@ -9,8 +11,9 @@ import er.auth.processing.ERTwoFactorAuthenticationDelegate;
 import er.corebl.ERCoreBL;
 import er.extensions.ERXExtensions;
 import er.extensions.ERXFrameworkPrincipal;
-import er.users.delegates.AuthenticationDelegate;
+import er.extensions.crypting.ERXCrypto;
 import er.javamail.ERJavaMail;
+import er.users.delegates.AuthenticationDelegate;
 import er.users.model.ERUser;
 
 public class ERUsers extends ERXFrameworkPrincipal {
@@ -46,6 +49,19 @@ public class ERUsers extends ERXFrameworkPrincipal {
 		ERTwoFactorAuthenticationDelegate delegate = new AuthenticationDelegate();
 		ERTwoFactorAuthenticationConfig config = new AuthConfig(ERUser.ENTITY_NAME, ERUser.USERNAME_KEY, ERUser.CLEAR_PASSWORD_KEY, ERUser.PASSWORD_KEY, delegate);
 		ERTwoFactorAuthenticationRequest.clazz.setAuthenticationConfig(config);
+	}
+
+	/**
+	 * Generates a new random 128 byte base64 encoded salt value
+	 * 
+	 * @return the salt
+	 */
+	public String generateSalt() {
+		Random random = new Random();
+		byte[] bytes = new byte[128];
+		random.nextBytes(bytes);
+		String salt = ERXCrypto.base64Encode(bytes);
+		return salt;
 	}
 
 }

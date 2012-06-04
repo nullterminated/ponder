@@ -17,6 +17,8 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "ERUser";
 
   // Attributes
+  public static final ERXKey<er.users.model.enums.ERUserActivationStatus> ACTIVATION_STATUS = new ERXKey<er.users.model.enums.ERUserActivationStatus>("activationStatus");
+  public static final String ACTIVATION_STATUS_KEY = ACTIVATION_STATUS.key();
   public static final ERXKey<org.joda.time.DateTime> DATE_CREATED = new ERXKey<org.joda.time.DateTime>("dateCreated");
   public static final String DATE_CREATED_KEY = DATE_CREATED.key();
   public static final ERXKey<String> EMAIL_ADDRESS = new ERXKey<String>("emailAddress");
@@ -33,6 +35,8 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String USERNAME_KEY = USERNAME.key();
 
   // Relationships
+  public static final ERXKey<er.users.model.ERActivateUserToken> ACTIVATE_USER_TOKEN = new ERXKey<er.users.model.ERActivateUserToken>("activateUserToken");
+  public static final String ACTIVATE_USER_TOKEN_KEY = ACTIVATE_USER_TOKEN.key();
   public static final ERXKey<er.users.model.ERChallengeResponse> CHALLENGE_RESPONSES = new ERXKey<er.users.model.ERChallengeResponse>("challengeResponses");
   public static final String CHALLENGE_RESPONSES_KEY = CHALLENGE_RESPONSES.key();
   public static final ERXKey<er.users.model.ERCredential> CREDENTIALS = new ERXKey<er.users.model.ERCredential>("credentials");
@@ -48,6 +52,17 @@ public abstract class _ERUser extends  ERXGenericRecord {
     return er.users.model.ERUser.clazz;
   }
   
+  public er.users.model.enums.ERUserActivationStatus activationStatus() {
+    return (er.users.model.enums.ERUserActivationStatus) storedValueForKey(_ERUser.ACTIVATION_STATUS_KEY);
+  }
+
+  public void setActivationStatus(er.users.model.enums.ERUserActivationStatus value) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+    	_ERUser.LOG.debug( "updating activationStatus from " + activationStatus() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERUser.ACTIVATION_STATUS_KEY);
+  }
+
   public org.joda.time.DateTime dateCreated() {
     return (org.joda.time.DateTime) storedValueForKey(_ERUser.DATE_CREATED_KEY);
   }
@@ -125,6 +140,30 @@ public abstract class _ERUser extends  ERXGenericRecord {
     takeStoredValueForKey(value, _ERUser.USERNAME_KEY);
   }
 
+  public er.users.model.ERActivateUserToken activateUserToken() {
+    return (er.users.model.ERActivateUserToken)storedValueForKey(_ERUser.ACTIVATE_USER_TOKEN_KEY);
+  }
+  
+  public void setActivateUserToken(er.users.model.ERActivateUserToken value) {
+    takeStoredValueForKey(value, _ERUser.ACTIVATE_USER_TOKEN_KEY);
+  }
+
+  public void setActivateUserTokenRelationship(er.users.model.ERActivateUserToken value) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+      _ERUser.LOG.debug("updating activateUserToken from " + activateUserToken() + " to " + value);
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setActivateUserToken(value);
+    }
+    else if (value == null) {
+    	er.users.model.ERActivateUserToken oldValue = activateUserToken();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _ERUser.ACTIVATE_USER_TOKEN_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _ERUser.ACTIVATE_USER_TOKEN_KEY);
+    }
+  }
   public NSArray<er.users.model.ERChallengeResponse> challengeResponses() {
     return (NSArray<er.users.model.ERChallengeResponse>)storedValueForKey(_ERUser.CHALLENGE_RESPONSES_KEY);
   }

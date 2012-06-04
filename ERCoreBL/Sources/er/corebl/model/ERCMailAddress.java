@@ -8,6 +8,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 
 import er.extensions.eof.ERXBatchFetchUtilities;
+import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXQ;
 import er.extensions.net.ERXEmailValidator;
 import er.extensions.validation.ERXValidationException;
@@ -43,8 +44,19 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 		public ERCMailAddress addressForEmailString(EOEditingContext ec, String email) {
 			ERCMailAddress result = objectMatchingKeyAndValue(ec, EMAIL_ADDRESS_KEY, email);
 			if(result == null) {
-				result = createAndInsertObject(ec);
+				EOEditingContext newEc = ERXEC.newEditingContext(ec.parentObjectStore());
+				result = createAndInsertObject(newEc);
 				result.setEmailAddress(email);
+				try {
+					newEc.saveChanges();
+					result = (ERCMailAddress) result.localInstanceIn(ec);
+				} catch (RuntimeException e) {
+					// CHECKME only catch unique index exceptions?
+					result = objectMatchingKeyAndValue(ec, EMAIL_ADDRESS_KEY, email);
+					if(result == null) {
+						throw e;
+					}
+				}
 			}
 			return result;
 		}
@@ -79,7 +91,7 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 	}
 
 	public String validateEmailAddress(String value) {
-		if(!clazz.emailValidator().isValidEmailString(value)) {
+		if(!clazz().emailValidator().isValidEmailString(value)) {
 			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 			throw factory.createException(this, EMAIL_ADDRESS_KEY, value, ERXValidationException.InvalidValueException);
 		}

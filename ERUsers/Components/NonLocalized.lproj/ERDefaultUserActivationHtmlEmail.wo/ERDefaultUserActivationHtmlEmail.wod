@@ -1,0 +1,25 @@
+HTML: WOGenericContainer {
+	elementName = "html";
+	"xml:lang" = localizer.@languageCode; //VALID
+	xmlns = "http://www.w3.org/1999/xhtml";
+}
+
+EmailTitle: WOString {
+	value = emailTitle;
+}
+
+CachingWrapper: ERXCachingWrapper {
+	entryName = "ERDefaultUserActivationHtmlEmailContent";
+}
+
+ExternalContent: ERXExternalContent {
+	url = htmlContentUrl;
+}
+
+ActivationLink: WOHyperlink {
+	actionClass = "ERUserAction";
+	directActionName = "activateUser";
+	?token = token.primaryKey;
+	rel = "nofollow";
+	string = tokenLinkString;
+}
