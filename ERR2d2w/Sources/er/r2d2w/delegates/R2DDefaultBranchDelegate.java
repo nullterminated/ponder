@@ -66,8 +66,9 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
     public WOComponent _cancelEdit(WOComponent sender) {
 		EOEnterpriseObject eo = object(sender);
 		ERD2WInspectPage page = ERD2WUtilities.enclosingComponentOfClass(sender, ERD2WInspectPage.class);
-        if ((eo != null) && (eo.editingContext()!=null) && page.shouldRevertChanges()) {
-            eo.editingContext().revert();
+		EOEditingContext ec = eo != null?eo.editingContext():null;
+		if (ec != null && page.shouldRevertChanges()) {
+            ec.revert();
         }
         return page.nextPage(false);
 	}
