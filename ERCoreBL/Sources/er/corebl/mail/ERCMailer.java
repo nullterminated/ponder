@@ -6,9 +6,10 @@ import org.apache.log4j.Logger;
 
 import com.webobjects.eoaccess.EOGeneralAdaptorException;
 import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.eocontrol.EOKeyGlobalID;
 import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSTimestamp;
 
+import er.corebl.ERCoreBL;
 import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCMailAttachment;
 import er.corebl.model.ERCMailMessage;
@@ -74,23 +75,25 @@ public enum ERCMailer {
 				mailMessage.editingContext().saveChanges();
 
 				ERMailDelivery delivery = createMailDeliveryForMailMessage(mailMessage);
+				
+				//add a delegate to set sent/exception state
+				EOKeyGlobalID gid = mailMessage.permanentGlobalID();
+				ERCMessageDelegate delegate = new ERCMessageDelegate(gid);
+				delivery.setDelegate(delegate);
 				delivery.sendMail();
-				mailMessage.setState(ERCMailState.SENT);
-				mailMessage.setDateSent(new NSTimestamp());
 
 			} catch (EOGeneralAdaptorException ge) {
 				mailMessage.editingContext().revert();
 			} catch (NoRecipientException e) {
 				mailMessage.setState(ERCMailState.OPT_OUT);
 			} catch (Exception e) {
-				mailMessage.setState(ERCMailState.EXCEPTION);
-				mailMessage.setExceptionReason(e.getMessage());
+				mailMessage.setException(e);
 			} finally {
 				if (mailMessage.editingContext().hasChanges()) {
 					try {
 						mailMessage.editingContext().saveChanges();
 					} catch (RuntimeException e) {
-						log.error("Runtime exception during save!", e);
+						ERCoreBL.sharedInstance().reportException(e, null);
 						throw e;
 					}
 				}

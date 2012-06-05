@@ -180,6 +180,16 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 	}
 	
+	public void setException(Throwable t) {
+		setState(ERCMailState.EXCEPTION);
+		String message = t.getMessage();
+		int max = clazz().entity().attributeNamed(EXCEPTION_REASON_KEY).width();
+		if(message != null && message.length() > max) {
+			message = message.substring(0, max);
+		}
+		setExceptionReason(message);
+	}
+	
 	public NSArray<ERCMailAddress> addresses(ERCMailRecipientType type) {
 		return ERCMailRecipient.clazz.addressesForMessageAndType(this, type);
 	}
