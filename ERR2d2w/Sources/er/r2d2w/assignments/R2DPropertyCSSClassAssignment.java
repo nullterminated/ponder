@@ -1,12 +1,14 @@
 package er.r2d2w.assignments;
 
+import com.webobjects.appserver.WOComponent;
 import com.webobjects.directtoweb.D2WContext;
+import com.webobjects.directtoweb.ERD2WUtilities;
 import com.webobjects.eocontrol.EOKeyValueArchiver;
 import com.webobjects.eocontrol.EOKeyValueUnarchiver;
-import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 
 import er.directtoweb.assignments.delayed.ERDDelayedAssignment;
+import er.directtoweb.pages.ERD2WPage;
 import er.extensions.foundation.ERXStringUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
@@ -39,9 +41,18 @@ public class R2DPropertyCSSClassAssignment extends ERDDelayedAssignment {
 
 	public Object fireNow(D2WContext c) {
 		NSMutableArray<String> classes = new NSMutableArray<String>();
-		String propertyKey = c.propertyKey();
-		NSArray<String> exceptions = (NSArray<String>)c.valueForKey("keyPathsWithValidationExceptions");
-		if(exceptions != null && exceptions.containsObject(propertyKey)) {
+		
+		//Find the first parent page that collects exceptions
+		WOComponent component = (WOComponent)c.valueForKeyPath("session.context.component");
+		ERD2WPage page = ERD2WUtilities.enclosingComponentOfClass(component, ERD2WPage.class);
+		while(page != null) {
+			if(page.shouldCollectValidationExceptions()) {
+				break;
+			}
+			page = (ERD2WPage) ERD2WUtilities.enclosingPageOfClass(page, ERD2WPage.class);
+		}
+		
+		if(page != null && page.hasValidationExceptionForPropertyKey()) {
 			classes.add(ERROR_CLASS);
 		}
 		if(ERXValueUtilities.booleanValue(c.valueForKey("displayRequiredMarker"))){
