@@ -14,9 +14,11 @@
 	{
 		name = CreateERUser;
 		directActionName = "CreateERUser";
+		secure = "true";
 	},
 	{
 		name = ForgotPassword;
 		directActionName = "ForgotPassword";
+		secure = "true";
 	}
 )
