@@ -1,13 +1,16 @@
 package er.users;
 
 import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
+import com.webobjects.directtoweb.D2W;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.foundation.NSDictionary;
 
 import er.directtoweb.ERD2WDirectAction;
+import er.directtoweb.ERD2WFactory;
 import er.directtoweb.interfaces.ERDErrorPageInterface;
 import er.directtoweb.interfaces.ERDMessagePageInterface;
 import er.extensions.appserver.ERXBrowser;
@@ -75,7 +78,8 @@ public class ERUserAction extends ERD2WDirectAction {
 		}
 		
 		// return success page
-		WOActionResults result = dynamicPageForActionNamed("MessageERUser");
+		D2W d2w = ERD2WFactory.factory();
+		WOComponent result = d2w.pageForConfigurationNamed("MessageERUser", session());
 		ERDMessagePageInterface mpi = (ERDMessagePageInterface) result;
 		String message = loc.localizedStringForKey("ERUserAction.activationSuccess");
 		mpi.setMessage(message);
