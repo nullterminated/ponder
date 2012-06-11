@@ -2,6 +2,7 @@ package er.r2d2w.delegates;
 
 import org.apache.log4j.Logger;
 
+import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSMutableDictionary;
 
@@ -19,7 +20,7 @@ public class EditListValidationDelegate extends ValidationDelegate {
 	
 	private static final Logger log = Logger.getLogger(EditListValidationDelegate.class);
 
-	private NSMutableDictionary<Object, NSMutableArray<String>> _keyPathsWithValidationExceptions = new NSMutableDictionary<Object, NSMutableArray<String>>();
+	private NSMutableDictionary<EOEnterpriseObject, NSMutableArray<String>> _keyPathsWithValidationExceptions = new NSMutableDictionary<EOEnterpriseObject, NSMutableArray<String>>();
 
 	public EditListValidationDelegate(ERD2WPage page) {
 		super(page);
@@ -29,14 +30,26 @@ public class EditListValidationDelegate extends ValidationDelegate {
 	public boolean hasValidationExceptionForPropertyKey() {
 		Object obj = _page.object();
 		NSMutableArray<String> keyPaths = _keyPathsWithValidationExceptions.objectForKey(obj);
-		return keyPaths != null && keyPaths.count() > 0;
+		return keyPaths != null && _page.propertyKey() != null && keyPaths.contains(_page.propertyKey());
 	}
 
 	@Override
 	public void validationFailedWithException(Throwable e, Object value, String keyPath) {
-		// TODO Auto-generated method stub
         if (log.isDebugEnabled()) {
             log.debug("Validation failed with exception: " + e + " value: " + value + " keyPath: " + keyPath);
+        }
+        EOEnterpriseObject obj = _page.object();
+        if(obj != null && keyPath != null) {
+        	NSMutableArray<String> keyPaths = _keyPathsWithValidationExceptions.objectForKey(obj);
+        	if(keyPaths == null) {
+        		keyPaths = new NSMutableArray<String>();
+        		_keyPathsWithValidationExceptions.setObjectForKey(keyPaths, obj);
+        	}
+        	if(!keyPaths.contains(keyPath)) {
+        		keyPaths.addObject(keyPath);
+        	}
+        } else {
+        	log.info("Validation failed with exception: " + e + " value: " + value + " keyPath: " + keyPath, e);
         }
 	}
 	
