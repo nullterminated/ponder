@@ -80,4 +80,8 @@ public class ERDefaultUserActivationHtmlEmail extends ERXComponent implements ER
 	public String tokenLinkString() {
 		return localizer().localizedStringForKey("ERDefaultUserActivationHtmlEmail.tokenLinkString");
 	}
+
+	public String tokenHREF() {
+		return token().tokenHrefInContext(context());
+	}
 }
