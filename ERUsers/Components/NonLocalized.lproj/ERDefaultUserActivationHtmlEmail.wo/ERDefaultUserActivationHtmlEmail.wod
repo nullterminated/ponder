@@ -17,9 +17,7 @@ ExternalContent: ERXExternalContent {
 }
 
 ActivationLink: WOHyperlink {
-	actionClass = "ERUserAction";
-	directActionName = "activateUser";
-	?token = token.primaryKey;
+	href = tokenHREF;
 	rel = "nofollow";
 	string = tokenLinkString;
 }
