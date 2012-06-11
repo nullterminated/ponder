@@ -171,7 +171,8 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		// Make sure all security questions are unique
 		NSDictionary<ERChallengeQuestion, NSArray<ERChallengeResponse>> grouped = 
 				ERXArrayUtilities.arrayGroupedByKeyPath(challengeResponses(), ERChallengeResponse.CHALLENGE_QUESTION);
-		for(ERChallengeQuestion key : grouped.allKeys()) {
+		// Using Object key since null grouping key is a string...
+		for(Object key : grouped.allKeys()) {
 			if(grouped.objectForKey(key).count() > 1) {
 				ERXValidationException ex = factory.createException(this, CHALLENGE_RESPONSES_KEY, challengeResponses(), "UniqueConstraintException.challengequestionid_userid_idx");
 				throw ex;

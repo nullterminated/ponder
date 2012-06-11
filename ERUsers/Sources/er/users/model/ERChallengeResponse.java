@@ -76,7 +76,8 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 		super.willInsert();
 		NSDictionary<ERChallengeQuestion, NSArray<ERChallengeResponse>> grouped = 
 				ERXArrayUtilities.arrayGroupedByKeyPath(user().challengeResponses(), CHALLENGE_QUESTION);
-		for(ERChallengeQuestion key : grouped.allKeys()) {
+		// Using Object key since null grouping key is a string...
+		for(Object key : grouped.allKeys()) {
 			if(grouped.objectForKey(key).count() > 1) {
 				// Reset answers to null if the same question is chosen twice.
 				grouped.objectForKey(key).takeValueForKey(null, ANSWER_KEY);
