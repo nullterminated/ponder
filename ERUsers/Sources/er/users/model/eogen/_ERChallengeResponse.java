@@ -19,8 +19,6 @@ public abstract class _ERChallengeResponse extends  ERXGenericRecord {
   // Attributes
   public static final ERXKey<String> ANSWER = new ERXKey<String>("answer");
   public static final String ANSWER_KEY = ANSWER.key();
-  public static final ERXKey<String> SALT = new ERXKey<String>("salt");
-  public static final String SALT_KEY = SALT.key();
 
   // Relationships
   public static final ERXKey<er.users.model.ERChallengeQuestion> CHALLENGE_QUESTION = new ERXKey<er.users.model.ERChallengeQuestion>("challengeQuestion");
@@ -47,17 +45,6 @@ public abstract class _ERChallengeResponse extends  ERXGenericRecord {
     	_ERChallengeResponse.LOG.debug( "updating answer from " + answer() + " to " + value);
     }
     takeStoredValueForKey(value, _ERChallengeResponse.ANSWER_KEY);
-  }
-
-  public String salt() {
-    return (String) storedValueForKey(_ERChallengeResponse.SALT_KEY);
-  }
-
-  public void setSalt(String value) {
-    if (_ERChallengeResponse.LOG.isDebugEnabled()) {
-    	_ERChallengeResponse.LOG.debug( "updating salt from " + salt() + " to " + value);
-    }
-    takeStoredValueForKey(value, _ERChallengeResponse.SALT_KEY);
   }
 
   public er.users.model.ERChallengeQuestion challengeQuestion() {

@@ -23,8 +23,8 @@
         {
             columnName = password; 
             name = password; 
-            prototypeName = varchar100; 
-            width = 128; 
+            prototypeName = varchar50; 
+            width = 60; 
         }, 
         {
             allowsNull = Y; 
@@ -38,7 +38,6 @@
             name = resetToken; 
             prototypeName = varchar50; 
         }, 
-        {columnName = salt; name = salt; prototypeName = varchar255; width = 174; }, 
         {columnName = username; name = username; prototypeName = varchar50; }
     ); 
     attributesUsedForLocking = (
@@ -48,7 +47,6 @@
         id, 
         password, 
         resetToken, 
-        salt, 
         username
     ); 
     className = "er.users.model.ERUser"; 
@@ -62,7 +60,6 @@
         password, 
         resetRequestDate, 
         resetToken, 
-        salt, 
         username
     ); 
     entityIndexes = (
@@ -70,7 +67,7 @@
             attributes = (username); 
             constraint = distinct; 
             indexType = clustered; 
-            name = "username_idx"; 
+            name = "ERUser_username_unique_idx"; 
             order = asc; 
         }
     ); 

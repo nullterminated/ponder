@@ -21,8 +21,6 @@ public abstract class _ERCredential extends  ERXGenericRecord {
   public static final String DATE_CREATED_KEY = DATE_CREATED.key();
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
   public static final String PASSWORD_KEY = PASSWORD.key();
-  public static final ERXKey<String> SALT = new ERXKey<String>("salt");
-  public static final String SALT_KEY = SALT.key();
 
   // Relationships
   public static final ERXKey<er.users.model.ERUser> USER = new ERXKey<er.users.model.ERUser>("user");
@@ -58,17 +56,6 @@ public abstract class _ERCredential extends  ERXGenericRecord {
     	_ERCredential.LOG.debug( "updating password from " + password() + " to " + value);
     }
     takeStoredValueForKey(value, _ERCredential.PASSWORD_KEY);
-  }
-
-  public String salt() {
-    return (String) storedValueForKey(_ERCredential.SALT_KEY);
-  }
-
-  public void setSalt(String value) {
-    if (_ERCredential.LOG.isDebugEnabled()) {
-    	_ERCredential.LOG.debug( "updating salt from " + salt() + " to " + value);
-    }
-    takeStoredValueForKey(value, _ERCredential.SALT_KEY);
   }
 
   public er.users.model.ERUser user() {

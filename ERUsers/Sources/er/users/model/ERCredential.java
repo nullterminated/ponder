@@ -5,7 +5,7 @@ import org.joda.time.DateTime;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
-import er.extensions.crypting.ERXCrypto;
+import er.users.ERUsers;
 
 /**
  * ERCredential records the old password hashes so that password reuse
@@ -39,25 +39,12 @@ public class ERCredential extends er.users.model.eogen._ERCredential {
 	}
 
 	/**
-	 * Returns a string value for the clear password after passing it through a
-	 * one way hash function.
-	 * 
-	 * @param clearPassword
-	 *            the clear text password
-	 * @return the hashed password
-	 */
-	public String hashedPassword(String clearPassword) {
-		String sha = ERXCrypto.sha512Encode(clearPassword + salt());
-		return sha;
-	}
-
-	/**
 	 * @param clearPassword
 	 *            the clear text password to hash
 	 * @return true if the hashing clearPassword matches the stored hash
 	 */
 	public boolean hashMatches(String clearPassword) {
-		return password().equals(hashedPassword(clearPassword));
+		return ERUsers.sharedInstance().hashMatches(clearPassword, password());
 	}
 
 }

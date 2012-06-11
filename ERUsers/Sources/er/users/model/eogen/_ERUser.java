@@ -29,8 +29,6 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String RESET_REQUEST_DATE_KEY = RESET_REQUEST_DATE.key();
   public static final ERXKey<String> RESET_TOKEN = new ERXKey<String>("resetToken");
   public static final String RESET_TOKEN_KEY = RESET_TOKEN.key();
-  public static final ERXKey<String> SALT = new ERXKey<String>("salt");
-  public static final String SALT_KEY = SALT.key();
   public static final ERXKey<String> USERNAME = new ERXKey<String>("username");
   public static final String USERNAME_KEY = USERNAME.key();
 
@@ -116,17 +114,6 @@ public abstract class _ERUser extends  ERXGenericRecord {
     	_ERUser.LOG.debug( "updating resetToken from " + resetToken() + " to " + value);
     }
     takeStoredValueForKey(value, _ERUser.RESET_TOKEN_KEY);
-  }
-
-  public String salt() {
-    return (String) storedValueForKey(_ERUser.SALT_KEY);
-  }
-
-  public void setSalt(String value) {
-    if (_ERUser.LOG.isDebugEnabled()) {
-    	_ERUser.LOG.debug( "updating salt from " + salt() + " to " + value);
-    }
-    takeStoredValueForKey(value, _ERUser.SALT_KEY);
   }
 
   public String username() {

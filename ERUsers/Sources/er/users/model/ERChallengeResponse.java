@@ -4,8 +4,10 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.eocontrol.EOEditingContext;
+import com.webobjects.foundation.NSArray;
+import com.webobjects.foundation.NSDictionary;
 
-import er.extensions.crypting.ERXCrypto;
+import er.extensions.foundation.ERXArrayUtilities;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
 import er.users.ERUsers;
@@ -36,7 +38,6 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 	 */
 	public void init(EOEditingContext ec) {
 		super.init(ec);
-		setSalt(ERUsers.sharedInstance().generateSalt());
 	}
 
 	/**
@@ -51,7 +52,7 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 		if(answer() != null) {
 			throw new IllegalArgumentException("The answer for this challenge response is already set: " + this);
 		}
-		String answer = hashedAnswer(clearAnswer);
+		String answer = ERUsers.sharedInstance().hashedPlaintext(clearAnswer);
 		setAnswer(answer);
 	}
 	
@@ -63,25 +64,24 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 	}
 
 	/**
-	 * Returns a string value for the clear answer after passing it through a
-	 * one way hash function.
-	 * 
-	 * @param clearAnswer
-	 *            the clear text answer
-	 * @return the hashed answer
-	 */
-	public String hashedAnswer(String clearAnswer) {
-		String sha = ERXCrypto.sha512Encode(clearAnswer + salt());
-		return sha;
-	}
-
-	/**
 	 * @param clearAnswer
 	 *            the clear text answer to compare
 	 * @return true if the hashing clearAnswer matches the stored hash
 	 */
 	public boolean hashMatches(String clearAnswer) {
-		return answer().equals(hashedAnswer(clearAnswer));
+		return ERUsers.sharedInstance().hashMatches(clearAnswer, answer());
+	}
+	
+	public void willInsert() {
+		super.willInsert();
+		NSDictionary<ERChallengeQuestion, NSArray<ERChallengeResponse>> grouped = 
+				ERXArrayUtilities.arrayGroupedByKeyPath(user().challengeResponses(), CHALLENGE_QUESTION);
+		for(ERChallengeQuestion key : grouped.allKeys()) {
+			if(grouped.objectForKey(key).count() > 1) {
+				// Reset answers to null if the same question is chosen twice.
+				grouped.objectForKey(key).takeValueForKey(null, ANSWER_KEY);
+			}
+		}
 	}
 	
 	/**
@@ -91,8 +91,12 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 	 * @return
 	 */
 	public String validateClearAnswer(String clearAnswer) {
+		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
+		if(!isNewObject()) {
+			ERXValidationException ex = factory.createCustomException(this, "AnswerNotModifiableException");
+			throw ex;
+		}
 		if(StringUtils.isBlank(clearAnswer)) {
-			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 			ERXValidationException ex = factory.createException(this, CLEAR_ANSWER_KEY, clearAnswer, ERXValidationException.NullPropertyException);
 			throw ex;
 		}
