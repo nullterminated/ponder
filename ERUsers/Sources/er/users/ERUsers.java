@@ -54,13 +54,13 @@ public class ERUsers extends ERXFrameworkPrincipal {
 
 	/**
 	 * The log2 number of rounds of hashing to apply. Larger values require more
-	 * work. Default value is 10. Can be set using a property.
+	 * work. Default value is 13. Can be set using a property.
 	 * 
 	 * @property er.users.ERUsers.logRounds
 	 * @return the log rounds value
 	 */
 	public int logRounds() {
-		return ERXProperties.intForKeyWithDefault("er.users.ERUsers.logRounds", 10);
+		return ERXProperties.intForKeyWithDefault("er.users.ERUsers.logRounds", 13);
 	}
 
 	/**
