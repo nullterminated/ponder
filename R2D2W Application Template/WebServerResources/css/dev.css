@@ -38,3 +38,17 @@ ul#debugFlags li a {
 ul#debugFlags li:hover {
 	background-color: #DDDED7;
 }
+
+.contextHelp.debug {
+	position: relative;
+}
+
+.contextHelp.debug > table {
+	display: none;
+	position: absolute;
+	background-color: white;
+}
+
+.contextHelp.debug:hover > table {
+	display: table;
+}

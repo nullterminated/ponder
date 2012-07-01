@@ -11,10 +11,9 @@
         <td>Page Configuration</td>
         <td>
           <webobject name = "ConfigName" />
-          <div style = "display:inline;" onmouseout = "this.innerHTML=this.innerHTML.replace('visibility: visible;','visibility: hidden;');" onmouseover = "this.innerHTML=this.innerHTML.replace('visibility: hidden;','visibility: visible;');">
+          <div class = "contextHelp debug">
             ◊ 
-            <div style = "position:absolute;display:inline;visibility: hidden;" onclick = "this.style.visibility='hidden'; return false;">
-              <table class = "contextHelp debug" onclick = "this.style.visibility='hidden'; return false;" border="1" cellpadding="1" cellspacing="1">
+              <table border="1">
                 <webobject name = "ContextKeys">
                   <tr>
                     <td><webobject name = "CurrentKey" /></td>
@@ -22,7 +21,6 @@
                   </tr>
                 </webobject>
               </table>
-            </div>
           </div>
         </td>
       </tr>
