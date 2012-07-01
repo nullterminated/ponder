@@ -48,7 +48,15 @@ public class EditListValidationDelegate extends ValidationDelegate {
         	if(!keyPaths.contains(keyPath)) {
         		keyPaths.addObject(keyPath);
         	}
+        	NSMutableDictionary<String, String> messagesForObject = 
+        			(NSMutableDictionary<String, String>) errorMessages().objectForKey(obj);
+        	if(messagesForObject == null) {
+        		messagesForObject = new NSMutableDictionary<String, String>();
+        		errorMessages().setObjectForKey(messagesForObject, obj);
+        	}
+        	messagesForObject.setObjectForKey(e.getMessage(), keyPath);
         } else {
+        	//TODO do something useful here
         	log.info("Validation failed with exception: " + e + " value: " + value + " keyPath: " + keyPath, e);
         }
 	}
@@ -58,4 +66,16 @@ public class EditListValidationDelegate extends ValidationDelegate {
 		_keyPathsWithValidationExceptions.removeAllObjects();
 	}
 
+	public String errorMessageForPropertyKey() {
+        EOEnterpriseObject obj = _page.object();
+        String keyPath = _page.propertyKey();
+        if(obj != null && keyPath != null) {
+        	NSMutableDictionary<String, String> messagesForObject = 
+        			(NSMutableDictionary<String, String>) errorMessages().objectForKey(obj);
+        	if(messagesForObject != null) {
+        		return messagesForObject.objectForKey(keyPath);
+        	}
+        }
+        return null;
+	}
 }

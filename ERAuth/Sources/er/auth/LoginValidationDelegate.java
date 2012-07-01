@@ -34,4 +34,10 @@ public class LoginValidationDelegate extends ValidationDelegate {
 		// Does nothing
 	}
 
+	@Override
+	public String errorMessageForPropertyKey() {
+		// Does nothing
+		return null;
+	}
+
 }
