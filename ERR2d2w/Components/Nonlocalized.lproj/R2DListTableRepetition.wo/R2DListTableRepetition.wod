@@ -147,6 +147,15 @@ AttributeComponent: WOSwitchComponent {
 	object = d2wContext.object;
 }
 
+ComponentDebug: R2DDebuggingComponentHelp {
+	localContext = d2wContext;
+}
+
+PropertyMessage: WOSwitchComponent {
+	WOComponentName = d2wContext.propertyMessageComponentName;
+	localContext = d2wContext;
+}
+
 GroupHeaderTall: WOGenericContainer {
 	elementName = "th";
 	rowspan = "2";

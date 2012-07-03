@@ -32,6 +32,11 @@ ComponentDebug: R2DDebuggingComponentHelp {
 	localContext = d2wContext;
 }
 
+PropertyMessage: WOSwitchComponent {
+	WOComponentName = d2wContext.propertyMessageComponentName;
+	localContext = d2wContext;
+}
+
 DisplayProperty: WOConditional {
 	condition = d2wContext.displayProperty;
 }
