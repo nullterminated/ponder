@@ -16,5 +16,4 @@ InspectRepetition: WOSwitchComponent {
 	WOComponentName = ^embeddedRepetitionComponentName;
 	localContext = d2wContext;
 	object = d2wContext.object;
-	displayPropertyKeys = displayPropertyKeys;
 }

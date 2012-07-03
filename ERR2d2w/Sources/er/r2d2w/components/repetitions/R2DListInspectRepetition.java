@@ -4,26 +4,31 @@ import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.foundation.NSDictionary;
 
-import er.directtoweb.components.repetitions.ERDAttributeRepetition;
+import er.directtoweb.components.ERDCustomComponent;
 
-public class R2DListInspectRepetition extends ERDAttributeRepetition {
+public class R2DListInspectRepetition extends ERDCustomComponent {
 	/**
 	 * Do I need to update serialVersionUID?
 	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	public R2DListInspectRepetition(WOContext context) {
         super(context);
     }
+	
+	@Override
+	public boolean synchronizesVariablesWithBindings() {
+		return false;
+	}
     
     public WODisplayGroup displayGroup() {
     	return (WODisplayGroup) valueForBinding("displayGroup");
     }
 
 	public String listElement() {
-		return displayGroup().sortOrderings().isEmpty()?"ul":"li";
+		return displayGroup().sortOrderings().isEmpty()?"ul":"ol";
 	}
 
 	public String startValue() {
