@@ -93,9 +93,9 @@ public class R2D2WEditPassword extends ERD2WStatelessComponent {
 
 	protected void checkPasswords() {
 		if (StringUtils.isBlank(password()) || StringUtils.isBlank(confirmPassword())) {
-			fail("PasswordsFillBothFieldsException");
+			fail("R2PasswordsFillBothFieldsException");
 		} else if (!password().equals(confirmPassword())) {
-			fail("PasswordsDontMatchException");
+			fail("R2PasswordsDontMatchException");
 		} else {
 			try {
 				object().validateTakeValueForKeyPath(password(), propertyKey());
