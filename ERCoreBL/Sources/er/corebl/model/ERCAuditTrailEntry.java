@@ -1,5 +1,6 @@
 package er.corebl.model;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.eoaccess.EOObjectNotAvailableException;
@@ -58,14 +59,18 @@ public class ERCAuditTrailEntry extends er.corebl.model.eogen._ERCAuditTrailEntr
     }
 
     public void setOldValue(Object value) {
+    	String val = NSPropertyListSerialization.stringFromPropertyList(value);
+    	if(StringUtils.isBlank(val)) { return; }
     	ERCAuditClob values = ERCAuditClob.clazz.createAndInsertObject(editingContext());
-    	values.setValuesString(NSPropertyListSerialization.stringFromPropertyList(value));
+    	values.setValuesString(val);
     	addObjectToBothSidesOfRelationshipWithKey(values, OLD_CLOB_KEY);
     }
 
     public void setNewValue(Object value) {
+    	String val = NSPropertyListSerialization.stringFromPropertyList(value);
+    	if(StringUtils.isBlank(val)) { return; }
     	ERCAuditClob values = ERCAuditClob.clazz.createAndInsertObject(editingContext());
-    	values.setValuesString(NSPropertyListSerialization.stringFromPropertyList(value));
+    	values.setValuesString(val);
     	addObjectToBothSidesOfRelationshipWithKey(values, NEW_CLOB_KEY);
     }
 }
