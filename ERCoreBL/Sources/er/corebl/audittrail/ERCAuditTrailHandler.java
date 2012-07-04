@@ -76,6 +76,11 @@ public class ERCAuditTrailHandler {
 		NSNotificationCenter nc = NSNotificationCenter.defaultCenter();
 		nc.addObserver(_handler, sel, ERXModelGroup.ModelGroupAddedNotification, null);
 	}
+	
+	public static void init() {
+		//Triggers the static initialization
+		log.info("Audit trail handler initialized.");
+	}
 
 	public void modelGroupDidLoad(NSNotification n) {
 		configuration.removeAllObjects();

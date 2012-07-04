@@ -90,8 +90,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	public void finishInitialization() {
 		ERCoreUserPreferences.INSTANCE.registerHandlers();
 
-		// Just to trigger the static initializer
-		ERCAuditTrailHandler.class.getName();
+		// Initialize the audit trail handler
+		ERCAuditTrailHandler.init();
 
 		log.info("ERCoreBL finished initializing.");
 	}
