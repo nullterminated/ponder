@@ -199,6 +199,12 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		 */
 		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 		ERXValidationException ex = null;
+		
+		// Check for null
+		if (clearPassword == null) {
+			ex = factory.createException(this, CLEAR_PASSWORD_KEY, clearPassword, ERXValidationException.NullPropertyException);
+			throw ex;
+		}
 
 		// Check length
 		if (clearPassword.length() < 8) {

@@ -49,8 +49,17 @@ public class ERAEditPassword extends ERDCustomComponent {
 		boolean hasOldPassword = oldPassword() != null;
 		boolean hasNewPassword = !(newPassword() == null && verifyPassword() == null);
 		
-		//If all fields are empty, return
-		if(!hasOldPassword && !hasNewPassword) { return; }
+		//If all fields are empty and existing value for key is null, validate with null and return
+		if(!hasOldPassword && !hasNewPassword) {
+			if(!hasPassword()) {
+				try {
+					object().validateTakeValueForKeyPath(null, d2wContext().propertyKey());
+				} catch (ValidationException e) {
+					validationFailedWithException(e, e.object(), e.key());
+				}
+			}
+			return;
+		}
 		
 		try {
 			//If the stored password is not null and password field does not match it, throw
