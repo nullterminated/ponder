@@ -80,9 +80,9 @@ public class CreateUserController extends ERDBranchDelegate {
 
 		if (saveSuccessful) {
 			// Send an activation email for the ERUser.
-			WOContext contextClone = (WOContext) c.valueForKeyPath("session.context.clone");
+			WOContext ctx = (WOContext) c.valueForKeyPath("session.context.clone");
 			String templateName = (String) c.valueForKey("templateNameForUserActivationEmail");
-			WOComponent component = WOApplication.application().pageWithName(templateName, contextClone);
+			WOComponent component = WOApplication.application().pageWithName(templateName, ctx);
 			ERUserHtmlEmail emailComponent = (ERUserHtmlEmail) component;
 			emailComponent.setUser(user);
 			
