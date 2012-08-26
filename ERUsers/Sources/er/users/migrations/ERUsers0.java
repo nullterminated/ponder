@@ -20,17 +20,8 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 
 	@Override
 	public void upgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
-		ERXMigrationTable erActivateUserTokenTable = database.newTableNamed("ERActivateUserToken");
-		erActivateUserTokenTable.newStringColumn("token", 50, false);
-		erActivateUserTokenTable.newIntegerColumn("userID", false);
-
-		erActivateUserTokenTable.addUniqueIndex("ERActivateUserToken_userID_unique_idx", erActivateUserTokenTable.existingColumnNamed("userID"));
-
-		erActivateUserTokenTable.create();
-	 	erActivateUserTokenTable.setPrimaryKey("token");
-
 		ERXMigrationTable erUserTable = database.newTableNamed("ERUser");
-		erUserTable.newStringColumn("activateUserTokenID", 50, true);
+		erUserTable.newStringColumn("activateUserToken", 50, true);
 		erUserTable.newStringColumn("activationStatus", 50, false);
 		erUserTable.newTimestampColumn("dateCreated", false);
 		erUserTable.newStringColumn("emailAddress", 254, false);
@@ -74,8 +65,6 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 		erChallengeQuestionTable.create();
 	 	erChallengeQuestionTable.setPrimaryKey("id");
 
-		erActivateUserTokenTable.addForeignKey("userID", "ERUser", "id");
-		erUserTable.addForeignKey("activateUserTokenID", "ERActivateUserToken", "token");
 		erChallengeResponseTable.addForeignKey("challengeQuestionID", "ERChallengeQuestion", "id");
 		erChallengeResponseTable.addForeignKey("userID", "ERUser", "id");
 		erCredentialTable.addForeignKey("userID", "ERUser", "id");

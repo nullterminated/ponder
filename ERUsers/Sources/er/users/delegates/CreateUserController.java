@@ -28,7 +28,6 @@ import er.directtoweb.pages.ERD2WPage;
 import er.extensions.foundation.ERXConfigurationManager;
 import er.extensions.localization.ERXLocalizer;
 import er.users.components.ERUserHtmlEmail;
-import er.users.model.ERActivateUserToken;
 import er.users.model.ERUser;
 
 public class CreateUserController extends ERDBranchDelegate {
@@ -86,11 +85,9 @@ public class CreateUserController extends ERDBranchDelegate {
 			ERUserHtmlEmail emailComponent = (ERUserHtmlEmail) component;
 			emailComponent.setUser(user);
 			
-			ERActivateUserToken token = user.activateUserToken();
-			
 			String subject = loc.localizedStringForKey("ERDefaultUserActivationHtmlEmail.subject");
 			String plainMessageString = loc.localizedStringForKey("ERDefaultUserActivationHtmlEmail.plainMessage");
-			String plainMessage = plainMessageString + "\n\n" + token.tokenHrefInContext(component.context());
+			String plainMessage = plainMessageString + "\n\n" + user.activateUserHrefInContext(component.context());
 			String htmlMessage = component.generateResponse().contentString();
 
 			//TODO fix from address generation. Include uuid in address comment for bounce detection
@@ -110,7 +107,7 @@ public class CreateUserController extends ERDBranchDelegate {
 				NSMutableDictionary<String, Object> extraInfo = new NSMutableDictionary<String, Object>();
 				extraInfo.setObjectForKey("Failed to send activation email!", "status");
 				extraInfo.setObjectForKey(user, "user");
-				extraInfo.setObjectForKey(token.primaryKey(), "token");
+				extraInfo.setObjectForKey(user.activateUserToken(), "token");
 				ERCoreBL.sharedInstance().reportException(e, extraInfo);
 			}
 

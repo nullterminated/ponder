@@ -2,8 +2,8 @@
     attributes = (
         {
             allowsNull = Y; 
-            columnName = activateUserTokenID; 
-            name = activateUserTokenID; 
+            columnName = activateUserToken; 
+            name = activateUserToken; 
             prototypeName = varchar50; 
         }, 
         {
@@ -41,7 +41,7 @@
         {columnName = username; name = username; prototypeName = varchar50; }
     ); 
     attributesUsedForLocking = (
-        activateUserTokenID, 
+        activateUserToken, 
         activationStatus, 
         emailAddress, 
         id, 
@@ -76,16 +76,6 @@
     name = ERUser; 
     primaryKeyAttributes = (id); 
     relationships = (
-        {
-            deleteRule = EODeleteRuleCascade; 
-            destination = ERActivateUserToken; 
-            isToMany = N; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = token; sourceAttribute = activateUserTokenID; }); 
-            name = activateUserToken; 
-            ownsDestination = Y; 
-            userInfo = {ERXInverseRelationshipName = user; }; 
-        }, 
         {
             deleteRule = EODeleteRuleCascade; 
             destination = ERChallengeResponse; 

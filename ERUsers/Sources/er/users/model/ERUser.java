@@ -1,8 +1,11 @@
 package er.users.model;
 
+import java.util.UUID;
+
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
+import com.webobjects.appserver.WOContext;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.eocontrol.EOSortOrdering;
@@ -19,6 +22,7 @@ import er.extensions.foundation.ERXProperties;
 import er.extensions.net.ERXEmailValidator;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
+import er.users.ERUserAction;
 import er.users.ERUsers;
 import er.users.model.enums.ERUserActivationStatus;
 
@@ -105,8 +109,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		DateTime dt = new DateTime();
 		setDateCreated(dt);
 		setActivationStatus(ERUserActivationStatus.PRE_ACTIVATION);
-		ERActivateUserToken token = ERActivateUserToken.clazz.createAndInsertObject(ec);
-		addObjectToBothSidesOfRelationshipWithKey(token, ACTIVATE_USER_TOKEN_KEY);
+		setActivateUserToken(UUID.randomUUID().toString());
 		for (int i = 0, count = clazz.requiredChallengeResponses(); i < count; ++i) {
 			ERChallengeResponse cr = ERChallengeResponse.clazz.createAndInsertObject(ec);
 			addObjectToBothSidesOfRelationshipWithKey(cr, CHALLENGE_RESPONSES_KEY);
@@ -187,7 +190,41 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	}
 
 	/**
-	 * Overriden to ensure challenge questions are not duplicated.
+	 * Generates the href necessary to activate the related user.
+	 * 
+	 * @param context
+	 *            the context
+	 * @return the href string
+	 */
+	public String activateUserHrefInContext(WOContext context) {
+		if(activateUserToken() != null) {
+			NSDictionary<String, Object> queryDict = new NSDictionary<String, Object>(activateUserToken(), ERUserAction.TOKEN_KEY);
+			boolean completeUrls = context.doesGenerateCompleteURLs();
+			if (!completeUrls) {
+				context.generateCompleteURLs();
+			}
+			try {
+				return context.directActionURLForActionNamed("ERUserAction/activateUser", queryDict);
+			} finally {
+				if (!completeUrls) {
+					context.generateRelativeURLs();
+				}
+			}
+		}
+		throw new IllegalStateException("No user activation token");
+	}
+	
+	/**
+	 * Activates the user by setting the user's activation status to
+	 * ACTIVATED and setting the activation token to null;
+	 */
+	public void activateUser() {
+		setActivateUserToken(null);
+		setActivationStatus(ERUserActivationStatus.ACTIVATED);
+	}
+
+	/**
+	 * Overridden to ensure challenge questions are not duplicated.
 	 */
 	@Override
 	public void willInsert() {
@@ -198,18 +235,12 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	}
 	
 	/**
-	 * This method deletes activation tokens on users once activated. It also ensures
-	 * challenge questions are not duplicated.
+	 * Overridden to ensure challenge questions are not duplicated.
 	 */
 	@Override
 	public void willUpdate() {
 		super.willUpdate();
 
-		// Remove/delete the activation token once activated
-		if (!ERUserActivationStatus.PRE_ACTIVATION.equals(activationStatus()) && activateUserToken() != null) {
-			removeObjectFromBothSidesOfRelationshipWithKey(activateUserToken(), ACTIVATE_USER_TOKEN_KEY);
-		}
-		
 		// Ensure challenge questions are not duplicated
 		clearDuplicateChallengeResponses();
 	}

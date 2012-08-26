@@ -16,10 +16,8 @@ import er.directtoweb.interfaces.ERDMessagePageInterface;
 import er.extensions.appserver.ERXBrowser;
 import er.extensions.appserver.ERXBrowserFactory;
 import er.extensions.eof.ERXEC;
-import er.extensions.eof.ERXEOControlUtilities;
 import er.extensions.localization.ERXLocalizer;
-import er.users.model.ERActivateUserToken;
-import er.users.model.enums.ERUserActivationStatus;
+import er.users.model.ERUser;
 
 public class ERUserAction extends ERD2WDirectAction {
 	
@@ -44,7 +42,7 @@ public class ERUserAction extends ERD2WDirectAction {
 		String token = request().stringFormValueForKey(TOKEN_KEY);
 		if(token != null) {
 			EOEditingContext ec = ERXEC.newEditingContext();
-			eo = ERXEOControlUtilities.objectWithPrimaryKeyValue(ec, ERActivateUserToken.ENTITY_NAME, token, null);
+			eo = ERUser.clazz.objectMatchingKeyAndValue(ec, ERUser.ACTIVATE_USER_TOKEN_KEY, token);
 		}
 		
 		ERXLocalizer loc = ERXLocalizer.localizerForRequest(request());
@@ -63,8 +61,8 @@ public class ERUserAction extends ERD2WDirectAction {
 		}
 		
 		// Activate the user related to the token
-		ERActivateUserToken aut = (ERActivateUserToken) eo;
-		aut.user().setActivationStatus(ERUserActivationStatus.ACTIVATED);
+		ERUser user = (ERUser) eo;
+		user.activateUser();
 		try {
 			eo.editingContext().saveChanges();
 		} catch (Exception e) {

@@ -39,7 +39,7 @@ public abstract class ERUserHtmlEmail extends ERXComponent {
 	}
 	
 	public String activateUserHref() {
-		return user().activateUserToken().tokenHrefInContext(context());
+		return user().activateUserHrefInContext(context());
 	}
 	
 	public String resetPasswordHref() {
