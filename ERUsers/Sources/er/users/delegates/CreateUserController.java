@@ -2,6 +2,7 @@ package er.users.delegates;
 
 import com.webobjects.appserver.WOApplication;
 import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2W;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WPage;
@@ -24,10 +25,9 @@ import er.directtoweb.delegates.ERDBranchDelegate;
 import er.directtoweb.delegates.ERDBranchInterface;
 import er.directtoweb.interfaces.ERDMessagePageInterface;
 import er.directtoweb.pages.ERD2WPage;
-import er.extensions.appserver.ERXApplication;
 import er.extensions.foundation.ERXConfigurationManager;
 import er.extensions.localization.ERXLocalizer;
-import er.users.components.ERUserActivationHtmlEmailInterface;
+import er.users.components.ERUserHtmlEmail;
 import er.users.model.ERActivateUserToken;
 import er.users.model.ERUser;
 
@@ -39,20 +39,6 @@ public class CreateUserController extends ERDBranchDelegate {
 	 * Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private String _htmlEmailPageName;
-	private String _htmlContentFileName;
-	private String _htmlContentFrameworkName;
-	
-	public CreateUserController(String htmlEmailPageName) {
-		this(htmlEmailPageName, null, null);
-	}
-
-	public CreateUserController(String htmlEmailPageName, String htmlContentFileName, String htmlContentFrameworkName) {
-		_htmlEmailPageName = htmlEmailPageName;
-		_htmlContentFileName = htmlContentFileName;
-		_htmlContentFrameworkName = htmlContentFrameworkName;
-	}
 
 	/**
 	 * Saves the created ERUser. If successful, an email is sent to activate the
@@ -93,30 +79,19 @@ public class CreateUserController extends ERDBranchDelegate {
 		}
 
 		if (saveSuccessful) {
-			// Return a success message page to the user.
-			D2W d2w = ERD2WFactory.factory();
-			WOComponent newPage = d2w.pageForConfigurationNamed("MessageERUser", sender.session());
-			ERDMessagePageInterface messagePage = (ERDMessagePageInterface) newPage;
-			String message = loc.localizedTemplateStringForKeyWithObject("CreateUserSuccessMessage", c);
-			messagePage.setMessage(message);
-			messagePage.setNextPage(_nextPageFromDelegate(page));
-			nextPage = newPage;
-
 			// Send an activation email for the ERUser.
-			String subject = loc.localizedStringForKey("ERDefaultUserActivationHtmlEmail.subject");
-
-			ERActivateUserToken token = user.activateUserToken();
-			WOComponent emailComponent = ERXApplication.instantiatePage(_htmlEmailPageName);
-			ERUserActivationHtmlEmailInterface emailInterface = (ERUserActivationHtmlEmailInterface) emailComponent;
-			emailInterface.setToken(token);
-			emailInterface.setHtmlContentFileName(_htmlContentFileName);
-			emailInterface.setHtmlContentFrameworkName(_htmlContentFrameworkName);
-			emailInterface.setEmailTitle(subject);
-
-			String plainMessageString = loc.localizedStringForKey("ERDefaultUserActivationHtmlEmail.plainMessage");
-			String plainMessage = plainMessageString + "\n\n" + token.tokenHrefInContext(emailComponent.context());
+			WOContext contextClone = (WOContext) c.valueForKeyPath("session.context.clone");
+			String templateName = (String) c.valueForKey("templateNameForUserActivationEmail");
+			WOComponent component = WOApplication.application().pageWithName(templateName, contextClone);
+			ERUserHtmlEmail emailComponent = (ERUserHtmlEmail) component;
+			emailComponent.setUser(user);
 			
-			String htmlMessage = emailComponent.generateResponse().contentString();
+			ERActivateUserToken token = user.activateUserToken();
+			
+			String subject = loc.localizedStringForKey("ERDefaultUserActivationHtmlEmail.subject");
+			String plainMessageString = loc.localizedStringForKey("ERDefaultUserActivationHtmlEmail.plainMessage");
+			String plainMessage = plainMessageString + "\n\n" + token.tokenHrefInContext(component.context());
+			String htmlMessage = component.generateResponse().contentString();
 
 			//TODO fix from address generation. Include uuid in address comment for bounce detection
 			String hostName = ERXConfigurationManager.defaultManager().hostName();
@@ -138,6 +113,16 @@ public class CreateUserController extends ERDBranchDelegate {
 				extraInfo.setObjectForKey(token.primaryKey(), "token");
 				ERCoreBL.sharedInstance().reportException(e, extraInfo);
 			}
+
+			// Return a success message page to the user.
+			D2W d2w = ERD2WFactory.factory();
+			WOComponent newPage = d2w.pageForConfigurationNamed("MessageERUser", sender.session());
+			ERDMessagePageInterface messagePage = (ERDMessagePageInterface) newPage;
+			String message = loc.localizedTemplateStringForKeyWithObject("CreateUserSuccessMessage", c);
+			messagePage.setMessage(message);
+			messagePage.setNextPage(_nextPageFromDelegate(page));
+			nextPage = newPage;
+
 		}
 
 		return nextPage;

@@ -3,6 +3,7 @@ package er.corebl.model;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.webobjects.appserver.WOComponent;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
@@ -44,8 +45,14 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 *            email addresses
 		 * @param subject
 		 *            of the message
-		 * @param message
-		 *            text of the message
+		 * @param htmlMessage
+		 *            text of the HTML message
+		 * @param plainMessage
+		 *            text of the plain text message
+		 * @param attachments
+		 *            the mail attachments
+		 * @param category
+		 *            the mail message category
 		 * @param ec
 		 *            editing context to create the mail message in.
 		 * @return created mail message for the given parameters
@@ -105,6 +112,50 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			mailMessage.setState(state);
 			
 			return mailMessage;
+		}
+		
+		/**
+		 * Composes a mail message.
+		 * 
+		 * @param from
+		 *            email address
+		 * @param to
+		 *            email addresses
+		 * @param cc
+		 *            email addresses
+		 * @param bcc
+		 *            email addresses
+		 * @param subject
+		 *            of the message
+		 * @param htmlComponent
+		 *            component for the HTML message
+		 * @param plainComponent
+		 *            component for the plain text message
+		 * @param attachments
+		 *            the mail attachments
+		 * @param category
+		 *            the mail message category
+		 * @param ec
+		 *            editing context to create the mail message in.
+		 * @return created mail message for the given parameters
+		 */
+		public T composeComponentMailMessage(EOEditingContext ec, 
+				ERCMailState state,
+				ERCMailAddress from, 
+				ERCMailAddress replyTo, 
+				NSArray<ERCMailAddress> to,
+				NSArray<ERCMailAddress> cc, 
+				NSArray<ERCMailAddress> bcc, 
+				String subject, 
+				WOComponent htmlComponent, 
+				WOComponent plainComponent, 
+				NSArray<ERCMailAttachment> attachments, 
+				ERCMailCategory category) {
+			
+			String htmlMessage = htmlComponent == null?null:htmlComponent.generateResponse().contentString();
+			String plainMessage = plainComponent == null?null:plainComponent.generateResponse().contentString();
+			
+			return composeMailMessage(ec, state, from, replyTo, to, cc, bcc, subject, htmlMessage, plainMessage, attachments, category);
 		}
 		
 		public ERXFetchSpecificationBatchIterator batchIteratorForUnsentMessages() {

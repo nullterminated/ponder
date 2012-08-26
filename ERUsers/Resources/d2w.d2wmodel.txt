@@ -44,6 +44,6 @@
     55 : (task = 'edit' and entity.name = 'ERChallengeResponse' and propertyKey = 'challengeQuestion' and object.answer.length > 0) => disabled = "true" [com.webobjects.directtoweb.BooleanAssignment],
     55 : (task = 'edit' and entity.name = 'ERChallengeResponse' and propertyKey = 'clearAnswer' and object.answer.length > 0) => componentName = "R2D2WPropertyMessage" [com.webobjects.directtoweb.Assignment],
     75 : (task = 'edit' and entity.name = 'ERUser') => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment],
-    75 : pageConfiguration = 'ForgotPassword' => pageController = "er.users.delegates.ForgotPasswordController" [ERDDelayedObjectCreationAssignment],
-    75 : pageConfiguration = 'CreateERUser' => pageController = {"arguments" = ({"className" = "java.lang.String"; "contextKey" = "templateNameForUserActivationEmail"; }, {"className" = "java.lang.String"; "contextKey" = "fileNameForActivationEmailContent"; }, {"className" = "java.lang.String"; "contextKey" = "frameworkNameForActivationEmailContent"; }); "className" = "er.users.delegates.CreateUserController"; } [ERDDelayedObjectCreationAssignment]
+    75 : pageConfiguration = 'CreateERUser' => pageController = "er.users.delegates.CreateUserController" [ERDDelayedObjectCreationAssignment],
+    75 : pageConfiguration = 'ForgotPassword' => pageController = "er.users.delegates.ForgotPasswordController" [ERDDelayedObjectCreationAssignment]
 )

@@ -4,8 +4,8 @@ HTML: WOGenericContainer {
 	xmlns = "http://www.w3.org/1999/xhtml";
 }
 
-EmailTitle: WOString {
-	value = emailTitle;
+EmailTitle: ERXLocalizedString {
+	value = "ERDefaultUserActivationHtmlEmail.subject";
 }
 
 CachingWrapper: ERXCachingWrapper {
@@ -17,7 +17,10 @@ ExternalContent: ERXExternalContent {
 }
 
 ActivationLink: WOHyperlink {
-	href = tokenHREF;
+	href = activateUserHref;
 	rel = "nofollow";
-	string = tokenLinkString;
+}
+
+ActivationLinkString: ERXLocalizedString {
+	value = "ERDefaultUserActivationHtmlEmail.tokenLinkString";
 }
