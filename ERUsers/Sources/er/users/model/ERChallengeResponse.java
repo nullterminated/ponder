@@ -4,10 +4,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.foundation.NSArray;
-import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSValidation;
 
-import er.extensions.foundation.ERXArrayUtilities;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
 import er.users.ERUsers;
@@ -24,6 +22,8 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 	private static final Logger log = Logger.getLogger(ERChallengeResponse.class);
 
 	public static final String CLEAR_ANSWER_KEY = "clearAnswer";
+	
+	public static final String VERIFY_ANSWER_KEY = "verifyAnswer";
 
 	public static final ERChallengeResponseClazz<ERChallengeResponse> clazz = new ERChallengeResponseClazz<ERChallengeResponse>();
 
@@ -56,8 +56,13 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 		setAnswer(answer);
 	}
 	
+	/**
+	 * Overridden to handle requests for clearAnswer and verifyAnswer.
+	 * @return null for clearAnswer or verifyAnswer
+	 * @throws UnknownKeyException
+	 */
 	public Object handleQueryWithUnboundKey(String key) {
-		if("clearAnswer".equals(key)) {
+		if("clearAnswer".equals(key) || "verifyAnswer".equals(key)) {
 			return null;
 		}
 		return super.handleQueryWithUnboundKey(key);
@@ -72,24 +77,12 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 		return ERUsers.sharedInstance().hashMatches(clearAnswer, answer());
 	}
 	
-	public void willInsert() {
-		super.willInsert();
-		NSDictionary<ERChallengeQuestion, NSArray<ERChallengeResponse>> grouped = 
-				ERXArrayUtilities.arrayGroupedByKeyPath(user().challengeResponses(), CHALLENGE_QUESTION);
-		// Using Object key since null grouping key is a string...
-		for(Object key : grouped.allKeys()) {
-			if(grouped.objectForKey(key).count() > 1) {
-				// Reset answers to null if the same question is chosen twice.
-				grouped.objectForKey(key).takeValueForKey(null, ANSWER_KEY);
-			}
-		}
-	}
-	
 	/**
 	 * Ensures that the clear answer is not null or empty.
 	 * 
-	 * @param clearAnswer
-	 * @return
+	 * @param clearAnswer the plain text answer
+	 * @return the clearAnswer
+	 * @throws NSValidation.ValidationException
 	 */
 	public String validateClearAnswer(String clearAnswer) {
 		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
@@ -104,4 +97,22 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 		return clearAnswer;
 	}
 
+	/**
+	 * Ensures that the verify answer is not null and matches the hashed answer
+	 * @param verifyAnswer the plain text answer
+	 * @return the verifyAnswer
+	 * @throws NSValidation.ValidationException
+	 */
+	public String validateVerifyAnswer(String verifyAnswer) {
+		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
+		if(StringUtils.isBlank(verifyAnswer)) {
+			ERXValidationException ex = factory.createException(this, VERIFY_ANSWER_KEY, verifyAnswer, ERXValidationException.NullPropertyException);
+			throw ex;
+		}
+		if(!hashMatches(verifyAnswer)) {
+			ERXValidationException ex = factory.createException(this, VERIFY_ANSWER_KEY, verifyAnswer, ERXValidationException.InvalidValueException);
+			throw ex;
+		}
+		return verifyAnswer;
+	}
 }

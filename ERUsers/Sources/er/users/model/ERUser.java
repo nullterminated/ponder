@@ -39,10 +39,9 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	private static final Logger log = Logger.getLogger(ERUser.class);
 
 	public static final ERXKey<ERCPreference> PREFERENCES = new ERXKey<ERCPreference>("preferences");
-	public static final ERXKey<String> CLEAR_PASSWORD = new ERXKey<String>("clearPassword");
 
 	public static final String PREFERENCES_KEY = PREFERENCES.key();
-	public static final String CLEAR_PASSWORD_KEY = CLEAR_PASSWORD.key();
+	public static final String CLEAR_PASSWORD_KEY = "clearPassword";
 
 	protected ERCredential newCredential;
 
@@ -50,10 +49,49 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 
 	public static class ERUserClazz<T extends ERUser> extends er.users.model.eogen._ERUser._ERUserClazz<T> {
 		/* more clazz methods here */
-		public static final String MIN_CHALLENGE_RESPONSES = "er.users.model.ERUser.clazz.minimumChallengeResponses";
+		public static final String REQUIRED_CHALLENGE_RESPONSES_PROP = "er.users.model.ERUser.clazz.requiredChallengeResponses";
+		
+		public static final String MIN_PASSWORD_LENGTH_PROP = "er.users.model.ERUser.clazz.minimumPasswordLength";
+		
+		public static final String PASSWORD_REUSE_COUNT_PROP = "er.users.model.ERUser.clazz.passwordReuseCount";
+		
+		public static final String PASSWORD_REUSE_DAYS_PROP = "er.users.model.ERUser.clazz.passwordReuseDays";
 
-		public int minimumChallengeResponses() {
-			return ERXProperties.intForKeyWithDefault(MIN_CHALLENGE_RESPONSES, 3);
+		public static final String OUT_OF_BAND_DAYS_PROP = "er.users.model.ERUser.clazz.outOfBandDays";
+		
+		/**
+		 * @return The number of challenge responses required for password reset
+		 */
+		public int requiredChallengeResponses() {
+			return ERXProperties.intForKeyWithDefault(REQUIRED_CHALLENGE_RESPONSES_PROP, 3);
+		}
+
+		/**
+		 * @return The minimum length required for valid passwords
+		 */
+		public int minimumPasswordLength() {
+			return ERXProperties.intForKeyWithDefault(MIN_PASSWORD_LENGTH_PROP, 8);
+		}
+		
+		/**
+		 * @return The minimum number of different passwords used before a password may be reused
+		 */
+		public int passwordReuseCount() {
+			return ERXProperties.intForKeyWithDefault(PASSWORD_REUSE_COUNT_PROP, 3);
+		}
+		
+		/**
+		 * @return The minimum number of days that must elapse before a password may be reused
+		 */
+		public int passwordReuseDays() {
+			return ERXProperties.intForKeyWithDefault(PASSWORD_REUSE_DAYS_PROP, 30);
+		}
+		
+		/**
+		 * @return The minimum number of days a user must wait to bypass the out of band password reset
+		 */
+		public int outOfBandDays() {
+			return ERXProperties.intForKeyWithDefault(OUT_OF_BAND_DAYS_PROP, 7);
 		}
 	}
 
@@ -69,7 +107,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		setActivationStatus(ERUserActivationStatus.PRE_ACTIVATION);
 		ERActivateUserToken token = ERActivateUserToken.clazz.createAndInsertObject(ec);
 		addObjectToBothSidesOfRelationshipWithKey(token, ACTIVATE_USER_TOKEN_KEY);
-		for (int i = 0, count = clazz.minimumChallengeResponses(); i < count; ++i) {
+		for (int i = 0, count = clazz.requiredChallengeResponses(); i < count; ++i) {
 			ERChallengeResponse cr = ERChallengeResponse.clazz.createAndInsertObject(ec);
 			addObjectToBothSidesOfRelationshipWithKey(cr, CHALLENGE_RESPONSES_KEY);
 		}
@@ -130,9 +168,38 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	public boolean hashMatches(String clearPassword) {
 		return ERUsers.sharedInstance().hashMatches(clearPassword, password());
 	}
+	
+	/**
+	 * This method sets answers to null on related challenge responses for any
+	 * response that has a duplicated challenge question.
+	 */
+	private void clearDuplicateChallengeResponses() {
+		NSDictionary<ERChallengeQuestion, NSArray<ERChallengeResponse>> grouped = 
+				ERXArrayUtilities.arrayGroupedByKeyPath(challengeResponses(), ERChallengeResponse.CHALLENGE_QUESTION);
+		// Using Object key since null grouping key is a string...
+		for(Object key : grouped.allKeys()) {
+			NSArray<ERChallengeResponse> responses = grouped.objectForKey(key);
+			if(responses.count() > 1) {
+				// Reset answers to null if the same question is chosen twice.
+				responses.takeValueForKey(null, ERChallengeResponse.ANSWER_KEY);
+			}
+		}
+	}
 
 	/**
-	 * This method deletes activation tokens on users once activated.
+	 * Overriden to ensure challenge questions are not duplicated.
+	 */
+	@Override
+	public void willInsert() {
+		super.willInsert();
+		
+		//Ensure challenge questions are not duplicated
+		clearDuplicateChallengeResponses();
+	}
+	
+	/**
+	 * This method deletes activation tokens on users once activated. It also ensures
+	 * challenge questions are not duplicated.
 	 */
 	@Override
 	public void willUpdate() {
@@ -142,6 +209,9 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		if (!ERUserActivationStatus.PRE_ACTIVATION.equals(activationStatus()) && activateUserToken() != null) {
 			removeObjectFromBothSidesOfRelationshipWithKey(activateUserToken(), ACTIVATE_USER_TOKEN_KEY);
 		}
+		
+		// Ensure challenge questions are not duplicated
+		clearDuplicateChallengeResponses();
 	}
 
 	/**
@@ -193,10 +263,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	 * @return the validated clear text password
 	 */
 	public String validateClearPassword(final String clearPassword) {
-		/*
-		 * TODO create properties/methods to control this rather than hard
-		 * coding the values
-		 */
+
 		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 		ERXValidationException ex = null;
 		
@@ -207,7 +274,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		}
 
 		// Check length
-		if (clearPassword.length() < 8) {
+		if (clearPassword.length() < clazz().minimumPasswordLength()) {
 			ex = factory.createCustomException(this, CLEAR_PASSWORD_KEY, clearPassword, "PasswordLengthException");
 			throw ex;
 		}
@@ -215,23 +282,21 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		EOQualifier userQualifier = ERCredential.USER.eq(this);
 
 		// Check previous passwords
-		DateTime oneMonth = new DateTime().minusMonths(1);
-		EOQualifier q = ERCredential.DATE_CREATED.greaterThan(oneMonth).and(userQualifier);
+		DateTime days = new DateTime().minusDays(clazz().passwordReuseDays());
+		EOQualifier q = ERCredential.DATE_CREATED.greaterThan(days).and(userQualifier);
 		NSArray<EOSortOrdering> sort = ERCredential.DATE_CREATED.descs();
 
-		// Fetch all credentials used in the last month
-		ERXFetchSpecification<ERCredential> fs = new ERXFetchSpecification<ERCredential>(ERCredential.ENTITY_NAME, q,
-				sort);
-		NSArray<ERCredential> pastMonth = fs.fetchObjects(editingContext());
+		// Fetch all credentials used in the specified time period
+		ERXFetchSpecification<ERCredential> fs = new ERXFetchSpecification<ERCredential>(ERCredential.ENTITY_NAME, q, sort);
+		NSArray<ERCredential> timeResult = fs.fetchObjects(editingContext());
 
-		// Fetch the last three credentials used
-		ERXFetchSpecification<ERCredential> fsLimit = new ERXFetchSpecification<ERCredential>(ERCredential.ENTITY_NAME,
-				userQualifier, sort);
-		fsLimit.setFetchLimit(3);
-		NSArray<ERCredential> lastThree = fsLimit.fetchObjects(editingContext());
+		// Fetch the last credentials used limited by reuse count
+		ERXFetchSpecification<ERCredential> fsLimit = new ERXFetchSpecification<ERCredential>(ERCredential.ENTITY_NAME, userQualifier, sort);
+		fsLimit.setFetchLimit(clazz().passwordReuseCount());
+		NSArray<ERCredential> countResult = fsLimit.fetchObjects(editingContext());
 
 		// Examine whichever is greatest
-		NSArray<ERCredential> pastCredentials = pastMonth.count() > 3 ? pastMonth : lastThree;
+		NSArray<ERCredential> pastCredentials = timeResult.count() > countResult.count() ? timeResult : countResult;
 		for (ERCredential past : pastCredentials) {
 			if (past.hashMatches(clearPassword)) {
 				ex = factory.createCustomException(this, CLEAR_PASSWORD_KEY, clearPassword, "PreviousPasswordException");
@@ -254,7 +319,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 
 	public NSArray<ERChallengeResponse> validateChallengeResponses(NSArray<ERChallengeResponse> value) {
 		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
-		if (value.count() < clazz.minimumChallengeResponses()) {
+		if (value.count() < clazz.requiredChallengeResponses()) {
 			ERXValidationException ex = factory.createException(this, CHALLENGE_RESPONSES_KEY, value, "MinimumChallengeResponses");
 			// TODO set the minimum number in the exception context?
 			throw ex;

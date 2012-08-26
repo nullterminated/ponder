@@ -1,0 +1,14 @@
+#The number of challenge responses required for password reset
+#er.users.model.ERUser.clazz.requiredChallengeResponses=3
+
+#The minimum length required for valid passwords
+#er.users.model.ERUser.clazz.minimumPasswordLength=8
+
+#The minimum number of different passwords used before a password may be reused
+#er.users.model.ERUser.clazz.passwordReuseCount=3
+
+#The minimum number of days that must elapse before a password may be reused
+#er.users.model.ERUser.clazz.passwordReuseDays=30
+
+#The minimum number of days a user must wait to bypass the out of band password reset
+#er.users.model.ERUser.clazz.outOfBandDays=7

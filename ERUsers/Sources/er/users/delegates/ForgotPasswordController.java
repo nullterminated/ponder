@@ -69,6 +69,6 @@ public class ForgotPasswordController extends ERDBranchDelegate {
 	 * @return the waiting period
 	 */
 	protected Duration outOfBandWaitingPeriod() {
-		return Duration.standardDays(7);
+		return Duration.standardDays(ERUser.clazz.outOfBandDays());
 	}
 }
