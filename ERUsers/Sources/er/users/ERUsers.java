@@ -22,6 +22,10 @@ public class ERUsers extends ERXFrameworkPrincipal {
 	public static final Logger log = Logger.getLogger(ERUsers.class);
 
 	protected static volatile ERUsers sharedInstance;
+	
+	//Just here to initialize the reset request monitor
+	@SuppressWarnings("unused")
+	private static ResetRequestMonitor instance = ResetRequestMonitor.INSTANCE;
 
 	// Registers the class as the framework principal
 	static {
@@ -44,7 +48,7 @@ public class ERUsers extends ERXFrameworkPrincipal {
 	public void finishInitialization() {
 		// Set up the user preferences relationship
 		ERCoreBL.sharedInstance().addPreferenceRelationshipToActorEntity(ERUser.ENTITY_NAME);
-
+		
 		// Set up the auth config and delegate
 		ERTwoFactorAuthenticationDelegate delegate = new AuthenticationDelegate();
 		ERTwoFactorAuthenticationConfig config = new AuthConfig(ERUser.ENTITY_NAME, ERUser.USERNAME_KEY,

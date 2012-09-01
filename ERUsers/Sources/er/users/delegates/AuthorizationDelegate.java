@@ -1,5 +1,7 @@
 package er.users.delegates;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOQualifier;
 
@@ -90,9 +92,9 @@ public enum AuthorizationDelegate implements CRUDAuthorization {
 	}
 	
 	public Boolean canUpdateProperty(ERChallengeResponse eo, String keypath) {
-		if(ERChallengeResponse.CHALLENGE_QUESTION_KEY.equals(keypath) && eo.isNewObject()) {
+		if(ERChallengeResponse.CHALLENGE_QUESTION_KEY.equals(keypath) && eo.isNewObject() && StringUtils.isBlank(eo.answer())) {
 			return Boolean.TRUE;
-		} else if(ERChallengeResponse.CLEAR_ANSWER_KEY.equals(keypath)) {
+		} else if(ERChallengeResponse.CLEAR_ANSWER_KEY.equals(keypath) || ERChallengeResponse.VERIFY_ANSWER_KEY.equals(keypath)) {
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;

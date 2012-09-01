@@ -43,7 +43,6 @@ public abstract class ERUserHtmlEmail extends ERXComponent {
 	}
 	
 	public String resetPasswordHref() {
-		//TODO implement
-		return null;
+		return user().resetPasswordHrefInContext(context());
 	}
 }

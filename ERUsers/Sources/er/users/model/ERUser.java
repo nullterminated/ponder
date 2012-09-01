@@ -39,6 +39,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	private static final long serialVersionUID = 1L;
 
 	private static final ERXEmailValidator emailValidator = new ERXEmailValidator(false, false);
+	private static final String[] QUERY_KEYS = new String[]{ERUserAction.TOKEN_KEY, ERUserAction.USERNAME_KEY};
 
 	private static final Logger log = Logger.getLogger(ERUser.class);
 
@@ -190,7 +191,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	}
 
 	/**
-	 * Generates the href necessary to activate the related user.
+	 * Generates the url necessary to activate the related user.
 	 * 
 	 * @param context
 	 *            the context
@@ -198,7 +199,8 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	 */
 	public String activateUserHrefInContext(WOContext context) {
 		if(activateUserToken() != null) {
-			NSDictionary<String, Object> queryDict = new NSDictionary<String, Object>(activateUserToken(), ERUserAction.TOKEN_KEY);
+			Object[] queryValues = new Object[]{activateUserToken(), username()};
+			NSDictionary<String, Object> queryDict = new NSDictionary<String, Object>(queryValues, QUERY_KEYS);
 			boolean completeUrls = context.doesGenerateCompleteURLs();
 			if (!completeUrls) {
 				context.generateCompleteURLs();
@@ -212,6 +214,32 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 			}
 		}
 		throw new IllegalStateException("No user activation token");
+	}
+	
+	/**
+	 * Generates the url necessary to reset the user's password
+	 * 
+	 * @param context
+	 *            the context
+	 * @return the href string
+	 */
+	public String resetPasswordHrefInContext(WOContext context) {
+		if(resetToken() != null) {
+			Object[] queryValues = new Object[]{resetToken(), username()};
+			NSDictionary<String, Object> queryDict = new NSDictionary<String, Object>(queryValues, QUERY_KEYS);
+			boolean completeUrls = context.doesGenerateCompleteURLs();
+			if (!completeUrls) {
+				context.generateCompleteURLs();
+			}
+			try {
+				return context.directActionURLForActionNamed("ERUserAction/resetPassword", queryDict);
+			} finally {
+				if (!completeUrls) {
+					context.generateRelativeURLs();
+				}
+			}
+		}
+		throw new IllegalStateException("No reset password token");
 	}
 	
 	/**

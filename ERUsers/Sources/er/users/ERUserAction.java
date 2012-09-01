@@ -5,14 +5,14 @@ import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.directtoweb.D2W;
+import com.webobjects.directtoweb.EditPageInterface;
 import com.webobjects.eocontrol.EOEditingContext;
-import com.webobjects.eocontrol.EOEnterpriseObject;
-import com.webobjects.foundation.NSDictionary;
 
 import er.directtoweb.ERD2WDirectAction;
 import er.directtoweb.ERD2WFactory;
 import er.directtoweb.interfaces.ERDErrorPageInterface;
 import er.directtoweb.interfaces.ERDMessagePageInterface;
+import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXBrowser;
 import er.extensions.appserver.ERXBrowserFactory;
 import er.extensions.eof.ERXEC;
@@ -22,6 +22,7 @@ import er.users.model.ERUser;
 public class ERUserAction extends ERD2WDirectAction {
 	
 	public static final String TOKEN_KEY = "token";
+	public static final String USERNAME_KEY = "username";
 	
 	public ERUserAction(WORequest r) {
 		super(r);
@@ -38,33 +39,29 @@ public class ERUserAction extends ERD2WDirectAction {
 		}
 		
 		// find the matching token
-		EOEnterpriseObject eo = null;
+		ERUser user = null;
 		String token = request().stringFormValueForKey(TOKEN_KEY);
-		if(token != null) {
+		String username = request().stringFormValueForKey(USERNAME_KEY);
+		if(username != null && token != null) {
 			EOEditingContext ec = ERXEC.newEditingContext();
-			eo = ERUser.clazz.objectMatchingKeyAndValue(ec, ERUser.ACTIVATE_USER_TOKEN_KEY, token);
+			user = ERUser.clazz.objectMatchingKeyAndValue(ec, ERUser.USERNAME_KEY, username);
 		}
 		
 		ERXLocalizer loc = ERXLocalizer.localizerForRequest(request());
 		
-		// Return an error page if the token is not found
-		if (eo == null) {
+		// Return an error page if the user is not found or the token does not match
+		if (user == null || ERXExtensions.safeDifferent(token, user.activateUserToken())) {
 			WOActionResults result = dynamicPageForActionNamed("Error");
 			ERDErrorPageInterface epi = (ERDErrorPageInterface) result;
-			NSDictionary<String, Object> messageContext = NSDictionary.emptyDictionary();
-			if(token != null) {
-				messageContext = new NSDictionary<String, Object>(token, "token");
-			}
-			String message = loc.localizedTemplateStringForKeyWithObject("ERUserAction.tokenNotFound", messageContext);
+			String message = loc.localizedStringForKey("ERUserAction.activateTokenNotFound");
 			epi.setMessage(message);
 			return result;
 		}
 		
 		// Activate the user related to the token
-		ERUser user = (ERUser) eo;
 		user.activateUser();
 		try {
-			eo.editingContext().saveChanges();
+			user.editingContext().saveChanges();
 		} catch (Exception e) {
 			// Return an error page if save changes fails.
 			WOActionResults result = dynamicPageForActionNamed("Error");
@@ -81,6 +78,46 @@ public class ERUserAction extends ERD2WDirectAction {
 		ERDMessagePageInterface mpi = (ERDMessagePageInterface) result;
 		String message = loc.localizedStringForKey("ERUserAction.activationSuccess");
 		mpi.setMessage(message);
+		return result;
+	}
+	
+	public WOActionResults resetPasswordAction() {
+		// check for robot user agents
+		ERXBrowser browser = ERXBrowserFactory.factory().browserMatchingRequest(request());
+		if(browser.isRobot()) {
+			WOResponse response = new WOResponse();
+			response.setStatus(403);
+			response.setContent("Search engine robots are forbidden.");
+			return response;
+		}
+		
+		// find the matching token
+		ERUser user = null;
+		String token = request().stringFormValueForKey(TOKEN_KEY);
+		String username = request().stringFormValueForKey(USERNAME_KEY);
+		if(username != null && token != null) {
+			EOEditingContext ec = ERXEC.newEditingContext();
+			user = ERUser.clazz.objectMatchingKeyAndValue(ec, ERUser.USERNAME_KEY, username);
+		}
+		
+		ERXLocalizer loc = ERXLocalizer.localizerForRequest(request());
+		
+		// Return an error page if the user is not found or the token does not match
+		if (user == null || ERXExtensions.safeDifferent(token, user.resetToken())) {
+			WOActionResults result = dynamicPageForActionNamed("Error");
+			ERDErrorPageInterface epi = (ERDErrorPageInterface) result;
+			String message = loc.localizedStringForKey("ERUserAction.resetTokenNotFound");
+			epi.setMessage(message);
+			return result;
+		}
+		
+		// return reset page
+		D2W d2w = ERD2WFactory.factory();
+		WOComponent result = d2w.pageForConfigurationNamed("ResetERUserPassword", session());
+		EditPageInterface epi = (EditPageInterface) result;
+		epi.setObject(user);
+		//TODO use defaultAction or default D2W page instead
+		epi.setNextPage(pageWithName("Main"));
 		return result;
 	}
 }

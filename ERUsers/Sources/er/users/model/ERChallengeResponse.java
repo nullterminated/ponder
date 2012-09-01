@@ -24,6 +24,10 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 	public static final String CLEAR_ANSWER_KEY = "clearAnswer";
 	
 	public static final String VERIFY_ANSWER_KEY = "verifyAnswer";
+	
+	public static final String VERIFY_ANSWER_MATCHES = "verifyAnswerMatches";
+	
+	private transient String _verifyAnswer;
 
 	public static final ERChallengeResponseClazz<ERChallengeResponse> clazz = new ERChallengeResponseClazz<ERChallengeResponse>();
 
@@ -57,12 +61,21 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 	}
 	
 	/**
+	 * Sets the verifyAnswer
+	 * @param value
+	 */
+	public void setVerifyAnswer(String verifyAnswer) {
+		willChange();
+		_verifyAnswer = verifyAnswer;
+	}
+
+	/**
 	 * Overridden to handle requests for clearAnswer and verifyAnswer.
 	 * @return null for clearAnswer or verifyAnswer
 	 * @throws UnknownKeyException
 	 */
 	public Object handleQueryWithUnboundKey(String key) {
-		if("clearAnswer".equals(key) || "verifyAnswer".equals(key)) {
+		if(CLEAR_ANSWER_KEY.equals(key) || VERIFY_ANSWER_KEY.equals(key)) {
 			return null;
 		}
 		return super.handleQueryWithUnboundKey(key);
@@ -77,6 +90,15 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 		return ERUsers.sharedInstance().hashMatches(clearAnswer, answer());
 	}
 	
+	/**
+	 * Determines if the verify answer is not null and matches the hashed answer
+	 * @param verifyAnswer the plain text answer
+	 * @return true if the answer matches
+	 */
+	public boolean verifyAnswerMatches() {
+		return !StringUtils.isBlank(_verifyAnswer) && hashMatches(_verifyAnswer);
+	}
+
 	/**
 	 * Ensures that the clear answer is not null or empty.
 	 * 
@@ -95,24 +117,5 @@ public class ERChallengeResponse extends er.users.model.eogen._ERChallengeRespon
 			throw ex;
 		}
 		return clearAnswer;
-	}
-
-	/**
-	 * Ensures that the verify answer is not null and matches the hashed answer
-	 * @param verifyAnswer the plain text answer
-	 * @return the verifyAnswer
-	 * @throws NSValidation.ValidationException
-	 */
-	public String validateVerifyAnswer(String verifyAnswer) {
-		ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
-		if(StringUtils.isBlank(verifyAnswer)) {
-			ERXValidationException ex = factory.createException(this, VERIFY_ANSWER_KEY, verifyAnswer, ERXValidationException.NullPropertyException);
-			throw ex;
-		}
-		if(!hashMatches(verifyAnswer)) {
-			ERXValidationException ex = factory.createException(this, VERIFY_ANSWER_KEY, verifyAnswer, ERXValidationException.InvalidValueException);
-			throw ex;
-		}
-		return verifyAnswer;
 	}
 }
