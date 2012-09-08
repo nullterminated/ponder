@@ -1,4 +1,4 @@
-package er.auth;
+package er.auth.assignments;
 
 import java.lang.reflect.Method;
 
@@ -16,6 +16,7 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSForwardException;
 import com.webobjects.foundation.NSMutableArray;
 
+import er.auth.CRUDAuthorization;
 import er.directtoweb.assignments.ERDAssignment;
 import er.directtoweb.assignments.delayed.ERDDelayedAssignment;
 import er.extensions.eof.ERXGuardedObjectInterface;
