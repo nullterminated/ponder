@@ -81,15 +81,8 @@ public class ERAuth0 extends ERXMigrationDatabase.Migration {
 		ERXMigrationTable erTwoFactorAuthenticationRequestTable = database.existingTableNamed("ERAuthenticationRequest");
 		erTwoFactorAuthenticationRequestTable.newStringColumn("username", 50, true);
 
-
-
-		ERXMigrationTable erTwoFactorAuthenticationResponseTable = database.existingTableNamed("ERAuthenticationResponse");
-
-
-
 		erAuthenticationResponseTable.addForeignKey("authenticationRequestID", "ERAuthenticationRequest", "id");
 		erEntityPermissionTable.addForeignKey("roleID", "ERRole", "id");
 		erPropertyPermissionTable.addForeignKey("entityPermissionID", "EREntityPermission", "id");
-		erTwoFactorAuthenticationResponseTable.addForeignKey("authenticationRequestID", "ERAuthenticationRequest", "id");
 	}
 }
