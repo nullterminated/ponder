@@ -10,6 +10,12 @@
             className = "er.auth.model.ERAuthenticationResponse"; 
             name = ERAuthenticationResponse; 
         }, 
+        {className = "er.auth.model.EREntityPermission"; name = EREntityPermission; }, 
+        {
+            className = "er.auth.model.ERPropertyPermission"; 
+            name = ERPropertyPermission; 
+        }, 
+        {className = "er.auth.model.ERRole"; name = ERRole; }, 
         {
             className = "er.auth.model.ERTwoFactorAuthenticationRequest"; 
             name = ERTwoFactorAuthenticationRequest; 

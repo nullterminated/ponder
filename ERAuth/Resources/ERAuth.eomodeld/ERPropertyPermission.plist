@@ -1,0 +1,44 @@
+{
+    attributes = (
+        {columnName = allowRead; name = allowRead; prototypeName = flag; }, 
+        {columnName = allowUpdate; name = allowUpdate; prototypeName = flag; }, 
+        {
+            allowsNull = N; 
+            columnName = entityPermissionID; 
+            name = entityPermissionID; 
+            prototypeName = id; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            columnName = nameForProperty; 
+            name = nameForProperty; 
+            prototypeName = varchar255; 
+        }
+    ); 
+    attributesUsedForLocking = (allowRead, allowUpdate, entityPermissionID, id, nameForProperty); 
+    className = "er.auth.model.ERPropertyPermission"; 
+    classProperties = (allowRead, allowUpdate, entityPermission, nameForProperty); 
+    entityIndexes = (
+        {
+            attributes = (nameForProperty, entityPermissionID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "unique_property_entity_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERPropertyPermission; 
+    fetchSpecificationDictionary = {}; 
+    name = ERPropertyPermission; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = EREntityPermission; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = entityPermissionID; }); 
+            name = entityPermission; 
+        }
+    ); 
+}

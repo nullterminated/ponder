@@ -1,0 +1,68 @@
+{
+    attributes = (
+        {columnName = allowCreate; name = allowCreate; prototypeName = flag; }, 
+        {columnName = allowDelete; name = allowDelete; prototypeName = flag; }, 
+        {columnName = allowQuery; name = allowQuery; prototypeName = flag; }, 
+        {columnName = allowRead; name = allowRead; prototypeName = flag; }, 
+        {columnName = allowUpdate; name = allowUpdate; prototypeName = flag; }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            columnName = nameForEntity; 
+            name = nameForEntity; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = N; columnName = roleID; name = roleID; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (
+        allowCreate, 
+        allowDelete, 
+        allowQuery, 
+        allowRead, 
+        allowUpdate, 
+        id, 
+        nameForEntity, 
+        roleID
+    ); 
+    className = "er.auth.model.EREntityPermission"; 
+    classProperties = (
+        allowCreate, 
+        allowDelete, 
+        allowQuery, 
+        allowRead, 
+        allowUpdate, 
+        nameForEntity, 
+        propertyPermissions, 
+        role
+    ); 
+    entityIndexes = (
+        {
+            attributes = (nameForEntity, roleID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "unique_entity_role_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = EREntityPermission; 
+    fetchSpecificationDictionary = {}; 
+    name = EREntityPermission; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERPropertyPermission; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = entityPermissionID; sourceAttribute = id; }); 
+            name = propertyPermissions; 
+        }, 
+        {
+            destination = ERRole; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = roleID; }); 
+            name = role; 
+        }
+    ); 
+}

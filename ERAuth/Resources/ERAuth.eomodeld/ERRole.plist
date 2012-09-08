@@ -1,0 +1,32 @@
+{
+    attributes = (
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {columnName = roleName; name = roleName; prototypeName = varchar50; }
+    ); 
+    attributesUsedForLocking = (id, roleName); 
+    className = "er.auth.model.ERRole"; 
+    classProperties = (entityPermissions, roleName); 
+    entityIndexes = (
+        {
+            attributes = (roleName); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "unique_roleName_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERRole; 
+    fetchSpecificationDictionary = {}; 
+    name = ERRole; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = EREntityPermission; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = roleID; sourceAttribute = id; }); 
+            name = entityPermissions; 
+        }
+    ); 
+}
