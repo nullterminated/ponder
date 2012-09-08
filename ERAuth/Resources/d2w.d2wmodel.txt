@@ -1,10 +1,14 @@
 (
+    0 : *true* => authorizeRoleNames = (null) [ERAModelAuthorizationAssignment],
+    0 : *true* => authorizePropertyKeys = (null) [ERAModelAuthorizationAssignment],
     0 : *true* => crudAuthorization = "er.auth.SimpleCRUDAuthorization.DENY_ALL" [ERDEnumAssignment],
+    0 : *true* => templateNameForAuthorizationPage = "ERAAuthorizationPage" [com.webobjects.directtoweb.Assignment],
     0 : pageConfiguration = 'Login' => validationDelegateClassName = "er.auth.LoginValidationDelegate" [com.webobjects.directtoweb.Assignment],
     10 : task = 'edit' => disabled = (null) [ERADefaultAuthorizationAssignment],
     10 : *true* => createSubEntities = (null) [ERADefaultAuthorizationAssignment],
     10 : task = 'inspect' => displayProperty = (null) [ERADefaultAuthorizationAssignment],
     10 : task = 'inspect' => inspectControllerChoices = (null) [ERADefaultAuthorizationAssignment],
+    10 : pageConfiguration like 'Authorize*' => task = "authorize" [com.webobjects.directtoweb.Assignment],
     10 : propertyKey = 'leftControllerAction' => leftControllerChoices = (null) [ERADefaultAuthorizationAssignment],
     10 : propertyKey = 'rightControllerAction' => rightControllerChoices = (null) [ERADefaultAuthorizationAssignment],
     10 : (task = 'editRelationship' and parentRelationship.isToMany = 1) => toManyControllerChoices = (null) [ERADefaultAuthorizationAssignment],
@@ -12,6 +16,7 @@
     20 : task = 'queryAll' => visibleEntityNames = (null) [ERADefaultAuthorizationAssignment],
     50 : pageConfiguration like 'Login*' => task = "login" [com.webobjects.directtoweb.Assignment],
     50 : pageConfiguration like 'Login*' => entity = "*all*" [er.directtoweb.ERDDefaultModelAssignment],
+    50 : task = 'authorize' => pageName = "templateNameForAuthorizationPage" [er.directtoweb.ERDKeyValueAssignment],
     50 : pageConfiguration like 'Login*' => pageName = "templateNameForLoginPage" [er.directtoweb.ERDKeyValueAssignment],
     75 : task = 'login' => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment]
 )

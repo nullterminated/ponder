@@ -1,0 +1,31 @@
+ContentWrapper: WOSwitchComponent {
+	WOComponentName = d2wContext.contentWrapperComponentName;
+	localContext = d2wContext;
+}
+
+HasRoles: WOConditional {
+	condition = roles.isEmpty;
+	negate = true;
+}
+
+HasSelection: WOConditional {
+	condition = selectedPermission;
+}
+
+PageWrapper: WOSwitchComponent {
+	WOComponentName = pageWrapperName;
+}
+
+PropertyList: ERXD2WList {
+	list = propertyPermissions;
+	displayKeys = "(nameForProperty, allowRead, allowUpdate)";
+	pageConfiguration = "EditListERPropertyPermission";
+}
+
+RoleList: ERXD2WSelect {
+	action = selectedPermissionAction;
+	list = entityPermissions;
+	pageConfiguration = "EditListEREntityPermission";
+	displayKeys = "(role.roleName, allowCreate, allowRead, allowUpdate, allowDelete, allowQuery)";
+	selectedObject = selectedPermission;
+}
