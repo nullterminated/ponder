@@ -16,35 +16,30 @@ import er.extensions.foundation.*;
 public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGenericRecord {
   public static final String ENTITY_NAME = "ERAuthenticationResponse";
 
-  // Attribute Keys
-  public static final ERXKey<Boolean> AUTHENTICATION_FAILED = new ERXKey<Boolean>("authenticationFailed");
-  public static final ERXKey<Enum> AUTHENTICATION_FAILURE_TYPE = new ERXKey<Enum>("authenticationFailureType");
-  public static final ERXKey<String> SUBTYPE = new ERXKey<String>("subtype");
-  public static final ERXKey<er.extensions.eof.ERXKeyGlobalID> USER_ID = new ERXKey<er.extensions.eof.ERXKeyGlobalID>("userID");
-
-  // Relationship Keys
-  public static final ERXKey<er.auth.model.ERAuthenticationRequest> AUTHENTICATION_REQUEST = new ERXKey<er.auth.model.ERAuthenticationRequest>("authenticationRequest");
-
   // Attributes
+  public static final ERXKey<Boolean> AUTHENTICATION_FAILED = new ERXKey<Boolean>("authenticationFailed");
   public static final String AUTHENTICATION_FAILED_KEY = AUTHENTICATION_FAILED.key();
+  public static final ERXKey<Enum> AUTHENTICATION_FAILURE_TYPE = new ERXKey<Enum>("authenticationFailureType");
   public static final String AUTHENTICATION_FAILURE_TYPE_KEY = AUTHENTICATION_FAILURE_TYPE.key();
+  public static final ERXKey<String> SUBTYPE = new ERXKey<String>("subtype");
   public static final String SUBTYPE_KEY = SUBTYPE.key();
+  public static final ERXKey<er.extensions.eof.ERXKeyGlobalID> USER_ID = new ERXKey<er.extensions.eof.ERXKeyGlobalID>("userID");
   public static final String USER_ID_KEY = USER_ID.key();
 
   // Relationships
+  public static final ERXKey<er.auth.model.ERAuthenticationRequest> AUTHENTICATION_REQUEST = new ERXKey<er.auth.model.ERAuthenticationRequest>("authenticationRequest");
   public static final String AUTHENTICATION_REQUEST_KEY = AUTHENTICATION_REQUEST.key();
 
   public static class _ERAuthenticationResponseClazz<T extends er.auth.model.ERAuthenticationResponse> extends ERXGenericRecord.ERXGenericRecordClazz<T> {
     /* more clazz methods here */
   }
 
-  private static Logger LOG = Logger.getLogger(_ERAuthenticationResponse.class);
+  private static final Logger LOG = Logger.getLogger(_ERAuthenticationResponse.class);
 
   public er.auth.model.ERAuthenticationResponse.ERAuthenticationResponseClazz clazz() {
     return er.auth.model.ERAuthenticationResponse.clazz;
   }
   
-	
   public Boolean authenticationFailed() {
     return (Boolean) storedValueForKey(_ERAuthenticationResponse.AUTHENTICATION_FAILED_KEY);
   }
@@ -56,7 +51,6 @@ public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGen
     takeStoredValueForKey(value, _ERAuthenticationResponse.AUTHENTICATION_FAILED_KEY);
   }
 
-	
   public Enum authenticationFailureType() {
     return (Enum) storedValueForKey(_ERAuthenticationResponse.AUTHENTICATION_FAILURE_TYPE_KEY);
   }
@@ -68,7 +62,6 @@ public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGen
     takeStoredValueForKey(value, _ERAuthenticationResponse.AUTHENTICATION_FAILURE_TYPE_KEY);
   }
 
-	
   public String subtype() {
     return (String) storedValueForKey(_ERAuthenticationResponse.SUBTYPE_KEY);
   }
@@ -80,7 +73,6 @@ public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGen
     takeStoredValueForKey(value, _ERAuthenticationResponse.SUBTYPE_KEY);
   }
 
-	
   public er.extensions.eof.ERXKeyGlobalID userID() {
     return (er.extensions.eof.ERXKeyGlobalID) storedValueForKey(_ERAuthenticationResponse.USER_ID_KEY);
   }
@@ -117,11 +109,4 @@ public abstract class _ERAuthenticationResponse extends er.extensions.eof.ERXGen
     }
   }
 
-  public static er.auth.model.ERAuthenticationResponse createERAuthenticationResponse(EOEditingContext editingContext, Boolean authenticationFailed, String subtype, er.auth.model.ERAuthenticationRequest authenticationRequest) {
-    er.auth.model.ERAuthenticationResponse eo = (er.auth.model.ERAuthenticationResponse) EOUtilities.createAndInsertInstance(editingContext, _ERAuthenticationResponse.ENTITY_NAME);    
-	eo.setAuthenticationFailed(authenticationFailed);
-	eo.setSubtype(subtype);
-    eo.setAuthenticationRequestRelationship(authenticationRequest);
-    return eo;
-  }
 }
