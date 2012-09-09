@@ -13,8 +13,6 @@ import er.auth.model.ERRole;
 import er.directtoweb.pages.ERD2WPage;
 import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXFetchSpecification;
-import er.extensions.eof.ERXS;
-import er.extensions.eof.ERXSortOrdering.ERXSortOrderings;
 import er.extensions.foundation.ERXArrayUtilities;
 
 public class ERAAuthorizationPage extends ERD2WPage {
@@ -77,9 +75,8 @@ public class ERAAuthorizationPage extends ERD2WPage {
 			NSArray<String> roleNames = (NSArray<String>) d2wContext().valueForKey("authorizeRoleNames");
 			EOQualifier q = EREntityPermission.ROLE.dot(ERRole.ROLE_NAME).in(roleNames)
 					.and(EREntityPermission.NAME_FOR_ENTITY.eq(entityName));
-			ERXSortOrderings so = EREntityPermission.ROLE.dot(ERRole.ROLE_NAME).ascs();
 			ERXFetchSpecification<EREntityPermission> fs = 
-					new ERXFetchSpecification<EREntityPermission>(EREntityPermission.ENTITY_NAME, q, so);
+					new ERXFetchSpecification<EREntityPermission>(EREntityPermission.ENTITY_NAME, q, null);
 			NSArray<String> prefetch = new NSArray<String>(EREntityPermission.ROLE_KEY);
 			fs.setPrefetchingRelationshipKeyPaths(prefetch);
 			NSArray<EREntityPermission> permissions = fs.fetchObjects(editingContext());
@@ -95,7 +92,6 @@ public class ERAAuthorizationPage extends ERD2WPage {
 					newPermissions.addObject(permission);
 				}
 				permissions = permissions.arrayByAddingObjectsFromArray(newPermissions);
-				permissions = ERXS.sorted(permissions, so);
 			}
 			_entityPermissions = permissions;
 		}
@@ -115,9 +111,8 @@ public class ERAAuthorizationPage extends ERD2WPage {
 			NSArray<String> propertyKeys = (NSArray<String>) d2wContext().valueForKey("authorizePropertyKeys");
 			EOQualifier q = ERPropertyPermission.ENTITY_PERMISSION.eq(selectedPermission())
 					.and(ERPropertyPermission.NAME_FOR_PROPERTY.in(propertyKeys));
-			ERXSortOrderings so = ERPropertyPermission.NAME_FOR_PROPERTY.ascs();
 			ERXFetchSpecification<ERPropertyPermission> fs = 
-					new ERXFetchSpecification<ERPropertyPermission>(ERPropertyPermission.ENTITY_NAME, q, so);
+					new ERXFetchSpecification<ERPropertyPermission>(ERPropertyPermission.ENTITY_NAME, q, null);
 			fs.setIncludeEditingContextChanges(true);
 			NSArray<ERPropertyPermission> permissions = fs.fetchObjects(editingContext());
 			int diff = propertyKeys.count() - permissions.count();
@@ -134,7 +129,6 @@ public class ERAAuthorizationPage extends ERD2WPage {
 					newPermissions.addObject(permission);
 				}
 				permissions = permissions.arrayByAddingObjectsFromArray(newPermissions);
-				permissions = ERXS.sorted(permissions, so);
 			}
 			_propertyPermissions = permissions;
 		}
