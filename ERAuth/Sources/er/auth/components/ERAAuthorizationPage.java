@@ -48,7 +48,8 @@ public class ERAAuthorizationPage extends ERD2WPage {
 	
 	public NSArray<ERRole> roles() {
 		if(_roles == null) {
-			_roles = EREntityPermission.ROLE.arrayValueInObject(entityPermissions());
+			NSArray<String> roleNames = (NSArray<String>) d2wContext().valueForKey("authorizeRoleNames");
+			_roles = ERRole.clazz.objectsMatchingQualifier(editingContext(), ERRole.ROLE_NAME.in(roleNames));
 		}
 		return _roles;
 	}
