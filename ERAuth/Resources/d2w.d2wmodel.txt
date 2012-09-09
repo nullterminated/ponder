@@ -18,5 +18,6 @@
     50 : pageConfiguration like 'Login*' => entity = "*all*" [er.directtoweb.ERDDefaultModelAssignment],
     50 : task = 'authorize' => pageName = "templateNameForAuthorizationPage" [er.directtoweb.ERDKeyValueAssignment],
     50 : pageConfiguration like 'Login*' => pageName = "templateNameForLoginPage" [er.directtoweb.ERDKeyValueAssignment],
-    75 : task = 'login' => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment]
+    75 : task = 'login' => secureForm = "true" [com.webobjects.directtoweb.BooleanAssignment],
+    75 : pageConfiguration like 'Authorize*' => pageController = "er.auth.AuthorizeEntityController" [ERDDelayedObjectCreationAssignment]
 )
