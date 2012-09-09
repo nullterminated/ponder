@@ -19,8 +19,7 @@ import er.extensions.foundation.ERXArrayUtilities;
 import er.extensions.qualifiers.ERXFalseQualifier;
 import er.extensions.qualifiers.ERXTrueQualifier;
 
-public enum RoleBasedCRUDAuthorization implements CRUDAuthorization {
-	INSTANCE;
+public class RoleBasedCRUDAuthorization implements CRUDAuthorization {
 	
 	private static final ERXKey<ERRole> currentUserRoles = new ERXKey<ERRole>("currentUserRoles");
 	private static final EOQualifier falseQualifier = new ERXFalseQualifier();
