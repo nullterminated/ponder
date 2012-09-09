@@ -1,11 +1,17 @@
+Form: ERXWOForm {
+	class = d2wContext.task;
+	multipleSubmit = true;
+	enctype = d2wContext.formEncoding;
+	secure = d2wContext.secureForm;
+}
+
 ContentWrapper: WOSwitchComponent {
 	WOComponentName = d2wContext.contentWrapperComponentName;
 	localContext = d2wContext;
 }
 
 HasRoles: WOConditional {
-	condition = roles.isEmpty;
-	negate = true;
+	condition = roles.count;
 }
 
 HasSelection: WOConditional {
@@ -19,13 +25,15 @@ PageWrapper: WOSwitchComponent {
 PropertyList: ERXD2WList {
 	list = propertyPermissions;
 	displayKeys = "(nameForProperty, allowRead, allowUpdate)";
-	pageConfiguration = "EditListERPropertyPermission";
+	pageConfiguration = "EditListEmbeddedERPropertyPermission";
+	entityName = "ERPropertyPermission";
 }
 
 RoleList: ERXD2WSelect {
 	action = selectedPermissionAction;
 	list = entityPermissions;
-	pageConfiguration = "EditListEREntityPermission";
+	entityName = "EREntityPermission";
+	pageConfiguration = "EditListEmbeddedEREntityPermission";
 	displayKeys = "(role.roleName, allowCreate, allowRead, allowUpdate, allowDelete, allowQuery)";
 	selectedObject = selectedPermission;
 }
