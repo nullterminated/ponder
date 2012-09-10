@@ -58,8 +58,11 @@ public class R2DBatchNavigationBar extends ERXStatelessComponent {
 	
 	public int batchLimit() {
 		int batchLimit = ERXValueUtilities.intValue(d2wContext().valueForKey("batchLimit"));
-		batchLimit = Math.min(batchLimit, displayGroup().batchCount());
 		return batchLimit;
+	}
+	
+	public int limitedBatchCount() {
+		return Math.min(displayGroup().batchCount(), batchLimit());
 	}
 
 	/**

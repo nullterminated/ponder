@@ -9,7 +9,7 @@ OrderedList: WOGenericContainer {
 }
 
 BatchRepetition: WORepetition {
-	count = batchLimit;
+	count = limitedBatchCount;
 	index = index;
 }
 
