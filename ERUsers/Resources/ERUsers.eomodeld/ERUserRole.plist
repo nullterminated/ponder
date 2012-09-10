@@ -1,0 +1,30 @@
+{
+    attributes = (
+        {allowsNull = N; columnName = erRoleId; name = erRoleId; prototypeName = id; }, 
+        {allowsNull = N; columnName = erUserId; name = erUserId; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (erRoleId, erUserId); 
+    className = EOGenericRecord; 
+    externalName = ERUserRole; 
+    fetchSpecificationDictionary = {}; 
+    name = ERUserRole; 
+    primaryKeyAttributes = (erRoleId, erUserId); 
+    relationships = (
+        {
+            destination = ERRole; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = erRoleId; }); 
+            name = erRole; 
+        }, 
+        {
+            destination = ERUser; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = erUserId; }); 
+            name = erUser; 
+        }
+    ); 
+}

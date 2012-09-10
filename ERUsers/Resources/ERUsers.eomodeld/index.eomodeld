@@ -11,6 +11,7 @@
             name = ERChallengeResponse; 
         }, 
         {className = "er.users.model.ERCredential"; name = ERCredential; }, 
-        {className = "er.users.model.ERUser"; name = ERUser; }
+        {className = "er.users.model.ERUser"; name = ERUser; }, 
+        {className = EOGenericRecord; name = ERUserRole; }
     ); 
 }

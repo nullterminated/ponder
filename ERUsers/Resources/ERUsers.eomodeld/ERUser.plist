@@ -60,6 +60,7 @@
         password, 
         resetRequestDate, 
         resetToken, 
+        roles, 
         username
     ); 
     entityIndexes = (
@@ -91,6 +92,16 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
             name = credentials; 
-        }
+        }, 
+        {
+            deleteRule = EODeleteRuleCascade; 
+            destination = ERUserRole; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = erUserId; sourceAttribute = id; }); 
+            name = erUserRoles; 
+            propagatesPrimaryKey = Y; 
+        }, 
+        {definition = "erUserRoles.erRole"; name = roles; }
     ); 
 }

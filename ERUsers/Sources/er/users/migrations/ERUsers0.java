@@ -20,21 +20,13 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 
 	@Override
 	public void upgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
-		ERXMigrationTable erUserTable = database.newTableNamed("ERUser");
-		erUserTable.newStringColumn("activateUserToken", 50, true);
-		erUserTable.newStringColumn("activationStatus", 50, false);
-		erUserTable.newTimestampColumn("dateCreated", false);
-		erUserTable.newStringColumn("emailAddress", 254, false);
-		erUserTable.newIntegerColumn("id", false);
-		erUserTable.newStringColumn("password", 60, false);
-		erUserTable.newTimestampColumn("resetRequestDate", true);
-		erUserTable.newStringColumn("resetToken", 50, true);
-		erUserTable.newStringColumn("username", 50, false);
+		ERXMigrationTable erChallengeQuestionTable = database.newTableNamed("ERChallengeQuestion");
+		erChallengeQuestionTable.newIntegerColumn("id", false);
+		erChallengeQuestionTable.newStringColumn("question", 255, false);
 
-		erUserTable.addUniqueIndex("ERUser_username_unique_idx", erUserTable.existingColumnNamed("username"));
 
-		erUserTable.create();
-	 	erUserTable.setPrimaryKey("id");
+		erChallengeQuestionTable.create();
+	 	erChallengeQuestionTable.setPrimaryKey("id");
 
 		ERXMigrationTable erChallengeResponseTable = database.newTableNamed("ERChallengeResponse");
 		erChallengeResponseTable.newStringColumn("answer", 60, false);
@@ -57,16 +49,34 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 		erCredentialTable.create();
 	 	erCredentialTable.setPrimaryKey("id");
 
-		ERXMigrationTable erChallengeQuestionTable = database.newTableNamed("ERChallengeQuestion");
-		erChallengeQuestionTable.newIntegerColumn("id", false);
-		erChallengeQuestionTable.newStringColumn("question", 255, false);
+		ERXMigrationTable erUserTable = database.newTableNamed("ERUser");
+		erUserTable.newStringColumn("activateUserToken", 50, true);
+		erUserTable.newStringColumn("activationStatus", 50, false);
+		erUserTable.newTimestampColumn("dateCreated", false);
+		erUserTable.newStringColumn("emailAddress", 254, false);
+		erUserTable.newIntegerColumn("id", false);
+		erUserTable.newStringColumn("password", 60, false);
+		erUserTable.newTimestampColumn("resetRequestDate", true);
+		erUserTable.newStringColumn("resetToken", 50, true);
+		erUserTable.newStringColumn("username", 50, false);
+
+		erUserTable.addUniqueIndex("ERUser_username_unique_idx", erUserTable.existingColumnNamed("username"));
+
+		erUserTable.create();
+	 	erUserTable.setPrimaryKey("id");
+
+		ERXMigrationTable erUserRoleTable = database.newTableNamed("ERUserRole");
+		erUserRoleTable.newIntegerColumn("erRoleId", false);
+		erUserRoleTable.newIntegerColumn("erUserId", false);
 
 
-		erChallengeQuestionTable.create();
-	 	erChallengeQuestionTable.setPrimaryKey("id");
+		erUserRoleTable.create();
+	 	erUserRoleTable.setPrimaryKey("erUserId", "erRoleId");
 
 		erChallengeResponseTable.addForeignKey("challengeQuestionID", "ERChallengeQuestion", "id");
 		erChallengeResponseTable.addForeignKey("userID", "ERUser", "id");
 		erCredentialTable.addForeignKey("userID", "ERUser", "id");
+		erUserRoleTable.addForeignKey("erRoleId", "ERRole", "id");
+		erUserRoleTable.addForeignKey("erUserId", "ERUser", "id");
 	}
 }
