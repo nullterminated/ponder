@@ -27,6 +27,7 @@ PropertyList: ERXD2WList {
 	displayKeys = "(nameForProperty, allowRead, allowUpdate)";
 	pageConfiguration = "EditListEmbeddedERPropertyPermission";
 	entityName = "ERPropertyPermission";
+	settings = settings;
 }
 
 RoleList: ERXD2WSelect {
@@ -36,4 +37,5 @@ RoleList: ERXD2WSelect {
 	pageConfiguration = "EditListEmbeddedEREntityPermission";
 	displayKeys = "(role.roleName, allowCreate, allowRead, allowUpdate, allowDelete, allowQuery)";
 	selectedObject = selectedPermission;
+	_settings = settings;
 }
