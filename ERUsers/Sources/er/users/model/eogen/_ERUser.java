@@ -31,6 +31,8 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String RESET_REQUEST_DATE_KEY = RESET_REQUEST_DATE.key();
   public static final ERXKey<String> RESET_TOKEN = new ERXKey<String>("resetToken");
   public static final String RESET_TOKEN_KEY = RESET_TOKEN.key();
+  public static final ERXKey<String> SUBTYPE = new ERXKey<String>("subtype");
+  public static final String SUBTYPE_KEY = SUBTYPE.key();
   public static final ERXKey<String> USERNAME = new ERXKey<String>("username");
   public static final String USERNAME_KEY = USERNAME.key();
 
@@ -129,6 +131,17 @@ public abstract class _ERUser extends  ERXGenericRecord {
     	_ERUser.LOG.debug( "updating resetToken from " + resetToken() + " to " + value);
     }
     takeStoredValueForKey(value, _ERUser.RESET_TOKEN_KEY);
+  }
+
+  public String subtype() {
+    return (String) storedValueForKey(_ERUser.SUBTYPE_KEY);
+  }
+
+  public void setSubtype(String value) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+    	_ERUser.LOG.debug( "updating subtype from " + subtype() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERUser.SUBTYPE_KEY);
   }
 
   public String username() {

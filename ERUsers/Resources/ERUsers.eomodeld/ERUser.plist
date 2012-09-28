@@ -38,6 +38,7 @@
             name = resetToken; 
             prototypeName = varchar50; 
         }, 
+        {columnName = subtype; name = subtype; prototypeName = varchar50; }, 
         {columnName = username; name = username; prototypeName = varchar50; }
     ); 
     attributesUsedForLocking = (
@@ -47,6 +48,7 @@
         id, 
         password, 
         resetToken, 
+        subtype, 
         username
     ); 
     className = "er.users.model.ERUser"; 
@@ -62,6 +64,7 @@
         resetRequestDate, 
         resetToken, 
         roles, 
+        subtype, 
         username
     ); 
     entityIndexes = (
@@ -112,4 +115,5 @@
         }, 
         {definition = "erUserRoles.erRole"; name = roles; }
     ); 
+    restrictingQualifier = "subtype = 'ERUser'"; 
 }

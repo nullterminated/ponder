@@ -43,6 +43,8 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	private static final Logger log = Logger.getLogger(ERUser.class);
 
 	public static final String CLEAR_PASSWORD_KEY = "clearPassword";
+	
+	public static final String SUBTYPE_VALUE = "ERUser";
 
 	protected ERCredential newCredential;
 
@@ -103,6 +105,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	@Override
 	public void init(EOEditingContext ec) {
 		super.init(ec);
+		setSubtype(SUBTYPE_VALUE);
 		DateTime dt = new DateTime();
 		setDateCreated(dt);
 		setActivationStatus(ERUserActivationStatus.PRE_ACTIVATION);

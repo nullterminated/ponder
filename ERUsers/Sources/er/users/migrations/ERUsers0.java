@@ -58,6 +58,7 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 		erUserTable.newStringColumn("password", 60, false);
 		erUserTable.newTimestampColumn("resetRequestDate", true);
 		erUserTable.newStringColumn("resetToken", 50, true);
+		erUserTable.newStringColumn("subtype", 50, false);
 		erUserTable.newStringColumn("username", 50, false);
 
 		erUserTable.addUniqueIndex("ERUser_username_unique_idx", erUserTable.existingColumnNamed("username"));
