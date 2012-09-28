@@ -16,7 +16,6 @@ import com.webobjects.foundation.NSValidation;
 import er.corebl.model.ERCPreference;
 import er.corebl.preferences.ERCoreUserInterface;
 import er.extensions.eof.ERXFetchSpecification;
-import er.extensions.eof.ERXKey;
 import er.extensions.foundation.ERXArrayUtilities;
 import er.extensions.foundation.ERXProperties;
 import er.extensions.net.ERXEmailValidator;
@@ -43,9 +42,6 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 
 	private static final Logger log = Logger.getLogger(ERUser.class);
 
-	public static final ERXKey<ERCPreference> PREFERENCES = new ERXKey<ERCPreference>("preferences");
-
-	public static final String PREFERENCES_KEY = PREFERENCES.key();
 	public static final String CLEAR_PASSWORD_KEY = "clearPassword";
 
 	protected ERCredential newCredential;
@@ -146,12 +142,6 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 			return null;
 		}
 		return super.handleQueryWithUnboundKey(key);
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public NSArray<ERCPreference> preferences() {
-		return (NSArray<ERCPreference>) storedValueForKey(PREFERENCES_KEY);
 	}
 
 	@Override

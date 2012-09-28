@@ -58,6 +58,7 @@
         dateCreated, 
         emailAddress, 
         password, 
+        preferences, 
         resetRequestDate, 
         resetToken, 
         roles, 
@@ -101,6 +102,13 @@
             joins = ({destinationAttribute = erUserId; sourceAttribute = id; }); 
             name = erUserRoles; 
             propagatesPrimaryKey = Y; 
+        }, 
+        {
+            destination = ERCPreference; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = userID; sourceAttribute = id; }); 
+            name = preferences; 
         }, 
         {definition = "erUserRoles.erRole"; name = roles; }
     ); 

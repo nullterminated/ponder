@@ -39,6 +39,10 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String CHALLENGE_RESPONSES_KEY = CHALLENGE_RESPONSES.key();
   public static final ERXKey<er.users.model.ERCredential> CREDENTIALS = new ERXKey<er.users.model.ERCredential>("credentials");
   public static final String CREDENTIALS_KEY = CREDENTIALS.key();
+  public static final ERXKey<er.corebl.model.ERCPreference> PREFERENCES = new ERXKey<er.corebl.model.ERCPreference>("preferences");
+  public static final String PREFERENCES_KEY = PREFERENCES.key();
+  public static final ERXKey<er.auth.model.ERRole> ROLES = new ERXKey<er.auth.model.ERRole>("roles");
+  public static final String ROLES_KEY = ROLES.key();
 
   public static class _ERUserClazz<T extends er.users.model.ERUser> extends ERXGenericRecord.ERXGenericRecordClazz<T> {
     /* more clazz methods here */
@@ -322,6 +326,150 @@ public abstract class _ERUser extends  ERXGenericRecord {
     Enumeration<er.users.model.ERCredential> objects = credentials().immutableClone().objectEnumerator();
     while (objects.hasMoreElements()) {
       deleteCredentialsRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<er.corebl.model.ERCPreference> preferences() {
+    return (NSArray<er.corebl.model.ERCPreference>)storedValueForKey(_ERUser.PREFERENCES_KEY);
+  }
+
+  public NSArray<er.corebl.model.ERCPreference> preferences(EOQualifier qualifier) {
+    return preferences(qualifier, null);
+  }
+
+  public NSArray<er.corebl.model.ERCPreference> preferences(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    NSArray<er.corebl.model.ERCPreference> results;
+      results = preferences();
+      if (qualifier != null) {
+        results = (NSArray<er.corebl.model.ERCPreference>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<er.corebl.model.ERCPreference>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    return results;
+  }
+  
+  public void addToPreferences(er.corebl.model.ERCPreference object) {
+    includeObjectIntoPropertyWithKey(object, _ERUser.PREFERENCES_KEY);
+  }
+
+  public void removeFromPreferences(er.corebl.model.ERCPreference object) {
+    excludeObjectFromPropertyWithKey(object, _ERUser.PREFERENCES_KEY);
+  }
+
+  public void addToPreferencesRelationship(er.corebl.model.ERCPreference object) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+      _ERUser.LOG.debug("adding " + object + " to preferences relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToPreferences(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _ERUser.PREFERENCES_KEY);
+    }
+  }
+
+  public void removeFromPreferencesRelationship(er.corebl.model.ERCPreference object) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+      _ERUser.LOG.debug("removing " + object + " from preferences relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromPreferences(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _ERUser.PREFERENCES_KEY);
+    }
+  }
+
+  public er.corebl.model.ERCPreference createPreferencesRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( er.corebl.model.ERCPreference.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _ERUser.PREFERENCES_KEY);
+    return (er.corebl.model.ERCPreference) eo;
+  }
+
+  public void deletePreferencesRelationship(er.corebl.model.ERCPreference object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _ERUser.PREFERENCES_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllPreferencesRelationships() {
+    Enumeration<er.corebl.model.ERCPreference> objects = preferences().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deletePreferencesRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<er.auth.model.ERRole> roles() {
+    return (NSArray<er.auth.model.ERRole>)storedValueForKey(_ERUser.ROLES_KEY);
+  }
+
+  public NSArray<er.auth.model.ERRole> roles(EOQualifier qualifier) {
+    return roles(qualifier, null);
+  }
+
+  public NSArray<er.auth.model.ERRole> roles(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings) {
+    NSArray<er.auth.model.ERRole> results;
+      results = roles();
+      if (qualifier != null) {
+        results = (NSArray<er.auth.model.ERRole>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<er.auth.model.ERRole>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    return results;
+  }
+  
+  public void addToRoles(er.auth.model.ERRole object) {
+    includeObjectIntoPropertyWithKey(object, _ERUser.ROLES_KEY);
+  }
+
+  public void removeFromRoles(er.auth.model.ERRole object) {
+    excludeObjectFromPropertyWithKey(object, _ERUser.ROLES_KEY);
+  }
+
+  public void addToRolesRelationship(er.auth.model.ERRole object) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+      _ERUser.LOG.debug("adding " + object + " to roles relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToRoles(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _ERUser.ROLES_KEY);
+    }
+  }
+
+  public void removeFromRolesRelationship(er.auth.model.ERRole object) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+      _ERUser.LOG.debug("removing " + object + " from roles relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromRoles(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _ERUser.ROLES_KEY);
+    }
+  }
+
+  public er.auth.model.ERRole createRolesRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( er.auth.model.ERRole.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _ERUser.ROLES_KEY);
+    return (er.auth.model.ERRole) eo;
+  }
+
+  public void deleteRolesRelationship(er.auth.model.ERRole object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _ERUser.ROLES_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllRolesRelationships() {
+    Enumeration<er.auth.model.ERRole> objects = roles().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteRolesRelationship(objects.nextElement());
     }
   }
 

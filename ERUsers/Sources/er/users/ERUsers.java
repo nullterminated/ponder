@@ -46,9 +46,6 @@ public class ERUsers extends ERXFrameworkPrincipal {
 
 	@Override
 	public void finishInitialization() {
-		// Set up the user preferences relationship
-		ERCoreBL.sharedInstance().addPreferenceRelationshipToActorEntity(ERUser.ENTITY_NAME);
-		
 		// Set up the auth config and delegate
 		ERTwoFactorAuthenticationDelegate delegate = new AuthenticationDelegate();
 		ERTwoFactorAuthenticationConfig config = new AuthConfig(ERUser.ENTITY_NAME, ERUser.USERNAME_KEY,
