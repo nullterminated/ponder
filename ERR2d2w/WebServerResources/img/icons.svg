@@ -1,23 +1,15 @@
 <svg:svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svg="http://www.w3.org/2000/svg" version="1.1" width="0" height="0">
 	<svg:defs>
 		<!-- zoom icons -->
-		<svg:filter id="inner_shadow_1px">
-			<svg:feGaussianBlur stdDeviation="1" result="blur" in="SourceAlpha"/>
-			<svg:feOffset dx="0" dy="1"/>
-			<svg:feComposite in2="SourceAlpha" k3="1" k2="-1" k1="0" result="shadowDiff" k4="0" operator="arithmetic"/>
-			<svg:feFlood flood-color="black" flood-opacity="1"/>
-			<svg:feComposite operator="in" in2="shadowDiff"/>
-			<svg:feComposite operator="over" in2="SourceGraphic"/>
-		</svg:filter>
 		<svg:path id="magnify_15" d="M7,1c-3.3019,0-6,2.6981-6,6s2.6981,6,6,6c1.2772,0,2.3997-0.50134,3.375-1.1875l3.9062,3.9062,1.4375-1.4375-3.906-3.905c0.687-0.9753,1.188-2.0978,1.188-3.375,0-3.3019-2.698-6-6-6zm0,2c2.221,0,4,1.779,4,4s-1.779,4-4,4-4-1.779-4-4,1.779-4,4-4z"/>
-		<svg:g id="zoom" filter="url(#inner_shadow_1px)" fill="#505050">
+		<svg:g id="zoom" fill="#505050">
 			<svg:use xlink:href="#magnify_15"/>
 		</svg:g>
-		<svg:g id="zoom_in" filter="url(#inner_shadow_1px)" fill="#505050">
+		<svg:g id="zoom_in" fill="#505050">
 			<svg:use xlink:href="#magnify_15"/>
 			<svg:path d="M4,6,6,6,6,4,8,4,8,6,10,6,10,8,8,8,8,10,6,10,6,8,4,8z"/>
 		</svg:g>
-		<svg:g id="zoom_out" filter="url(#inner_shadow_1px)" fill="#505050">
+		<svg:g id="zoom_out" fill="#505050">
 			<svg:use xlink:href="#magnify_15"/>
 			<svg:path d="m4,6,6,0,0,2-6,0z"/>
 		</svg:g>
@@ -68,15 +60,15 @@
 		<!-- Sort arrows -->
 		<svg:path id="sort_top" d="M8,1,5,7,11,7z"/>
 		<svg:path id="sort_bottom" d="M8,15,11,9,5,9,8,15"/>
-		<svg:g id="sort_unsort" fill="#bcbcbc" filter="url(#inner_shadow_1px)">
+		<svg:g id="sort_unsort" fill="#bcbcbc">
 			<svg:use xlink:href="#sort_top"/>
 			<svg:use xlink:href="#sort_bottom"/>
 		</svg:g>
-		<svg:g id="sort_asc" fill="#bcbcbc" filter="url(#inner_shadow_1px)">
+		<svg:g id="sort_asc" fill="#bcbcbc">
 			<svg:use xlink:href="#sort_top" fill="#505050"/>
 			<svg:use xlink:href="#sort_bottom"/>
 		</svg:g>
-		<svg:g id="sort_desc" fill="#bcbcbc" filter="url(#inner_shadow_1px)">
+		<svg:g id="sort_desc" fill="#bcbcbc">
 			<svg:use xlink:href="#sort_top"/>
 			<svg:use xlink:href="#sort_bottom" fill="#505050"/>
 		</svg:g>
