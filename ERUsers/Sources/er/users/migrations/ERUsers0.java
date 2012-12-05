@@ -10,7 +10,7 @@ import er.extensions.migration.ERXModelVersion;
 public class ERUsers0 extends ERXMigrationDatabase.Migration {
 	@Override
 	public NSArray<ERXModelVersion> modelDependencies() {
-		return null;
+		return new NSArray<ERXModelVersion>(new ERXModelVersion("ERAuth", 0));
 	}
   
 	@Override
