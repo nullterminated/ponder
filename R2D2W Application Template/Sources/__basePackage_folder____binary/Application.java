@@ -36,9 +36,6 @@ public class Application extends ERXApplication {
 
 	public void didFinishLaunching() {
 		/* ** put your post initialization code in here ** */
-		
-		// FIXME Add the preference relationship to the actor entity
-		// ERCoreBusinessLogic.sharedInstance().addPreferenceRelationshipToActorEntity(Person.ENTITY_NAME);
 	}
 
 }
