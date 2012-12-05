@@ -106,7 +106,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 
 		ERXMigrationTable ercAuditClobTable = database.newTableNamed("ERCAuditClob");
 		ercAuditClobTable.newBigIntegerColumn("id", false);
-		ercAuditClobTable.newStringColumn("valuesString", 10000000, false);
+		ercAuditClobTable.newLargeStringColumn("valuesString", false);
 
 
 		ercAuditClobTable.create();
@@ -114,7 +114,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 
 		ERXMigrationTable ercMailClobTable = database.newTableNamed("ERCMailClob");
 		ercMailClobTable.newBigIntegerColumn("id", false);
-		ercMailClobTable.newStringColumn("message", 10000000, false);
+		ercMailClobTable.newLargeStringColumn("message", false);
 
 
 		ercMailClobTable.create();
@@ -141,7 +141,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 		ERXMigrationTable ercPreferenceTable = database.newTableNamed("ERCPreference");
 		ercPreferenceTable.newBigIntegerColumn("id", false);
 		ercPreferenceTable.newStringColumn("prefKey", 100, false);
-		ercPreferenceTable.newStringColumn("prefValue", 10000000, false);
+		ercPreferenceTable.newLargeStringColumn("prefValue", false);
 		ercPreferenceTable.newIntegerColumn("userID", false);
 
 		ercPreferenceTable.addUniqueIndex("prefKey_userID_idx", ercPreferenceTable.existingColumnNamed("prefKey"), ercPreferenceTable.existingColumnNamed("userID"));
