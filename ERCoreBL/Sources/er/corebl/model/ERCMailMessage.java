@@ -93,7 +93,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			
 			//Make sure the subject doesn't cause a max length validation exception
 			int subjectLength = entity().attributeNamed(SUBJECT_KEY).width();
-			if(subject.length() > subjectLength) {
+			if(subject != null && subject.length() > subjectLength) {
 				subject = subject.substring(0, subjectLength);
 			}
 			mailMessage.validateTakeValueForKeyPath(subject, SUBJECT_KEY);
