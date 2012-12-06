@@ -117,7 +117,7 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 				response.setUserID(kgid);
 				if(!config.allowLogin(eo)) {
 					response.setAuthenticationFailed(Boolean.TRUE);
-					response.setAuthenticationFailureType(ERTwoFactorAuthenticationFailure.ACCOUNT_LOCKED);
+					response.setAuthenticationFailureType(ERTwoFactorAuthenticationFailure.ACCOUNT_DEACTIVATED);
 				} else if (config.verifyPassword(eo, authRequest.password())) {
 					response.setAuthenticationFailed(Boolean.FALSE);
 					ERStageManager.INSTANCE.setActor(eo);
