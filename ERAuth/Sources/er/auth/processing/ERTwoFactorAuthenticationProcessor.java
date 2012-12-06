@@ -115,7 +115,10 @@ public class ERTwoFactorAuthenticationProcessor extends ERAuthenticationProcesso
 				EOGlobalID gid = ec.globalIDForObject(eo);
 				ERXKeyGlobalID kgid = ERXKeyGlobalID.globalIDForGID((EOKeyGlobalID) gid);
 				response.setUserID(kgid);
-				if (config.verifyPassword(eo, authRequest.password())) {
+				if(!config.allowLogin(eo)) {
+					response.setAuthenticationFailed(Boolean.TRUE);
+					response.setAuthenticationFailureType(ERTwoFactorAuthenticationFailure.ACCOUNT_LOCKED);
+				} else if (config.verifyPassword(eo, authRequest.password())) {
 					response.setAuthenticationFailed(Boolean.FALSE);
 					ERStageManager.INSTANCE.setActor(eo);
 				} else {

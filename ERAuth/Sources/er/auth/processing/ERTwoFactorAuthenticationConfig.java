@@ -51,4 +51,11 @@ public abstract class ERTwoFactorAuthenticationConfig implements ERAuthenticatio
 	 * @return true if the passwords match
 	 */
 	public abstract boolean verifyPassword(EOEnterpriseObject user, String enteredPassword);
+	
+	/**
+	 * Determines if the user is allowed to log in
+	 * @param eo the user
+	 * @return true if the user is permitted to log in
+	 */
+	public abstract boolean allowLogin(EOEnterpriseObject eo);
 }
