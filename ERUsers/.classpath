@@ -4,10 +4,11 @@
 	<classpathentry exported="true" kind="con" path="WOFramework/ERExtensions"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/ERJars"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/ERPrototypes"/>
-	<classpathentry exported="true" kind="con" path="WOFramework/ERCoreBL"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERJavaMail"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/ERDirectToWeb"/>
-	<classpathentry exported="true" kind="con" path="WOFramework/ERAttributeExtension"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERCoreBL"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/ERAuth"/>
+	<classpathentry exported="true" kind="con" path="WOFramework/ERAttributeExtension"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/JavaWOExtensions"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/JavaDTWGeneration"/>
 	<classpathentry exported="true" kind="con" path="WOFramework/JavaDirectToWeb"/>
