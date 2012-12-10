@@ -17,12 +17,18 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
   public static final String ENTITY_NAME = "ERCMailAddress";
 
   // Attributes
+  public static final ERXKey<NSTimestamp> DATE_LAST_SENT = new ERXKey<NSTimestamp>("dateLastSent");
+  public static final String DATE_LAST_SENT_KEY = DATE_LAST_SENT.key();
   public static final ERXKey<String> EMAIL_ADDRESS = new ERXKey<String>("emailAddress");
   public static final String EMAIL_ADDRESS_KEY = EMAIL_ADDRESS.key();
-  public static final ERXKey<Boolean> IS_ACTIVE = new ERXKey<Boolean>("isActive");
-  public static final String IS_ACTIVE_KEY = IS_ACTIVE.key();
+  public static final ERXKey<er.corebl.mail.ERCMailStopReason> STOP_REASON = new ERXKey<er.corebl.mail.ERCMailStopReason>("stopReason");
+  public static final String STOP_REASON_KEY = STOP_REASON.key();
+  public static final ERXKey<er.corebl.mail.ERCMailAddressVerification> VERIFICATION_STATE = new ERXKey<er.corebl.mail.ERCMailAddressVerification>("verificationState");
+  public static final String VERIFICATION_STATE_KEY = VERIFICATION_STATE.key();
 
   // Relationships
+  public static final ERXKey<er.corebl.model.ERCMailNotification> MAIL_NOTIFICATIONS = new ERXKey<er.corebl.model.ERCMailNotification>("mailNotifications");
+  public static final String MAIL_NOTIFICATIONS_KEY = MAIL_NOTIFICATIONS.key();
   public static final ERXKey<er.corebl.model.ERCMailCategory> OPT_IN_CATEGORIES = new ERXKey<er.corebl.model.ERCMailCategory>("optInCategories");
   public static final String OPT_IN_CATEGORIES_KEY = OPT_IN_CATEGORIES.key();
 
@@ -36,6 +42,17 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
     return er.corebl.model.ERCMailAddress.clazz;
   }
   
+  public NSTimestamp dateLastSent() {
+    return (NSTimestamp) storedValueForKey(_ERCMailAddress.DATE_LAST_SENT_KEY);
+  }
+
+  public void setDateLastSent(NSTimestamp value) {
+    if (_ERCMailAddress.LOG.isDebugEnabled()) {
+    	_ERCMailAddress.LOG.debug( "updating dateLastSent from " + dateLastSent() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERCMailAddress.DATE_LAST_SENT_KEY);
+  }
+
   public String emailAddress() {
     return (String) storedValueForKey(_ERCMailAddress.EMAIL_ADDRESS_KEY);
   }
@@ -47,15 +64,120 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
     takeStoredValueForKey(value, _ERCMailAddress.EMAIL_ADDRESS_KEY);
   }
 
-  public Boolean isActive() {
-    return (Boolean) storedValueForKey(_ERCMailAddress.IS_ACTIVE_KEY);
+  public er.corebl.mail.ERCMailStopReason stopReason() {
+    return (er.corebl.mail.ERCMailStopReason) storedValueForKey(_ERCMailAddress.STOP_REASON_KEY);
   }
 
-  public void setIsActive(Boolean value) {
+  public void setStopReason(er.corebl.mail.ERCMailStopReason value) {
     if (_ERCMailAddress.LOG.isDebugEnabled()) {
-    	_ERCMailAddress.LOG.debug( "updating isActive from " + isActive() + " to " + value);
+    	_ERCMailAddress.LOG.debug( "updating stopReason from " + stopReason() + " to " + value);
     }
-    takeStoredValueForKey(value, _ERCMailAddress.IS_ACTIVE_KEY);
+    takeStoredValueForKey(value, _ERCMailAddress.STOP_REASON_KEY);
+  }
+
+  public er.corebl.mail.ERCMailAddressVerification verificationState() {
+    return (er.corebl.mail.ERCMailAddressVerification) storedValueForKey(_ERCMailAddress.VERIFICATION_STATE_KEY);
+  }
+
+  public void setVerificationState(er.corebl.mail.ERCMailAddressVerification value) {
+    if (_ERCMailAddress.LOG.isDebugEnabled()) {
+    	_ERCMailAddress.LOG.debug( "updating verificationState from " + verificationState() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERCMailAddress.VERIFICATION_STATE_KEY);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications() {
+    return (NSArray<er.corebl.model.ERCMailNotification>)storedValueForKey(_ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier) {
+    return mailNotifications(qualifier, null, false);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier, boolean fetch) {
+    return mailNotifications(qualifier, null, fetch);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<er.corebl.model.ERCMailNotification> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(er.corebl.model.ERCMailNotification.MAIL_ADDRESS_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = er.corebl.model.ERCMailNotification.clazz.objectsMatchingQualifier(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = mailNotifications();
+      if (qualifier != null) {
+        results = (NSArray<er.corebl.model.ERCMailNotification>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<er.corebl.model.ERCMailNotification>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToMailNotifications(er.corebl.model.ERCMailNotification object) {
+    includeObjectIntoPropertyWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+  }
+
+  public void removeFromMailNotifications(er.corebl.model.ERCMailNotification object) {
+    excludeObjectFromPropertyWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+  }
+
+  public void addToMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
+    if (_ERCMailAddress.LOG.isDebugEnabled()) {
+      _ERCMailAddress.LOG.debug("adding " + object + " to mailNotifications relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToMailNotifications(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+    }
+  }
+
+  public void removeFromMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
+    if (_ERCMailAddress.LOG.isDebugEnabled()) {
+      _ERCMailAddress.LOG.debug("removing " + object + " from mailNotifications relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromMailNotifications(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+    }
+  }
+
+  public er.corebl.model.ERCMailNotification createMailNotificationsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( er.corebl.model.ERCMailNotification.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+    return (er.corebl.model.ERCMailNotification) eo;
+  }
+
+  public void deleteMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllMailNotificationsRelationships() {
+    Enumeration<er.corebl.model.ERCMailNotification> objects = mailNotifications().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteMailNotificationsRelationship(objects.nextElement());
+    }
   }
 
   public NSArray<er.corebl.model.ERCMailCategory> optInCategories() {

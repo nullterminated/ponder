@@ -9,10 +9,10 @@ import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 
+import er.corebl.mail.ERCMailAddressVerification;
 import er.corebl.mail.ERCMailRecipientType;
 import er.corebl.mail.ERCMailState;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
-import er.extensions.eof.ERXQ;
 import er.extensions.validation.ERXValidationFactory;
 
 public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
@@ -200,13 +200,51 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 	}
 	
-	public void removeOptOutRecipients() {
-		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.IS_ACTIVE).isFalse();
+	public boolean hasUnverifiedRecipients() {
+		return !unverifiedRecipients().isEmpty();
+	}
+	
+	public NSArray<ERCMailRecipient> unverifiedRecipients() {
+		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.VERIFICATION_STATE).eq(ERCMailAddressVerification.UNVERIFIED);
+		NSArray<ERCMailRecipient> unverified = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+		return unverified;
+	}
+	
+	public boolean hasOptOutRecipients() {
+		return !optOutRecipients().isEmpty();
+	}
+	
+	public NSArray<ERCMailRecipient> optOutRecipients() {
 		if(mailCategory() != null) {
-			q = ERXQ.or(q, ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.OPT_IN_CATEGORIES).containsObject(mailCategory()));
+			EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.OPT_IN_CATEGORIES).containsObject(mailCategory());
+			NSArray<ERCMailRecipient> optOut = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+			return optOut;
 		}
-		NSArray<ERCMailRecipient> optOut = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
-		removeObjectsFromBothSidesOfRelationshipWithKey(optOut, MAIL_RECIPIENTS_KEY);
+		return NSArray.emptyArray();
+	}
+	
+	public void removeOptOutRecipients() {
+		NSArray<ERCMailRecipient> optOut = optOutRecipients();
+		if(!optOut.isEmpty()) {
+			removeObjectsFromBothSidesOfRelationshipWithKey(optOut, MAIL_RECIPIENTS_KEY);
+		}
+	}
+	
+	public boolean hasSuppressedRecipients() {
+		return !suppressedRecipients().isEmpty();
+	}
+	
+	public NSArray<ERCMailRecipient> suppressedRecipients() {
+		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.STOP_REASON).isNotNull();
+		NSArray<ERCMailRecipient> suppressed = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+		return suppressed;
+	}
+	
+	public void removeSuppressedRecipients() {
+		NSArray<ERCMailRecipient> suppressed = suppressedRecipients();
+		if(!suppressed.isEmpty()) {
+			removeObjectsFromBothSidesOfRelationshipWithKey(suppressed, MAIL_RECIPIENTS_KEY);
+		}
 	}
 	
 	public void setHtmlMessage(String value) {

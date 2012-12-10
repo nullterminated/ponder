@@ -7,9 +7,9 @@ import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSMutableArray;
 
+import er.corebl.mail.ERCMailAddressVerification;
 import er.extensions.eof.ERXBatchFetchUtilities;
 import er.extensions.eof.ERXEC;
-import er.extensions.eof.ERXQ;
 import er.extensions.net.ERXEmailValidator;
 import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
@@ -76,7 +76,6 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 				ERXBatchFetchUtilities.batchFetch(addresses, OPT_IN_CATEGORIES_KEY);
 				qualifier = OPT_IN_CATEGORIES.containsObject(category);
 			}
-			qualifier = ERXQ.and(IS_ACTIVE.isTrue(), qualifier);
 			return EOQualifier.filteredArrayWithQualifier(addresses, qualifier);
 		}
 	}
@@ -87,7 +86,7 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 	 */
 	public void init(EOEditingContext ec) {
 		super.init(ec);
-		setIsActive(Boolean.TRUE);
+		setVerificationState(ERCMailAddressVerification.UNVERIFIED);
 	}
 
 	public String validateEmailAddress(String value) {

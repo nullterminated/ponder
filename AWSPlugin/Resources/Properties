@@ -1,0 +1,3 @@
+#mail.transport.protocol=aws
+
+er.javamail.smtpProtocol=aws

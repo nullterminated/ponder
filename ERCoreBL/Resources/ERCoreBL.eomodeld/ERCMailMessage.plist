@@ -39,6 +39,12 @@
         }, 
         {
             allowsNull = Y; 
+            columnName = messageID; 
+            name = messageID; 
+            prototypeName = varchar100; 
+        }, 
+        {
+            allowsNull = Y; 
             columnName = plainClobID; 
             name = plainClobID; 
             prototypeName = longNumber; 
@@ -79,6 +85,7 @@
         htmlClobID, 
         id, 
         mailCategoryID, 
+        messageID, 
         plainClobID, 
         replyToAddressID, 
         state, 
@@ -95,7 +102,9 @@
         htmlClob, 
         mailAttachments, 
         mailCategory, 
+        mailNotifications, 
         mailRecipients, 
+        messageID, 
         plainClob, 
         replyToAddress, 
         state, 
@@ -104,6 +113,13 @@
         xMailer
     ); 
     entityIndexes = (
+        {
+            attributes = (messageID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "ERCMailMessage_messageID_idx"; 
+            order = asc; 
+        }, 
         {
             attributes = (uuid); 
             constraint = distinct; 
@@ -149,6 +165,13 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = id; sourceAttribute = mailCategoryID; }); 
             name = mailCategory; 
+        }, 
+        {
+            destination = ERCMailNotification; 
+            isToMany = Y; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = mailMessageID; sourceAttribute = id; }); 
+            name = mailNotifications; 
         }, 
         {
             deleteRule = EODeleteRuleCascade; 

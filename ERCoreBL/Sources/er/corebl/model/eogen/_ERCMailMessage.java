@@ -23,6 +23,8 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public static final String DATE_SENT_KEY = DATE_SENT.key();
   public static final ERXKey<String> EXCEPTION_REASON = new ERXKey<String>("exceptionReason");
   public static final String EXCEPTION_REASON_KEY = EXCEPTION_REASON.key();
+  public static final ERXKey<String> MESSAGE_ID = new ERXKey<String>("messageID");
+  public static final String MESSAGE_ID_KEY = MESSAGE_ID.key();
   public static final ERXKey<er.corebl.mail.ERCMailState> STATE = new ERXKey<er.corebl.mail.ERCMailState>("state");
   public static final String STATE_KEY = STATE.key();
   public static final ERXKey<String> SUBJECT = new ERXKey<String>("subject");
@@ -41,6 +43,8 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public static final String MAIL_ATTACHMENTS_KEY = MAIL_ATTACHMENTS.key();
   public static final ERXKey<er.corebl.model.ERCMailCategory> MAIL_CATEGORY = new ERXKey<er.corebl.model.ERCMailCategory>("mailCategory");
   public static final String MAIL_CATEGORY_KEY = MAIL_CATEGORY.key();
+  public static final ERXKey<er.corebl.model.ERCMailNotification> MAIL_NOTIFICATIONS = new ERXKey<er.corebl.model.ERCMailNotification>("mailNotifications");
+  public static final String MAIL_NOTIFICATIONS_KEY = MAIL_NOTIFICATIONS.key();
   public static final ERXKey<er.corebl.model.ERCMailRecipient> MAIL_RECIPIENTS = new ERXKey<er.corebl.model.ERCMailRecipient>("mailRecipients");
   public static final String MAIL_RECIPIENTS_KEY = MAIL_RECIPIENTS.key();
   public static final ERXKey<er.corebl.model.ERCMailClob> PLAIN_CLOB = new ERXKey<er.corebl.model.ERCMailClob>("plainClob");
@@ -89,6 +93,17 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     	_ERCMailMessage.LOG.debug( "updating exceptionReason from " + exceptionReason() + " to " + value);
     }
     takeStoredValueForKey(value, _ERCMailMessage.EXCEPTION_REASON_KEY);
+  }
+
+  public String messageID() {
+    return (String) storedValueForKey(_ERCMailMessage.MESSAGE_ID_KEY);
+  }
+
+  public void setMessageID(String value) {
+    if (_ERCMailMessage.LOG.isDebugEnabled()) {
+    	_ERCMailMessage.LOG.debug( "updating messageID from " + messageID() + " to " + value);
+    }
+    takeStoredValueForKey(value, _ERCMailMessage.MESSAGE_ID_KEY);
   }
 
   public er.corebl.mail.ERCMailState state() {
@@ -345,6 +360,100 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     Enumeration<er.corebl.model.ERCMailAttachment> objects = mailAttachments().immutableClone().objectEnumerator();
     while (objects.hasMoreElements()) {
       deleteMailAttachmentsRelationship(objects.nextElement());
+    }
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications() {
+    return (NSArray<er.corebl.model.ERCMailNotification>)storedValueForKey(_ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier) {
+    return mailNotifications(qualifier, null, false);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier, boolean fetch) {
+    return mailNotifications(qualifier, null, fetch);
+  }
+
+  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<er.corebl.model.ERCMailNotification> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(er.corebl.model.ERCMailNotification.MAIL_MESSAGE_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = er.corebl.model.ERCMailNotification.clazz.objectsMatchingQualifier(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = mailNotifications();
+      if (qualifier != null) {
+        results = (NSArray<er.corebl.model.ERCMailNotification>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<er.corebl.model.ERCMailNotification>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToMailNotifications(er.corebl.model.ERCMailNotification object) {
+    includeObjectIntoPropertyWithKey(object, _ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+  }
+
+  public void removeFromMailNotifications(er.corebl.model.ERCMailNotification object) {
+    excludeObjectFromPropertyWithKey(object, _ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+  }
+
+  public void addToMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
+    if (_ERCMailMessage.LOG.isDebugEnabled()) {
+      _ERCMailMessage.LOG.debug("adding " + object + " to mailNotifications relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToMailNotifications(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+    }
+  }
+
+  public void removeFromMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
+    if (_ERCMailMessage.LOG.isDebugEnabled()) {
+      _ERCMailMessage.LOG.debug("removing " + object + " from mailNotifications relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromMailNotifications(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+    }
+  }
+
+  public er.corebl.model.ERCMailNotification createMailNotificationsRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( er.corebl.model.ERCMailNotification.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+    return (er.corebl.model.ERCMailNotification) eo;
+  }
+
+  public void deleteMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailMessage.MAIL_NOTIFICATIONS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllMailNotificationsRelationships() {
+    Enumeration<er.corebl.model.ERCMailNotification> objects = mailNotifications().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteMailNotificationsRelationship(objects.nextElement());
     }
   }
 
