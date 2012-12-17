@@ -9,6 +9,7 @@ import com.webobjects.appserver.WOResponse;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
+import com.webobjects.foundation.NSMutableArray;
 
 import er.awsplugin.enums.SESNotificationType;
 import er.corebl.mail.ERCMailState;
@@ -18,7 +19,6 @@ import er.corebl.model.ERCMailMessage;
 import er.extensions.appserver.ERXApplication;
 import er.extensions.appserver.ERXDirectAction;
 import er.extensions.eof.ERXEC;
-import er.extensions.foundation.ERXProperties;
 import er.extensions.foundation.ERXPropertyListSerialization;
 
 public class SESAction extends ERXDirectAction {
@@ -94,15 +94,16 @@ public class SESAction extends ERXDirectAction {
 	public WOActionResults testMessagesAction() {
 		WOResponse response = new WOResponse();
 		EOEditingContext ec = ERXEC.newEditingContext();
+		String from = request().stringFormValueForKey("from");
+		NSMutableArray<ERCMailMessage> messages = new NSMutableArray<ERCMailMessage>();
 		try {
-			String from = fromAddress();
-			simpleMessage(ec, "success@simulator.amazonses.com", from, "Test Success", "Testing Success");
-			simpleMessage(ec, "bounce@simulator.amazonses.com", from, "Test Bounce", "Testing Bounce");
-			simpleMessage(ec, "ooto@simulator.amazonses.com", from, "Test OOTO", "Testing OOTO");
-			simpleMessage(ec, "complaint@simulator.amazonses.com", from, "Test Complaint", "Testing Complaint");
-			simpleMessage(ec, "blacklist@simulator.amazonses.com", from, "Test Blacklist", "Testing Blacklist");
+			messages.add(simpleMessage(ec, "success@simulator.amazonses.com", from, "Test Success", "Testing Success"));
+			messages.add(simpleMessage(ec, "bounce@simulator.amazonses.com", from, "Test Bounce", "Testing Bounce"));
+			messages.add(simpleMessage(ec, "ooto@simulator.amazonses.com", from, "Test OOTO", "Testing OOTO"));
+			messages.add(simpleMessage(ec, "complaint@simulator.amazonses.com", from, "Test Complaint", "Testing Complaint"));
+			messages.add(simpleMessage(ec, "blacklist@simulator.amazonses.com", from, "Test Blacklist", "Testing Blacklist"));
 			ec.saveChanges();
-			ERCMailer.INSTANCE.processOutgoingMail();
+			ERCMailer.INSTANCE.sendMailMessages(messages);
 			response.setStatus(200);
 			response.setContent("OK");
 		} catch (Exception e) {
@@ -111,10 +112,6 @@ public class SESAction extends ERXDirectAction {
 			log.error("Error sending test messages", e);
 		}
 		return response;
-	}
-	
-	private String fromAddress() {
-		return ERXProperties.stringForKey("er.awsplugin.testMessages.senderAddress");
 	}
 	
 	private ERCMailMessage simpleMessage(EOEditingContext ec, String to, String from, String subject, String message) {
