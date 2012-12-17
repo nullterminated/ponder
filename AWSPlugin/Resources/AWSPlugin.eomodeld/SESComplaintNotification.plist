@@ -1,0 +1,123 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = arrivalDate; 
+            name = arrivalDate; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            columnName = awsFeedbackID; 
+            name = awsFeedbackID; 
+            prototypeName = varchar100; 
+            width = 60; 
+        }, 
+        {
+            columnName = awsMessageID; 
+            name = awsMessageID; 
+            prototypeName = varchar100; 
+            width = 60; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = complaintFeedbackType; 
+            name = complaintFeedbackType; 
+            prototypeName = varchar50; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = mailAddressID; 
+            name = mailAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = mailMessageID; 
+            name = mailMessageID; 
+            prototypeName = longNumber; 
+        }, 
+        {columnName = mailTimestamp; name = mailTimestamp; prototypeName = dateTime; }, 
+        {
+            columnName = notificationTimestamp; 
+            name = notificationTimestamp; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            columnName = notificationType; 
+            name = notificationType; 
+            prototypeName = varchar10; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = sourceAddressID; 
+            name = sourceAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = userAgent; 
+            name = userAgent; 
+            prototypeName = varchar255; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        arrivalDate, 
+        awsFeedbackID, 
+        awsMessageID, 
+        complaintFeedbackType, 
+        id, 
+        mailAddressID, 
+        mailMessageID, 
+        mailTimestamp, 
+        notificationTimestamp, 
+        notificationType, 
+        sourceAddressID, 
+        userAgent
+    ); 
+    className = "er.awsplugin.model.SESComplaintNotification"; 
+    classProperties = (
+        arrivalDate, 
+        awsFeedbackID, 
+        awsMessageID, 
+        complaintFeedbackType, 
+        mailAddress, 
+        mailMessage, 
+        mailTimestamp, 
+        notificationTimestamp, 
+        notificationType, 
+        sourceAddress, 
+        userAgent
+    ); 
+    externalName = SESNotification; 
+    fetchSpecificationDictionary = {}; 
+    name = SESComplaintNotification; 
+    parent = SESNotification; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailAddressID; }); 
+            name = mailAddress; 
+        }, 
+        {
+            destination = ERCMailMessage; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailMessageID; }); 
+            name = mailMessage; 
+        }, 
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = sourceAddressID; }); 
+            name = sourceAddress; 
+        }
+    ); 
+    restrictingQualifier = "notificationType = 'COMPLAINT'"; 
+}

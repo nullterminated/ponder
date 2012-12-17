@@ -27,8 +27,6 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
   public static final String VERIFICATION_STATE_KEY = VERIFICATION_STATE.key();
 
   // Relationships
-  public static final ERXKey<er.corebl.model.ERCMailNotification> MAIL_NOTIFICATIONS = new ERXKey<er.corebl.model.ERCMailNotification>("mailNotifications");
-  public static final String MAIL_NOTIFICATIONS_KEY = MAIL_NOTIFICATIONS.key();
   public static final ERXKey<er.corebl.model.ERCMailCategory> OPT_IN_CATEGORIES = new ERXKey<er.corebl.model.ERCMailCategory>("optInCategories");
   public static final String OPT_IN_CATEGORIES_KEY = OPT_IN_CATEGORIES.key();
 
@@ -84,100 +82,6 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
     	_ERCMailAddress.LOG.debug( "updating verificationState from " + verificationState() + " to " + value);
     }
     takeStoredValueForKey(value, _ERCMailAddress.VERIFICATION_STATE_KEY);
-  }
-
-  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications() {
-    return (NSArray<er.corebl.model.ERCMailNotification>)storedValueForKey(_ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-  }
-
-  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier) {
-    return mailNotifications(qualifier, null, false);
-  }
-
-  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier, boolean fetch) {
-    return mailNotifications(qualifier, null, fetch);
-  }
-
-  public NSArray<er.corebl.model.ERCMailNotification> mailNotifications(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
-    NSArray<er.corebl.model.ERCMailNotification> results;
-    if (fetch) {
-      EOQualifier fullQualifier;
-      EOQualifier inverseQualifier = new EOKeyValueQualifier(er.corebl.model.ERCMailNotification.MAIL_ADDRESS_KEY, EOQualifier.QualifierOperatorEqual, this);
-    	
-      if (qualifier == null) {
-        fullQualifier = inverseQualifier;
-      }
-      else {
-        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
-        qualifiers.addObject(qualifier);
-        qualifiers.addObject(inverseQualifier);
-        fullQualifier = new EOAndQualifier(qualifiers);
-      }
-
-      results = er.corebl.model.ERCMailNotification.clazz.objectsMatchingQualifier(editingContext(), fullQualifier, sortOrderings);
-    }
-    else {
-      results = mailNotifications();
-      if (qualifier != null) {
-        results = (NSArray<er.corebl.model.ERCMailNotification>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
-      }
-      if (sortOrderings != null) {
-        results = (NSArray<er.corebl.model.ERCMailNotification>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
-      }
-    }
-    return results;
-  }
-  
-  public void addToMailNotifications(er.corebl.model.ERCMailNotification object) {
-    includeObjectIntoPropertyWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-  }
-
-  public void removeFromMailNotifications(er.corebl.model.ERCMailNotification object) {
-    excludeObjectFromPropertyWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-  }
-
-  public void addToMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
-    if (_ERCMailAddress.LOG.isDebugEnabled()) {
-      _ERCMailAddress.LOG.debug("adding " + object + " to mailNotifications relationship");
-    }
-    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
-    	addToMailNotifications(object);
-    }
-    else {
-    	addObjectToBothSidesOfRelationshipWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-    }
-  }
-
-  public void removeFromMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
-    if (_ERCMailAddress.LOG.isDebugEnabled()) {
-      _ERCMailAddress.LOG.debug("removing " + object + " from mailNotifications relationship");
-    }
-    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
-    	removeFromMailNotifications(object);
-    }
-    else {
-    	removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-    }
-  }
-
-  public er.corebl.model.ERCMailNotification createMailNotificationsRelationship() {
-    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( er.corebl.model.ERCMailNotification.ENTITY_NAME );
-    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
-    editingContext().insertObject(eo);
-    addObjectToBothSidesOfRelationshipWithKey(eo, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-    return (er.corebl.model.ERCMailNotification) eo;
-  }
-
-  public void deleteMailNotificationsRelationship(er.corebl.model.ERCMailNotification object) {
-    removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailAddress.MAIL_NOTIFICATIONS_KEY);
-    editingContext().deleteObject(object);
-  }
-
-  public void deleteAllMailNotificationsRelationships() {
-    Enumeration<er.corebl.model.ERCMailNotification> objects = mailNotifications().immutableClone().objectEnumerator();
-    while (objects.hasMoreElements()) {
-      deleteMailNotificationsRelationship(objects.nextElement());
-    }
   }
 
   public NSArray<er.corebl.model.ERCMailCategory> optInCategories() {

@@ -1,10 +1,10 @@
-package er.corebl.model;
+package er.awsplugin.model;
 
 import org.apache.log4j.Logger;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
-public class ERCMailNotification extends er.corebl.model.eogen._ERCMailNotification {
+public class SESBounceNotification extends er.awsplugin.model.eogen._SESBounceNotification {
 	/**
 	 * Do I need to update serialVersionUID?
 	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
@@ -13,10 +13,12 @@ public class ERCMailNotification extends er.corebl.model.eogen._ERCMailNotificat
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCMailNotification.class);
+	private static final Logger log = Logger.getLogger(SESBounceNotification.class);
 
-    public static final ERCMailNotificationClazz<ERCMailNotification> clazz = new ERCMailNotificationClazz<ERCMailNotification>();
-    public static class ERCMailNotificationClazz<T extends ERCMailNotification> extends er.corebl.model.eogen._ERCMailNotification._ERCMailNotificationClazz<T> {
+	public static final String NOTIFICATION_TYPE = "BOUNCE";
+
+	public static final SESBounceNotificationClazz<SESBounceNotification> clazz = new SESBounceNotificationClazz<SESBounceNotification>();
+    public static class SESBounceNotificationClazz<T extends SESBounceNotification> extends er.awsplugin.model.eogen._SESBounceNotification._SESBounceNotificationClazz<T> {
         /* more clazz methods here */
     }
 
@@ -28,4 +30,7 @@ public class ERCMailNotification extends er.corebl.model.eogen._ERCMailNotificat
         super.init(ec);
     }
 
+    public String typeString() {
+    	return NOTIFICATION_TYPE;
+    }
 }

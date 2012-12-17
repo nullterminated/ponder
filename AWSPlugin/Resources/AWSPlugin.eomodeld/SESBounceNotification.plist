@@ -1,0 +1,142 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = action; 
+            name = action; 
+            prototypeName = varchar16; 
+        }, 
+        {
+            columnName = awsFeedbackID; 
+            name = awsFeedbackID; 
+            prototypeName = varchar100; 
+            width = 60; 
+        }, 
+        {
+            columnName = awsMessageID; 
+            name = awsMessageID; 
+            prototypeName = varchar100; 
+            width = 60; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = bounceSubType; 
+            name = bounceSubType; 
+            prototypeName = varchar50; 
+        }, 
+        {columnName = bounceType; name = bounceType; prototypeName = varchar10; }, 
+        {
+            allowsNull = Y; 
+            columnName = diagnosticCode; 
+            name = diagnosticCode; 
+            prototypeName = varchar255; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = mailAddressID; 
+            name = mailAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = mailMessageID; 
+            name = mailMessageID; 
+            prototypeName = longNumber; 
+        }, 
+        {columnName = mailTimestamp; name = mailTimestamp; prototypeName = dateTime; }, 
+        {
+            columnName = notificationTimestamp; 
+            name = notificationTimestamp; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            columnName = notificationType; 
+            name = notificationType; 
+            prototypeName = varchar10; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = reportingMTA; 
+            name = reportingMTA; 
+            prototypeName = varchar255; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = sourceAddressID; 
+            name = sourceAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = status; 
+            name = status; 
+            prototypeName = varchar16; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        action, 
+        awsFeedbackID, 
+        awsMessageID, 
+        bounceSubType, 
+        bounceType, 
+        diagnosticCode, 
+        id, 
+        mailAddressID, 
+        mailMessageID, 
+        mailTimestamp, 
+        notificationTimestamp, 
+        notificationType, 
+        reportingMTA, 
+        sourceAddressID, 
+        status
+    ); 
+    className = "er.awsplugin.model.SESBounceNotification"; 
+    classProperties = (
+        action, 
+        awsFeedbackID, 
+        awsMessageID, 
+        bounceSubType, 
+        bounceType, 
+        diagnosticCode, 
+        mailAddress, 
+        mailMessage, 
+        mailTimestamp, 
+        notificationTimestamp, 
+        notificationType, 
+        reportingMTA, 
+        sourceAddress, 
+        status
+    ); 
+    externalName = SESNotification; 
+    fetchSpecificationDictionary = {}; 
+    name = SESBounceNotification; 
+    parent = SESNotification; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailAddressID; }); 
+            name = mailAddress; 
+        }, 
+        {
+            destination = ERCMailMessage; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailMessageID; }); 
+            name = mailMessage; 
+        }, 
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = sourceAddressID; }); 
+            name = sourceAddress; 
+        }
+    ); 
+    restrictingQualifier = "notificationType = 'BOUNCE'"; 
+}

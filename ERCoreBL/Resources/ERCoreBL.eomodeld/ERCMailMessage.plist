@@ -102,7 +102,6 @@
         htmlClob, 
         mailAttachments, 
         mailCategory, 
-        mailNotifications, 
         mailRecipients, 
         messageID, 
         plainClob, 
@@ -165,13 +164,6 @@
             joinSemantic = EOInnerJoin; 
             joins = ({destinationAttribute = id; sourceAttribute = mailCategoryID; }); 
             name = mailCategory; 
-        }, 
-        {
-            destination = ERCMailNotification; 
-            isToMany = Y; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = mailMessageID; sourceAttribute = id; }); 
-            name = mailNotifications; 
         }, 
         {
             deleteRule = EODeleteRuleCascade; 

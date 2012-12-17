@@ -29,14 +29,7 @@
     ); 
     attributesUsedForLocking = (dateLastSent, emailAddress, id, stopReason, verificationState); 
     className = "er.corebl.model.ERCMailAddress"; 
-    classProperties = (
-        dateLastSent, 
-        emailAddress, 
-        mailNotifications, 
-        optInCategories, 
-        stopReason, 
-        verificationState
-    ); 
+    classProperties = (dateLastSent, emailAddress, optInCategories, stopReason, verificationState); 
     entityIndexes = (
         {
             attributes = (emailAddress); 
@@ -59,13 +52,6 @@
             joins = ({destinationAttribute = ercMailAddressId; sourceAttribute = id; }); 
             name = ercMailAddressCategoryPreferences; 
             propagatesPrimaryKey = Y; 
-        }, 
-        {
-            destination = ERCMailNotification; 
-            isToMany = Y; 
-            joinSemantic = EOInnerJoin; 
-            joins = ({destinationAttribute = mailAddressID; sourceAttribute = id; }); 
-            name = mailNotifications; 
         }, 
         {
             definition = "ercMailAddressCategoryPreferences.ercMailCategory"; 

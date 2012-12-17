@@ -1,0 +1,107 @@
+{
+    attributes = (
+        {
+            columnName = awsFeedbackID; 
+            name = awsFeedbackID; 
+            prototypeName = varchar100; 
+            width = 60; 
+        }, 
+        {
+            columnName = awsMessageID; 
+            name = awsMessageID; 
+            prototypeName = varchar100; 
+            width = 60; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = mailAddressID; 
+            name = mailAddressID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = mailMessageID; 
+            name = mailMessageID; 
+            prototypeName = longNumber; 
+        }, 
+        {columnName = mailTimestamp; name = mailTimestamp; prototypeName = dateTime; }, 
+        {
+            columnName = notificationTimestamp; 
+            name = notificationTimestamp; 
+            prototypeName = dateTime; 
+        }, 
+        {
+            columnName = notificationType; 
+            name = notificationType; 
+            prototypeName = varchar10; 
+        }, 
+        {
+            allowsNull = N; 
+            columnName = sourceAddressID; 
+            name = sourceAddressID; 
+            prototypeName = longNumber; 
+        }
+    ); 
+    attributesUsedForLocking = (
+        awsFeedbackID, 
+        awsMessageID, 
+        id, 
+        mailAddressID, 
+        mailMessageID, 
+        mailTimestamp, 
+        notificationTimestamp, 
+        notificationType, 
+        sourceAddressID
+    ); 
+    className = "er.awsplugin.model.SESNotification"; 
+    classProperties = (
+        awsFeedbackID, 
+        awsMessageID, 
+        mailAddress, 
+        mailMessage, 
+        mailTimestamp, 
+        notificationTimestamp, 
+        notificationType, 
+        sourceAddress
+    ); 
+    entityIndexes = (
+        {
+            attributes = (awsMessageID); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "awsMessageID_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = SESNotification; 
+    fetchSpecificationDictionary = {}; 
+    isAbstractEntity = Y; 
+    name = SESNotification; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailAddressID; }); 
+            name = mailAddress; 
+        }, 
+        {
+            destination = ERCMailMessage; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailMessageID; }); 
+            name = mailMessage; 
+        }, 
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = sourceAddressID; }); 
+            name = sourceAddress; 
+        }
+    ); 
+}

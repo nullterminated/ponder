@@ -1,0 +1,17 @@
+{
+    EOModelVersion = "2.1"; 
+    adaptorName = JDBC; 
+    entities = (
+        {
+            className = "er.awsplugin.model.SESBounceNotification"; 
+            name = SESBounceNotification; 
+            parent = SESNotification; 
+        }, 
+        {
+            className = "er.awsplugin.model.SESComplaintNotification"; 
+            name = SESComplaintNotification; 
+            parent = SESNotification; 
+        }, 
+        {className = "er.awsplugin.model.SESNotification"; name = SESNotification; }
+    ); 
+}

@@ -11,10 +11,6 @@
         {className = "er.corebl.model.ERCMailCategory"; name = ERCMailCategory; }, 
         {className = "er.corebl.model.ERCMailClob"; name = ERCMailClob; }, 
         {className = "er.corebl.model.ERCMailMessage"; name = ERCMailMessage; }, 
-        {
-            className = "er.corebl.model.ERCMailNotification"; 
-            name = ERCMailNotification; 
-        }, 
         {className = "er.corebl.model.ERCMailRecipient"; name = ERCMailRecipient; }, 
         {className = "er.corebl.model.ERCPreference"; name = ERCPreference; }
     ); 
