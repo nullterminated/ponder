@@ -25,7 +25,7 @@ public abstract class _SESBounceNotification extends er.awsplugin.model.SESNotif
   public static final String AWS_MESSAGE_ID_KEY = AWS_MESSAGE_ID.key();
   public static final ERXKey<String> BOUNCE_SUB_TYPE = new ERXKey<String>("bounceSubType");
   public static final String BOUNCE_SUB_TYPE_KEY = BOUNCE_SUB_TYPE.key();
-  public static final ERXKey<String> BOUNCE_TYPE = new ERXKey<String>("bounceType");
+  public static final ERXKey<er.awsplugin.enums.SESBounceType> BOUNCE_TYPE = new ERXKey<er.awsplugin.enums.SESBounceType>("bounceType");
   public static final String BOUNCE_TYPE_KEY = BOUNCE_TYPE.key();
   public static final ERXKey<String> DIAGNOSTIC_CODE = new ERXKey<String>("diagnosticCode");
   public static final String DIAGNOSTIC_CODE_KEY = DIAGNOSTIC_CODE.key();
@@ -80,11 +80,11 @@ public abstract class _SESBounceNotification extends er.awsplugin.model.SESNotif
     takeStoredValueForKey(value, _SESBounceNotification.BOUNCE_SUB_TYPE_KEY);
   }
 
-  public String bounceType() {
-    return (String) storedValueForKey(_SESBounceNotification.BOUNCE_TYPE_KEY);
+  public er.awsplugin.enums.SESBounceType bounceType() {
+    return (er.awsplugin.enums.SESBounceType) storedValueForKey(_SESBounceNotification.BOUNCE_TYPE_KEY);
   }
 
-  public void setBounceType(String value) {
+  public void setBounceType(er.awsplugin.enums.SESBounceType value) {
     if (_SESBounceNotification.LOG.isDebugEnabled()) {
     	_SESBounceNotification.LOG.debug( "updating bounceType from " + bounceType() + " to " + value);
     }

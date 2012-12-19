@@ -18,13 +18,14 @@
             prototypeName = varchar100; 
             width = 60; 
         }, 
+        {columnName = bounceSubType; name = bounceSubType; prototypeName = varchar50; }, 
         {
-            allowsNull = Y; 
-            columnName = bounceSubType; 
-            name = bounceSubType; 
-            prototypeName = varchar50; 
+            columnName = bounceType; 
+            name = bounceType; 
+            prototypeName = javaEnum; 
+            valueClassName = "er.awsplugin.enums.SESBounceType"; 
+            width = 10; 
         }, 
-        {columnName = bounceType; name = bounceType; prototypeName = varchar10; }, 
         {
             allowsNull = Y; 
             columnName = diagnosticCode; 
