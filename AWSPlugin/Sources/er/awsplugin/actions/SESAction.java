@@ -54,7 +54,9 @@ public class SESAction extends ERXDirectAction {
 				}
 				return;
 			} else if("Notification".equals(type)) {
-				String notificationType = (String) dict.objectForKey("Message.notificationType");
+				String jsonString = (String) dict.objectForKey("Message");
+				dict = ERXPropertyListSerialization.dictionaryForJSONString(jsonString);
+				String notificationType = (String) dict.objectForKey("notificationType");
 				SESNotificationType sesType;
 				try {
 					sesType = SESNotificationType.valueOf(notificationType.toUpperCase());
