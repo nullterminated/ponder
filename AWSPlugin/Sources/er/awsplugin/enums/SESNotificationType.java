@@ -143,7 +143,7 @@ public enum SESNotificationType {
 	}
 
 	public static void setDelegate(Delegate delegate) {
-		SESNotificationType._delegate = delegate;
+		_delegate = delegate;
 	}
 
 	public static interface Delegate {
