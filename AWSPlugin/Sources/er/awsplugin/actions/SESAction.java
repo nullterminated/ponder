@@ -3,6 +3,11 @@ package er.awsplugin.actions;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
@@ -34,26 +39,42 @@ public class SESAction extends ERXDirectAction {
 	private static class NotificationProcessor {
 		public void run(String json) {
 			NSDictionary<String, Object> dict = ERXPropertyListSerialization.dictionaryForJSONString(json);
-			String notificationType = (String) dict.objectForKey("notificationType");
-			SESNotificationType type;
-			try {
-				type = SESNotificationType.valueOf(notificationType.toUpperCase());
-			} catch (RuntimeException e) {
-				reportException(e,json);
+			String type = (String) dict.objectForKey("Type");
+			if("SubscriptionConfirmation".equals(type)) {
+				String subscribeURL = (String) dict.objectForKey("SubscribeURL");
+				HttpClient client = new DefaultHttpClient();
+				HttpGet get = new HttpGet(subscribeURL);
+				try {
+					HttpResponse response = client.execute(get);
+					if(response.getStatusLine().getStatusCode() >= 300) {
+						log.error("Error subscribing to notifications with url: " + subscribeURL);
+					}
+				} catch (Exception e) {
+					log.error("Error subscribing to notifications with url: " + subscribeURL, e);
+				}
 				return;
-			}
-			
-			EOEditingContext ec = ERXEC.newEditingContext();
-			ec.lock();
-			try {
-				type.createNotificationRecords(ec, dict);
+			} else if("Notification".equals(type)) {
+				String notificationType = (String) dict.objectForKey("Message.notificationType");
+				SESNotificationType sesType;
+				try {
+					sesType = SESNotificationType.valueOf(notificationType.toUpperCase());
+				} catch (RuntimeException e) {
+					reportException(e,json);
+					return;
+				}
 				
-				ec.saveChanges();
-			} catch (Exception e) {
-				reportException(e, json);
-			} finally {
-				ec.unlock();
-				ec.dispose();
+				EOEditingContext ec = ERXEC.newEditingContext();
+				ec.lock();
+				try {
+					sesType.createNotificationRecords(ec, dict);
+					
+					ec.saveChanges();
+				} catch (Exception e) {
+					reportException(e, json);
+				} finally {
+					ec.unlock();
+					ec.dispose();
+				}
 			}
 		}
 		

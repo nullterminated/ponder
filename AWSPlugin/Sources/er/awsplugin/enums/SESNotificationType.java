@@ -21,32 +21,33 @@ public enum SESNotificationType {
 		@Override
 		public void createNotificationRecords(EOEditingContext ec, NSDictionary<String, Object> json) {
 			NSArray<NSDictionary<String, Object>> recipients = 
-					(NSArray<NSDictionary<String, Object>>) json.valueForKeyPath("bounce.bouncedRecipients");
+					(NSArray<NSDictionary<String, Object>>) json.valueForKeyPath("Message.bounce.bouncedRecipients");
 			SimpleDateFormat format = new SimpleDateFormat(JSON_DATE_FORMAT_STRING);
 			
 			for(NSDictionary<String, Object> recipientDict : recipients) {
 				SESBounceNotification notification = SESBounceNotification.clazz.createAndInsertObject(ec);
-				String email = (String) recipientDict.valueForKey("emailAddress");
+				String email = (String) recipientDict.valueForKey("Message.emailAddress");
 				ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
 				address.setStopReason(reasonForType());
 				notification.setMailAddressRelationship(address);
-				email = (String) json.valueForKeyPath("mail.source");
+				email = (String) json.valueForKeyPath("Message.mail.source");
 				address = ERCMailAddress.clazz.addressForEmailString(ec, email);
 				notification.setSourceAddressRelationship(address);
 
 				notification.setStatus((String) recipientDict.valueForKey("status"));
 				notification.setAction((String) recipientDict.valueForKey("action"));
 				notification.setDiagnosticCode((String) recipientDict.valueForKey("diagnosticCode"));
-				notification.setReportingMTA((String) json.valueForKeyPath("bounce.reportingMTA"));
-				notification.setBounceType((String) json.valueForKeyPath("bounce.bounceType"));
-				notification.setBounceSubType((String) json.valueForKeyPath("bounce.bounceSubType"));
+				notification.setReportingMTA((String) json.valueForKeyPath("Message.bounce.reportingMTA"));
+				String bounceTypeString = (String) json.valueForKeyPath("Message.bounce.bounceType");
+				notification.setBounceType(SESBounceType.typeForString(bounceTypeString));
+				notification.setBounceSubType((String) json.valueForKeyPath("Message.bounce.bounceSubType"));
 
-				notification.setAwsFeedbackID((String) json.valueForKeyPath("bounce.feedbackId"));
-				String messageId = (String) json.valueForKeyPath("mail.messageId");
+				notification.setAwsFeedbackID((String) json.valueForKeyPath("Message.Message.bounce.feedbackId"));
+				String messageId = (String) json.valueForKeyPath("Message.mail.messageId");
 				notification.setAwsMessageID(messageId);
 				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.MESSAGE_ID_KEY, messageId);
 				notification.setMailMessageRelationship(message);
-				String dateString = (String) json.valueForKeyPath("bounce.timestamp");
+				String dateString = (String) json.valueForKeyPath("Message.bounce.timestamp");
 				Date date;
 				try {
 					date = format.parse(dateString);
@@ -54,7 +55,7 @@ public enum SESNotificationType {
 					throw NSForwardException._runtimeExceptionForThrowable(e);
 				}
 				notification.setNotificationTimestamp(new NSTimestamp(date));
-				dateString = (String) json.valueForKeyPath("mail.timestamp");
+				dateString = (String) json.valueForKeyPath("Message.mail.timestamp");
 				try {
 					date = format.parse(dateString);
 				} catch (ParseException e) {
@@ -68,7 +69,7 @@ public enum SESNotificationType {
 		@Override
 		public void createNotificationRecords(EOEditingContext ec, NSDictionary<String, Object> json) {
 			NSArray<NSDictionary<String, Object>> recipients = 
-					(NSArray<NSDictionary<String, Object>>) json.valueForKeyPath("complaint.complainedRecipients");
+					(NSArray<NSDictionary<String, Object>>) json.valueForKeyPath("Message.complaint.complainedRecipients");
 			SimpleDateFormat format = new SimpleDateFormat(JSON_DATE_FORMAT_STRING);
 			
 			for(NSDictionary<String, Object> recipientDict : recipients) {
@@ -77,13 +78,13 @@ public enum SESNotificationType {
 				ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
 				address.setStopReason(reasonForType());
 				notification.setMailAddressRelationship(address);
-				email = (String) json.valueForKeyPath("mail.source");
+				email = (String) json.valueForKeyPath("Message.mail.source");
 				address = ERCMailAddress.clazz.addressForEmailString(ec, email);
 				notification.setSourceAddressRelationship(address);
 				
-				notification.setUserAgent((String) json.valueForKeyPath("complaint.userAgent"));
-				notification.setComplaintFeedbackType((String) json.valueForKeyPath("complaint.complaintFeedbackType"));
-				String dateString = (String) json.valueForKeyPath("complaint.arrivalDate");
+				notification.setUserAgent((String) json.valueForKeyPath("Message.complaint.userAgent"));
+				notification.setComplaintFeedbackType((String) json.valueForKeyPath("Message.complaint.complaintFeedbackType"));
+				String dateString = (String) json.valueForKeyPath("Message.complaint.arrivalDate");
 				Date date;
 				try {
 					date = format.parse(dateString);
@@ -92,19 +93,19 @@ public enum SESNotificationType {
 				}
 				notification.setArrivalDate(new NSTimestamp(date));
 				
-				notification.setAwsFeedbackID((String) json.valueForKeyPath("complaint.feedbackId"));
-				String messageId = (String) json.valueForKeyPath("mail.messageId");
+				notification.setAwsFeedbackID((String) json.valueForKeyPath("Message.complaint.feedbackId"));
+				String messageId = (String) json.valueForKeyPath("Message.mail.messageId");
 				notification.setAwsMessageID(messageId);
 				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.MESSAGE_ID_KEY, messageId);
 				notification.setMailMessageRelationship(message);
-				dateString = (String) json.valueForKeyPath("complaint.timestamp");
+				dateString = (String) json.valueForKeyPath("Message.complaint.timestamp");
 				try {
 					date = format.parse(dateString);
 				} catch (ParseException e) {
 					throw NSForwardException._runtimeExceptionForThrowable(e);
 				}
 				notification.setNotificationTimestamp(new NSTimestamp(date));
-				dateString = (String) json.valueForKeyPath("mail.timestamp");
+				dateString = (String) json.valueForKeyPath("Message.mail.timestamp");
 				try {
 					date = format.parse(dateString);
 				} catch (ParseException e) {
