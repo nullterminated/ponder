@@ -12,6 +12,7 @@ import com.webobjects.foundation.NSTimestamp;
 
 import er.awsplugin.model.SESBounceNotification;
 import er.awsplugin.model.SESComplaintNotification;
+import er.awsplugin.model.SESNotification;
 import er.corebl.mail.ERCMailStopReason;
 import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCMailMessage;
@@ -28,7 +29,6 @@ public enum SESNotificationType {
 				SESBounceNotification notification = SESBounceNotification.clazz.createAndInsertObject(ec);
 				String email = (String) recipientDict.valueForKey("Message.emailAddress");
 				ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-				address.setStopReason(reasonForType());
 				notification.setMailAddressRelationship(address);
 				email = (String) json.valueForKeyPath("Message.mail.source");
 				address = ERCMailAddress.clazz.addressForEmailString(ec, email);
@@ -62,6 +62,10 @@ public enum SESNotificationType {
 					throw NSForwardException._runtimeExceptionForThrowable(e);
 				}
 				notification.setMailTimestamp(new NSTimestamp(date));
+				
+				if(delegate() == null || !delegate().delegateHandledNotification(this, notification, address)) {
+					address.setStopReason(reasonForType());
+				}
 			}
 		}
 	},
@@ -76,7 +80,6 @@ public enum SESNotificationType {
 				SESComplaintNotification notification = SESComplaintNotification.clazz.createAndInsertObject(ec);
 				String email = (String) recipientDict.valueForKey("emailAddress");
 				ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-				address.setStopReason(reasonForType());
 				notification.setMailAddressRelationship(address);
 				email = (String) json.valueForKeyPath("Message.mail.source");
 				address = ERCMailAddress.clazz.addressForEmailString(ec, email);
@@ -112,6 +115,10 @@ public enum SESNotificationType {
 					throw NSForwardException._runtimeExceptionForThrowable(e);
 				}
 				notification.setMailTimestamp(new NSTimestamp(date));
+
+				if(delegate() == null || !delegate().delegateHandledNotification(this, notification, address)) {
+					address.setStopReason(reasonForType());
+				}
 			}
 		}
 	};
@@ -119,6 +126,7 @@ public enum SESNotificationType {
 	private static final String JSON_DATE_FORMAT_STRING = "yyyy-MM-ddThh:mm:ss.SSSZ";
 	
 	private final ERCMailStopReason _reason;
+	private static Delegate _delegate;
 	
 	private SESNotificationType(ERCMailStopReason reason) {
 		_reason = reason;
@@ -129,4 +137,25 @@ public enum SESNotificationType {
 	}
 
 	public abstract void createNotificationRecords(EOEditingContext ec, NSDictionary<String, Object> json);
+
+	public static Delegate delegate() {
+		return _delegate;
+	}
+
+	public static void setDelegate(Delegate delegate) {
+		SESNotificationType._delegate = delegate;
+	}
+
+	public static interface Delegate {
+		/**
+		 * Provides a place to override default behavior.
+		 * 
+		 * @param type the notification type
+		 * @param notification the notification
+		 * @param address the email address
+		 * @return true if the delegate handled the notification, false if the default behavior should be used.
+		 */
+		public boolean delegateHandledNotification(SESNotificationType type, SESNotification notification, ERCMailAddress address);
+	}
+	
 }
