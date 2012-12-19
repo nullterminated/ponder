@@ -15,7 +15,8 @@ public class SESRequestHandler implements RequestHandler {
 	@Override
 	public void afterError(Request<?> request, Exception exception) {
 		// Does nothing
-		log.info("Error", exception);
+		log.info("Request: " + request);
+		log.info("Error: " + exception.toString(), exception);
 	}
 
 	/**
