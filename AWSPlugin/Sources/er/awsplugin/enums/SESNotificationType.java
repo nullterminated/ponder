@@ -30,11 +30,11 @@ public enum SESNotificationType {
 			for(NSDictionary<String, Object> recipientDict : recipients) {
 				SESBounceNotification notification = SESBounceNotification.clazz.createAndInsertObject(ec);
 				String email = (String) recipientDict.valueForKey("emailAddress");
-				ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-				notification.setMailAddressRelationship(address);
+				ERCMailAddress recipientAddress = ERCMailAddress.clazz.addressForEmailString(ec, email);
+				notification.setMailAddressRelationship(recipientAddress);
 				email = (String) json.valueForKeyPath("mail.source");
-				address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-				notification.setSourceAddressRelationship(address);
+				ERCMailAddress sourceAddress = ERCMailAddress.clazz.addressForEmailString(ec, email);
+				notification.setSourceAddressRelationship(sourceAddress);
 
 				notification.setStatus((String) recipientDict.valueForKey("status"));
 				notification.setAction((String) recipientDict.valueForKey("action"));
@@ -65,8 +65,8 @@ public enum SESNotificationType {
 				}
 				notification.setMailTimestamp(new NSTimestamp(date));
 				
-				if(delegate() == null || !delegate().delegateHandledNotification(this, notification, address)) {
-					address.setStopReason(reasonForType());
+				if(delegate() == null || !delegate().delegateHandledNotification(this, notification, recipientAddress)) {
+					recipientAddress.setStopReason(reasonForType());
 				}
 			}
 		}
@@ -82,22 +82,24 @@ public enum SESNotificationType {
 			for(NSDictionary<String, Object> recipientDict : recipients) {
 				SESComplaintNotification notification = SESComplaintNotification.clazz.createAndInsertObject(ec);
 				String email = (String) recipientDict.valueForKey("emailAddress");
-				ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-				notification.setMailAddressRelationship(address);
+				ERCMailAddress recipientAddress = ERCMailAddress.clazz.addressForEmailString(ec, email);
+				notification.setMailAddressRelationship(recipientAddress);
 				email = (String) json.valueForKeyPath("mail.source");
-				address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-				notification.setSourceAddressRelationship(address);
+				ERCMailAddress sourceAddress = ERCMailAddress.clazz.addressForEmailString(ec, email);
+				notification.setSourceAddressRelationship(sourceAddress);
 				
 				notification.setUserAgent((String) json.valueForKeyPath("complaint.userAgent"));
 				notification.setComplaintFeedbackType((String) json.valueForKeyPath("complaint.complaintFeedbackType"));
 				String dateString = (String) json.valueForKeyPath("complaint.arrivalDate");
 				Date date;
-				try {
-					date = format.parse(dateString);
-				} catch (ParseException e) {
-					throw NSForwardException._runtimeExceptionForThrowable(e);
+				if(dateString != null) {
+					try {
+						date = format.parse(dateString);
+					} catch (ParseException e) {
+						throw NSForwardException._runtimeExceptionForThrowable(e);
+					}
+					notification.setArrivalDate(new NSTimestamp(date));
 				}
-				notification.setArrivalDate(new NSTimestamp(date));
 				
 				notification.setAwsFeedbackID((String) json.valueForKeyPath("complaint.feedbackId"));
 				String messageId = (String) json.valueForKeyPath("mail.messageId");
@@ -119,8 +121,8 @@ public enum SESNotificationType {
 				}
 				notification.setMailTimestamp(new NSTimestamp(date));
 
-				if(delegate() == null || !delegate().delegateHandledNotification(this, notification, address)) {
-					address.setStopReason(reasonForType());
+				if(delegate() == null || !delegate().delegateHandledNotification(this, notification, recipientAddress)) {
+					recipientAddress.setStopReason(reasonForType());
 				}
 			}
 		}
