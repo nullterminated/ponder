@@ -3,6 +3,7 @@ package er.awsplugin.enums;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
@@ -24,6 +25,7 @@ public enum SESNotificationType {
 			NSArray<NSDictionary<String, Object>> recipients = 
 					(NSArray<NSDictionary<String, Object>>) json.valueForKeyPath("bounce.bouncedRecipients");
 			SimpleDateFormat format = new SimpleDateFormat(JSON_DATE_FORMAT_STRING);
+			format.setTimeZone(TimeZone.getTimeZone("GMT"));
 			
 			for(NSDictionary<String, Object> recipientDict : recipients) {
 				SESBounceNotification notification = SESBounceNotification.clazz.createAndInsertObject(ec);
@@ -75,6 +77,7 @@ public enum SESNotificationType {
 			NSArray<NSDictionary<String, Object>> recipients = 
 					(NSArray<NSDictionary<String, Object>>) json.valueForKeyPath("complaint.complainedRecipients");
 			SimpleDateFormat format = new SimpleDateFormat(JSON_DATE_FORMAT_STRING);
+			format.setTimeZone(TimeZone.getTimeZone("GMT"));
 			
 			for(NSDictionary<String, Object> recipientDict : recipients) {
 				SESComplaintNotification notification = SESComplaintNotification.clazz.createAndInsertObject(ec);
@@ -123,7 +126,7 @@ public enum SESNotificationType {
 		}
 	};
 	
-	private static final String JSON_DATE_FORMAT_STRING = "yyyy-MM-ddThh:mm:ss.SSSZ";
+	private static final String JSON_DATE_FORMAT_STRING = "yyyy-MM-dd'T'hh:mm:ss.SSS'Z'";
 	
 	private final ERCMailStopReason _reason;
 	private static Delegate _delegate;
