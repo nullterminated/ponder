@@ -61,6 +61,10 @@ public class ERCMailAddress extends er.corebl.model.eogen._ERCMailAddress {
 			return result;
 		}
 		
+		public NSArray<ERCMailAddress> addressesForEmailStrings(EOEditingContext ec, String... addresses) {
+			return addressesForEmailStrings(ec, new NSArray<String>(addresses));
+		}
+		
 		public NSArray<ERCMailAddress> addressesForEmailStrings(EOEditingContext ec, NSArray<String> emailStrings) {
 			NSMutableArray<ERCMailAddress> addresses = new NSMutableArray<ERCMailAddress>();
 			for(String emailString: emailStrings) {

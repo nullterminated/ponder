@@ -152,16 +152,103 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 				NSArray<ERCMailAttachment> attachments, 
 				ERCMailCategory category) {
 			
-			String htmlMessage = htmlComponent == null?null:htmlComponent.generateResponse().contentString();
-			String plainMessage = plainComponent == null?null:plainComponent.generateResponse().contentString();
+			String htmlMessage = htmlComponent == null?null:componentContentWithFullURLs(htmlComponent);
+			String plainMessage = plainComponent == null?null:componentContentWithFullURLs(plainComponent);
 			
 			return composeMailMessage(ec, state, from, replyTo, to, cc, bcc, subject, htmlMessage, plainMessage, attachments, category);
+		}
+		
+		/**
+		 * Composes a mail message.
+		 * 
+		 * @param from
+		 *            email address
+		 * @param to
+		 *            email address
+		 * @param cc
+		 *            email address
+		 * @param bcc
+		 *            email address
+		 * @param subject
+		 *            of the message
+		 * @param htmlMessage
+		 *            text of the HTML message
+		 * @param plainMessage
+		 *            text of the plain text message
+		 * @param ec
+		 *            editing context to create the mail message in.
+		 * @return created mail message for the given parameters
+		 */
+		public T composeMailMessage(EOEditingContext ec, 
+				String from, 
+				String replyTo, 
+				String to,
+				String cc,
+				String bcc,
+				String subject, 
+				String htmlMessage, 
+				String plainMessage) {
+			
+			return composeMailMessage(ec, 
+					ERCMailState.READY_TO_BE_SENT, 
+					ERCMailAddress.clazz.addressForEmailString(ec, from), 
+					ERCMailAddress.clazz.addressForEmailString(ec, replyTo), 
+					ERCMailAddress.clazz.addressesForEmailStrings(ec, to), 
+					ERCMailAddress.clazz.addressesForEmailStrings(ec, cc), 
+					ERCMailAddress.clazz.addressesForEmailStrings(ec, bcc), 
+					subject, 
+					htmlMessage, 
+					plainMessage, 
+					null, 
+					null);
+		}
+		
+		/**
+		 * Composes a mail message.
+		 * 
+		 * @param from
+		 *            email address
+		 * @param to
+		 *            email address
+		 * @param subject
+		 *            of the message
+		 * @param htmlMessage
+		 *            text of the HTML message
+		 * @param plainMessage
+		 *            text of the plain text message
+		 * @param ec
+		 *            editing context to create the mail message in.
+		 * @return created mail message for the given parameters
+		 */
+		public T composeMailMessage(EOEditingContext ec, 
+				String from, 
+				String to,
+				String subject, 
+				String htmlMessage, 
+				String plainMessage) {
+			
+			return composeMailMessage(ec, from, null, to, null, null, subject, htmlMessage, plainMessage);
 		}
 		
 		public ERXFetchSpecificationBatchIterator batchIteratorForUnsentMessages() {
 			EOQualifier q = STATE.eq(ERCMailState.READY_TO_BE_SENT);
 			EOFetchSpecification fs = new EOFetchSpecification(ENTITY_NAME, q, null);
 			return new ERXFetchSpecificationBatchIterator(fs);
+		}
+		
+		public String componentContentWithFullURLs(WOComponent component) {
+			boolean complete = component.context().doesGenerateCompleteURLs();
+			if(!complete) {
+				component.context().generateCompleteURLs();
+			}
+			try {
+				String content = component.generateResponse().contentString();
+				return content;
+			} finally {
+				if(!complete) {
+					component.context().generateRelativeURLs();
+				}
+			}
 		}
 	}
 
