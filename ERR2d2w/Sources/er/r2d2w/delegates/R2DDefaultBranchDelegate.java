@@ -380,7 +380,7 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 		if(erpi != null) {
 			EOEnterpriseObject eo = (EOEnterpriseObject)NSKeyValueCoding.Utility.valueForKey(erpi, "masterObject");
 			if(eo != null) {
-				//FIXME can throw exceptions
+				//eo should be in a non-validating nested ec so no exceptions should throw
 				eo.editingContext().saveChanges();
 			}
 			if(erpi instanceof D2WPage) {

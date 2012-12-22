@@ -17,6 +17,7 @@ import com.webobjects.eoaccess.EORelationship;
 import com.webobjects.eoaccess.EOUtilities;
 import com.webobjects.eocontrol.EODataSource;
 import com.webobjects.eocontrol.EODetailDataSource;
+import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.eocontrol.EOSortOrdering;
 import com.webobjects.foundation.NSArray;
@@ -27,6 +28,7 @@ import er.directtoweb.pages.ERD2WPage;
 import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXDisplayGroup;
 import er.extensions.eof.ERXConstant;
+import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXEOAccessUtilities;
 import er.extensions.eof.ERXEOControlUtilities;
 import er.extensions.foundation.ERXArrayUtilities;
@@ -84,9 +86,18 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 			if(ERXExtensions.safeDifferent(masterObject(), masterObject) ||
 					ERXExtensions.safeDifferent(relationshipKey(), relationshipKey)) {
 				
-				this.masterObject = masterObject;
+				/*
+				 * Only validate if this is an inline edit relationship page.
+				 * Otherwise, use a nested ec which is saved when _returnRelated
+				 * is called, pushing changes into the parent ec.
+				 */
+				EOEditingContext ec = d2wContext().frame()
+						?masterObject.editingContext()
+						:ERXEC.newEditingContext(masterObject.editingContext(), false);
+						
+				this.masterObject = EOUtilities.localInstanceOfObject(ec, masterObject);
 				this.relationshipKey = relationshipKey;
-				EOEntity masterEntity = EOUtilities.entityForObject(masterObject.editingContext(), masterObject);
+				EOEntity masterEntity = EOUtilities.entityForObject(ec, masterObject);
 				EORelationship rel = masterEntity.relationshipNamed(relationshipKey);
 				d2wContext().takeValueForKey(rel, PARENT_RELATIONSHIP_KEY);
 				
