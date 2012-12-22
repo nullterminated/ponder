@@ -12,3 +12,6 @@
 
 #The minimum number of days a user must wait to bypass the out of band password reset
 #er.users.model.ERUser.clazz.outOfBandDays=7
+
+#The work value for bcrypt. Max is 30. Each increment takes approx twice as long
+#er.users.ERUsers.logRounds=13
