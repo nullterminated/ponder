@@ -28,7 +28,7 @@ public class ERCoreBL1 extends ERXMigrationDatabase.Migration {
 		ercMailAddressTable.existingColumnNamed("isActive").delete();
 		
 		ERXMigrationTable ercMailMessageTable = database.existingTableNamed("ERCMailMessage");
-		ercMailMessageTable.newStringColumn("messageID", true);
+		ercMailMessageTable.newStringColumn("messageID", 100, true);
 		
 		ercMailMessageTable.addUniqueIndex("ERCMailMessage_messageID_idx", "messageID");
 		
