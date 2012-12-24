@@ -22,8 +22,8 @@ public class ERCoreBL1 extends ERXMigrationDatabase.Migration {
 	public void upgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
 		ERXMigrationTable ercMailAddressTable = database.existingTableNamed("ERCMailAddress");
 		ercMailAddressTable.newTimestampColumn("dateLastSent", true);
-		ercMailAddressTable.newStringColumn("stopReason", true);
-		ercMailAddressTable.newStringColumn("verificationState", false, "UNVERIFIED");
+		ercMailAddressTable.newStringColumn("stopReason", 50, true);
+		ercMailAddressTable.newStringColumn("verificationState", 50, false, "UNVERIFIED");
 		
 		ercMailAddressTable.existingColumnNamed("isActive").delete();
 		
