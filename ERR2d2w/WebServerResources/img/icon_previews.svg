@@ -26,6 +26,6 @@
 	<use xlink:href="icons.svg#boolean_true" x="48" y ="80"/>
 	<use xlink:href="icons.svg#boolean_false" x="0" y ="96"/>
 	<use xlink:href="icons.svg#lock" x="16" y ="96"/>
-	<use xlink:href="icons.svg#ballot_boolean_null" x="32" y ="96"/>
+	<use xlink:href="icons.svg#flower_spinner" x="32" y ="96"/>
 	<use xlink:href="icons.svg#boolean_true" x="48" y ="96"/>
 </svg>
