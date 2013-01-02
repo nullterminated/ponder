@@ -171,7 +171,7 @@
 			<svg:use opacity="0.5" xlink:href="#petal" transform="matrix(-0.70710678,0.70710678,-0.70710678,-0.70710678,19.313708,8)" height="16" width="16" y="0" x="0"/>
 			<svg:use opacity="0.4" xlink:href="#petal" transform="matrix(0,1,-1,0,16,0)" height="16" width="16" y="0" x="0"/>
 			<svg:use opacity="0.3" xlink:href="#petal" transform="matrix(0.70710678,0.70710678,-0.70710678,0.70710678,8,-3.3137085)" height="16" width="16" y="0" x="0"/>
-			<svg:animateTransform attributeName="transform" attributeType="XML" type="rotate" values="0,8,8;45,8,8;90,8,8;135,8,8;180,8,8;225,8,8;270,8,8;315,8,8" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875" begin="0s" dur="1s" repeatCount="indefinite" calcMode="discrete" />
+			<svg:animateTransform attributeName="transform" attributeType="XML" type="rotate" values="0,8,8;45,8,8;90,8,8;135,8,8;180,8,8;225,8,8;270,8,8;315,8,8;360,8,8" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875;1" begin="0s" dur="1s" repeatCount="indefinite" calcMode="discrete" />
 		</svg:g>
 	</svg:defs>
 </svg:svg>
