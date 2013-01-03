@@ -1,5 +1,5 @@
 HasHint: WOConditional {
-	condition = ^d2wContext.hintString;
+	condition = ^d2wContext.hintString.length;
 }
 
 HintString: WOString {
