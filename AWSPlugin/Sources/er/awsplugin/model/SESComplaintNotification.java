@@ -15,7 +15,7 @@ public class SESComplaintNotification extends er.awsplugin.model.eogen._SESCompl
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(SESComplaintNotification.class);
 	
-	public static final String NOTIFICATION_TYPE = "COMPLAINT";
+	public static final String NOTIFICATION_TYPE_STRING = "COMPLAINT";
 
     public static final SESComplaintNotificationClazz<SESComplaintNotification> clazz = new SESComplaintNotificationClazz<SESComplaintNotification>();
     public static class SESComplaintNotificationClazz<T extends SESComplaintNotification> extends er.awsplugin.model.eogen._SESComplaintNotification._SESComplaintNotificationClazz<T> {
@@ -31,6 +31,6 @@ public class SESComplaintNotification extends er.awsplugin.model.eogen._SESCompl
     }
     
     public String typeString() {
-    	return NOTIFICATION_TYPE;
+    	return NOTIFICATION_TYPE_STRING;
     }
 }

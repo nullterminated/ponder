@@ -15,7 +15,7 @@ public class SESBounceNotification extends er.awsplugin.model.eogen._SESBounceNo
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(SESBounceNotification.class);
 
-	public static final String NOTIFICATION_TYPE = "BOUNCE";
+	public static final String NOTIFICATION_TYPE_STRING = "BOUNCE";
 
 	public static final SESBounceNotificationClazz<SESBounceNotification> clazz = new SESBounceNotificationClazz<SESBounceNotification>();
     public static class SESBounceNotificationClazz<T extends SESBounceNotification> extends er.awsplugin.model.eogen._SESBounceNotification._SESBounceNotificationClazz<T> {
@@ -31,6 +31,6 @@ public class SESBounceNotification extends er.awsplugin.model.eogen._SESBounceNo
     }
 
     public String typeString() {
-    	return NOTIFICATION_TYPE;
+    	return NOTIFICATION_TYPE_STRING;
     }
 }
