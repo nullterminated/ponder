@@ -23,6 +23,7 @@ RadioButton: WOGenericElement {
 	checked = isCurrentItemSelected;
 	type = "radio";
 	value = index;
+	disabled = isCurrentItemDisabled;
 }
 
 RadioButtonRepetition: WORepetition {

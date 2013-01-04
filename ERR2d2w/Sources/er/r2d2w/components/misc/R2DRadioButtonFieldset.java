@@ -34,4 +34,8 @@ public class R2DRadioButtonFieldset extends ERXRadioButtonMatrix {
 		labelID = "id" + context().elementID();
 		return labelID;
 	}
+
+	public String isCurrentItemDisabled() {
+		return disabled()?"disabled":null;
+	}
 }
