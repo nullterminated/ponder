@@ -15,7 +15,7 @@ PageWrapper: WOSwitchComponent {
 
 QueryForm: ERXWOForm {
 	class = d2wContext.task;
-	disabled = context.isInForm;
+	disabled = disableForm;
 	multipleSubmit = true;
 	enctype = d2wContext.formEncoding;
 	secure = d2wContext.secureForm;
