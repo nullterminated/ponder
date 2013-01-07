@@ -3,6 +3,7 @@ package er.r2d2w.pages;
 import com.webobjects.appserver.WOContext;
 
 import er.directtoweb.pages.ERD2WQueryPage;
+import er.extensions.foundation.ERXValueUtilities;
 
 public class R2D2WQueryPage extends ERD2WQueryPage {
 	/**
@@ -16,4 +17,8 @@ public class R2D2WQueryPage extends ERD2WQueryPage {
         super(context);
     }
 
+	public boolean disableForm() {
+		boolean hasForm = ERXValueUtilities.booleanValue(d2wContext().valueForKey("hasForm"));
+		return context().isInForm() || !hasForm;
+	}
 }
