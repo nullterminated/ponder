@@ -40,7 +40,7 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 	public static final NSArray<String> editControllerDependentKeys = 
 		new NSArray<String>("task","subTask","tabCount","tabIndex");
 	public static final NSArray<String> listControllerDependentKeys = 
-		new NSArray<String>("task","frame");
+		new NSArray<String>("task","frame","subTask");
 	public static final NSArray<String> queryControllerDependentKeys = 
 		new NSArray<String>("task","frame");
 	public static final NSArray<String> queryAllControllerDependentKeys = 
@@ -234,6 +234,9 @@ public class R2DDefaultBranchChoicesAssignment extends ERDAssignment {
 	}
 
 	public Object listControllerChoices(D2WContext c) {
+		if("pick".equals(c.valueForKey("subTask"))) {
+			return new NSArray<String>("_selectAll","_selectNone");
+		}
 		if(c.frame()) { return NSArray.emptyArray(); }
 		return new NSArray<String>("_return");
 	}

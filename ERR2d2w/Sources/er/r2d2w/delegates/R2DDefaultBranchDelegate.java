@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.directtoweb.D2W;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WPage;
@@ -35,6 +36,7 @@ import er.directtoweb.delegates.ERDBranchDelegate;
 import er.directtoweb.delegates.ERDBranchInterface;
 import er.directtoweb.delegates.ERDQueryValidationDelegate;
 import er.directtoweb.interfaces.ERDErrorPageInterface;
+import er.directtoweb.interfaces.ERDListPageInterface;
 import er.directtoweb.pages.ERD2WInspectPage;
 import er.directtoweb.pages.ERD2WPage;
 import er.directtoweb.pages.ERD2WQueryPage;
@@ -71,6 +73,19 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
             ec.revert();
         }
         return page.nextPage(false);
+	}
+
+	public WOComponent _selectAll(WOComponent sender) {
+		ERDListPageInterface page = ERD2WUtilities.enclosingComponentOfClass(sender, ERDListPageInterface.class);
+		WODisplayGroup dg = page.displayGroup();
+		dg.setSelectedObjects(dg.allObjects());
+		return sender.context().page();
+	}
+
+	public WOComponent _selectNone(WOComponent sender) {
+		ERDListPageInterface page = ERD2WUtilities.enclosingComponentOfClass(sender, ERDListPageInterface.class);
+		page.displayGroup().setSelectedObjects(NSArray.EmptyArray);
+		return sender.context().page();
 	}
 
 	public WOComponent _confirmCancelEdit(WOComponent sender) {
