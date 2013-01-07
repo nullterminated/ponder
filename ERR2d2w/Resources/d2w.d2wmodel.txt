@@ -187,6 +187,7 @@
     20 : (task = 'inspect' or task = 'edit') => repetitionComponentName = "R2DInspectFormRepetition" [com.webobjects.directtoweb.Assignment],
     20 : *true* => actions = {"left" = ("leftControllerAction"); "right" = ("rightControllerAction"); } [com.webobjects.directtoweb.Assignment],
     20 : (task = 'edit' and componentName = 'R2D2WEditBoolean') => displayRequiredMarker = "false" [com.webobjects.directtoweb.BooleanAssignment],
+    20 : (task = 'query' and smartAttribute.prototypeName = 'javaEnum') => componentName = "R2D2WQueryEnum" [com.webobjects.directtoweb.Assignment],
     20 : (task = 'editRelationship' and parentRelationship.isToMany = 1) => repetitionComponentName = "R2DListTableRepetition" [com.webobjects.directtoweb.Assignment],
     20 : (task = 'editRelationship' and not (parentRelationship.isToMany = 1)) => repetitionComponentName = "R2DInspectFormRepetition" [com.webobjects.directtoweb.Assignment],
     20 : (session.objectStore.modernizr.svg = 1 and (propertyKey = 'leftControllerAction' or propertyKey = 'rightControllerAction')) => imageWidth = "20" [com.webobjects.directtoweb.Assignment],
