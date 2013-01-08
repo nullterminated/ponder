@@ -48,6 +48,7 @@ public class R2D2WQueryDateRange extends D2WQueryDateRange {
 		try {
 			if (minDateString() != null) {
 				obj = dateFormatter().parseObject(minDateString());
+				setMinValue(obj);
 			}
 		} catch (ParseException e) {
 			log.debug("java.text.ParseException:" + e);
@@ -70,6 +71,7 @@ public class R2D2WQueryDateRange extends D2WQueryDateRange {
 		try {
 			if (maxDateString() != null) {
 				obj = dateFormatter().parseObject(maxDateString());
+				setMaxValue(obj);
 			}
 		} catch (ParseException e) {
 			log.debug("java.text.ParseException:" + e);
