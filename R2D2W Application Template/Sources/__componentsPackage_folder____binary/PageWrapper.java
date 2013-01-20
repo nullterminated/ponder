@@ -73,4 +73,17 @@ public class PageWrapper extends ERXStatelessComponent {
 	public NSArray<String> availableTimeZones() {
 		return availableTimeZones;
 	}
+
+	public String iconsURL() {
+		boolean b = context().doesGenerateCompleteURLs();
+		if(!b) { context().generateCompleteURLs(); }
+		String url = context()._urlForResourceNamed("img/icons.svg", "ERR2d2w", false);
+		if(!b) { context().generateRelativeURLs(); }
+		return url;
+	}
+
+	public boolean isWebKit() {
+		ERXBrowser browser = ERXSession.session() == null?null:ERXSession.session().browser();
+		return browser != null && (browser.isChrome() || browser.isSafari() || browser.isOmniWeb());
+	}
 }
