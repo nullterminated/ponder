@@ -8,7 +8,5 @@ public enum ERCMailState {
 	OPT_OUT,
 	SUPPRESSED,
 	EXCEPTION,
-	SENT,
-	BOUNCED,
-	RECEIVED;
+	SENT;
 }
