@@ -4,7 +4,7 @@ ActivityMarker: WOImage {
 }
 
 DisplayName: WOString {
-	value = d2wContext.navigationItem.displayName;
+	value = ^displayName;
 }
 
 HasActivity: WOConditional {

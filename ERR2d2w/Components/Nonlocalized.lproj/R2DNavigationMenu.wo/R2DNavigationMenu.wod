@@ -37,23 +37,24 @@ L1NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
     level=1;
     secure = navContext.secure; //VALID
+    navigationButtonContentComponentName = navigationButtonContentComponentName;
+    d2wContext = navContext;
 }
 
 L2NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
 	level=2;
     secure = navContext.secure; //VALID
+    navigationButtonContentComponentName = navigationButtonContentComponentName;
+    d2wContext = navContext;
 }
 
 L3NavObject: R2DNavigationMenuItem {
 	navigationItem = aNavigationItem;
     level=3;
     secure = navContext.secure; //VALID
-}
-
-NavButtonComponent: WOSwitchComponent {
-	WOComponentName = navigationButtonContentComponentName;
-	localContext = navContext;
+    navigationButtonContentComponentName = navigationButtonContentComponentName;
+    d2wContext = navContext;
 }
 
 NavLabel: ERXLocalizedString {

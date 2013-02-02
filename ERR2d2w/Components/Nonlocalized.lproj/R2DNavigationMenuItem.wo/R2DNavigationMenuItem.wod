@@ -1,6 +1,3 @@
-DisplayName: WOComponentContent {
-}
-
 HasAction: WOConditional {
 	condition = navigationItem.action.trim.length;
 }
@@ -24,9 +21,14 @@ MeetsDisplayConditions: WOConditional {
 NavAction: ERXLinkButton5 {
 	action = action;
 	disabled = isDisabled;
-	string = navigationItem.displayName;
 	submit = false;
 	secure = secureInContext;
+}
+
+NavButtonComponent: WOSwitchComponent {
+	WOComponentName = ^navigationButtonContentComponentName;
+	localContext = ^navContext;
+	displayName = displayName;
 }
 
 NavDirectAction: ERXLinkButton5 {
@@ -34,7 +36,6 @@ NavDirectAction: ERXLinkButton5 {
 	directActionName = navigationItem.uneditedDirectActionName;
 	disabled = isDisabled;
 	queryDictionary = queryDictionary;
-	string = navigationItem.displayName;
 	submit = false;
 	secure = secureInContext;
 }
@@ -42,7 +43,6 @@ NavDirectAction: ERXLinkButton5 {
 NavHREF: ERXLinkButton5 {
 	disabled = isDisabled;
 	href = navigationItem.href;
-	string = navigationItem.displayName;
 	submit = false;
 }
 
@@ -50,7 +50,6 @@ NavPageName: ERXLinkButton5 {
 	disabled = isDisabled;
 	pageName = navigationItem.pageName;
 	queryDictionary = queryDictionary;
-	string = navigationItem.displayName;
 	submit = false;
 	secure = secureInContext;
 }
