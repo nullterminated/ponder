@@ -263,10 +263,8 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	}
 	
 	public void addToRecipients(ERCMailAddress address, ERCMailRecipientType type) {
-		EOQualifier qualifier = 
-				ERCMailRecipient.MAIL_ADDRESS.eq(address).and(ERCMailRecipient.MAIL_MESSAGE.eq(this));
-		NSArray<ERCMailRecipient> recipients = 
-				ERCMailRecipient.clazz.objectsMatchingQualifier(editingContext(), qualifier);
+		EOQualifier qualifier = ERCMailRecipient.MAIL_ADDRESS.eq(address);
+		NSArray<ERCMailRecipient> recipients = mailRecipients(qualifier);
 		if(recipients.count() > 1) {
 			//Due to the unique index, there should be only 0 or 1
 			String message = "More than one recipient was found for ERCMailMessage: " + this + " with address: " + address;
