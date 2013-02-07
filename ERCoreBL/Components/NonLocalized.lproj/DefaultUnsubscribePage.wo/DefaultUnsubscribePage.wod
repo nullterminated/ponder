@@ -1,0 +1,24 @@
+ErrorMessage: WOString {
+	value = errorMessage;
+}
+
+HasError: WOConditional {
+	condition = errorMessage;
+}
+
+HTML: WOGenericContainer {
+	elementName = "html";
+	"xml:lang" = localizer.@languageCode; //VALID
+	xmlns = "http://www.w3.org/1999/xhtml";
+}
+
+Submit: ERXLinkButton5 {
+	actionClass = "MailAction";
+	directActionName = "unsubscribe";
+	value = "Submit";
+}
+
+UnsubscribeForm: ERXWOForm {
+	actionClass = "MailAction";
+	directActionName = "unsubscribe";
+}

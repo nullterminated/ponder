@@ -1,0 +1,22 @@
+<webobject name = "HTML">
+	<head>
+		<title>Unsubscribe</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1"/>
+	</head>
+	<body>
+		<webobject name = "UnsubscribeForm">
+			<fieldset>
+				<legend>Unsubscribe</legend>
+				<label for="email">Email Address</label>
+				<input type="text" name="email" id="email" />
+				<webobject name = "Submit"/>
+			</fieldset>
+			<webobject name = "HasError">
+				<div class="error">
+					<webobject name = "ErrorMessage"/>
+				</div>
+			</webobject>
+		</webobject>
+	</body>
+</webobject>

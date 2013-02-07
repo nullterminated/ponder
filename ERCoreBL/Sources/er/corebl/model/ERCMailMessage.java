@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOComponent;
+import com.webobjects.appserver.WOContext;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
@@ -12,6 +13,8 @@ import com.webobjects.foundation.NSArray;
 import er.corebl.mail.ERCMailAddressVerification;
 import er.corebl.mail.ERCMailRecipientType;
 import er.corebl.mail.ERCMailState;
+import er.corebl.mail.MailAction;
+import er.extensions.appserver.ERXWOContext;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.extensions.validation.ERXValidationFactory;
 
@@ -260,6 +263,21 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		super.init(ec);
 		setState(ERCMailState.DRAFT);
 		setUuid(java.util.UUID.randomUUID().toString());
+	}
+	
+	public String messageReadURL() {
+		return mailActionURL("MailAction/read");
+	}
+	
+	public String unsubscribeURL() {
+		return mailActionURL("MailAction/unsubscribe");
+	}
+	
+	protected String mailActionURL(String directActionName) {
+		WOContext context = ERXWOContext.newContext();
+		context.generateCompleteURLs();
+		String url = ERXWOContext.directActionUrl(context, directActionName, MailAction.MESSAGE_ID_KEY, messageID(), false, false);
+		return url;
 	}
 	
 	public void addToRecipients(ERCMailAddress address, ERCMailRecipientType type) {
