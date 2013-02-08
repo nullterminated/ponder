@@ -21,7 +21,7 @@ import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
 
 public class MailAction extends ERXDirectAction {
-	public static final String MESSAGE_ID_KEY = "mid";
+	public static final String UUID_KEY = "uuid";
 	public static final String ADDRESS_KEY = "email";
 	
 	private static UnsubscribeDelegate unsubscribeDelegate = new DefaultUnsubscribeDelegate();
@@ -31,20 +31,20 @@ public class MailAction extends ERXDirectAction {
 	}
 
 	public WOActionResults readAction() {
-		String messageId = request().stringFormValueForKey(MESSAGE_ID_KEY);
+		String uuid = request().stringFormValueForKey(UUID_KEY);
 		
-		if(messageId != null) {
+		if(uuid != null) {
 			EOEditingContext ec = ERXEC.newEditingContext();
 			ec.lock();
 			try {
-				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.MESSAGE_ID_KEY, messageId);
+				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.UUID_KEY, uuid);
 				if(message != null) {
 					message.setDateRead(new NSTimestamp());
 					ec.saveChanges();
 				}
 			} catch (Exception e) {
 				/* Ignore exceptions */
-				log.warn("Error setting read date on mail message with id: " + messageId, e);
+				log.warn("Error setting read date on mail message with uuid: " + uuid, e);
 			} finally {
 				ec.unlock();
 			}
@@ -61,7 +61,7 @@ public class MailAction extends ERXDirectAction {
 	}
 	
 	public WOActionResults unsubscribeAction() {
-		String messageId = request().stringFormValueForKey(MESSAGE_ID_KEY);
+		String messageId = request().stringFormValueForKey(UUID_KEY);
 		String email = request().stringFormValueForKey(ADDRESS_KEY);
 		
 		EOEditingContext ec = ERXEC.newEditingContext();
@@ -79,9 +79,7 @@ public class MailAction extends ERXDirectAction {
 				boolean isValid = unsubscribeDelegate().validEmail(email);
 				if(isValid) {
 					ERCMailAddress address = ERCMailAddress.clazz.addressForEmailString(ec, email);
-					address.setStopReason(ERCMailStopReason.UNSUBSCRIBED);
-					ec.saveChanges();
-					return unsubscribeDelegate().unsubscribeAddress(email);
+					return unsubscribeDelegate().unsubscribeAddress(address);
 				} else {
 					ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 					ERXValidationException ex = factory.createCustomException(null, "InvalidUnsubscribeAddress");
@@ -100,7 +98,7 @@ public class MailAction extends ERXDirectAction {
 	
 	public interface UnsubscribeDelegate {
 		public WOActionResults unsubscribeMessage(ERCMailMessage message);
-		public WOActionResults unsubscribeAddress(String emailAddress);
+		public WOActionResults unsubscribeAddress(ERCMailAddress emailAddress);
 		public WOActionResults formPage();
 		public WOActionResults error(Exception e);
 		public boolean validEmail(String email);
@@ -111,19 +109,19 @@ public class MailAction extends ERXDirectAction {
 
 		@Override
 		public WOActionResults unsubscribeMessage(ERCMailMessage message) {
-			EOEditingContext ec = message.editingContext();
 			if(message.mailRecipients().count() == 1) {
 				ERCMailAddress address = message.mailRecipients().lastObject().mailAddress();
-				address.setStopReason(ERCMailStopReason.UNSUBSCRIBED);
-				ec.saveChanges();
-				return unsubscribeAddress(address.emailAddress());
+				return unsubscribeAddress(address);
 			} else {
 				return formPage();
 			}
 		}
 		
 		@Override
-		public WOActionResults unsubscribeAddress(String emailAddress) {
+		public WOActionResults unsubscribeAddress(ERCMailAddress emailAddress) {
+			EOEditingContext ec = emailAddress.editingContext();
+			emailAddress.setStopReason(ERCMailStopReason.UNSUBSCRIBED);
+			ec.saveChanges();
 			WOResponse response = new WOResponse();
 			response.setStatus(200);
 			response.setContent(emailAddress + " has been unsubscribed.");

@@ -276,7 +276,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	protected String mailActionURL(String directActionName) {
 		WOContext context = ERXWOContext.newContext();
 		context.generateCompleteURLs();
-		String url = ERXWOContext.directActionUrl(context, directActionName, MailAction.MESSAGE_ID_KEY, messageID(), false, false);
+		String url = ERXWOContext.directActionUrl(context, directActionName, MailAction.UUID_KEY, uuid(), false, false);
 		return url;
 	}
 	
