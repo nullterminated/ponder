@@ -40,6 +40,10 @@ public class MailAction extends ERXDirectAction {
 				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.UUID_KEY, uuid);
 				if(message != null) {
 					message.setDateRead(new NSTimestamp());
+					if(message.mailRecipients().count() == 1) {
+						ERCMailAddress address = message.mailRecipients().lastObject().mailAddress();
+						address.setVerificationState(ERCMailAddressVerification.VERIFIED);
+					}
 					ec.saveChanges();
 				}
 			} catch (Exception e) {
@@ -111,6 +115,7 @@ public class MailAction extends ERXDirectAction {
 		public WOActionResults unsubscribeMessage(ERCMailMessage message) {
 			if(message.mailRecipients().count() == 1) {
 				ERCMailAddress address = message.mailRecipients().lastObject().mailAddress();
+				address.setVerificationState(ERCMailAddressVerification.VERIFIED);
 				return unsubscribeAddress(address);
 			} else {
 				return formPage();
