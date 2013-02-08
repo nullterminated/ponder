@@ -31,7 +31,7 @@ public class AWSPlugin0 extends ERXMigrationDatabase.Migration {
 		sesNotificationTable.newStringColumn("notificationType", 10, false);
 		sesNotificationTable.newBigIntegerColumn("sourceAddressID", false);
 
-		sesNotificationTable.addUniqueIndex("awsMessageID_idx", sesNotificationTable.existingColumnNamed("awsMessageID"));
+		sesNotificationTable.addUniqueIndex("awsFeedbackID_idx", sesNotificationTable.existingColumnNamed("awsFeedbackID"));
 
 		sesNotificationTable.create();
 	 	sesNotificationTable.setPrimaryKey("id");

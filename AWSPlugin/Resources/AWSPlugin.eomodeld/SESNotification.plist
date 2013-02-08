@@ -67,10 +67,10 @@
     ); 
     entityIndexes = (
         {
-            attributes = (awsMessageID); 
+            attributes = (awsFeedbackID); 
             constraint = distinct; 
             indexType = clustered; 
-            name = "awsMessageID_idx"; 
+            name = "awsFeedbackID_idx"; 
             order = asc; 
         }
     ); 
