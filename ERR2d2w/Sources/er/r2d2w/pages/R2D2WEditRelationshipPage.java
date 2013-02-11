@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.webobjects.appserver.WOComponent;
@@ -25,7 +26,6 @@ import com.webobjects.foundation.NSMutableArray;
 import com.webobjects.foundation.NSSelector;
 
 import er.directtoweb.pages.ERD2WPage;
-import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXDisplayGroup;
 import er.extensions.eof.ERXConstant;
 import er.extensions.eof.ERXEC;
@@ -83,8 +83,8 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	
 	public void setMasterObjectAndRelationshipKey(EOEnterpriseObject masterObject, String relationshipKey) {
 		if(!ERXValueUtilities.isNull(masterObject) && !StringUtils.isBlank(relationshipKey)) {
-			if(ERXExtensions.safeDifferent(masterObject(), masterObject) ||
-					ERXExtensions.safeDifferent(relationshipKey(), relationshipKey)) {
+			if(ObjectUtils.notEqual(masterObject(), masterObject) ||
+					ObjectUtils.notEqual(relationshipKey(), relationshipKey)) {
 				
 				/*
 				 * Only validate if this is an inline edit relationship page.

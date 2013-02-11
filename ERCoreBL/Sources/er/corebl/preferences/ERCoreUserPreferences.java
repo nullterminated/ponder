@@ -1,5 +1,6 @@
 package er.corebl.preferences;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.directtoweb.D2WModel;
@@ -18,7 +19,6 @@ import com.webobjects.foundation.NSSelector;
 
 import er.corebl.ERCoreBL;
 import er.corebl.model.ERCPreference;
-import er.extensions.ERXExtensions;
 import er.extensions.batching.ERXBatchNavigationBar;
 import er.extensions.components.ERXSortOrder;
 import er.extensions.eof.ERXConstant;
@@ -107,7 +107,7 @@ public enum ERCoreUserPreferences implements NSKeyValueCoding {
 			if (pref != null) {
 				if (value != null) {
 					String encodedValue = encodedValue(value);
-					if (ERXExtensions.safeDifferent(encodedValue, pref.prefValue())) {
+					if (ObjectUtils.notEqual(encodedValue, pref.prefValue())) {
 						if (log.isDebugEnabled()) {
 							log.debug("Updating preference " + actor + ": " + key + "=" + encodedValue);
 						}

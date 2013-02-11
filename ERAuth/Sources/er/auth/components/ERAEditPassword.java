@@ -1,5 +1,6 @@
 package er.auth.components;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOContext;
@@ -14,7 +15,6 @@ import com.webobjects.foundation.NSSelector;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
 import er.auth.processing.ERTwoFactorAuthenticationConfig;
 import er.directtoweb.components.ERDCustomComponent;
-import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXWOContext;
 import er.extensions.foundation.ERXSelectorUtilities;
 import er.extensions.validation.ERXValidationException;
@@ -70,7 +70,7 @@ public class ERAEditPassword extends ERDCustomComponent {
 				validationFailedWithException(e, e.value(), e.key());
 				return;
 			}
-			boolean match = ERXExtensions.safeEquals(newPassword(), verifyPassword());
+			boolean match = ObjectUtils.equals(newPassword(), verifyPassword());
 			if (!match) {
 				ERXValidationException e = ERXValidationFactory.defaultFactory().createCustomException(object(),
 						"MismatchedPasswordException");

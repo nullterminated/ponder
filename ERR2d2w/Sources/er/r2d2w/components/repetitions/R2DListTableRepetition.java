@@ -1,5 +1,7 @@
 package er.r2d2w.components.repetitions;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
 import com.webobjects.foundation.NSArray;
@@ -8,7 +10,6 @@ import com.webobjects.foundation.NSKeyValueCodingAdditions;
 import com.webobjects.foundation.NSMutableDictionary;
 
 import er.directtoweb.components.repetitions.ERDAttributeRepetition;
-import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXWOContext;
 
 public class R2DListTableRepetition extends ERDAttributeRepetition {
@@ -86,7 +87,7 @@ public class R2DListTableRepetition extends ERDAttributeRepetition {
 	}
 
 	public boolean isGrouping() {
-		return ERXExtensions.safeEquals(d2wContext().valueForKey("subTask"), "group");
+		return ObjectUtils.equals(d2wContext().valueForKey("subTask"), "group");
 	}
 
 	public String attributeHeaderID() {

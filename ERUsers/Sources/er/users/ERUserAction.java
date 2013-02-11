@@ -1,5 +1,7 @@
 package er.users;
 
+import org.apache.commons.lang.ObjectUtils;
+
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WORequest;
@@ -12,7 +14,6 @@ import er.directtoweb.ERD2WDirectAction;
 import er.directtoweb.ERD2WFactory;
 import er.directtoweb.interfaces.ERDErrorPageInterface;
 import er.directtoweb.interfaces.ERDMessagePageInterface;
-import er.extensions.ERXExtensions;
 import er.extensions.appserver.ERXBrowser;
 import er.extensions.appserver.ERXBrowserFactory;
 import er.extensions.eof.ERXEC;
@@ -50,7 +51,7 @@ public class ERUserAction extends ERD2WDirectAction {
 		ERXLocalizer loc = ERXLocalizer.localizerForRequest(request());
 		
 		// Return an error page if the user is not found or the token does not match
-		if (user == null || ERXExtensions.safeDifferent(token, user.activateUserToken())) {
+		if (user == null || ObjectUtils.notEqual(token, user.activateUserToken())) {
 			WOActionResults result = dynamicPageForActionNamed("Error");
 			ERDErrorPageInterface epi = (ERDErrorPageInterface) result;
 			String message = loc.localizedStringForKey("ERUserAction.activateTokenNotFound");
@@ -103,7 +104,7 @@ public class ERUserAction extends ERD2WDirectAction {
 		ERXLocalizer loc = ERXLocalizer.localizerForRequest(request());
 		
 		// Return an error page if the user is not found or the token does not match
-		if (user == null || ERXExtensions.safeDifferent(token, user.resetToken())) {
+		if (user == null || ObjectUtils.notEqual(token, user.resetToken())) {
 			WOActionResults result = dynamicPageForActionNamed("Error");
 			ERDErrorPageInterface epi = (ERDErrorPageInterface) result;
 			String message = loc.localizedStringForKey("ERUserAction.resetTokenNotFound");
