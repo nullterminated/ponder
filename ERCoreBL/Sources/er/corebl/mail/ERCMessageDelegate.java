@@ -37,7 +37,7 @@ public class ERCMessageDelegate implements Delegate {
 	@Override
 	public void invalidRecipients(ERMessage message, NSArray<String> invalidRecipientAddresses) {
 		// TODO Flag or remove invalid addresses?
-		log.info("Invalid recipients: " + invalidRecipientAddresses);
+		log.debug("Invalid recipients: " + invalidRecipientAddresses);
 	}
 
 	@Override
