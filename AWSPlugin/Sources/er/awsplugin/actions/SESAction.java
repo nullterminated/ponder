@@ -3,6 +3,7 @@ package er.awsplugin.actions;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -118,6 +119,11 @@ public class SESAction extends ERXDirectAction {
 		WOResponse response = new WOResponse();
 		EOEditingContext ec = ERXEC.newEditingContext();
 		String from = request().stringFormValueForKey("from");
+		if(StringUtils.isBlank(from)) {
+			response.setStatus(400);
+			response.setContent("'from' required");
+			return response;
+		}
 		NSMutableArray<ERCMailMessage> messages = new NSMutableArray<ERCMailMessage>();
 		try {
 			messages.add(simpleMessage(ec, "success@simulator.amazonses.com", from, "Test Success", "Testing Success"));
