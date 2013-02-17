@@ -53,8 +53,8 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 		erUserTable.newStringColumn("activateUserToken", 50, true);
 		erUserTable.newStringColumn("activationStatus", 50, false);
 		erUserTable.newTimestampColumn("dateCreated", false);
-		erUserTable.newStringColumn("emailAddress", 254, false);
 		erUserTable.newIntegerColumn("id", false);
+		erUserTable.newBigIntegerColumn("mailAddressID", false);
 		erUserTable.newStringColumn("password", 60, false);
 		erUserTable.newTimestampColumn("resetRequestDate", true);
 		erUserTable.newStringColumn("resetToken", 50, true);
@@ -77,6 +77,7 @@ public class ERUsers0 extends ERXMigrationDatabase.Migration {
 		erChallengeResponseTable.addForeignKey("challengeQuestionID", "ERChallengeQuestion", "id");
 		erChallengeResponseTable.addForeignKey("userID", "ERUser", "id");
 		erCredentialTable.addForeignKey("userID", "ERUser", "id");
+		erUserTable.addForeignKey("mailAddressID", "ERCMailAddress", "id");
 		erUserRoleTable.addForeignKey("erRoleId", "ERRole", "id");
 		erUserRoleTable.addForeignKey("erUserId", "ERUser", "id");
 	}

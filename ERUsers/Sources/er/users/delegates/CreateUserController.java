@@ -93,7 +93,7 @@ public class CreateUserController extends ERDBranchDelegate {
 			String fromString = WOApplication.application().name() + "-" + hostName + "@" + ERCoreBL.sharedInstance().problemEmailDomain();
 			ERCMailAddress from = ERCMailAddress.clazz.addressForEmailString(ec, fromString);
 			
-			ERCMailAddress toAddress = ERCMailAddress.clazz.addressForEmailString(ec, user.emailAddress());
+			ERCMailAddress toAddress = user.mailAddress();
 			NSArray<ERCMailAddress> to = new NSArray<ERCMailAddress>(toAddress);
 			
 			ERCMailMessage.clazz.composeMailMessage(ec, ERCMailState.READY_TO_BE_SENT, from, null, to, null, null, subject, htmlMessage, plainMessage, null, null);

@@ -23,8 +23,6 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String ACTIVATION_STATUS_KEY = ACTIVATION_STATUS.key();
   public static final ERXKey<org.joda.time.DateTime> DATE_CREATED = new ERXKey<org.joda.time.DateTime>("dateCreated");
   public static final String DATE_CREATED_KEY = DATE_CREATED.key();
-  public static final ERXKey<String> EMAIL_ADDRESS = new ERXKey<String>("emailAddress");
-  public static final String EMAIL_ADDRESS_KEY = EMAIL_ADDRESS.key();
   public static final ERXKey<String> PASSWORD = new ERXKey<String>("password");
   public static final String PASSWORD_KEY = PASSWORD.key();
   public static final ERXKey<org.joda.time.DateTime> RESET_REQUEST_DATE = new ERXKey<org.joda.time.DateTime>("resetRequestDate");
@@ -41,6 +39,8 @@ public abstract class _ERUser extends  ERXGenericRecord {
   public static final String CHALLENGE_RESPONSES_KEY = CHALLENGE_RESPONSES.key();
   public static final ERXKey<er.users.model.ERCredential> CREDENTIALS = new ERXKey<er.users.model.ERCredential>("credentials");
   public static final String CREDENTIALS_KEY = CREDENTIALS.key();
+  public static final ERXKey<er.corebl.model.ERCMailAddress> MAIL_ADDRESS = new ERXKey<er.corebl.model.ERCMailAddress>("mailAddress");
+  public static final String MAIL_ADDRESS_KEY = MAIL_ADDRESS.key();
   public static final ERXKey<er.corebl.model.ERCPreference> PREFERENCES = new ERXKey<er.corebl.model.ERCPreference>("preferences");
   public static final String PREFERENCES_KEY = PREFERENCES.key();
   public static final ERXKey<er.auth.model.ERRole> ROLES = new ERXKey<er.auth.model.ERRole>("roles");
@@ -87,17 +87,6 @@ public abstract class _ERUser extends  ERXGenericRecord {
     	_ERUser.LOG.debug( "updating dateCreated from " + dateCreated() + " to " + value);
     }
     takeStoredValueForKey(value, _ERUser.DATE_CREATED_KEY);
-  }
-
-  public String emailAddress() {
-    return (String) storedValueForKey(_ERUser.EMAIL_ADDRESS_KEY);
-  }
-
-  public void setEmailAddress(String value) {
-    if (_ERUser.LOG.isDebugEnabled()) {
-    	_ERUser.LOG.debug( "updating emailAddress from " + emailAddress() + " to " + value);
-    }
-    takeStoredValueForKey(value, _ERUser.EMAIL_ADDRESS_KEY);
   }
 
   public String password() {
@@ -155,6 +144,30 @@ public abstract class _ERUser extends  ERXGenericRecord {
     takeStoredValueForKey(value, _ERUser.USERNAME_KEY);
   }
 
+  public er.corebl.model.ERCMailAddress mailAddress() {
+    return (er.corebl.model.ERCMailAddress)storedValueForKey(_ERUser.MAIL_ADDRESS_KEY);
+  }
+  
+  public void setMailAddress(er.corebl.model.ERCMailAddress value) {
+    takeStoredValueForKey(value, _ERUser.MAIL_ADDRESS_KEY);
+  }
+
+  public void setMailAddressRelationship(er.corebl.model.ERCMailAddress value) {
+    if (_ERUser.LOG.isDebugEnabled()) {
+      _ERUser.LOG.debug("updating mailAddress from " + mailAddress() + " to " + value);
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	setMailAddress(value);
+    }
+    else if (value == null) {
+    	er.corebl.model.ERCMailAddress oldValue = mailAddress();
+    	if (oldValue != null) {
+    		removeObjectFromBothSidesOfRelationshipWithKey(oldValue, _ERUser.MAIL_ADDRESS_KEY);
+      }
+    } else {
+    	addObjectToBothSidesOfRelationshipWithKey(value, _ERUser.MAIL_ADDRESS_KEY);
+    }
+  }
   public NSArray<er.users.model.ERChallengeResponse> challengeResponses() {
     return (NSArray<er.users.model.ERChallengeResponse>)storedValueForKey(_ERUser.CHALLENGE_RESPONSES_KEY);
   }

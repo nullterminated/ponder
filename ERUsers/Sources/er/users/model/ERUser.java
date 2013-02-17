@@ -2,6 +2,7 @@ package er.users.model;
 
 import java.util.UUID;
 
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
@@ -13,6 +14,8 @@ import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
 import com.webobjects.foundation.NSValidation;
 
+import er.corebl.mail.ERCMailAddressVerification;
+import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCPreference;
 import er.corebl.preferences.ERCoreUserInterface;
 import er.extensions.eof.ERXFetchSpecification;
@@ -43,6 +46,8 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	private static final Logger log = Logger.getLogger(ERUser.class);
 
 	public static final String CLEAR_PASSWORD_KEY = "clearPassword";
+	
+	public static final String EMAIL_ADDRESS_KEY = "emailAddress";
 	
 	public static final String SUBTYPE_VALUE = "ERUser";
 
@@ -134,6 +139,17 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 		String hashedPassword = ERUsers.sharedInstance().hashedPlaintext(clearPassword);
 		newCredential.setPassword(hashedPassword);
 		setPassword(hashedPassword);
+	}
+	
+	public String emailAddress() {
+		return MAIL_ADDRESS.dot(ERCMailAddress.EMAIL_ADDRESS).valueInObject(this);
+	}
+	
+	public void setEmailAddress(String emailAddress) {
+		if(ObjectUtils.notEqual(emailAddress, emailAddress())) {
+			ERCMailAddress email = ERCMailAddress.clazz.addressForEmailString(editingContext(), emailAddress);
+			addObjectToBothSidesOfRelationshipWithKey(email, MAIL_ADDRESS_KEY);
+		}
 	}
 
 	/**
@@ -237,11 +253,13 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	
 	/**
 	 * Activates the user by setting the user's activation status to
-	 * ACTIVATED and setting the activation token to null;
+	 * ACTIVATED, setting the activation token to null, and marking
+	 * the ERCMailAddress for the user as verified.
 	 */
 	public void activateUser() {
 		setActivateUserToken(null);
 		setActivationStatus(ERUserActivationStatus.ACTIVATED);
+		mailAddress().setVerificationState(ERCMailAddressVerification.VERIFIED);
 	}
 
 	/**
@@ -360,7 +378,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	}
 	
 	public String validateEmailAddress(String emailAddress) {
-		if (!emailValidator.isValidEmailAddress(emailAddress, 100, true)) {
+		if (emailAddress == null || emailAddress.length() > 254 || !emailValidator.isValidEmailString(emailAddress)) {
 			ERXValidationFactory factory = ERXValidationFactory.defaultFactory();
 			ERXValidationException ex = factory.createException(this, EMAIL_ADDRESS_KEY, emailAddress,
 					ERXValidationException.InvalidValueException);

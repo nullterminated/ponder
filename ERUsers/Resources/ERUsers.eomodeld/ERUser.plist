@@ -13,13 +13,13 @@
             valueClassName = "er.users.model.enums.ERUserActivationStatus"; 
         }, 
         {columnName = dateCreated; name = dateCreated; prototypeName = jodaDateTime; }, 
-        {
-            columnName = emailAddress; 
-            name = emailAddress; 
-            prototypeName = varchar255; 
-            width = 254; 
-        }, 
         {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = mailAddressID; 
+            name = mailAddressID; 
+            prototypeName = longNumber; 
+        }, 
         {
             columnName = password; 
             name = password; 
@@ -44,8 +44,8 @@
     attributesUsedForLocking = (
         activateUserToken, 
         activationStatus, 
-        emailAddress, 
         id, 
+        mailAddressID, 
         password, 
         resetToken, 
         subtype, 
@@ -58,7 +58,7 @@
         challengeResponses, 
         credentials, 
         dateCreated, 
-        emailAddress, 
+        mailAddress, 
         password, 
         preferences, 
         resetRequestDate, 
@@ -105,6 +105,14 @@
             joins = ({destinationAttribute = erUserId; sourceAttribute = id; }); 
             name = erUserRoles; 
             propagatesPrimaryKey = Y; 
+        }, 
+        {
+            destination = ERCMailAddress; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailAddressID; }); 
+            name = mailAddress; 
         }, 
         {
             destination = ERCPreference; 
