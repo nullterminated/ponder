@@ -1,0 +1,37 @@
+IsPlainText: WOConditional {
+	condition = isPlainText;
+}
+
+IsHTML: WOConditional {
+	condition = isPlainText;
+	negate = true;
+}
+
+StreetAddress: WOString {
+	value = streetAddress;
+}
+
+City: WOString {
+	value = city;
+}
+
+State: WOString {
+	value = state;
+}
+
+ZipCode: WOString {
+	value = zipCode;
+}
+
+WebBug: WOImage {
+	src = mailMessage.messageReadURL;
+}
+
+UnsubscribeURL: WOString {
+	value = mailMessage.unsubscribeURL;
+}
+
+UnsubscribeLink: WOHyperlink {
+	href = mailMessage.unsubscribeURL;
+	string = "click here";
+}

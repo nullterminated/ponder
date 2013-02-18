@@ -12,10 +12,12 @@ import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 
+import er.corebl.components.DefaultMessageFooter;
 import er.corebl.mail.ERCMailAddressVerification;
 import er.corebl.mail.ERCMailRecipientType;
 import er.corebl.mail.ERCMailState;
 import er.corebl.mail.MailAction;
+import er.extensions.appserver.ERXApplication;
 import er.extensions.appserver.ERXWOContext;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.extensions.validation.ERXValidationFactory;
@@ -34,11 +36,23 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ERCMailMessage.class);
+	
+	private transient CreateDeliveryDelegate delegate;
 
 	public static final ERCMailMessageClazz<ERCMailMessage> clazz = new ERCMailMessageClazz<ERCMailMessage>();
 
 	public static class ERCMailMessageClazz<T extends ERCMailMessage> extends
 			er.corebl.model.eogen._ERCMailMessage._ERCMailMessageClazz<T> {
+		
+		private CreateDeliveryDelegate defaultDelegate;
+		
+		public CreateDeliveryDelegate defaultCreateDeliveryDelegate() {
+			return defaultDelegate;
+		}
+		
+		public void setDefaultCreateDeliveryDelegate(CreateDeliveryDelegate defaultDelegate) {
+			this.defaultDelegate = defaultDelegate;
+		}
 
 		/**
 		 * Composes a mail message.
@@ -259,6 +273,105 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			}
 		}
 	}
+	
+	public static interface CreateDeliveryDelegate {
+		public void willCreateDelivery(ERCMailMessage mailMessage);
+	}
+	
+	public static class DefaultCreateDeliveryDelegate implements CreateDeliveryDelegate {
+		/**
+		 * The CAN SPAM act requires this exact prefix on the email subject
+		 * line if an email message is sexually explicit.
+		 */
+		public static final String SEXUALLY_EXPLICIT_PREFIX = "SEXUALLY-EXPLICIT: ";
+		
+		/**
+		 * CAN SPAM requires that you must disclose clearly and conspicuously 
+		 * that your message is an advertisement. The law provides a lot of
+		 * leeway in how to do this. Here we just note it in the subject line.
+		 */
+		public static final String COMMERCIAL_PREFIX = "[AD] ";
+		
+		public void willCreateDelivery(ERCMailMessage mailMessage) {
+			String subject = mailMessage.subject();
+			if(isCommercial(mailMessage)) {
+				subject = COMMERCIAL_PREFIX + subject;
+			}
+			if(isSexuallyExplicit(mailMessage)) {
+				subject = SEXUALLY_EXPLICIT_PREFIX + subject;
+			}
+			if(!subject.equals(mailMessage.subject())) {
+				mailMessage.setSubject(subject);
+			}
+			
+			DefaultMessageFooter footer = (DefaultMessageFooter) ERXApplication.instantiatePage(DefaultMessageFooter.class.getName());
+			footer.setMailMessage(mailMessage);
+			setPostalAddress(footer);
+			
+			String plainText = PLAIN_CLOB.dot(ERCMailClob.MESSAGE).valueInObject(mailMessage);
+			if(plainText != null) {
+				footer.setPlainText(true);
+				String footerText = ERCMailMessage.clazz.componentContentWithFullURLs(footer);
+				plainText += footerText;
+				PLAIN_CLOB.dot(ERCMailClob.MESSAGE).takeValueInObject(plainText, mailMessage);
+			}
+			
+			String htmlText = HTML_CLOB.dot(ERCMailClob.MESSAGE).valueInObject(mailMessage);
+			if(htmlText != null) {
+				footer.setPlainText(false);
+				String footerHTML = ERCMailMessage.clazz.componentContentWithFullURLs(footer);
+				int idx = htmlText.indexOf("</body>");
+				if(idx == -1) { idx = htmlText.indexOf("</html>"); }
+				if(idx == -1) {
+					htmlText += footerHTML;
+				} else {
+					StringBuilder sb = new StringBuilder(htmlText);
+					sb.insert(idx, footerHTML);
+					htmlText = sb.toString();
+				}
+				HTML_CLOB.dot(ERCMailClob.MESSAGE).takeValueInObject(htmlText, mailMessage);
+			}
+		}
+		
+		/**
+		 * Default implementation just returns false. Subclasses might
+		 * return different values based on the content of the mail
+		 * message or its categories.
+		 * 
+		 * @param mailMessage the mail message
+		 * @return Always returns false
+		 */
+		protected boolean isCommercial(ERCMailMessage mailMessage) {
+			return false;
+		}
+		
+		/**
+		 * Default implementation just returns false. Subclasses might
+		 * return different values based on the content of the mail
+		 * message or its categories.
+		 * 
+		 * @param mailMessage the mail message
+		 * @return Always returns false
+		 */
+		protected boolean isSexuallyExplicit(ERCMailMessage mailMessage) {
+			return false;
+		}
+		
+		/**
+		 * Sets the postal address of the sender on the footer component.
+		 * 
+		 * Defaults to the location of MC Pee Pants' global demonic diet 
+		 * pill pyramid scheme. Obviously, you should change this :)
+		 * 
+		 * @param footer the footer component
+		 */
+		protected void setPostalAddress(DefaultMessageFooter footer) {
+			footer.setStreetAddress("612 Wharf Ave");
+			footer.setCity("Nashville");
+			footer.setState("TN");
+			footer.setZipCode("37210");
+		}
+	}
 
 	/**
 	 * Initializes the EO. This is called when an EO is created, not when it is
@@ -278,8 +391,23 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		return mailActionURL("MailAction/unsubscribe");
 	}
 	
+	public CreateDeliveryDelegate createDeliveryDelegate() {
+		if(delegate == null) {
+			delegate = ERCMailMessage.clazz.defaultCreateDeliveryDelegate();
+		}
+		return delegate;
+	}
+	
+	public void setCreateDeliveryDelegate(CreateDeliveryDelegate delegate) {
+		this.delegate = delegate;
+	}
+	
 	public ERMailDelivery createMailDeliveryForMailMessage() 
 			throws MessagingException {
+		
+		if(createDeliveryDelegate() != null) {
+			createDeliveryDelegate().willCreateDelivery(this);
+		}
 
 		ERMailDelivery mail = null;
 		if (htmlClob() != null) {
