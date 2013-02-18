@@ -278,7 +278,11 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		public void willCreateDelivery(ERCMailMessage mailMessage);
 	}
 	
-	public static class DefaultCreateDeliveryDelegate implements CreateDeliveryDelegate {
+	/**
+	 * The default delegate is designed to support compliance with the
+	 * CAN SPAM act.
+	 */
+	public static abstract class DefaultCreateDeliveryDelegate implements CreateDeliveryDelegate {
 		/**
 		 * The CAN SPAM act requires this exact prefix on the email subject
 		 * line if an email message is sexually explicit.
@@ -334,44 +338,23 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 		
 		/**
-		 * Default implementation just returns false. Subclasses might
-		 * return different values based on the content of the mail
-		 * message or its categories.
-		 * 
 		 * @param mailMessage the mail message
-		 * @return Always returns false
+		 * @return true if a the mailMessage is commercial, false otherwise
 		 */
-		protected boolean isCommercial(ERCMailMessage mailMessage) {
-			return false;
-		}
+		protected abstract boolean isCommercial(ERCMailMessage mailMessage);
 		
 		/**
-		 * Default implementation just returns false. Subclasses might
-		 * return different values based on the content of the mail
-		 * message or its categories.
-		 * 
 		 * @param mailMessage the mail message
-		 * @return Always returns false
+		 * @return true if a the mailMessage is sexually explicit, false otherwise
 		 */
-		protected boolean isSexuallyExplicit(ERCMailMessage mailMessage) {
-			return false;
-		}
+		protected abstract boolean isSexuallyExplicit(ERCMailMessage mailMessage);
 		
 		/**
 		 * Sets the postal address of the sender on the footer component.
 		 * 
-		 * Defaults to the location of MC Pee Pants' global demonic diet 
-		 * pill pyramid scheme. Obviously, you should change this :)
-		 * 
 		 * @param footer the footer component
 		 */
-		protected void setPostalAddress(ERCMailMessage mailMessage, DefaultMessageFooter footer) {
-			footer.setSender("MC Pee Pants");
-			footer.setStreetAddress("612 Wharf Ave");
-			footer.setCity("Nashville");
-			footer.setState("TN");
-			footer.setZipCode("37210");
-		}
+		protected abstract void setPostalAddress(ERCMailMessage mailMessage, DefaultMessageFooter footer);
 	}
 
 	/**
