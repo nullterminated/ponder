@@ -1,5 +1,7 @@
 package er.corebl.model;
 
+import javax.mail.MessagingException;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
@@ -17,6 +19,9 @@ import er.corebl.mail.MailAction;
 import er.extensions.appserver.ERXWOContext;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.extensions.validation.ERXValidationFactory;
+import er.javamail.ERMailDelivery;
+import er.javamail.ERMailDeliveryHTML;
+import er.javamail.ERMailDeliveryPlainText;
 
 public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	/**
@@ -273,6 +278,57 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		return mailActionURL("MailAction/unsubscribe");
 	}
 	
+	public ERMailDelivery createMailDeliveryForMailMessage() 
+			throws MessagingException {
+
+		ERMailDelivery mail = null;
+		if (htmlClob() != null) {
+			ERMailDeliveryHTML html = ERMailDeliveryHTML.newMailDelivery();
+			html.setHTMLContent(htmlClob().message());
+			if (plainClob() != null) {
+				html.setHiddenPlainTextContent(plainClob().message());
+			}
+			mail = html;
+		} else {
+			ERMailDeliveryPlainText plain = new ERMailDeliveryPlainText();
+			plain.setTextContent(plainClob().message());
+			mail = plain;
+		}
+
+		mail.setSubject(subject());
+		mail.setFromAddress(fromAddress().emailAddress());
+		if (replyToAddress() != null) {
+			mail.setReplyToAddress(replyToAddress().emailAddress());
+		}
+
+		if (!mailAttachments().isEmpty()) {
+			for (ERCMailAttachment attachment : mailAttachments()) {
+				if (mail instanceof ERMailDeliveryHTML && attachment.isInline().booleanValue()) {
+					mail.addInlineAttachment(attachment.mailAttachment());
+				} else {
+					mail.addAttachment(attachment.mailAttachment());
+				}
+			}
+		}
+
+		NSArray<ERCMailAddress> toAddresses = toAddresses();
+		if (!toAddresses.isEmpty()) {
+			mail.setToAddresses(ERCMailAddress.EMAIL_ADDRESS.arrayValueInObject(toAddresses));
+		}
+
+		NSArray<ERCMailAddress> ccAddresses = ccAddresses();
+		if (!ccAddresses.isEmpty()) {
+			mail.setCCAddresses(ERCMailAddress.EMAIL_ADDRESS.arrayValueInObject(ccAddresses));
+		}
+
+		NSArray<ERCMailAddress> bccAddresses = bccAddresses();
+		if (!bccAddresses.isEmpty()) {
+			mail.setBCCAddresses(ERCMailAddress.EMAIL_ADDRESS.arrayValueInObject(bccAddresses));
+		}
+
+		return mail;
+	}
+
 	protected String mailActionURL(String directActionName) {
 		WOContext context = ERXWOContext.newContext();
 		context.generateCompleteURLs();

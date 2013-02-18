@@ -10,14 +10,10 @@ import com.webobjects.eocontrol.EOKeyGlobalID;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSForwardException;
 
-import er.corebl.model.ERCMailAddress;
-import er.corebl.model.ERCMailAttachment;
 import er.corebl.model.ERCMailMessage;
 import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.javamail.ERMailDelivery;
-import er.javamail.ERMailDeliveryHTML;
-import er.javamail.ERMailDeliveryPlainText;
 
 public enum ERCMailer {
 	INSTANCE;
@@ -86,7 +82,7 @@ public enum ERCMailer {
 		}
 	}
 
-	public synchronized void sendMailMessage(ERCMailMessage mailMessage) {
+	public void sendMailMessage(ERCMailMessage mailMessage) {
 		if (log.isDebugEnabled()) {
 			log.debug("Sending mail message: " + mailMessage);
 		}
@@ -135,7 +131,7 @@ public enum ERCMailer {
 		
 		ERMailDelivery delivery;
 		try {
-			delivery = createMailDeliveryForMailMessage(mailMessage);
+			delivery = mailMessage.createMailDeliveryForMailMessage();
 		} catch (MessagingException e) {
 			mailMessage.setState(ERCMailState.EXCEPTION);
 			mailMessage.setException(e);
@@ -148,7 +144,7 @@ public enum ERCMailer {
 			EOKeyGlobalID gid = mailMessage.permanentGlobalID();
 			ERCMessageDelegate delegate = new ERCMessageDelegate(gid);
 			delivery.setDelegate(delegate);
-			delivery.sendMail(true);
+			sendMailMessage(delivery, mailMessage.mailRecipients().count() * sendRate);
 			
 			if(ERCMailState.SENT.equals(mailMessage.state())) {
 				if(messageID != null) {
@@ -163,65 +159,18 @@ public enum ERCMailer {
 		
 		ec.saveChanges();
 		
-		if(ERCMailState.SENT.equals(mailMessage.state()) && sendRate > 0) {
-			int recipients = mailMessage.mailRecipients().count();
-			try {
-				Thread.sleep(recipients * sendRate);
-			} catch (InterruptedException e) {
-				throw NSForwardException._runtimeExceptionForThrowable(e);
-			}
+	}
+	
+	public synchronized void sendMailMessage(ERMailDelivery delivery, long sleep) {
+		delivery.sendMail(true);
+		if(sleep <= 0) {
+			return;
 		}
-
+		try {
+			Thread.sleep(sleep);
+		} catch (InterruptedException e) {
+			throw NSForwardException._runtimeExceptionForThrowable(e);
+		}
 	}
 
-	public ERMailDelivery createMailDeliveryForMailMessage(ERCMailMessage message) 
-			throws MessagingException {
-
-		ERMailDelivery mail = null;
-		if (message.htmlClob() != null) {
-			ERMailDeliveryHTML html = ERMailDeliveryHTML.newMailDelivery();
-			html.setHTMLContent(message.htmlClob().message());
-			if (message.plainClob() != null) {
-				html.setHiddenPlainTextContent(message.plainClob().message());
-			}
-			mail = html;
-		} else {
-			ERMailDeliveryPlainText plain = new ERMailDeliveryPlainText();
-			plain.setTextContent(message.plainClob().message());
-			mail = plain;
-		}
-
-		mail.setSubject(message.subject());
-		mail.setFromAddress(message.fromAddress().emailAddress());
-		if (message.replyToAddress() != null) {
-			mail.setReplyToAddress(message.replyToAddress().emailAddress());
-		}
-
-		if (!message.mailAttachments().isEmpty()) {
-			for (ERCMailAttachment attachment : message.mailAttachments()) {
-				if (mail instanceof ERMailDeliveryHTML && attachment.isInline().booleanValue()) {
-					mail.addInlineAttachment(attachment.mailAttachment());
-				} else {
-					mail.addAttachment(attachment.mailAttachment());
-				}
-			}
-		}
-
-		NSArray<ERCMailAddress> toAddresses = message.toAddresses();
-		if (!toAddresses.isEmpty()) {
-			mail.setToAddresses(ERCMailAddress.EMAIL_ADDRESS.arrayValueInObject(toAddresses));
-		}
-
-		NSArray<ERCMailAddress> ccAddresses = message.ccAddresses();
-		if (!ccAddresses.isEmpty()) {
-			mail.setCCAddresses(ERCMailAddress.EMAIL_ADDRESS.arrayValueInObject(ccAddresses));
-		}
-
-		NSArray<ERCMailAddress> bccAddresses = message.bccAddresses();
-		if (!bccAddresses.isEmpty()) {
-			mail.setBCCAddresses(ERCMailAddress.EMAIL_ADDRESS.arrayValueInObject(bccAddresses));
-		}
-
-		return mail;
-	}
 }
