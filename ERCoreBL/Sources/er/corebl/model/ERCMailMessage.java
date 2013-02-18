@@ -366,6 +366,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 * @param footer the footer component
 		 */
 		protected void setPostalAddress(DefaultMessageFooter footer) {
+			footer.setSender("MC Pee Pants");
 			footer.setStreetAddress("612 Wharf Ave");
 			footer.setCity("Nashville");
 			footer.setState("TN");

@@ -7,6 +7,10 @@ IsHTML: WOConditional {
 	negate = true;
 }
 
+Sender: WOString {
+	value = sender;
+}
+
 StreetAddress: WOString {
 	value = streetAddress;
 }

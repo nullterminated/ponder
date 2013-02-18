@@ -20,6 +20,8 @@ public class DefaultMessageFooter extends ERXStatelessComponent {
 	private String state;
 	private String zipCode;
 
+	private String sender;
+
 	public DefaultMessageFooter(WOContext context) {
         super(context);
     }
@@ -115,5 +117,19 @@ public class DefaultMessageFooter extends ERXStatelessComponent {
 	 */
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+
+	/**
+	 * @return the sender
+	 */
+	public String sender() {
+		return sender;
+	}
+
+	/**
+	 * @param sender the sender to set
+	 */
+	public void setSender(String sender) {
+		this.sender = sender;
 	}
 }
