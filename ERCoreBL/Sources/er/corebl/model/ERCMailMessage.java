@@ -306,7 +306,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			
 			DefaultMessageFooter footer = (DefaultMessageFooter) ERXApplication.instantiatePage(DefaultMessageFooter.class.getName());
 			footer.setMailMessage(mailMessage);
-			setPostalAddress(footer);
+			setPostalAddress(mailMessage, footer);
 			
 			String plainText = PLAIN_CLOB.dot(ERCMailClob.MESSAGE).valueInObject(mailMessage);
 			if(plainText != null) {
@@ -365,7 +365,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 * 
 		 * @param footer the footer component
 		 */
-		protected void setPostalAddress(DefaultMessageFooter footer) {
+		protected void setPostalAddress(ERCMailMessage mailMessage, DefaultMessageFooter footer) {
 			footer.setSender("MC Pee Pants");
 			footer.setStreetAddress("612 Wharf Ave");
 			footer.setCity("Nashville");
