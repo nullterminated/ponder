@@ -15,6 +15,11 @@ import er.extensions.eof.ERXEC;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.javamail.ERMailDelivery;
 
+/**
+ * The ERCMailer is a singleton to send mail messages at a specified
+ * send rate.
+ *
+ */
 public enum ERCMailer {
 	INSTANCE;
 
@@ -144,14 +149,7 @@ public enum ERCMailer {
 			EOKeyGlobalID gid = mailMessage.permanentGlobalID();
 			ERCMessageDelegate delegate = new ERCMessageDelegate(gid);
 			delivery.setDelegate(delegate);
-			sendMailMessage(delivery, mailMessage.mailRecipients().count() * sendRate);
-			
-			if(ERCMailState.SENT.equals(mailMessage.state())) {
-				if(messageID != null) {
-					mailMessage.setMessageID(messageID);
-					messageID = null;
-				}
-			}
+			sendMailMessage(delivery, mailMessage);
 		} catch (Exception e) {
 			mailMessage.setState(ERCMailState.EXCEPTION);
 			mailMessage.setException(e);
@@ -161,15 +159,27 @@ public enum ERCMailer {
 		
 	}
 	
-	public synchronized void sendMailMessage(ERMailDelivery delivery, long sleep) {
+	/**
+	 * This method provides a bottleneck to regulate the send rate of the mailer.
+	 * It simply sends the ERMailDelivery while blocking.
+	 * 
+	 * @param delivery the mail deliver to send
+	 * @param mailMessage the mailMessage EO
+	 */
+	public synchronized void sendMailMessage(ERMailDelivery delivery, ERCMailMessage mailMessage) {
 		delivery.sendMail(true);
-		if(sleep <= 0) {
-			return;
-		}
-		try {
-			Thread.sleep(sleep);
-		} catch (InterruptedException e) {
-			throw NSForwardException._runtimeExceptionForThrowable(e);
+		if(ERCMailState.SENT.equals(mailMessage.state())) {
+			if(messageID != null) {
+				mailMessage.setMessageID(messageID);
+				messageID = null;
+			}
+			if(sendRate > 0) {
+				try {
+					Thread.sleep(mailMessage.mailRecipients().count() * sendRate);
+				} catch (InterruptedException e) {
+					throw NSForwardException._runtimeExceptionForThrowable(e);
+				}
+			}
 		}
 	}
 
