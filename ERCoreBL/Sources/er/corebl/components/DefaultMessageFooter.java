@@ -19,7 +19,6 @@ public class DefaultMessageFooter extends ERXStatelessComponent {
 	private String city;
 	private String state;
 	private String zipCode;
-
 	private String sender;
 
 	public DefaultMessageFooter(WOContext context) {
@@ -33,6 +32,7 @@ public class DefaultMessageFooter extends ERXStatelessComponent {
 		city = null;
 		state = null;
 		zipCode = null;
+		sender = null;
 	}
 
 	/**
