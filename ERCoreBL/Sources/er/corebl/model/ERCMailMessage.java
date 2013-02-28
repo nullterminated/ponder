@@ -477,7 +477,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	
 	public NSArray<ERCMailRecipient> unverifiedRecipients() {
 		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.VERIFICATION_STATE).eq(ERCMailAddressVerification.UNVERIFIED);
-		NSArray<ERCMailRecipient> unverified = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+		NSArray<ERCMailRecipient> unverified = mailRecipients(q);
 		return unverified;
 	}
 	
@@ -488,7 +488,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	public NSArray<ERCMailRecipient> optOutRecipients() {
 		if(mailCategory() != null) {
 			EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.OPT_IN_CATEGORIES).containsObject(mailCategory());
-			NSArray<ERCMailRecipient> optOut = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+			NSArray<ERCMailRecipient> optOut = mailRecipients(q);
 			return optOut;
 		}
 		return NSArray.emptyArray();
@@ -507,7 +507,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	
 	public NSArray<ERCMailRecipient> suppressedRecipients() {
 		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.STOP_REASON).isNotNull();
-		NSArray<ERCMailRecipient> suppressed = EOQualifier.filteredArrayWithQualifier(mailRecipients(), q);
+		NSArray<ERCMailRecipient> suppressed = mailRecipients(q);
 		return suppressed;
 	}
 	
