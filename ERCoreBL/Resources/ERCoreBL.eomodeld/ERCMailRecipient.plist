@@ -55,5 +55,4 @@
             name = mailMessage; 
         }
     ); 
-    userInfo = {ERXAuditKeys = (type); }; 
 }

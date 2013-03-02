@@ -58,11 +58,4 @@
             name = optInCategories; 
         }
     ); 
-    userInfo = {
-        ERXAuditKeys = (
-            emailAddress, 
-            isActive, 
-            "ercMailAddressCategoryPreferences.ercMailCategory.name"
-        ); 
-    }; 
 }

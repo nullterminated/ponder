@@ -31,5 +31,4 @@
             name = mailMessages; 
         }
     ); 
-    userInfo = {ERXAuditKeys = (name, detail); }; 
 }

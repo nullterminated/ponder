@@ -191,16 +191,4 @@
             name = replyToAddress; 
         }
     ); 
-    userInfo = {
-        ERXAuditKeys = (
-            dateRead, 
-            dateSent, 
-            exceptionReason, 
-            state, 
-            "mailCategory.name", 
-            "fromAddress.emailAddress", 
-            "mailRecipients.mailAddress.emailAddress", 
-            "replyToAddress.emailAddress"
-        ); 
-    }; 
 }
