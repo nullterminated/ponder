@@ -157,7 +157,7 @@ public enum SESNotificationType {
 		 * 
 		 * @param type the notification type
 		 * @param notification the notification
-		 * @param address the email address
+		 * @param address the recipient email address
 		 * @return true if the delegate handled the notification, false if the default behavior should be used.
 		 */
 		public boolean delegateHandledNotification(SESNotificationType type, SESNotification notification, ERCMailAddress address);
