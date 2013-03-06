@@ -1,6 +1,7 @@
 package er.corebl.mail;
 
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.Semaphore;
@@ -23,6 +24,7 @@ import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCMailAttachment;
 import er.corebl.model.ERCMailMessage;
 import er.corebl.model.ERCMailRecipient;
+import er.extensions.appserver.ERXWOContext;
 import er.extensions.concurrency.ERXRunnable;
 import er.extensions.eof.ERXBatchFetchUtilities;
 import er.extensions.eof.ERXEC;
@@ -56,7 +58,7 @@ public enum ERCMailer {
 	
 	private final Semaphore semaphore = new Semaphore(1, true);
 	
-	private final ThreadPoolExecutor releasePool = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new SynchronousQueue<Runnable>(true));
+	private final ThreadPoolExecutor releasePool = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 	
 	private ThreadPoolExecutor executorPool = new ThreadPoolExecutor(8, 8, 0L, TimeUnit.MILLISECONDS,  new SynchronousQueue<Runnable>(true));
 	
@@ -108,6 +110,7 @@ public enum ERCMailer {
 				message.setState(ERCMailState.EXCEPTION);
 				message.setException(e);
 			}
+			ERXWOContext.setCurrentContext(null);
 			ec.saveChanges();
 		}
 	}
@@ -147,8 +150,8 @@ public enum ERCMailer {
 	}
 	
 	public void setNumberOfThreads(int poolSize) {
-		executorPool.setMaximumPoolSize(poolSize);
 		executorPool.setCorePoolSize(poolSize);
+		executorPool.setMaximumPoolSize(poolSize);
 	}
 	
 	public boolean isMailerActive() {
