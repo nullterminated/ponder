@@ -24,6 +24,7 @@ import er.directtoweb.delegates.ERDBranchDelegate;
 import er.directtoweb.delegates.ERDBranchInterface;
 import er.directtoweb.interfaces.ERDMessagePageInterface;
 import er.directtoweb.pages.ERD2WPage;
+import er.extensions.appserver.ERXApplication;
 import er.extensions.foundation.ERXConfigurationManager;
 import er.extensions.localization.ERXLocalizer;
 import er.users.components.ERUserHtmlEmail;
@@ -105,7 +106,7 @@ public class CreateUserController extends ERDBranchDelegate {
 				extraInfo.setObjectForKey("Failed to send activation email!", "status");
 				extraInfo.setObjectForKey(user, "user");
 				extraInfo.setObjectForKey(user.activateUserToken(), "token");
-				ERCoreBL.sharedInstance().reportException(e, extraInfo);
+				ERXApplication.erxApplication().reportException(e, sender.context(), extraInfo);
 			}
 
 			// Return a success message page to the user.

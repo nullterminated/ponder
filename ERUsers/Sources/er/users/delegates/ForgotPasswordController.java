@@ -29,6 +29,7 @@ import er.directtoweb.delegates.ERDBranchDelegate;
 import er.directtoweb.delegates.ERDBranchInterface;
 import er.directtoweb.interfaces.ERDMessagePageInterface;
 import er.directtoweb.pages.ERD2WQueryPage;
+import er.extensions.appserver.ERXApplication;
 import er.extensions.eof.ERXEC;
 import er.extensions.foundation.ERXConfigurationManager;
 import er.extensions.localization.ERXLocalizer;
@@ -109,7 +110,7 @@ public class ForgotPasswordController extends ERDBranchDelegate {
 				extraInfo.setObjectForKey("Failed to send reset password email!", "status");
 				extraInfo.setObjectForKey(user, "user");
 				extraInfo.setObjectForKey(user.resetToken(), "token");
-				ERCoreBL.sharedInstance().reportException(e, extraInfo);
+				ERXApplication.erxApplication().reportException(e, sender.context(), extraInfo);
 			}
 
 			// Return a success message page to the user.
