@@ -27,15 +27,21 @@ ZipCode: WOString {
 	value = zipCode;
 }
 
-WebBug: WOImage {
-	src = mailMessage.messageReadURL;
+Beacon: WOActionURL {
+	actionClass = "MailAction";
+	directActionName = "read";
+	?uuid = mailMessage.uuid;
 }
 
-UnsubscribeURL: WOString {
-	value = mailMessage.unsubscribeURL;
+UnsubscribeURL: WOActionURL {
+	actionClass = "MailAction";
+	directActionName = "unsubscribe";
+	?uuid = mailMessage.uuid;
 }
 
 UnsubscribeLink: WOHyperlink {
-	href = mailMessage.unsubscribeURL;
+	actionClass = "MailAction";
+	directActionName = "unsubscribe";
+	?uuid = mailMessage.uuid;
 	string = "click here";
 }
