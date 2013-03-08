@@ -64,6 +64,34 @@ public enum ERCMailer {
 	
 	private ScheduledExecutorService scheduledExecutor;
 	
+	private MailerDelegate delegate = new MailerDelegate() {
+		private SingleSenderDelegate _delegate = new SingleSenderDelegate();
+		
+		@Override
+		public void willCreateDelivery(ERCMailMessage message) {
+			// Does nothing
+		}
+		
+		@Override
+		public boolean shouldSendMessage(ERCMailMessage message) {
+			return _delegate.shouldSendMessage(message);
+		}
+	};
+	
+	/**
+	 * Sets the MailerDelegate for the mailer. The default delegate
+	 * just uses the logic in the {@link SingleSenderDelegate} class.
+	 * If you need to modify messages before sending them for CAN
+	 * SPAM Act compliance, have a look at the {@link CSAMailerDelegate}
+	 * class.
+	 * 
+	 * @param delegate the mailer delegate to set
+	 */
+	public void setMailerDelegate(MailerDelegate delegate) {
+		if(delegate == null) { throw new IllegalArgumentException("Delegate not allowed to be null"); }
+		this.delegate = delegate;
+	}
+	
 	/**
 	 * A MailerCallback allows for pre/post processing.
 	 */
@@ -72,6 +100,15 @@ public enum ERCMailer {
 		public void postProcess();
 	}
 	
+	/**
+	 * A MailerDelegate allows for message suppression and
+	 * modification that is beyond the scope of the mailer
+	 * daemon.
+	 */
+	public interface MailerDelegate {
+		public boolean shouldSendMessage(ERCMailMessage message);
+		public void willCreateDelivery(ERCMailMessage message);
+	}
 	
 	/**
 	 * The Message sender class sends messages on a background thread.
@@ -239,34 +276,15 @@ public enum ERCMailer {
 			return;
 		}
 		
+		if(!delegate.shouldSendMessage(mailMessage)) {
+			return;
+		}
+		
 		if (log.isDebugEnabled()) {
 			log.debug("Sending mail message: " + mailMessage);
 		}
 
 		EOEditingContext ec = mailMessage.editingContext();
-
-		if(mailMessage.hasOptOutRecipients()) {
-			try {
-				mailMessage.setState(ERCMailState.OPT_OUT);
-				ec.saveChanges();
-				return;
-			} catch (EOGeneralAdaptorException ge) {
-				ec.revert();
-				return;
-			}
-		}
-		
-		if(mailMessage.hasSuppressedRecipients()) {
-			try {
-				mailMessage.setState(ERCMailState.SUPPRESSED);
-				ec.saveChanges();
-				return;
-			} catch (EOGeneralAdaptorException ge) {
-				ec.revert();
-				return;
-			}
-		}
-		
 		try {
 			mailMessage.setState(ERCMailState.PROCESSING);
 			ec.saveChanges();
@@ -275,7 +293,9 @@ public enum ERCMailer {
 			return;
 		}
 		
-		ERMailDelivery delivery;
+		delegate.willCreateDelivery(mailMessage);
+		
+		ERMailDelivery delivery = null;
 		try {
 			delivery = mailMessage.createMailDeliveryForMailMessage();
 		} catch (MessagingException e) {
@@ -284,7 +304,6 @@ public enum ERCMailer {
 			ec.saveChanges();
 			return;
 		}
-
 
 		EOKeyGlobalID gid = mailMessage.permanentGlobalID();
 		MessageSender sender = new MessageSender(gid, delivery);

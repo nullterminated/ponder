@@ -6,19 +6,14 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.webobjects.appserver.WOComponent;
-import com.webobjects.appserver.WOContext;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOFetchSpecification;
 import com.webobjects.eocontrol.EOQualifier;
 import com.webobjects.foundation.NSArray;
 
-import er.corebl.components.DefaultMessageFooter;
 import er.corebl.mail.ERCMailAddressVerification;
 import er.corebl.mail.ERCMailRecipientType;
 import er.corebl.mail.ERCMailState;
-import er.corebl.mail.MailAction;
-import er.extensions.appserver.ERXApplication;
-import er.extensions.appserver.ERXWOContext;
 import er.extensions.eof.ERXFetchSpecificationBatchIterator;
 import er.extensions.validation.ERXValidationFactory;
 import er.javamail.ERMailDelivery;
@@ -36,24 +31,12 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 
 	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(ERCMailMessage.class);
-	
-	private transient CreateDeliveryDelegate delegate;
 
 	public static final ERCMailMessageClazz<ERCMailMessage> clazz = new ERCMailMessageClazz<ERCMailMessage>();
 
 	public static class ERCMailMessageClazz<T extends ERCMailMessage> extends
 			er.corebl.model.eogen._ERCMailMessage._ERCMailMessageClazz<T> {
 		
-		private CreateDeliveryDelegate defaultDelegate;
-		
-		public CreateDeliveryDelegate defaultCreateDeliveryDelegate() {
-			return defaultDelegate;
-		}
-		
-		public void setDefaultCreateDeliveryDelegate(CreateDeliveryDelegate defaultDelegate) {
-			this.defaultDelegate = defaultDelegate;
-		}
-
 		/**
 		 * Composes a mail message.
 		 * 
@@ -274,89 +257,6 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 	}
 	
-	public static interface CreateDeliveryDelegate {
-		public void willCreateDelivery(ERCMailMessage mailMessage);
-	}
-	
-	/**
-	 * The default delegate is designed to support compliance with the
-	 * CAN SPAM act.
-	 */
-	public static abstract class DefaultCreateDeliveryDelegate implements CreateDeliveryDelegate {
-		/**
-		 * The CAN SPAM act requires this exact prefix on the email subject
-		 * line if an email message is sexually explicit.
-		 */
-		public static final String SEXUALLY_EXPLICIT_PREFIX = "SEXUALLY-EXPLICIT: ";
-		
-		/**
-		 * CAN SPAM requires that you must disclose clearly and conspicuously 
-		 * that your message is an advertisement. The law provides a lot of
-		 * leeway in how to do this. Here we just note it in the subject line.
-		 */
-		public static final String COMMERCIAL_PREFIX = "[AD] ";
-		
-		public void willCreateDelivery(ERCMailMessage mailMessage) {
-			String subject = mailMessage.subject();
-			if(isCommercial(mailMessage)) {
-				subject = COMMERCIAL_PREFIX + subject;
-			}
-			if(isSexuallyExplicit(mailMessage)) {
-				subject = SEXUALLY_EXPLICIT_PREFIX + subject;
-			}
-			if(!subject.equals(mailMessage.subject())) {
-				mailMessage.setSubject(subject);
-			}
-			
-			DefaultMessageFooter footer = (DefaultMessageFooter) ERXApplication.instantiatePage(DefaultMessageFooter.class.getName());
-			footer.setMailMessage(mailMessage);
-			setPostalAddress(mailMessage, footer);
-			
-			String plainText = PLAIN_CLOB.dot(ERCMailClob.MESSAGE).valueInObject(mailMessage);
-			if(plainText != null) {
-				footer.setPlainText(true);
-				String footerText = ERCMailMessage.clazz.componentContentWithFullURLs(footer);
-				plainText += footerText;
-				PLAIN_CLOB.dot(ERCMailClob.MESSAGE).takeValueInObject(plainText, mailMessage);
-			}
-			
-			String htmlText = HTML_CLOB.dot(ERCMailClob.MESSAGE).valueInObject(mailMessage);
-			if(htmlText != null) {
-				footer.setPlainText(false);
-				String footerHTML = ERCMailMessage.clazz.componentContentWithFullURLs(footer);
-				int idx = htmlText.indexOf("</body>");
-				if(idx == -1) { idx = htmlText.indexOf("</html>"); }
-				if(idx == -1) {
-					htmlText += footerHTML;
-				} else {
-					StringBuilder sb = new StringBuilder(htmlText);
-					sb.insert(idx, footerHTML);
-					htmlText = sb.toString();
-				}
-				HTML_CLOB.dot(ERCMailClob.MESSAGE).takeValueInObject(htmlText, mailMessage);
-			}
-		}
-		
-		/**
-		 * @param mailMessage the mail message
-		 * @return true if a the mailMessage is commercial, false otherwise
-		 */
-		protected abstract boolean isCommercial(ERCMailMessage mailMessage);
-		
-		/**
-		 * @param mailMessage the mail message
-		 * @return true if a the mailMessage is sexually explicit, false otherwise
-		 */
-		protected abstract boolean isSexuallyExplicit(ERCMailMessage mailMessage);
-		
-		/**
-		 * Sets the postal address of the sender on the footer component.
-		 * 
-		 * @param footer the footer component
-		 */
-		protected abstract void setPostalAddress(ERCMailMessage mailMessage, DefaultMessageFooter footer);
-	}
-
 	/**
 	 * Initializes the EO. This is called when an EO is created, not when it is
 	 * inserted into an EC.
@@ -367,32 +267,9 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		setUuid(java.util.UUID.randomUUID().toString());
 	}
 	
-	public String messageReadURL() {
-		return mailActionURL("MailAction/read");
-	}
-	
-	public String unsubscribeURL() {
-		return mailActionURL("MailAction/unsubscribe");
-	}
-	
-	public CreateDeliveryDelegate createDeliveryDelegate() {
-		if(delegate == null) {
-			delegate = ERCMailMessage.clazz.defaultCreateDeliveryDelegate();
-		}
-		return delegate;
-	}
-	
-	public void setCreateDeliveryDelegate(CreateDeliveryDelegate delegate) {
-		this.delegate = delegate;
-	}
-	
 	public ERMailDelivery createMailDeliveryForMailMessage() 
 			throws MessagingException {
 		
-		if(createDeliveryDelegate() != null) {
-			createDeliveryDelegate().willCreateDelivery(this);
-		}
-
 		ERMailDelivery mail = null;
 		if (htmlClob() != null) {
 			ERMailDeliveryHTML html = ERMailDeliveryHTML.newMailDelivery();
@@ -441,13 +318,6 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		return mail;
 	}
 
-	protected String mailActionURL(String directActionName) {
-		WOContext context = ERXWOContext.newContext();
-		context.generateCompleteURLs();
-		String url = ERXWOContext.directActionUrl(context, directActionName, MailAction.UUID_KEY, uuid(), false, false);
-		return url;
-	}
-	
 	public void addToRecipients(ERCMailAddress address, ERCMailRecipientType type) {
 		EOQualifier qualifier = ERCMailRecipient.MAIL_ADDRESS.eq(address);
 		NSArray<ERCMailRecipient> recipients = mailRecipients(qualifier);
@@ -479,43 +349,6 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.VERIFICATION_STATE).eq(ERCMailAddressVerification.UNVERIFIED);
 		NSArray<ERCMailRecipient> unverified = mailRecipients(q);
 		return unverified;
-	}
-	
-	public boolean hasOptOutRecipients() {
-		return !optOutRecipients().isEmpty();
-	}
-	
-	public NSArray<ERCMailRecipient> optOutRecipients() {
-		if(mailCategory() != null) {
-			EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.OPT_IN_CATEGORIES).containsObject(mailCategory());
-			NSArray<ERCMailRecipient> optOut = mailRecipients(q);
-			return optOut;
-		}
-		return NSArray.emptyArray();
-	}
-	
-	public void removeOptOutRecipients() {
-		NSArray<ERCMailRecipient> optOut = optOutRecipients();
-		if(!optOut.isEmpty()) {
-			removeObjectsFromBothSidesOfRelationshipWithKey(optOut, MAIL_RECIPIENTS_KEY);
-		}
-	}
-	
-	public boolean hasSuppressedRecipients() {
-		return !suppressedRecipients().isEmpty();
-	}
-	
-	public NSArray<ERCMailRecipient> suppressedRecipients() {
-		EOQualifier q = ERCMailRecipient.MAIL_ADDRESS.dot(ERCMailAddress.STOP_REASON).isNotNull();
-		NSArray<ERCMailRecipient> suppressed = mailRecipients(q);
-		return suppressed;
-	}
-	
-	public void removeSuppressedRecipients() {
-		NSArray<ERCMailRecipient> suppressed = suppressedRecipients();
-		if(!suppressed.isEmpty()) {
-			removeObjectsFromBothSidesOfRelationshipWithKey(suppressed, MAIL_RECIPIENTS_KEY);
-		}
 	}
 	
 	public void setHtmlMessage(String value) {
