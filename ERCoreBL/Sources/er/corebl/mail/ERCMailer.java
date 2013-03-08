@@ -85,6 +85,16 @@ public enum ERCMailer {
 		public boolean shouldSendMessage(ERCMailMessage message) {
 			return _delegate.shouldSendMessage(message);
 		}
+
+		@Override
+		public void didSendMessage(ERCMailMessage message) {
+			// Does nothing
+		}
+
+		@Override
+		public void failedWithException(ERCMailMessage message, Throwable t) {
+			// Does nothing
+		}
 	};
 	
 	/**
@@ -117,6 +127,8 @@ public enum ERCMailer {
 	public interface MailerDelegate {
 		public boolean shouldSendMessage(ERCMailMessage message);
 		public void willCreateDelivery(ERCMailMessage message);
+		public void didSendMessage(ERCMailMessage message);
+		public void failedWithException(ERCMailMessage message, Throwable t);
 	}
 	
 	/**
@@ -144,18 +156,20 @@ public enum ERCMailer {
 			try {
 				long wait = message.mailRecipients().count() * ERCMailer.INSTANCE.sendRate();
 				ERCMailer.INSTANCE.sendMailMessage(_delivery, wait);
-				message.setState(ERCMailState.SENT);
-				NSTimestamp now = new NSTimestamp();
-				message.setDateSent(now);
-				ERCMailMessage.MAIL_RECIPIENTS.dot(ERCMailRecipient.MAIL_ADDRESS).dot(ERCMailAddress.DATE_LAST_SENT).takeValueInObject(now, message);
-				if(ERCMailer.INSTANCE.messageID() != null) {
-					message.setMessageID(ERCMailer.INSTANCE.messageID());
-					ERCMailer.INSTANCE.setMessageID(null);
-				}
 			} catch (Exception e) {
 				message.setState(ERCMailState.EXCEPTION);
 				message.setException(e);
+				ERCMailer.INSTANCE.delegate.failedWithException(message, e);
 			}
+			message.setState(ERCMailState.SENT);
+			NSTimestamp now = new NSTimestamp();
+			message.setDateSent(now);
+			ERCMailMessage.MAIL_RECIPIENTS.dot(ERCMailRecipient.MAIL_ADDRESS).dot(ERCMailAddress.DATE_LAST_SENT).takeValueInObject(now, message);
+			if(ERCMailer.INSTANCE.messageID() != null) {
+				message.setMessageID(ERCMailer.INSTANCE.messageID());
+				ERCMailer.INSTANCE.setMessageID(null);
+			}
+			ERCMailer.INSTANCE.delegate.didSendMessage(message);
 			ERXWOContext.setCurrentContext(null);
 			ec.saveChanges();
 		}
