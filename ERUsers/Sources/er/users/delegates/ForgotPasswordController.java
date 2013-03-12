@@ -77,7 +77,6 @@ public class ForgotPasswordController extends ERDBranchDelegate {
 		
 		DateTime bypassDate = user.resetRequestDate().plus(outOfBandWaitingPeriod());
 		if(bypassDate.compareTo(new DateTime()) > 0) {
-			// TODO Send email
 			// Send an activation email for the ERUser.
 			ERXLocalizer loc = ERXLocalizer.currentLocalizer();
 			D2WContext c = d2wContext(sender);
