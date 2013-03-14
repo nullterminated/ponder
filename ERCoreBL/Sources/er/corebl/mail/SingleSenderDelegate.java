@@ -32,6 +32,7 @@ public class SingleSenderDelegate {
 		NSArray<ERCMailRecipient> suppressed = message.mailRecipients(q);
 		if(!suppressed.isEmpty()) {
 			changeState(message, ERCMailState.SUPPRESSED);
+			return false;
 		}
 		
 		return true;
