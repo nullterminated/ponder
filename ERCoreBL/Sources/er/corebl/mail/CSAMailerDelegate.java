@@ -63,6 +63,7 @@ public abstract class CSAMailerDelegate {
 			}
 			ERCMailMessage.HTML_CLOB.dot(ERCMailClob.MESSAGE).takeValueInObject(htmlText, mailMessage);
 		}
+		mailMessage.editingContext().saveChanges();
 	}
 	
 	/**
