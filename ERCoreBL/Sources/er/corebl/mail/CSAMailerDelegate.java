@@ -25,6 +25,13 @@ public abstract class CSAMailerDelegate {
 	public static final String COMMERCIAL_PREFIX = "[AD] ";
 	
 	public void appendFooterToMessage(ERCMailMessage mailMessage) {
+		if(mailMessage.dateSent() != null) {
+			/*
+			 * If a message has been sent previously, assumed it has
+			 * been processed for CAN SPAM compliance also.
+			 */
+			return;
+		}
 		String subject = mailMessage.subject();
 		if(isCommercial(mailMessage)) {
 			subject = COMMERCIAL_PREFIX + subject;
