@@ -24,6 +24,14 @@ public abstract class CSAMailerDelegate {
 	 */
 	public static final String COMMERCIAL_PREFIX = "[AD] ";
 	
+	/**
+	 * Appends information required in the subject line and body of a
+	 * message for CAN SPAM compliance. If the {@link ERCMailMessage#dateSent()}
+	 * of the message is not null, then it is assumed the message has 
+	 * been processed already and nothing further is appended to it.
+	 * 
+	 * @param mailMessage the mail message to process
+	 */
 	public void appendRequiredDisclaimers(ERCMailMessage mailMessage) {
 		if(mailMessage.dateSent() != null) {
 			/*
