@@ -7,8 +7,8 @@ import er.extensions.appserver.ERXApplication;
 
 /**
  * The default delegate is designed to support compliance with the
- * CAN SPAM Act. It modifies the mail message before sending so
- * that the message complies with regulations.
+ * CAN SPAM Act. It modifies the mail message so that the message 
+ * complies with regulations.
  */
 public abstract class CSAMailerDelegate {
 	/**
@@ -24,7 +24,7 @@ public abstract class CSAMailerDelegate {
 	 */
 	public static final String COMMERCIAL_PREFIX = "[AD] ";
 	
-	public void appendFooterToMessage(ERCMailMessage mailMessage) {
+	public void appendRequiredDisclaimers(ERCMailMessage mailMessage) {
 		if(mailMessage.dateSent() != null) {
 			/*
 			 * If a message has been sent previously, assumed it has
