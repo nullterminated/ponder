@@ -11,7 +11,7 @@ public class AWSPlugin1 extends ERXMigrationDatabase.Migration {
 
 	@Override
 	public void downgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
-		// TODO Auto-generated method stub
+		// Do nothing
 	}
 
 	@Override
