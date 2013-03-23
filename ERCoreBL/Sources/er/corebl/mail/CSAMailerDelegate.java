@@ -24,7 +24,7 @@ public abstract class CSAMailerDelegate {
 	 */
 	public static final String COMMERCIAL_PREFIX = "[AD] ";
 	
-	public void willCreateDelivery(ERCMailMessage mailMessage) {
+	public void appendFooterToMessage(ERCMailMessage mailMessage) {
 		String subject = mailMessage.subject();
 		if(isCommercial(mailMessage)) {
 			subject = COMMERCIAL_PREFIX + subject;
