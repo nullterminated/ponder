@@ -11,8 +11,8 @@ er.extensions.components.ERXModernizr.modernizrFileName=js/modernizr-1.7.min.js
 er.extensions.ERXSession.autoAdjustTimeZone=true
 
 # Migrations
-#er.migration.migrateAtStartup=true 
-#er.migration.createTablesIfNecessary=true 
+er.migration.migrateAtStartup=true 
+er.migration.createTablesIfNecessary=true 
 
 # Connection Dictionary
 #dbConnectURLGLOBAL=jdbc:postgresql://localhost/Example
