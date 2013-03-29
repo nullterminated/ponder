@@ -4,6 +4,10 @@ WOAllowConcurrentRequestHandling=true
 #Preference handling
 er.corebusinesslogic.ERCoreUserPreferences.handlerClassName=er.r2d2w.delegates.PreferenceHandlerDelegate
 
+#ERXJavascript
+#Hiding in comment doesn't work when serving as application/xhtml+xml mime type
+er.extensions.ERXJavaScript.hideInComment=false
+
 #ERXModernizr
 er.extensions.components.ERXModernizr.modernizrFileName=js/modernizr-1.7.min.js
 
