@@ -2,7 +2,9 @@
 package ${componentsPackage};
 
 import com.webobjects.appserver.WOActionResults;
+import com.webobjects.appserver.WOApplication;
 import com.webobjects.appserver.WOContext;
+import com.webobjects.appserver.WOResourceManager;
 import com.webobjects.appserver.WOResponse;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WPage;
@@ -75,10 +77,9 @@ public class PageWrapper extends ERXStatelessComponent {
 	}
 
 	public String iconsURL() {
-		boolean b = context().doesGenerateCompleteURLs();
-		if(!b) { context().generateCompleteURLs(); }
-		String url = context()._urlForResourceNamed("img/icons.svg", "ERR2d2w", false);
-		if(!b) { context().generateRelativeURLs(); }
+		WOResourceManager rm = WOApplication.application().resourceManager();
+		NSArray<String> languages = new NSArray<String>(localizer().language());
+		String url = rm.pathURLForResourceNamed("img/icons.svg", "ERR2d2w", languages).toExternalForm();
 		return url;
 	}
 
