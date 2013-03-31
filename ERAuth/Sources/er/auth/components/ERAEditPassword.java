@@ -104,12 +104,13 @@ public class ERAEditPassword extends ERDCustomComponent {
 	public Object storedPassword() {
 		if (storedPassword == null) {
 			ERTwoFactorAuthenticationConfig config = config();
-			String entityName = d2wContext().entity().name();
-			if (!entityName.equals(config.userEntityName())) {
-				log.error("Cannot edit password for entity named: " + entityName);
-				throw new IllegalStateException("Configured to edit password for entity named: "
-						+ config.userEntityName());
-			}
+			//CHECKME Not sure why I included this in the first place
+//			String entityName = d2wContext().entity().name();
+//			if (!entityName.equals(config.userEntityName())) {
+//				log.error("Cannot edit password for entity named: " + entityName);
+//				throw new IllegalStateException("Configured to edit password for entity named: "
+//						+ config.userEntityName());
+//			}
 			String keyPath = config.storedPasswordKeyPath();
 			storedPassword = object().valueForKeyPath(keyPath);
 			if (storedPassword == null) {
