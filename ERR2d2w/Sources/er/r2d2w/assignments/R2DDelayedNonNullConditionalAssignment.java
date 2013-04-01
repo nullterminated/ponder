@@ -156,8 +156,8 @@ public class R2DDelayedNonNullConditionalAssignment extends ERDDelayedAssignment
 		String keyPath = NON_NULL_KEY_PATH.valueInObject(value());
 		boolean negate = ERXValueUtilities.booleanValue(NEGATE.valueInObject(value()));
 		boolean localize = ERXValueUtilities.booleanValue(LOCALIZE.valueInObject(value()));
-		ERXKey<String> resultKey = ERXValueUtilities.isNull(c.valueForKeyPath(keyPath)) && !negate ? FALSE_VALUE
-				: TRUE_VALUE;
+		boolean isNull = ERXValueUtilities.isNull(c.valueForKeyPath(keyPath));
+		ERXKey<String> resultKey =  isNull != negate ? FALSE_VALUE : TRUE_VALUE;
 		result = resultKey.valueInObject(value());
 		if (localize) {
 			String key = (String) result;
