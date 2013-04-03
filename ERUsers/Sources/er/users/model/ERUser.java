@@ -110,7 +110,7 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 	@Override
 	public void init(EOEditingContext ec) {
 		super.init(ec);
-		setSubtype(SUBTYPE_VALUE);
+		setSubtype(subtypeValue());
 		DateTime dt = new DateTime();
 		setDateCreated(dt);
 		setActivationStatus(ERUserActivationStatus.PRE_ACTIVATION);
@@ -119,6 +119,15 @@ public class ERUser extends er.users.model.eogen._ERUser implements ERCoreUserIn
 			ERChallengeResponse cr = ERChallengeResponse.clazz.createAndInsertObject(ec);
 			addObjectToBothSidesOfRelationshipWithKey(cr, CHALLENGE_RESPONSES_KEY);
 		}
+	}
+	
+	/**
+	 * Subclasses should override this to return their own subtype value
+	 * 
+	 * @return string value matching the subtype used for the entity's qualifier
+	 */
+	protected String subtypeValue() {
+		return SUBTYPE_VALUE;
 	}
 
 	/**
