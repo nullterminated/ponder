@@ -73,4 +73,8 @@ public class R2DNavigationMenu extends ERXNavigationMenu {
 	public boolean itemMeetsDisplayConditions() {
 		return navigationItem().meetsDisplayConditionsInComponent(this);
 	}
+
+	public String listItemClass() {
+		return isSelected()?"selected":null;
+	}
 }

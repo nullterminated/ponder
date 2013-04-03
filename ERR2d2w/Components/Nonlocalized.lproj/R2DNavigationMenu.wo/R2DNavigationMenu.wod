@@ -30,6 +30,7 @@ Level3Items: WORepetition {
 
 ListItem: WOGenericContainer {
 	elementName = "li";
+	class = listItemClass;
 	omitTags = omitListItem;
 }
 
