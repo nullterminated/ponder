@@ -302,6 +302,7 @@ public enum ERCMailer {
 	
 	public void sendMailMessage(ERCMailMessage mailMessage) {
 		ERXBatchFetchUtilities.batchFetch(mailMessage, prefetch, false);
+		_sendMailMessage(mailMessage);
 	}
 
 	private void _sendMailMessage(ERCMailMessage mailMessage) {
