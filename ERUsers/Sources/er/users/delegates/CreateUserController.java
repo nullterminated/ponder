@@ -17,6 +17,7 @@ import com.webobjects.foundation.NSValidation;
 
 import er.corebl.ERCoreBL;
 import er.corebl.mail.ERCMailState;
+import er.corebl.mail.ERCMailer;
 import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCMailMessage;
 import er.directtoweb.ERD2WFactory;
@@ -90,17 +91,22 @@ public class CreateUserController extends ERDBranchDelegate {
 			String plainMessage = plainMessageString + "\n\n" + user.activateUserHrefInContext(component.context());
 			String htmlMessage = component.generateResponse().contentString();
 
-			String hostName = ERXConfigurationManager.defaultManager().hostName();
-			String fromString = WOApplication.application().name() + "-" + hostName + "@" + ERCoreBL.sharedInstance().problemEmailDomain();
+			// allow customized from address
+			String fromString = (String) c.valueForKey("fromAddress");
+			if(fromString == null) {
+				String hostName = ERXConfigurationManager.defaultManager().hostName();
+				fromString = WOApplication.application().name() + "-" + hostName + "@" + ERCoreBL.sharedInstance().problemEmailDomain();
+			}
 			ERCMailAddress from = ERCMailAddress.clazz.addressForEmailString(ec, fromString);
 			
 			ERCMailAddress toAddress = user.mailAddress();
 			NSArray<ERCMailAddress> to = new NSArray<ERCMailAddress>(toAddress);
 			
-			ERCMailMessage.clazz.composeMailMessage(ec, ERCMailState.READY_TO_BE_SENT, from, null, to, null, null, subject, htmlMessage, plainMessage, null, null);
+			ERCMailMessage mailMessage = ERCMailMessage.clazz.composeMailMessage(ec, ERCMailState.READY_TO_BE_SENT, from, null, to, null, null, subject, htmlMessage, plainMessage, null, null);
 			
 			try {
 				ec.saveChanges();
+				ERCMailer.INSTANCE.sendMailMessage(mailMessage);
 			} catch(Exception e) {
 				NSMutableDictionary<String, Object> extraInfo = new NSMutableDictionary<String, Object>();
 				extraInfo.setObjectForKey("Failed to send activation email!", "status");
