@@ -133,6 +133,10 @@ public class R2DListTableRepetition extends ERDAttributeRepetition {
 	public String objectRowClass() {
 		WODisplayGroup displayGroup = (WODisplayGroup)valueForBinding("displayGroup");
 		Object o = d2wContext().valueForKey("object");
-		return displayGroup.displayedObjects().indexOf(o) % 2 == 0?"odd":"even";
+		String result = displayGroup.displayedObjects().indexOf(o) % 2 == 0?"odd":"even";
+		if(displayGroup.selectedObjects().contains(o)) {
+			result += " selected";
+		}
+		return result;
 	}
 }
