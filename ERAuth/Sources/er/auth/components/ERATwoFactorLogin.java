@@ -5,6 +5,7 @@ import com.webobjects.appserver.WOContext;
 
 import er.auth.ERAuthDirectAction;
 import er.auth.model.ERTwoFactorAuthenticationRequest;
+import er.extensions.appserver.ERXWOContext;
 import er.extensions.components.ERXStatelessComponent;
 
 public class ERATwoFactorLogin extends ERXStatelessComponent {
@@ -21,6 +22,8 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 	private String requestType = ERTwoFactorAuthenticationRequest.ENTITY_NAME;
 	private String pageWrapperName;
 	private String lcid;
+	private String usernameFieldID;
+	private String passwordFieldID;
 
 	public ERATwoFactorLogin(WOContext context) {
 		super(context);
@@ -33,6 +36,8 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 		requestType = ERTwoFactorAuthenticationRequest.ENTITY_NAME;
 		pageWrapperName = null;
 		lcid = null;
+		usernameFieldID = null;
+		passwordFieldID = null;
 	}
 
 	/**
@@ -130,5 +135,25 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 
 	public String usernameFieldName() {
 		return ERTwoFactorAuthenticationRequest.USERNAME_KEY;
+	}
+
+	/**
+	 * @return the usernameFieldID
+	 */
+	public String usernameFieldID() {
+		if(usernameFieldID == null) {
+			usernameFieldID = ERXWOContext.safeIdentifierName(context(), false);
+		}
+		return usernameFieldID;
+	}
+
+	/**
+	 * @return the passwordFieldID
+	 */
+	public String passwordFieldID() {
+		if(passwordFieldID == null) {
+			passwordFieldID = ERXWOContext.safeIdentifierName(context(), false);
+		}
+		return passwordFieldID;
 	}
 }

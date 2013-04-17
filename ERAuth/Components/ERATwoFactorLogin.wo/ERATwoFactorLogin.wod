@@ -22,10 +22,16 @@ PageWrapper: WOSwitchComponent {
 PasswordField: WOPasswordField {
 	name = passwordFieldName;
 	value = password;
+	id = passwordFieldID;
 }
 
 PasswordLabel: WOString {
 	value = localizer.ERAuth.passwordLabel;
+}
+
+PasswordLabelElement: WOGenericContainer {
+	elementName = "label";
+	for = passwordFieldID;
 }
 
 Return: WOHyperlink {
@@ -49,8 +55,14 @@ SignIn: WOSubmitButton {
 UsernameField: WOTextField {
 	name = usernameFieldName;
 	value = username;
+	id = usernameFieldID;
 }
 
 UsernameLabel: WOString {
 	value = localizer.ERAuth.usernameLabel;
+}
+
+UsernameLabelElement: WOGenericContainer {
+	elementName = "label";
+	for = usernameFieldID;
 }
