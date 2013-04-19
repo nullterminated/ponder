@@ -146,6 +146,7 @@
     10 : *true* => controllerButtonLegend = "R2DControllerPopupButton.controllerButtonLegend" [er.directtoweb.ERDDelayedLocalizedAssignment],
     10 : *true* => calendarHeaderFormat = ("session.localizer", "localizedStringForKey", ("java.lang.String"), ("calendarHeaderFormatKey")) [R2DDelayedSelectorInvocationAssignment],
     10 : *true* => calendarCaptionFormat = ("session.localizer", "localizedStringForKey", ("java.lang.String"), ("calendarCaptionFormatKey")) [R2DDelayedSelectorInvocationAssignment],
+    10 : (pageConfiguration like 'EditList*' or (task = 'edit' and subTask = 'list')) => propertyMessageComponentName = "R2D2WPropertyMessage" [com.webobjects.directtoweb.Assignment],
     10 : smartAttribute.className = 'er.extensions.crypting.ERXCryptoString' => formatObject = "er.extensions.formatters.ERXCryptoStringFormatter" [ERDDelayedObjectCreationAssignment],
     10 : (smartAttribute.className = 'er.extensions.crypting.ERXCryptoString' and task = 'query') => componentName = "R2D2WQueryStringOperator" [com.webobjects.directtoweb.Assignment],
     10 : (smartAttribute.className = 'er.extensions.crypting.ERXCryptoString' and (task = 'edit' or task = 'inspect')) => componentName = "R2D2WEditString" [com.webobjects.directtoweb.Assignment],
