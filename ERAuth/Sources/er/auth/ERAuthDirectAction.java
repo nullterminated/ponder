@@ -55,7 +55,8 @@ public class ERAuthDirectAction extends ERXDirectAction {
 			}
 			
 			ERAuthenticationProcessor<ERAuthenticationRequest> processor = ERAuth.sharedInstance().processorForType(authRequest);
-			return processor.authenticate(authRequest);
+			WOActionResults result = processor.authenticate(authRequest);
+			return result == null?defaultAction():result;
 		}
 		return badRequest();
 	}
