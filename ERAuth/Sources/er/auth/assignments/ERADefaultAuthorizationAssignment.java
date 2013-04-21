@@ -113,7 +113,7 @@ public class ERADefaultAuthorizationAssignment extends ERDDelayedAssignment {
 			} else {
 				boolean owns = rel.ownsDestination();
 				EORelationship inverse = rel.inverseRelationship();
-				if(owns || (inverse != null && inverse.isMandatory() && !inverse.isToMany())) {
+				if(!owns && (inverse != null && inverse.isMandatory() && !inverse.isToMany())) {
 					choices.add("_removeRelated");
 				}
 			}
