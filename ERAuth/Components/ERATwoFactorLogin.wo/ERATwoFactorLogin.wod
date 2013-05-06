@@ -16,12 +16,12 @@ LoginRequestType: WOHiddenField {
 }
 
 PageWrapper: WOSwitchComponent {
-	WOComponentName = pageWrapperName;
+	WOComponentName = ^pageWrapperName;
 }
 
 PasswordField: WOPasswordField {
 	name = passwordFieldName;
-	value = password;
+	value = ^password;
 	id = passwordFieldID;
 }
 
@@ -54,7 +54,7 @@ SignIn: WOSubmitButton {
 
 UsernameField: WOTextField {
 	name = usernameFieldName;
-	value = username;
+	value = ^username;
 	id = usernameFieldID;
 }
 

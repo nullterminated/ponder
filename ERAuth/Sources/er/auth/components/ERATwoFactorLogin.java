@@ -1,6 +1,5 @@
 package er.auth.components;
 
-import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
 
 import er.auth.ERAuthDirectAction;
@@ -16,11 +15,7 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String username;
-	private String password;
-	private WOComponent nextPage;
 	private String requestType = ERTwoFactorAuthenticationRequest.ENTITY_NAME;
-	private String pageWrapperName;
 	private String lcid;
 	private String usernameFieldID;
 	private String passwordFieldID;
@@ -30,58 +25,10 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 	}
 	
 	public void reset() {
-		username = null;
-		password = null;
-		nextPage = null;
 		requestType = ERTwoFactorAuthenticationRequest.ENTITY_NAME;
-		pageWrapperName = null;
 		lcid = null;
 		usernameFieldID = null;
 		passwordFieldID = null;
-	}
-
-	/**
-	 * @return the username
-	 */
-	public String username() {
-		return username;
-	}
-
-	/**
-	 * @param username
-	 *            the username to set
-	 */
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	/**
-	 * @return the password
-	 */
-	public String password() {
-		return password;
-	}
-
-	/**
-	 * @param password
-	 *            the password to set
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * @return the nextPage
-	 */
-	public WOComponent nextPage() {
-		return nextPage;
-	}
-
-	/**
-	 * @param nextPage the nextPage to set
-	 */
-	public void setNextPage(WOComponent nextPage) {
-		this.nextPage = nextPage;
 	}
 
 	/**
@@ -96,23 +43,6 @@ public class ERATwoFactorLogin extends ERXStatelessComponent {
 	 */
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
-	}
-
-	/**
-	 * @return the pageWrapperName
-	 */
-	public String pageWrapperName() {
-		if(pageWrapperName == null) {
-			pageWrapperName = stringValueForBinding("pageWrapperName");
-		}
-		return pageWrapperName;
-	}
-
-	/**
-	 * @param pageWrapperName the pageWrapperName to set
-	 */
-	public void setPageWrapperName(String pageWrapperName) {
-		this.pageWrapperName = pageWrapperName;
 	}
 
 	public String lastCID() {
