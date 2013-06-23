@@ -35,7 +35,7 @@ public abstract class _ERCMailRecipient extends  ERXGenericRecord {
   public er.corebl.model.ERCMailRecipient.ERCMailRecipientClazz clazz() {
     return er.corebl.model.ERCMailRecipient.clazz;
   }
-  
+
   public er.corebl.mail.ERCMailRecipientType recipientType() {
     return (er.corebl.mail.ERCMailRecipientType) storedValueForKey(_ERCMailRecipient.RECIPIENT_TYPE_KEY);
   }
@@ -50,7 +50,7 @@ public abstract class _ERCMailRecipient extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAddress mailAddress() {
     return (er.corebl.model.ERCMailAddress)storedValueForKey(_ERCMailRecipient.MAIL_ADDRESS_KEY);
   }
-  
+
   public void setMailAddress(er.corebl.model.ERCMailAddress value) {
     takeStoredValueForKey(value, _ERCMailRecipient.MAIL_ADDRESS_KEY);
   }
@@ -74,7 +74,7 @@ public abstract class _ERCMailRecipient extends  ERXGenericRecord {
   public er.corebl.model.ERCMailMessage mailMessage() {
     return (er.corebl.model.ERCMailMessage)storedValueForKey(_ERCMailRecipient.MAIL_MESSAGE_KEY);
   }
-  
+
   public void setMailMessage(er.corebl.model.ERCMailMessage value) {
     takeStoredValueForKey(value, _ERCMailRecipient.MAIL_MESSAGE_KEY);
   }

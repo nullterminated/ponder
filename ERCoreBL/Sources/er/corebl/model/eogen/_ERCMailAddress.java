@@ -39,7 +39,7 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAddress.ERCMailAddressClazz clazz() {
     return er.corebl.model.ERCMailAddress.clazz;
   }
-  
+
   public NSTimestamp dateLastSent() {
     return (NSTimestamp) storedValueForKey(_ERCMailAddress.DATE_LAST_SENT_KEY);
   }
@@ -103,7 +103,7 @@ public abstract class _ERCMailAddress extends  ERXGenericRecord {
       }
     return results;
   }
-  
+
   public void addToOptInCategories(er.corebl.model.ERCMailCategory object) {
     includeObjectIntoPropertyWithKey(object, _ERCMailAddress.OPT_IN_CATEGORIES_KEY);
   }

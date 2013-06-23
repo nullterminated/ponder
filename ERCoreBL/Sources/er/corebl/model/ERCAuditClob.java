@@ -7,7 +7,7 @@ import com.webobjects.eocontrol.EOEditingContext;
 public class ERCAuditClob extends er.corebl.model.eogen._ERCAuditClob {
 	/**
 	 * Do I need to update serialVersionUID?
-	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
@@ -21,7 +21,7 @@ public class ERCAuditClob extends er.corebl.model.eogen._ERCAuditClob {
     }
 
     /**
-     * Initializes the EO. This is called when an EO is created, not when it is 
+     * Initializes the EO. This is called when an EO is created, not when it is
      * inserted into an EC.
      */
     public void init(EOEditingContext ec) {

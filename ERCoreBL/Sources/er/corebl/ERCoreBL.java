@@ -39,6 +39,13 @@ import er.extensions.foundation.ERXThreadStorage;
 import er.extensions.foundation.ERXUtilities;
 import er.javamail.ERJavaMail;
 
+/**
+ *
+ * @property er.corebl.ERCoreBL.problemEmailDomain holds the email domain of the generated from email.
+ * @property er.corebl.ERCoreBL.problemEmailRecipients holds the email messages of those who receive problem messages.
+ *
+ * @author nullterminated
+ */
 public class ERCoreBL extends ERXFrameworkPrincipal {
 	private static final Logger log = Logger.getLogger(ERCoreBL.class);
 
@@ -51,10 +58,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	public static final String PREFERENCES_RELATIONSHIP_NAME = "preferences";
 	public static final String USER_RELATIONSHIP_NAME = "user";
 
-	/** property key that holds the email domain of the generated from email */
 	public static final String ProblemEmailDomainPropertyKey = "er.corebl.ERCoreBL.problemEmailDomain";
 
-	/** property key that holds the emails of those who recieve problem emails */
 	public static final String ProblemEmailRecipientsPropertyKey = "er.corebl.ERCoreBL.problemEmailRecipients";
 
 	/** caches the email addresses to send to in the case of problems */
@@ -64,15 +69,15 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	protected String _problemEmailDomain;
 
 	/**
-	 * Registers the class as the framework principal
+	 * Register the class as the framework principal
 	 */
 	static {
 		setUpFrameworkPrincipalClass(ERCoreBL.class);
 	}
 
 	/**
-	 * Gets the shared instance of the ERCoreBusinessLogic.
-	 * 
+	 * Get the shared instance of the ERCoreBusinessLogic.
+	 *
 	 * @return shared instance.
 	 */
 	public static ERCoreBL sharedInstance() {
@@ -101,8 +106,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Gets the array of email addresses to send emails about problems to.
-	 * 
+	 * Get the array of email addresses to send emails about problems to.
+	 *
 	 * @return array of email addresses
 	 */
 	public NSArray<String> emailsForProblemRecipients() {
@@ -113,9 +118,9 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Sets the emails for problem recipients. Should be an array of email
+	 * Set the emails for problem recipients. Should be an array of email
 	 * addresses to report exceptions to in production applications.
-	 * 
+	 *
 	 * @param a
 	 *            array of email addresses
 	 */
@@ -124,9 +129,9 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Gets the problem email domain. This is used for constructing the from
+	 * Get the problem email domain. This is used for constructing the from
 	 * address when reporting an exception. Should be of the form: foo.com.
-	 * 
+	 *
 	 * @return problem email address domain
 	 */
 	public String problemEmailDomain() {
@@ -137,8 +142,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Sets the problem email domain.
-	 * 
+	 * Set the problem email domain.
+	 *
 	 * @param value
 	 *            to set problem domain to
 	 */
@@ -156,12 +161,12 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Registers a run-time relationship called "preferences" on the actor
+	 * Register a run-time relationship called "preferences" on the actor
 	 * entity of your business logic. The framework needs preferences
 	 * relationship to access user preferences for a specific actor. Call this
 	 * method when you initialize your business logic layer. (Check
 	 * BTBusinessLogic class as an example.)
-	 * 
+	 *
 	 * @param entityName
 	 *            String name for your actor entity
 	 * @param attributeNameToJoin
@@ -194,8 +199,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Sets the actor in the current thread storage.
-	 * 
+	 * Set the actor in the current thread storage.
+	 *
 	 * @param actor
 	 *            current user for this thread
 	 */
@@ -211,8 +216,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Gets the actor as a local instance in the given context.
-	 * 
+	 * Get the actor as a local instance in the given context.
+	 *
 	 * @param ec
 	 *            editing context to pull a local copy of the actor into
 	 * @return actor instance in the given editing context
@@ -243,8 +248,8 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 	}
 
 	/**
-	 * Gets the actor.
-	 * 
+	 * Get the actor.
+	 *
 	 * @return current actor for the thread
 	 */
 	public static EOEnterpriseObject actor() {
@@ -286,7 +291,7 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 					log.error("Unable to log problem due to misconfiguration: recipients: "
 							+ emailsForProblemRecipients() + " email domain: " + problemEmailDomain());
 				} else {
-					ERCMailableExceptionPage standardExceptionPage = 
+					ERCMailableExceptionPage standardExceptionPage =
 							(ERCMailableExceptionPage) ERXApplication.instantiatePage(ERCMailableExceptionPage.class.getSimpleName());
 					standardExceptionPage.setException(exception);
 					standardExceptionPage.setActor(actor());
@@ -320,11 +325,11 @@ public class ERCoreBL extends ERXFrameworkPrincipal {
 			}
 		} catch (Throwable u) {
 			try {
-				s.append("************ Caught exception " + u + " trying to report another one: " + exception);
-				s.append("** Original exception ");
-				s.append(ERXUtilities.stackTrace(exception));
-				s.append("** Second exception ");
-				s.append(ERXUtilities.stackTrace(u));
+				s.append("************ Caught exception " + u + " trying to report another one: " + exception + "\n");
+				s.append("** Original exception\n");
+				s.append(ERXUtilities.stackTrace(exception) + "\n");
+				s.append("** Second exception\n");
+				s.append(ERXUtilities.stackTrace(u) + "\n");
 				NSLog.err.appendln(s.toString());
 				log.error(s.toString());
 			} catch (Throwable u2) {

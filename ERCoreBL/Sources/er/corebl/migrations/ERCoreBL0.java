@@ -18,7 +18,7 @@ public class ERCoreBL0 extends ERXMigrationDatabase.Migration {
 	public NSArray<ERXModelVersion> modelDependencies() {
 		return new NSArray<ERXModelVersion>(new ERXModelVersion("ERAttachment", 0));
 	}
-  
+
 	@Override
 	public void downgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
 		// DO NOTHING

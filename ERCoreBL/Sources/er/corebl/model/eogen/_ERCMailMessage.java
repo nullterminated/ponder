@@ -59,7 +59,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailMessage.ERCMailMessageClazz clazz() {
     return er.corebl.model.ERCMailMessage.clazz;
   }
-  
+
   public NSTimestamp dateRead() {
     return (NSTimestamp) storedValueForKey(_ERCMailMessage.DATE_READ_KEY);
   }
@@ -151,7 +151,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAddress fromAddress() {
     return (er.corebl.model.ERCMailAddress)storedValueForKey(_ERCMailMessage.FROM_ADDRESS_KEY);
   }
-  
+
   public void setFromAddress(er.corebl.model.ERCMailAddress value) {
     takeStoredValueForKey(value, _ERCMailMessage.FROM_ADDRESS_KEY);
   }
@@ -175,7 +175,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailClob htmlClob() {
     return (er.corebl.model.ERCMailClob)storedValueForKey(_ERCMailMessage.HTML_CLOB_KEY);
   }
-  
+
   public void setHtmlClob(er.corebl.model.ERCMailClob value) {
     takeStoredValueForKey(value, _ERCMailMessage.HTML_CLOB_KEY);
   }
@@ -199,7 +199,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailCategory mailCategory() {
     return (er.corebl.model.ERCMailCategory)storedValueForKey(_ERCMailMessage.MAIL_CATEGORY_KEY);
   }
-  
+
   public void setMailCategory(er.corebl.model.ERCMailCategory value) {
     takeStoredValueForKey(value, _ERCMailMessage.MAIL_CATEGORY_KEY);
   }
@@ -223,7 +223,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailClob plainClob() {
     return (er.corebl.model.ERCMailClob)storedValueForKey(_ERCMailMessage.PLAIN_CLOB_KEY);
   }
-  
+
   public void setPlainClob(er.corebl.model.ERCMailClob value) {
     takeStoredValueForKey(value, _ERCMailMessage.PLAIN_CLOB_KEY);
   }
@@ -247,7 +247,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAddress replyToAddress() {
     return (er.corebl.model.ERCMailAddress)storedValueForKey(_ERCMailMessage.REPLY_TO_ADDRESS_KEY);
   }
-  
+
   public void setReplyToAddress(er.corebl.model.ERCMailAddress value) {
     takeStoredValueForKey(value, _ERCMailMessage.REPLY_TO_ADDRESS_KEY);
   }
@@ -309,7 +309,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     }
     return results;
   }
-  
+
   public void addToMailAttachments(er.corebl.model.ERCMailAttachment object) {
     includeObjectIntoPropertyWithKey(object, _ERCMailMessage.MAIL_ATTACHMENTS_KEY);
   }
@@ -402,7 +402,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     }
     return results;
   }
-  
+
   public void addToMailRecipients(er.corebl.model.ERCMailRecipient object) {
     includeObjectIntoPropertyWithKey(object, _ERCMailMessage.MAIL_RECIPIENTS_KEY);
   }

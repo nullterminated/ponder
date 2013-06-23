@@ -98,12 +98,12 @@ public enum ERCMailer {
 	};
 	
 	/**
-	 * Sets the MailerDelegate for the mailer. The default delegate
+	 * Set the MailerDelegate for the mailer. The default delegate
 	 * just uses the logic in the {@link SingleSenderDelegate} class.
 	 * If you need to modify messages before sending them for CAN
 	 * SPAM Act compliance, have a look at the {@link CSAMailerDelegate}
 	 * class.
-	 * 
+	 *
 	 * @param delegate the mailer delegate to set
 	 */
 	public void setMailerDelegate(MailerDelegate delegate) {
@@ -364,9 +364,8 @@ public enum ERCMailer {
 	}
 	
 	/**
-	 * This method serves as a bottleneck for rate limited sending
-	 * when 'wait' is greater than 0.
-	 * 
+	 * Provide a bottleneck for rate limited sending when 'wait' is greater than 0.
+	 *
 	 * @param delivery the mail delivery to send
 	 * @param wait the wait time in milliseconds
 	 */
