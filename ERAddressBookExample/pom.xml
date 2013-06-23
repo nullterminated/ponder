@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ponder</groupId>
+		<artifactId>ponder</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>ERAddressBookExample</artifactId>
+	<packaging>woapplication</packaging>
+	<name>ERAddress Book Example</name>
+	<dependencies>
+		<dependency>
+			<groupId>wonder.core</groupId>
+			<artifactId>ERExtensions</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>wonder.core</groupId>
+			<artifactId>ERDirectToWeb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ponder</groupId>
+			<artifactId>ERDatum</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ponder</groupId>
+			<artifactId>ERR2dw</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.webobjects</groupId>
+			<artifactId>JavaDirectToWeb</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.webobjects</groupId>
+			<artifactId>JavaFoundation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.webobjects</groupId>
+			<artifactId>JavaWebObjects</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.webobjects</groupId>
+			<artifactId>JavaEOControl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+	</dependencies>
+</project>
