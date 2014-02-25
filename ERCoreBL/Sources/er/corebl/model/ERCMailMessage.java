@@ -38,8 +38,8 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 			er.corebl.model.eogen._ERCMailMessage._ERCMailMessageClazz<T> {
 		
 		/**
-		 * Composes a mail message.
-		 * 
+		 * Compose a mail message.
+		 *
 		 * @param from
 		 *            email address
 		 * @param to
@@ -62,17 +62,17 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 *            editing context to create the mail message in.
 		 * @return created mail message for the given parameters
 		 */
-		public T composeMailMessage(EOEditingContext ec, 
+		public T composeMailMessage(EOEditingContext ec,
 									ERCMailState state,
-									ERCMailAddress from, 
-									ERCMailAddress replyTo, 
+									ERCMailAddress from,
+									ERCMailAddress replyTo,
 									NSArray<ERCMailAddress> to,
-									NSArray<ERCMailAddress> cc, 
-									NSArray<ERCMailAddress> bcc, 
-									String subject, 
-									String htmlMessage, 
-									String plainMessage, 
-									NSArray<ERCMailAttachment> attachments, 
+									NSArray<ERCMailAddress> cc,
+									NSArray<ERCMailAddress> bcc,
+									String subject,
+									String htmlMessage,
+									String plainMessage,
+									NSArray<ERCMailAttachment> attachments,
 									ERCMailCategory category) {
 			
 			T mailMessage = createAndInsertObject(ec);
@@ -120,8 +120,8 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 		
 		/**
-		 * Composes a mail message.
-		 * 
+		 * Compose a mail message.
+		 *
 		 * @param from
 		 *            email address
 		 * @param to
@@ -144,17 +144,17 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 *            editing context to create the mail message in.
 		 * @return created mail message for the given parameters
 		 */
-		public T composeComponentMailMessage(EOEditingContext ec, 
+		public T composeComponentMailMessage(EOEditingContext ec,
 				ERCMailState state,
-				ERCMailAddress from, 
-				ERCMailAddress replyTo, 
+				ERCMailAddress from,
+				ERCMailAddress replyTo,
 				NSArray<ERCMailAddress> to,
-				NSArray<ERCMailAddress> cc, 
-				NSArray<ERCMailAddress> bcc, 
-				String subject, 
-				WOComponent htmlComponent, 
-				WOComponent plainComponent, 
-				NSArray<ERCMailAttachment> attachments, 
+				NSArray<ERCMailAddress> cc,
+				NSArray<ERCMailAddress> bcc,
+				String subject,
+				WOComponent htmlComponent,
+				WOComponent plainComponent,
+				NSArray<ERCMailAttachment> attachments,
 				ERCMailCategory category) {
 			
 			String htmlMessage = htmlComponent == null?null:componentContentWithFullURLs(htmlComponent);
@@ -164,8 +164,8 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		}
 		
 		/**
-		 * Composes a mail message.
-		 * 
+		 * Compose a mail message.
+		 *
 		 * @param from
 		 *            email address
 		 * @param to
@@ -184,33 +184,33 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 *            editing context to create the mail message in.
 		 * @return created mail message for the given parameters
 		 */
-		public T composeMailMessage(EOEditingContext ec, 
-				String from, 
-				String replyTo, 
+		public T composeMailMessage(EOEditingContext ec,
+				String from,
+				String replyTo,
 				String to,
 				String cc,
 				String bcc,
-				String subject, 
-				String htmlMessage, 
+				String subject,
+				String htmlMessage,
 				String plainMessage) {
 			
-			return composeMailMessage(ec, 
-					ERCMailState.READY_TO_BE_SENT, 
-					from==null?null:ERCMailAddress.clazz.addressForEmailString(ec, from), 
-					replyTo==null?null:ERCMailAddress.clazz.addressForEmailString(ec, replyTo), 
-					to==null?null:ERCMailAddress.clazz.addressesForEmailStrings(ec, to), 
-					cc==null?null:ERCMailAddress.clazz.addressesForEmailStrings(ec, cc), 
-					bcc==null?null:ERCMailAddress.clazz.addressesForEmailStrings(ec, bcc), 
-					subject, 
-					htmlMessage, 
-					plainMessage, 
-					null, 
+			return composeMailMessage(ec,
+					ERCMailState.READY_TO_BE_SENT,
+					from==null?null:ERCMailAddress.clazz.addressForEmailString(ec, from),
+					replyTo==null?null:ERCMailAddress.clazz.addressForEmailString(ec, replyTo),
+					to==null?null:ERCMailAddress.clazz.addressesForEmailStrings(ec, to),
+					cc==null?null:ERCMailAddress.clazz.addressesForEmailStrings(ec, cc),
+					bcc==null?null:ERCMailAddress.clazz.addressesForEmailStrings(ec, bcc),
+					subject,
+					htmlMessage,
+					plainMessage,
+					null,
 					null);
 		}
 		
 		/**
-		 * Composes a mail message.
-		 * 
+		 * Compose a mail message.
+		 *
 		 * @param from
 		 *            email address
 		 * @param to
@@ -225,11 +225,11 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		 *            editing context to create the mail message in.
 		 * @return created mail message for the given parameters
 		 */
-		public T composeMailMessage(EOEditingContext ec, 
-				String from, 
+		public T composeMailMessage(EOEditingContext ec,
+				String from,
 				String to,
-				String subject, 
-				String htmlMessage, 
+				String subject,
+				String htmlMessage,
 				String plainMessage) {
 			
 			return composeMailMessage(ec, from, null, to, null, null, subject, htmlMessage, plainMessage);
@@ -258,7 +258,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 	}
 	
 	/**
-	 * Initializes the EO. This is called when an EO is created, not when it is
+	 * Initialize the EO. This is called when an EO is created, not when it is
 	 * inserted into an EC.
 	 */
 	public void init(EOEditingContext ec) {
@@ -267,7 +267,7 @@ public class ERCMailMessage extends er.corebl.model.eogen._ERCMailMessage {
 		setUuid(java.util.UUID.randomUUID().toString());
 	}
 	
-	public ERMailDelivery createMailDeliveryForMailMessage() 
+	public ERMailDelivery createMailDeliveryForMailMessage()
 			throws MessagingException {
 		
 		ERMailDelivery mail = null;

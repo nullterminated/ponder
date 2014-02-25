@@ -34,6 +34,12 @@ import er.extensions.foundation.ERXProperties;
 import er.extensions.foundation.ERXSelectorUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
+/**
+ *
+ * @property er.corebusinesslogic.ERCAuditTrailClassName allow sub-classing of the audit trail handler
+ *
+ * @author nullterminated
+ */
 public class ERCAuditTrailHandler {
 	private static final Logger log = Logger.getLogger(ERCAuditTrailHandler.class);
 
@@ -44,11 +50,6 @@ public class ERCAuditTrailHandler {
 	 */
 	public static final String ERXAUDIT_KEYS = "ERXAuditKeys";
 
-	/**
-	 * Property to allow subclassing of the audit trail handler
-	 * 
-	 * @property er.corebusinesslogic.ERCAuditTrailClassName
-	 */
 	public static final String AUDIT_CLASS_NAME_PROPERTY = "er.corebusinesslogic.ERCAuditTrailClassName";
 
 	protected NSMutableDictionary<String, Configuration> configuration = new NSMutableDictionary<String, Configuration>();

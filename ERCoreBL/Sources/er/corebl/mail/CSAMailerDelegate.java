@@ -7,7 +7,7 @@ import er.extensions.appserver.ERXApplication;
 
 /**
  * The default delegate is designed to support compliance with the
- * CAN SPAM Act. It modifies the mail message so that the message 
+ * CAN SPAM Act. It modifies the mail message so that the message
  * complies with regulations.
  */
 public abstract class CSAMailerDelegate {
@@ -18,18 +18,18 @@ public abstract class CSAMailerDelegate {
 	public static final String SEXUALLY_EXPLICIT_PREFIX = "SEXUALLY-EXPLICIT: ";
 	
 	/**
-	 * CAN SPAM requires that you must disclose clearly and conspicuously 
+	 * CAN SPAM requires that you must disclose clearly and conspicuously
 	 * that your message is an advertisement. The law provides a lot of
 	 * leeway in how to do this. Here we just note it in the subject line.
 	 */
 	public static final String COMMERCIAL_PREFIX = "[AD] ";
 	
 	/**
-	 * Appends information required in the subject line and body of a
+	 * Append information required in the subject line and body of a
 	 * message for CAN SPAM compliance. If the {@link ERCMailMessage#dateSent()}
-	 * of the message is not null, then it is assumed the message has 
+	 * of the message is not null, then it is assumed the message has
 	 * been processed already and nothing further is appended to it.
-	 * 
+	 *
 	 * @param mailMessage the mail message to process
 	 */
 	public void appendRequiredDisclaimers(ERCMailMessage mailMessage) {
@@ -94,16 +94,15 @@ public abstract class CSAMailerDelegate {
 	protected abstract boolean isSexuallyExplicit(ERCMailMessage mailMessage);
 	
 	/**
-	 * The class of the footer component to use. If you prefer to use something
-	 * other than the default, provide a subclass of it here.
-	 * 
+	 * Provide a subclass of the default class used for the footer.
+	 *
 	 * @return class for the footer component
 	 */
 	protected abstract Class<? extends DefaultMessageFooter> footerComponentClass();
 
 	/**
-	 * Sets the postal address of the sender on the footer component.
-	 * 
+	 * Set the postal address of the sender on the footer component.
+	 *
 	 * @param footer the footer component
 	 */
 	protected abstract void setPostalAddress(ERCMailMessage mailMessage, DefaultMessageFooter footer);

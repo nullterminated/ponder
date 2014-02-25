@@ -43,7 +43,7 @@ public class ERCMailAttachment extends er.corebl.model.eogen._ERCMailAttachment 
 	}
 
 	/**
-	 * Initializes the EO. This is called when an EO is created, not when it is
+	 * Initialize the EO. This is called when an EO is created, not when it is
 	 * inserted into an EC.
 	 */
 	public void init(EOEditingContext ec) {

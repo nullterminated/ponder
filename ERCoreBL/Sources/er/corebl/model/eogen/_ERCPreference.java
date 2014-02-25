@@ -35,7 +35,7 @@ public abstract class _ERCPreference extends  ERXGenericRecord {
   public er.corebl.model.ERCPreference.ERCPreferenceClazz clazz() {
     return er.corebl.model.ERCPreference.clazz;
   }
-  
+
   public String prefKey() {
     return (String) storedValueForKey(_ERCPreference.PREF_KEY_KEY);
   }

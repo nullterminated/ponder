@@ -39,7 +39,7 @@ public abstract class _ERCMailAttachment extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAttachment.ERCMailAttachmentClazz clazz() {
     return er.corebl.model.ERCMailAttachment.clazz;
   }
-  
+
   public String filePath() {
     return (String) storedValueForKey(_ERCMailAttachment.FILE_PATH_KEY);
   }
@@ -76,7 +76,7 @@ public abstract class _ERCMailAttachment extends  ERXGenericRecord {
   public er.attachment.model.ERAttachment attachment() {
     return (er.attachment.model.ERAttachment)storedValueForKey(_ERCMailAttachment.ATTACHMENT_KEY);
   }
-  
+
   public void setAttachment(er.attachment.model.ERAttachment value) {
     takeStoredValueForKey(value, _ERCMailAttachment.ATTACHMENT_KEY);
   }
@@ -100,7 +100,7 @@ public abstract class _ERCMailAttachment extends  ERXGenericRecord {
   public er.corebl.model.ERCMailMessage mailMessage() {
     return (er.corebl.model.ERCMailMessage)storedValueForKey(_ERCMailAttachment.MAIL_MESSAGE_KEY);
   }
-  
+
   public void setMailMessage(er.corebl.model.ERCMailMessage value) {
     takeStoredValueForKey(value, _ERCMailAttachment.MAIL_MESSAGE_KEY);
   }

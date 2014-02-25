@@ -12,7 +12,7 @@ public class ERCoreBL1 extends ERXMigrationDatabase.Migration {
 	public NSArray<ERXModelVersion> modelDependencies() {
 		return null;
 	}
-  
+
 	@Override
 	public void downgrade(EOEditingContext editingContext, ERXMigrationDatabase database) throws Throwable {
 		// DO NOTHING

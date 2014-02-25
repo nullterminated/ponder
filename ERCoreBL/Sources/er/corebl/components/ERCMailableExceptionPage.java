@@ -13,7 +13,7 @@ import er.extensions.foundation.ERXUtilities;
 public class ERCMailableExceptionPage extends WOComponent {
 	/**
 	 * Do I need to update serialVersionUID?
-	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the 
+	 * See section 5.6 <cite>Type Changes Affecting Serialization</cite> on page 51 of the
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class ERCMailableExceptionPage extends WOComponent {
     public NSDictionary extraInfo;
 
     public String currentUserInfoKey;
-    public Object currentUserInfoValue;    
+    public Object currentUserInfoValue;
 
     public ERCMailableExceptionPage(WOContext context) {
 		super(context);
@@ -52,19 +52,19 @@ public class ERCMailableExceptionPage extends WOComponent {
     public void setFormattedMessage(String value) {
         formattedMessage = value;
     }
-    
+
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
     }
-    
+
     public String shortErrorMessage() {
         return exception != null ? exception.getClass().getName() : errorMessage;
     }
-    
+
     public void setReasonLines(NSArray reasonLines) {
         _reasonLines = reasonLines;
     }
-    
+
     public NSArray reasonLines() {
         if (_reasonLines==null && exception!=null) {
             _reasonLines = NSArray.componentsSeparatedByString(ERXUtilities.stackTrace(exception), "\n\t");
