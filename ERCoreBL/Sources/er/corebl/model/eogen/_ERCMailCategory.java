@@ -33,6 +33,6 @@ public abstract class _ERCMailCategory extends  ERXGenericRecord {
   public er.corebl.model.ERCMailCategory.ERCMailCategoryClazz clazz() {
     return er.corebl.model.ERCMailCategory.clazz;
   }
-  
+
 
 }

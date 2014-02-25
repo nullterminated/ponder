@@ -31,7 +31,7 @@ public abstract class _ERCAuditClob extends  ERXGenericRecord {
   public er.corebl.model.ERCAuditClob.ERCAuditClobClazz clazz() {
     return er.corebl.model.ERCAuditClob.clazz;
   }
-  
+
   public String valuesString() {
     return (String) storedValueForKey(_ERCAuditClob.VALUES_STRING_KEY);
   }

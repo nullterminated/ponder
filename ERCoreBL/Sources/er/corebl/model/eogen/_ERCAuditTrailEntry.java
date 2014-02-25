@@ -43,7 +43,7 @@ public abstract class _ERCAuditTrailEntry extends  ERXGenericRecord {
   public er.corebl.model.ERCAuditTrailEntry.ERCAuditTrailEntryClazz clazz() {
     return er.corebl.model.ERCAuditTrailEntry.clazz;
   }
-  
+
   public NSTimestamp created() {
     return (NSTimestamp) storedValueForKey(_ERCAuditTrailEntry.CREATED_KEY);
   }
@@ -91,7 +91,7 @@ public abstract class _ERCAuditTrailEntry extends  ERXGenericRecord {
   public er.corebl.model.ERCAuditClob newClob() {
     return (er.corebl.model.ERCAuditClob)storedValueForKey(_ERCAuditTrailEntry.NEW_CLOB_KEY);
   }
-  
+
   public void setNewClob(er.corebl.model.ERCAuditClob value) {
     takeStoredValueForKey(value, _ERCAuditTrailEntry.NEW_CLOB_KEY);
   }
@@ -115,7 +115,7 @@ public abstract class _ERCAuditTrailEntry extends  ERXGenericRecord {
   public er.corebl.model.ERCAuditClob oldClob() {
     return (er.corebl.model.ERCAuditClob)storedValueForKey(_ERCAuditTrailEntry.OLD_CLOB_KEY);
   }
-  
+
   public void setOldClob(er.corebl.model.ERCAuditClob value) {
     takeStoredValueForKey(value, _ERCAuditTrailEntry.OLD_CLOB_KEY);
   }
@@ -139,7 +139,7 @@ public abstract class _ERCAuditTrailEntry extends  ERXGenericRecord {
   public er.corebl.model.ERCAuditTrail trail() {
     return (er.corebl.model.ERCAuditTrail)storedValueForKey(_ERCAuditTrailEntry.TRAIL_KEY);
   }
-  
+
   public void setTrail(er.corebl.model.ERCAuditTrail value) {
     takeStoredValueForKey(value, _ERCAuditTrailEntry.TRAIL_KEY);
   }

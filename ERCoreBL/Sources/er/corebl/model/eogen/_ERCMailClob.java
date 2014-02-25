@@ -31,7 +31,7 @@ public abstract class _ERCMailClob extends  ERXGenericRecord {
   public er.corebl.model.ERCMailClob.ERCMailClobClazz clazz() {
     return er.corebl.model.ERCMailClob.clazz;
   }
-  
+
   public String message() {
     return (String) storedValueForKey(_ERCMailClob.MESSAGE_KEY);
   }

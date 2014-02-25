@@ -35,7 +35,7 @@ public abstract class _ERCAuditTrail extends  ERXGenericRecord {
   public er.corebl.model.ERCAuditTrail.ERCAuditTrailClazz clazz() {
     return er.corebl.model.ERCAuditTrail.clazz;
   }
-  
+
   public er.extensions.eof.ERXKeyGlobalID gid() {
     return (er.extensions.eof.ERXKeyGlobalID) storedValueForKey(_ERCAuditTrail.GID_KEY);
   }
@@ -99,7 +99,7 @@ public abstract class _ERCAuditTrail extends  ERXGenericRecord {
     }
     return results;
   }
-  
+
   public void addToEntries(er.corebl.model.ERCAuditTrailEntry object) {
     includeObjectIntoPropertyWithKey(object, _ERCAuditTrail.ENTRIES_KEY);
   }
