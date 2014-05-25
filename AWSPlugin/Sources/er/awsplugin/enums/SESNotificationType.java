@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
@@ -28,6 +30,11 @@ public enum SESNotificationType {
 			format.setTimeZone(TimeZone.getTimeZone("GMT"));
 			
 			for(NSDictionary<String, Object> recipientDict : recipients) {
+				String awsFeedbackID= (String) json.valueForKeyPath("bounce.feedbackId");
+				SESNotification existing = SESNotification.clazz.objectMatchingKeyAndValue(ec, SESNotification.AWS_FEEDBACK_ID_KEY, awsFeedbackID);
+				if(existing != null) {
+					continue;
+				}
 				SESBounceNotification notification = SESBounceNotification.clazz.createAndInsertObject(ec);
 				String email = (String) recipientDict.valueForKey("emailAddress");
 				ERCMailAddress recipientAddress = ERCMailAddress.clazz.addressForEmailString(ec, email);
@@ -38,13 +45,15 @@ public enum SESNotificationType {
 
 				notification.setStatus((String) recipientDict.valueForKey("status"));
 				notification.setAction((String) recipientDict.valueForKey("action"));
-				notification.setDiagnosticCode((String) recipientDict.valueForKey("diagnosticCode"));
+				String diagnosticCode = (String) recipientDict.valueForKey("diagnosticCode");
+				diagnosticCode = StringUtils.left(diagnosticCode, 1000);
+				notification.setDiagnosticCode(diagnosticCode);
 				notification.setReportingMTA((String) json.valueForKeyPath("bounce.reportingMTA"));
 				String bounceTypeString = (String) json.valueForKeyPath("bounce.bounceType");
 				notification.setBounceType(SESBounceType.typeForString(bounceTypeString));
 				notification.setBounceSubType((String) json.valueForKeyPath("bounce.bounceSubType"));
 
-				notification.setAwsFeedbackID((String) json.valueForKeyPath("bounce.feedbackId"));
+				notification.setAwsFeedbackID(awsFeedbackID);
 				String messageId = (String) json.valueForKeyPath("mail.messageId");
 				notification.setAwsMessageID(messageId);
 				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.MESSAGE_ID_KEY, messageId);
