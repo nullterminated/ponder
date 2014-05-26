@@ -89,6 +89,11 @@ public enum SESNotificationType {
 			format.setTimeZone(TimeZone.getTimeZone("GMT"));
 			
 			for(NSDictionary<String, Object> recipientDict : recipients) {
+				String awsFeedbackID= (String) json.valueForKeyPath("complaint.feedbackId");
+				SESNotification existing = SESNotification.clazz.objectMatchingKeyAndValue(ec, SESNotification.AWS_FEEDBACK_ID_KEY, awsFeedbackID);
+				if(existing != null) {
+					continue;
+				}
 				SESComplaintNotification notification = SESComplaintNotification.clazz.createAndInsertObject(ec);
 				String email = (String) recipientDict.valueForKey("emailAddress");
 				ERCMailAddress recipientAddress = ERCMailAddress.clazz.addressForEmailString(ec, email);
@@ -110,7 +115,7 @@ public enum SESNotificationType {
 					notification.setArrivalDate(new NSTimestamp(date));
 				}
 				
-				notification.setAwsFeedbackID((String) json.valueForKeyPath("complaint.feedbackId"));
+				notification.setAwsFeedbackID(awsFeedbackID);
 				String messageId = (String) json.valueForKeyPath("mail.messageId");
 				notification.setAwsMessageID(messageId);
 				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.MESSAGE_ID_KEY, messageId);
