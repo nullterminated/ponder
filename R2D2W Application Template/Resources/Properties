@@ -77,14 +77,14 @@ er.extensions.ERXApplication.DefaultEncoding=UTF-8
 
 # ERJavaMail
 #er.javamail.adminEmail=admin@yourhost.com
-#er.javamail.centralize=false
+er.javamail.centralize=false
 #er.javamail.debugEnabled=false
 #er.javamail.milliSecondsWaitIfSenderOverflowed=6000
 #er.javamail.smtpHost=your.smtpserver.com
 #er.javamail.smtpAuth=false
 #er.javamail.smtpUser=
 #er.javamail.smtpPassword=
-#er.javamail.defaultEncoding=UTF-8
+er.javamail.defaultEncoding=UTF-8
 
 # Log4j Configuration
 
