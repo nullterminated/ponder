@@ -32,7 +32,7 @@ public class ERCoreBL3 extends ERXMigrationDatabase.Migration {
 
 		ERXMigrationTable ercUserAgentTable = database.newTableNamed("ERCUserAgent");
 		ercUserAgentTable.newBlobColumn("contentHash", NOT_NULL);
-		ercUserAgentTable.newStringColumn("contentString", 10000000, NOT_NULL);
+		ercUserAgentTable.newLargeStringColumn("contentString", NOT_NULL);
 		ercUserAgentTable.newIntegerColumn("id", NOT_NULL);
 		ercUserAgentTable.create();
 	 	ercUserAgentTable.setPrimaryKey("id");
