@@ -13,6 +13,8 @@ import com.webobjects.foundation.NSTimestamp;
 import er.corebl.components.DefaultUnsubscribePage;
 import er.corebl.model.ERCMailAddress;
 import er.corebl.model.ERCMailMessage;
+import er.corebl.model.ERCMailOpen;
+import er.corebl.model.ERCUserAgent;
 import er.extensions.appserver.ERXApplication;
 import er.extensions.appserver.ERXDirectAction;
 import er.extensions.eof.ERXEC;
@@ -39,11 +41,16 @@ public class MailAction extends ERXDirectAction {
 			try {
 				ERCMailMessage message = ERCMailMessage.clazz.objectMatchingKeyAndValue(ec, ERCMailMessage.UUID_KEY, uuid);
 				if(message != null) {
-					message.setDateRead(new NSTimestamp());
+					NSTimestamp date = new NSTimestamp();
+					message.setDateRead(date);
 					if(message.mailRecipients().count() == 1) {
 						ERCMailAddress address = message.mailRecipients().lastObject().mailAddress();
 						address.setVerificationState(ERCMailAddressVerification.VERIFIED);
 					}
+					ERCMailOpen open = message.createMailOpensRelationship();
+					open.setDateOpened(date);
+					ERCUserAgent userAgent = ERCUserAgent.clazz.userAgentFromRequest(ec, request());
+					open.setUserAgent(userAgent);
 					ec.saveChanges();
 				}
 			} catch (Exception e) {

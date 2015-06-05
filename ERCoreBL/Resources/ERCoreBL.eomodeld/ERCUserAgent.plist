@@ -1,0 +1,34 @@
+{
+    attributes = (
+        {
+            columnName = contentHash; 
+            isReadOnly = N; 
+            name = contentHash; 
+            prototypeName = blob; 
+            width = 16; 
+        }, 
+        {
+            columnName = contentString; 
+            isReadOnly = N; 
+            name = contentString; 
+            prototypeName = varcharLarge; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }
+    ); 
+    attributesUsedForLocking = (contentHash, id); 
+    className = "er.corebl.model.ERCUserAgent"; 
+    classProperties = (contentHash, contentString); 
+    entityIndexes = (
+        {
+            attributes = (contentHash); 
+            constraint = distinct; 
+            indexType = clustered; 
+            name = "contentHash_idx"; 
+            order = asc; 
+        }
+    ); 
+    externalName = ERCUserAgent; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCUserAgent; 
+    primaryKeyAttributes = (id); 
+}

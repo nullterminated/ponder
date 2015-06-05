@@ -1,0 +1,47 @@
+{
+    attributes = (
+        {
+            allowsNull = Y; 
+            columnName = dateOpened; 
+            name = dateOpened; 
+            prototypeName = dateTime; 
+        }, 
+        {allowsNull = N; name = id; prototypeName = id; }, 
+        {
+            allowsNull = N; 
+            columnName = mailMessageID; 
+            name = mailMessageID; 
+            prototypeName = longNumber; 
+        }, 
+        {
+            allowsNull = Y; 
+            columnName = userAgentID; 
+            name = userAgentID; 
+            prototypeName = id; 
+        }
+    ); 
+    attributesUsedForLocking = (id, mailMessageID, userAgentID); 
+    className = "er.corebl.model.ERCMailOpen"; 
+    classProperties = (dateOpened, mailMessage, userAgent); 
+    externalName = ERCMailOpen; 
+    fetchSpecificationDictionary = {}; 
+    name = ERCMailOpen; 
+    primaryKeyAttributes = (id); 
+    relationships = (
+        {
+            destination = ERCMailMessage; 
+            isMandatory = Y; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = mailMessageID; }); 
+            name = mailMessage; 
+        }, 
+        {
+            destination = ERCUserAgent; 
+            isToMany = N; 
+            joinSemantic = EOInnerJoin; 
+            joins = ({destinationAttribute = id; sourceAttribute = userAgentID; }); 
+            name = userAgent; 
+        }
+    ); 
+}

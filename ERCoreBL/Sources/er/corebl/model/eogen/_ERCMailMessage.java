@@ -43,6 +43,8 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public static final String MAIL_ATTACHMENTS_KEY = MAIL_ATTACHMENTS.key();
   public static final ERXKey<er.corebl.model.ERCMailCategory> MAIL_CATEGORY = new ERXKey<er.corebl.model.ERCMailCategory>("mailCategory");
   public static final String MAIL_CATEGORY_KEY = MAIL_CATEGORY.key();
+  public static final ERXKey<er.corebl.model.ERCMailOpen> MAIL_OPENS = new ERXKey<er.corebl.model.ERCMailOpen>("mailOpens");
+  public static final String MAIL_OPENS_KEY = MAIL_OPENS.key();
   public static final ERXKey<er.corebl.model.ERCMailRecipient> MAIL_RECIPIENTS = new ERXKey<er.corebl.model.ERCMailRecipient>("mailRecipients");
   public static final String MAIL_RECIPIENTS_KEY = MAIL_RECIPIENTS.key();
   public static final ERXKey<er.corebl.model.ERCMailClob> PLAIN_CLOB = new ERXKey<er.corebl.model.ERCMailClob>("plainClob");
@@ -59,7 +61,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailMessage.ERCMailMessageClazz clazz() {
     return er.corebl.model.ERCMailMessage.clazz;
   }
-
+  
   public NSTimestamp dateRead() {
     return (NSTimestamp) storedValueForKey(_ERCMailMessage.DATE_READ_KEY);
   }
@@ -151,7 +153,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAddress fromAddress() {
     return (er.corebl.model.ERCMailAddress)storedValueForKey(_ERCMailMessage.FROM_ADDRESS_KEY);
   }
-
+  
   public void setFromAddress(er.corebl.model.ERCMailAddress value) {
     takeStoredValueForKey(value, _ERCMailMessage.FROM_ADDRESS_KEY);
   }
@@ -175,7 +177,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailClob htmlClob() {
     return (er.corebl.model.ERCMailClob)storedValueForKey(_ERCMailMessage.HTML_CLOB_KEY);
   }
-
+  
   public void setHtmlClob(er.corebl.model.ERCMailClob value) {
     takeStoredValueForKey(value, _ERCMailMessage.HTML_CLOB_KEY);
   }
@@ -199,7 +201,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailCategory mailCategory() {
     return (er.corebl.model.ERCMailCategory)storedValueForKey(_ERCMailMessage.MAIL_CATEGORY_KEY);
   }
-
+  
   public void setMailCategory(er.corebl.model.ERCMailCategory value) {
     takeStoredValueForKey(value, _ERCMailMessage.MAIL_CATEGORY_KEY);
   }
@@ -223,7 +225,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailClob plainClob() {
     return (er.corebl.model.ERCMailClob)storedValueForKey(_ERCMailMessage.PLAIN_CLOB_KEY);
   }
-
+  
   public void setPlainClob(er.corebl.model.ERCMailClob value) {
     takeStoredValueForKey(value, _ERCMailMessage.PLAIN_CLOB_KEY);
   }
@@ -247,7 +249,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
   public er.corebl.model.ERCMailAddress replyToAddress() {
     return (er.corebl.model.ERCMailAddress)storedValueForKey(_ERCMailMessage.REPLY_TO_ADDRESS_KEY);
   }
-
+  
   public void setReplyToAddress(er.corebl.model.ERCMailAddress value) {
     takeStoredValueForKey(value, _ERCMailMessage.REPLY_TO_ADDRESS_KEY);
   }
@@ -309,7 +311,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     }
     return results;
   }
-
+  
   public void addToMailAttachments(er.corebl.model.ERCMailAttachment object) {
     includeObjectIntoPropertyWithKey(object, _ERCMailMessage.MAIL_ATTACHMENTS_KEY);
   }
@@ -361,6 +363,100 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     }
   }
 
+  public NSArray<er.corebl.model.ERCMailOpen> mailOpens() {
+    return (NSArray<er.corebl.model.ERCMailOpen>)storedValueForKey(_ERCMailMessage.MAIL_OPENS_KEY);
+  }
+
+  public NSArray<er.corebl.model.ERCMailOpen> mailOpens(EOQualifier qualifier) {
+    return mailOpens(qualifier, null, false);
+  }
+
+  public NSArray<er.corebl.model.ERCMailOpen> mailOpens(EOQualifier qualifier, boolean fetch) {
+    return mailOpens(qualifier, null, fetch);
+  }
+
+  public NSArray<er.corebl.model.ERCMailOpen> mailOpens(EOQualifier qualifier, NSArray<EOSortOrdering> sortOrderings, boolean fetch) {
+    NSArray<er.corebl.model.ERCMailOpen> results;
+    if (fetch) {
+      EOQualifier fullQualifier;
+      EOQualifier inverseQualifier = new EOKeyValueQualifier(er.corebl.model.ERCMailOpen.MAIL_MESSAGE_KEY, EOQualifier.QualifierOperatorEqual, this);
+    	
+      if (qualifier == null) {
+        fullQualifier = inverseQualifier;
+      }
+      else {
+        NSMutableArray<EOQualifier> qualifiers = new NSMutableArray<EOQualifier>();
+        qualifiers.addObject(qualifier);
+        qualifiers.addObject(inverseQualifier);
+        fullQualifier = new EOAndQualifier(qualifiers);
+      }
+
+      results = er.corebl.model.ERCMailOpen.clazz.objectsMatchingQualifier(editingContext(), fullQualifier, sortOrderings);
+    }
+    else {
+      results = mailOpens();
+      if (qualifier != null) {
+        results = (NSArray<er.corebl.model.ERCMailOpen>)EOQualifier.filteredArrayWithQualifier(results, qualifier);
+      }
+      if (sortOrderings != null) {
+        results = (NSArray<er.corebl.model.ERCMailOpen>)EOSortOrdering.sortedArrayUsingKeyOrderArray(results, sortOrderings);
+      }
+    }
+    return results;
+  }
+  
+  public void addToMailOpens(er.corebl.model.ERCMailOpen object) {
+    includeObjectIntoPropertyWithKey(object, _ERCMailMessage.MAIL_OPENS_KEY);
+  }
+
+  public void removeFromMailOpens(er.corebl.model.ERCMailOpen object) {
+    excludeObjectFromPropertyWithKey(object, _ERCMailMessage.MAIL_OPENS_KEY);
+  }
+
+  public void addToMailOpensRelationship(er.corebl.model.ERCMailOpen object) {
+    if (_ERCMailMessage.LOG.isDebugEnabled()) {
+      _ERCMailMessage.LOG.debug("adding " + object + " to mailOpens relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	addToMailOpens(object);
+    }
+    else {
+    	addObjectToBothSidesOfRelationshipWithKey(object, _ERCMailMessage.MAIL_OPENS_KEY);
+    }
+  }
+
+  public void removeFromMailOpensRelationship(er.corebl.model.ERCMailOpen object) {
+    if (_ERCMailMessage.LOG.isDebugEnabled()) {
+      _ERCMailMessage.LOG.debug("removing " + object + " from mailOpens relationship");
+    }
+    if (er.extensions.eof.ERXGenericRecord.InverseRelationshipUpdater.updateInverseRelationships()) {
+    	removeFromMailOpens(object);
+    }
+    else {
+    	removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailMessage.MAIL_OPENS_KEY);
+    }
+  }
+
+  public er.corebl.model.ERCMailOpen createMailOpensRelationship() {
+    EOClassDescription eoClassDesc = EOClassDescription.classDescriptionForEntityName( er.corebl.model.ERCMailOpen.ENTITY_NAME );
+    EOEnterpriseObject eo = eoClassDesc.createInstanceWithEditingContext(editingContext(), null);
+    editingContext().insertObject(eo);
+    addObjectToBothSidesOfRelationshipWithKey(eo, _ERCMailMessage.MAIL_OPENS_KEY);
+    return (er.corebl.model.ERCMailOpen) eo;
+  }
+
+  public void deleteMailOpensRelationship(er.corebl.model.ERCMailOpen object) {
+    removeObjectFromBothSidesOfRelationshipWithKey(object, _ERCMailMessage.MAIL_OPENS_KEY);
+    editingContext().deleteObject(object);
+  }
+
+  public void deleteAllMailOpensRelationships() {
+    Enumeration<er.corebl.model.ERCMailOpen> objects = mailOpens().immutableClone().objectEnumerator();
+    while (objects.hasMoreElements()) {
+      deleteMailOpensRelationship(objects.nextElement());
+    }
+  }
+
   public NSArray<er.corebl.model.ERCMailRecipient> mailRecipients() {
     return (NSArray<er.corebl.model.ERCMailRecipient>)storedValueForKey(_ERCMailMessage.MAIL_RECIPIENTS_KEY);
   }
@@ -402,7 +498,7 @@ public abstract class _ERCMailMessage extends  ERXGenericRecord {
     }
     return results;
   }
-
+  
   public void addToMailRecipients(er.corebl.model.ERCMailRecipient object) {
     includeObjectIntoPropertyWithKey(object, _ERCMailMessage.MAIL_RECIPIENTS_KEY);
   }
