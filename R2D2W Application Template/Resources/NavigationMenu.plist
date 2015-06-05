@@ -1,7 +1,7 @@
 (
 	{
 		name = Root;
-		children = (ItemOne,ItemTwo,ItemThree);
+		children = (ItemOne,ItemTwo,ItemThree,Login,Logout);
 	},
 	{
 		name = ItemOne;
