@@ -5,3 +5,6 @@ build
 *.pbxproj
 ant.*
 .DS_Store
+.settings
+.classpath
+.project
