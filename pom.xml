@@ -84,6 +84,13 @@
 			<url>https://maven.wocommunity.org/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/nullterminated/ponder</url>
+		</repository>
+	</distributionManagement>
 	<scm>
 		<connection>scm:git:git@github.com:nullterminated/ponder.git</connection>
 		<url>scm:git:git@github.com:nullterminated/ponder.git</url>
