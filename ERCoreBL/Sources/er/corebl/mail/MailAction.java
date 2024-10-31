@@ -1,5 +1,8 @@
 package er.corebl.mail;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOApplication;
 import com.webobjects.appserver.WOComponent;
@@ -23,6 +26,8 @@ import er.extensions.validation.ERXValidationException;
 import er.extensions.validation.ERXValidationFactory;
 
 public class MailAction extends ERXDirectAction {
+	private static final Logger LOG = LoggerFactory.getLogger(MailAction.class);
+	
 	public static final String UUID_KEY = "uuid";
 	public static final String ADDRESS_KEY = "email";
 	
@@ -55,7 +60,7 @@ public class MailAction extends ERXDirectAction {
 				}
 			} catch (Exception e) {
 				/* Ignore exceptions */
-				log.warn("Error setting read date on mail message with uuid: " + uuid, e);
+				LOG.warn("Error setting read date on mail message with uuid: " + uuid, e);
 			} finally {
 				ec.unlock();
 			}

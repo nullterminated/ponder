@@ -8,6 +8,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WORequest;
@@ -28,6 +30,7 @@ import er.extensions.eof.ERXEC;
 import er.extensions.foundation.ERXPropertyListSerialization;
 
 public class SESAction extends ERXDirectAction {
+	private static final Logger LOG = LoggerFactory.getLogger(SESAction.class);
 	
 	private static final int poolSize = 8;
 	
@@ -48,10 +51,10 @@ public class SESAction extends ERXDirectAction {
 				try {
 					HttpResponse response = client.execute(get);
 					if(response.getStatusLine().getStatusCode() >= 300) {
-						log.error("Error subscribing to notifications with url: " + subscribeURL);
+						LOG.error("Error subscribing to notifications with url: " + subscribeURL);
 					}
 				} catch (Exception e) {
-					log.error("Error subscribing to notifications with url: " + subscribeURL, e);
+					LOG.error("Error subscribing to notifications with url: " + subscribeURL, e);
 				}
 				return;
 			} else if("Notification".equals(type)) {
@@ -105,7 +108,7 @@ public class SESAction extends ERXDirectAction {
 			Runnable r = curry(new NotificationProcessor(), json);
 			service.execute(r);
 		} catch (Exception e) {
-			log.warn("Exception processing bounce notification: " + request(), e);
+			LOG.warn("Exception processing bounce notification: " + request(), e);
 			response.setStatus(500);
 			response.setContent("Server Error");
 			return response;
@@ -138,7 +141,7 @@ public class SESAction extends ERXDirectAction {
 		} catch (Exception e) {
 			response.setStatus(500);
 			response.setContent("Server Error");
-			log.error("Error sending test messages", e);
+			LOG.error("Error sending test messages", e);
 		}
 		return response;
 	}

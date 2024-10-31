@@ -19,7 +19,7 @@ public enum ERStageManager {
 	static {
 		NSNotificationCenter nc = NSNotificationCenter.defaultCenter();
 		NSSelector<Void> wakeActor = new NSSelector<Void>("wakeActor", ERXConstant.NotificationClassArray);
-		nc.addObserver(ERStageManager.INSTANCE, wakeActor, ERXSession.SessionWillAwakeNotification, null);
+		nc.addObserver(ERStageManager.INSTANCE, wakeActor, ERXSession.SessionDidRestoreNotification, null);
 		NSSelector<Void> sleepActor = new NSSelector<Void>("sleepActor", ERXConstant.NotificationClassArray);
 		nc.addObserver(ERStageManager.INSTANCE, sleepActor, ERXSession.SessionWillSleepNotification, null);
 	}

@@ -15,7 +15,7 @@ import com.webobjects.foundation.NSMutableDictionary;
 import com.webobjects.foundation.NSTimestamp;
 
 import er.extensions.components.ERXDateGrouper;
-import er.extensions.foundation.ERXTimestampUtility;
+import er.extensions.foundation.ERXTimestampUtilities;
 import er.extensions.foundation.ERXValueUtilities;
 
 public class R2DDateRangeGrouper extends ERXDateGrouper {
@@ -152,12 +152,12 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
     }
     
     public NSTimestamp _firstDateInSameYear(NSTimestamp value) {
-    	NSTimestamp result = _dateForDayInYear(ERXTimestampUtility.yearOfCommonEra(value), 1);
+    	NSTimestamp result = _dateForDayInYear(ERXTimestampUtilities.yearOfCommonEra(value), 1);
     	return result;
     }
     
     public NSTimestamp _firstDateInSameDay(NSTimestamp value) {
-    	NSTimestamp result = _dateForDayInYear(ERXTimestampUtility.yearOfCommonEra(value), ERXTimestampUtility.dayOfYear(value));
+    	NSTimestamp result = _dateForDayInYear(ERXTimestampUtilities.yearOfCommonEra(value), ERXTimestampUtilities.dayOfYear(value));
     	return result;
     }
     
@@ -194,7 +194,7 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
 	 */
     public boolean isToday() {
     	NSTimestamp today = _dateToCurrentZone(today());
-        return ERXTimestampUtility.differenceByDay(today, currentDate()) == 0;
+        return ERXTimestampUtilities.differenceByDay(today, currentDate()) == 0;
     }
     
     /**
