@@ -84,19 +84,6 @@
 			<url>https://maven.wocommunity.org/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
-	<distributionManagement>
-		<repository>
-			<id>wocommunity.deployment</id>
-			<name>WOCommunity Maven2 Releases Repository</name>
-			<url>http://maven.wocommunity.org/content/repositories/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>wocommunity.deployment</id>
-			<uniqueVersion>false</uniqueVersion>
-			<name>WOCommunity Maven2 Snapshots Repository</name>
-			<url>http://maven.wocommunity.org/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
 	<scm>
 		<connection>scm:git:git@github.com:nullterminated/ponder.git</connection>
 		<url>scm:git:git@github.com:nullterminated/ponder.git</url>
