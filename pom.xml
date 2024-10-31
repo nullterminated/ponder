@@ -130,22 +130,22 @@
 			</dependency>
 			<dependency>
 				<groupId>ponder</groupId>
-				<artifactId>ERCoreBL</artifactId>
+				<artifactId>ercorebl</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>ponder</groupId>
-				<artifactId>ERAuth</artifactId>
+				<artifactId>erauth</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>ponder</groupId>
-				<artifactId>ERDatum</artifactId>
+				<artifactId>erdatum</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>ponder</groupId>
-				<artifactId>ERR2dw</artifactId>
+				<artifactId>err2dw</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

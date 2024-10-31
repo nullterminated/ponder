@@ -6,7 +6,7 @@
 		<artifactId>ponder</artifactId>
 		<version>2.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>ERCoreBL</artifactId>
+	<artifactId>ercorebl</artifactId>
 	<packaging>woframework</packaging>
 	<name>ERCoreBL</name>
 	<dependencies>

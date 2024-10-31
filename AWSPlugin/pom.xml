@@ -7,7 +7,7 @@
 		<artifactId>ponder</artifactId>
 		<version>2.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>AWSPlugin</artifactId>
+	<artifactId>awsplugin</artifactId>
 	<packaging>woframework</packaging>
 	<name>AWS Plugin</name>
 	<dependencies>
@@ -21,7 +21,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ponder</groupId>
-			<artifactId>ERCoreBL</artifactId>
+			<artifactId>ercorebl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>

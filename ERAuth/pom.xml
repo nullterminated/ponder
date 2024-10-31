@@ -6,7 +6,7 @@
 		<artifactId>ponder</artifactId>
 		<version>2.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>ERAuth</artifactId>
+	<artifactId>erauth</artifactId>
 	<packaging>woframework</packaging>
 	<name>ERAuth</name>
 	<dependencies>
@@ -28,7 +28,7 @@
 		</dependency>
 		<dependency>
 			<groupId>ponder</groupId>
-			<artifactId>ERCoreBL</artifactId>
+			<artifactId>ercorebl</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.webobjects</groupId>
