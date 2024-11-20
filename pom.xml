@@ -92,9 +92,9 @@
 		</repository>
 	</distributionManagement>
 	<scm>
-		<connection>https://github.com/nullterminated/ponder.git</connection>
-		<url>https://github.com/nullterminated/ponder.git</url>
-		<developerConnection>https://github.com/nullterminated/ponder.git</developerConnection>
+		<connection>scm:git:https://github.com/nullterminated/ponder.git</connection>
+		<url>scm:git:https://github.com/nullterminated/ponder.git</url>
+		<developerConnection>scm:git:https://github.com/nullterminated/ponder.git</developerConnection>
 	</scm>
 	<dependencyManagement>
 		<dependencies>
