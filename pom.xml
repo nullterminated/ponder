@@ -21,6 +21,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<webobjects.version>5.4.3</webobjects.version>
 		<wonder.version>7.4</wonder.version>
+		<doclint>none</doclint>
 	</properties>
 	<build>
 		<sourceDirectory>${project.basedir}/Sources</sourceDirectory>
