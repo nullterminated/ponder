@@ -2,7 +2,8 @@ package er.corebl.audittrail;
 
 import java.util.Enumeration;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eoaccess.EOEntity;
 import com.webobjects.eoaccess.EOModel;
@@ -41,7 +42,7 @@ import er.extensions.foundation.ERXValueUtilities;
  * @author nullterminated
  */
 public class ERCAuditTrailHandler {
-	private static final Logger log = Logger.getLogger(ERCAuditTrailHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCAuditTrailHandler.class);
 
 	private static final ERCAuditTrailHandler _handler;
 

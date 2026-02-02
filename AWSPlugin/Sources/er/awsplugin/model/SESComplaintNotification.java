@@ -1,6 +1,7 @@
 package er.awsplugin.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
@@ -13,7 +14,7 @@ public class SESComplaintNotification extends er.awsplugin.model.eogen._SESCompl
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(SESComplaintNotification.class);
+	private static final Logger log = LoggerFactory.getLogger(SESComplaintNotification.class);
 	
 	public static final String NOTIFICATION_TYPE_STRING = "COMPLAINT";
 

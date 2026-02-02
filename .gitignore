@@ -7,3 +7,4 @@ ant.*
 .DS_Store
 .settings
 .classpath
+**/Resources/Info.plist

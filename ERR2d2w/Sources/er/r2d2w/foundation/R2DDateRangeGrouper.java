@@ -4,7 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.foundation.NSArray;
 import com.webobjects.foundation.NSDictionary;
@@ -58,7 +59,7 @@ public class R2DDateRangeGrouper extends ERXDateGrouper {
 	protected String _durationKeyPath;
 	
 	/** logging support */
-    private static Logger log = Logger.getLogger(R2DDateRangeGrouper.class);
+    private static Logger log = LoggerFactory.getLogger(R2DDateRangeGrouper.class);
     
     protected NSDictionary _groupedObjects() {
     	if(_groupedObjects == null) {

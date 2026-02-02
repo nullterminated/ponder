@@ -1,7 +1,5 @@
 package er.r2d2w.delegates;
 
-import org.apache.log4j.Logger;
-
 import com.webobjects.foundation.NSKeyValueCoding;
 import com.webobjects.foundation.NSNotification;
 import com.webobjects.foundation.NSNotificationCenter;
@@ -38,9 +36,6 @@ public class PreferenceHandlerDelegate {
 		                null);
 			}
 		}
-	
-		/** Logging support */
-	    public static final Logger log = Logger.getLogger(PreferenceHandlerDelegate.class);
 	
 	    public void handleBatchSizeChange(NSNotification n) { handleChange("batchSize", n); }
 	    public void handleCalendarViewChange(NSNotification n) { handleChange("calendarView", n); }

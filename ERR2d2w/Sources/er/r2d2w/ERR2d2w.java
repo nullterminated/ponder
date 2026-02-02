@@ -1,6 +1,7 @@
 package er.r2d2w;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOApplication;
 import com.webobjects.eoaccess.EOAttribute;
@@ -26,7 +27,7 @@ import er.r2d2w.delegates.PreferenceHandlerDelegate;
 public class ERR2d2w extends ERXFrameworkPrincipal {
 
 	public static final String DERIVED_COUNT = "DerivedCount";
-    public static final Logger log = Logger.getLogger(ERR2d2w.class);
+    public static final Logger log = LoggerFactory.getLogger(ERR2d2w.class);
     public final static Class<?>[] REQUIRES = new Class[] {ERXExtensions.class, ERDirectToWeb.class};
 
     protected static volatile ERR2d2w sharedInstance;

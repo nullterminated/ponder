@@ -3,7 +3,8 @@ package er.r2d2w.components;
 import java.text.Format;
 import java.text.ParseException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WORequest;
@@ -23,7 +24,7 @@ public class R2D2WQueryDateRange extends D2WQueryDateRange {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(R2D2WQueryDateRange.class);
+	private static final Logger log = LoggerFactory.getLogger(R2D2WQueryDateRange.class);
 	
     private String maxID;
 	private String minID;

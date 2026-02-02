@@ -1,7 +1,5 @@
 package er.r2d2w.assignments;
 
-import org.apache.log4j.Logger;
-
 import com.webobjects.appserver.WOSession;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.D2WModel;
@@ -22,7 +20,6 @@ public class R2DDefaultSubEntitiesAssignment extends ERDAssignment {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(R2DDefaultSubEntitiesAssignment.class);
 	private static final NSArray<String> dependentKeys = new NSArray<String>("entity","readOnly","isEntityEditable");
 	
 	public R2DDefaultSubEntitiesAssignment(EOKeyValueUnarchiver unarchiver) {

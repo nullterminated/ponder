@@ -1,6 +1,7 @@
 package er.awsplugin.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
@@ -13,7 +14,7 @@ public abstract class SESNotification extends er.awsplugin.model.eogen._SESNotif
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(SESNotification.class);
+	private static final Logger log = LoggerFactory.getLogger(SESNotification.class);
 
 	public static final SESNotificationClazz<SESNotification> clazz = new SESNotificationClazz<SESNotification>();
     public static class SESNotificationClazz<T extends SESNotification> extends er.awsplugin.model.eogen._SESNotification._SESNotificationClazz<T> {

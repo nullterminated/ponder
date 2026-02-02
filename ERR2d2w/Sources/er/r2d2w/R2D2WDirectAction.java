@@ -2,7 +2,8 @@ package er.r2d2w;
 
 import java.text.SimpleDateFormat;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
@@ -56,7 +57,7 @@ import er.extensions.foundation.ERXValueUtilities;
 import er.extensions.localization.ERXLocalizer;
 
 public class R2D2WDirectAction extends ERXDirectAction {
-    protected static final Logger log = Logger.getLogger(ERD2WDirectAction.class);
+    protected static final Logger log = LoggerFactory.getLogger(ERD2WDirectAction.class);
 	
     public static final String AUX_QUALIFIER_KEY = "aux";
 	public static final String FETCH_LIMIT_KEY = "fl";

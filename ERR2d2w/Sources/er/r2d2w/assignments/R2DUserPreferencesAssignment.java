@@ -1,7 +1,5 @@
 package er.r2d2w.assignments;
 
-import org.apache.log4j.Logger;
-
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.eocontrol.EOKeyValueArchiver;
 import com.webobjects.eocontrol.EOKeyValueUnarchiver;
@@ -17,9 +15,6 @@ public class R2DUserPreferencesAssignment extends ERDAssignment {
 	 * <a href="http://java.sun.com/j2se/1.4/pdf/serial-spec.pdf">Java Object Serialization Spec</a>
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/** Logging support */
-    public static final Logger log = Logger.getLogger(R2DUserPreferencesAssignment.class);
     
     private static final NSArray<String> dependentKeys = new NSArray<String>("session.sessionID");
 	

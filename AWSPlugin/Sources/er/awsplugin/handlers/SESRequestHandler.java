@@ -9,7 +9,8 @@ import java.nio.ByteBuffer;
 import javax.mail.Message.RecipientType;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.Request;
@@ -39,7 +40,7 @@ import er.extensions.eof.ERXEC;
 import er.extensions.foundation.ERXProperties;
 
 public class SESRequestHandler implements RequestHandler {
-	private static final Logger log = Logger.getLogger(SESRequestHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(SESRequestHandler.class);
 	private static final String THROTTLING = "Throttling";
 	
 	static {

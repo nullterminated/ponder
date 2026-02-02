@@ -1,7 +1,9 @@
 package er.r2d2w.components;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import java.util.function.Predicate;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WORequest;
@@ -22,7 +24,7 @@ public class R2D2WEditPassword extends ERD2WStatelessComponent {
 	 */
 	private static final long serialVersionUID = 2L;
 
-	private static final Logger log = Logger.getLogger(R2D2WEditPassword.class);
+	private static final Logger log = LoggerFactory.getLogger(R2D2WEditPassword.class);
 
 	private static final String _COMPONENT_CLASS = "password";
 	private String labelID;
@@ -92,7 +94,8 @@ public class R2D2WEditPassword extends ERD2WStatelessComponent {
 	}
 
 	protected void checkPasswords() {
-		if (StringUtils.isBlank(password()) || StringUtils.isBlank(confirmPassword())) {
+		Predicate<String> isBlank = s -> s == null || s.isBlank();
+		if (isBlank.test(password()) || isBlank.test(confirmPassword())) {
 			fail("R2PasswordsFillBothFieldsException");
 		} else if (!password().equals(confirmPassword())) {
 			fail("R2PasswordsDontMatchException");

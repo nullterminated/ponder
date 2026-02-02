@@ -7,40 +7,36 @@
 		<version>2.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>awsplugin</artifactId>
-	<packaging>woframework</packaging>
-	<name>AWS Plugin</name>
+	<name>AWSPlugin</name>
 	<dependencies>
 		<dependency>
 			<groupId>wonder.core</groupId>
-			<artifactId>ERFoundation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>wonder.core</groupId>
-			<artifactId>ERExtensions</artifactId>
+			<artifactId>erextensions</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>ponder</groupId>
 			<artifactId>ercorebl</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaWebObjects</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-foundation</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaEOAccess</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-eocontrol</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaEOControl</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-eoaccess</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaFoundation</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-webobjects</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk</artifactId>
+			<artifactId>aws-java-sdk-ses</artifactId>
+			<version>1.12.794</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -61,10 +57,6 @@
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpcore</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.mail</groupId>

@@ -1,6 +1,8 @@
 package er.r2d2w.assignments;
 
-import org.apache.commons.lang.StringUtils;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.eoaccess.EOEntity;
@@ -57,7 +59,10 @@ public class R2DDefaultConfigurationNameAssignment extends ERDAssignment {
 	}
 
 	public String defaultConfigurationName(D2WContext c) {
-		return StringUtils.replaceOnce(StringUtils.capitalize(keyPath()), REPLACE_TEXT, entityNameForContext(c));
+		return Optional.of(keyPath())
+			.map(s -> s.substring(0, 1).toUpperCase() + s.substring(1))
+			.map(s -> s.replaceFirst(Pattern.quote(REPLACE_TEXT), Matcher.quoteReplacement(entityNameForContext(c))))
+			.get();
 	}
 
 	/**

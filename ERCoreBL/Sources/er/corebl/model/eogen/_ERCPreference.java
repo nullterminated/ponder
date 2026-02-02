@@ -6,7 +6,8 @@ import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
 import java.math.*;
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
@@ -30,7 +31,7 @@ public abstract class _ERCPreference extends  ERXGenericRecord {
     /* more clazz methods here */
   }
 
-  private static final Logger LOG = Logger.getLogger(_ERCPreference.class);
+  private static final Logger LOG = LoggerFactory.getLogger(_ERCPreference.class);
 
   public er.corebl.model.ERCPreference.ERCPreferenceClazz clazz() {
     return er.corebl.model.ERCPreference.clazz;

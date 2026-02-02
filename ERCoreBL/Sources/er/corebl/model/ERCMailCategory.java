@@ -1,6 +1,7 @@
 package er.corebl.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
@@ -13,7 +14,7 @@ public class ERCMailCategory extends er.corebl.model.eogen._ERCMailCategory {
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCMailCategory.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCMailCategory.class);
 
     public static final ERCMailCategoryClazz<ERCMailCategory> clazz = new ERCMailCategoryClazz<ERCMailCategory>();
     public static class ERCMailCategoryClazz<T extends ERCMailCategory> extends er.corebl.model.eogen._ERCMailCategory._ERCMailCategoryClazz<T> {

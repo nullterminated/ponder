@@ -1,6 +1,7 @@
 package er.corebl.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOEnterpriseObject;
@@ -22,7 +23,7 @@ public class ERCAuditTrail extends er.corebl.model.eogen._ERCAuditTrail {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(ERCAuditTrail.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCAuditTrail.class);
 
 	public static final ERCAuditTrailClazz<ERCAuditTrail> clazz = new ERCAuditTrailClazz<ERCAuditTrail>();
 

@@ -3,7 +3,8 @@ package er.r2d2w.components;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOContext;
@@ -37,7 +38,7 @@ public class R2D2WEditFile extends ERDCustomEditComponent {
 	private static final long serialVersionUID = 3L;
 
 	/** logging support */
-    public final static Logger log = Logger.getLogger(R2D2WEditFile.class);
+    public final static Logger log = LoggerFactory.getLogger(R2D2WEditFile.class);
 	
 	public R2D2WEditFile(WOContext context) {
         super(context);

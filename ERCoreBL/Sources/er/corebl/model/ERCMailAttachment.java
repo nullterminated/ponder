@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.foundation.NSData;
@@ -33,7 +34,7 @@ public class ERCMailAttachment extends er.corebl.model.eogen._ERCMailAttachment 
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCMailAttachment.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCMailAttachment.class);
 
 	public static final ERCMailAttachmentClazz<ERCMailAttachment> clazz = new ERCMailAttachmentClazz<ERCMailAttachment>();
 

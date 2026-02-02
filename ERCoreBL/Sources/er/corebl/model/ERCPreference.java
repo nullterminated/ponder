@@ -1,6 +1,7 @@
 package er.corebl.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
@@ -13,7 +14,7 @@ public class ERCPreference extends er.corebl.model.eogen._ERCPreference {
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCPreference.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCPreference.class);
 
     public static final ERCPreferenceClazz<ERCPreference> clazz = new ERCPreferenceClazz<ERCPreference>();
     public static class ERCPreferenceClazz<T extends ERCPreference> extends er.corebl.model.eogen._ERCPreference._ERCPreferenceClazz<T> {

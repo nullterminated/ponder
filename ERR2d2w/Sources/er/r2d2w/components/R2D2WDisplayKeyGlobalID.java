@@ -1,6 +1,7 @@
 package er.r2d2w.components;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOActionResults;
 import com.webobjects.appserver.WOComponent;
@@ -27,7 +28,7 @@ public class R2D2WDisplayKeyGlobalID extends ERD2WStatelessComponent {
 	private static final long serialVersionUID = 1L;
 
     /** logging support */
-    static final Logger log = Logger.getLogger(R2D2WDisplayKeyGlobalID.class);
+    static final Logger log = LoggerFactory.getLogger(R2D2WDisplayKeyGlobalID.class);
     
     private static final String displayNameForEntityKey = "displayNameForEntityOfGlobalID";
     private static final String primaryKeyStringForGlobalIDKey = "primaryKeyStringForGlobalID";

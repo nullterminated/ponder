@@ -1,7 +1,7 @@
 package er.r2d2w.delegates;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WODisplayGroup;
@@ -58,7 +58,7 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(R2DDefaultBranchDelegate.class);
+	private static final Logger log = LoggerFactory.getLogger(R2DDefaultBranchDelegate.class);
 	
 	public boolean shouldSaveChanges(D2WContext c) { return ERXValueUtilities.booleanValue(c.valueForKey("shouldSaveChanges")); }
 	public boolean shouldValidateBeforeSave(D2WContext c) { return ERXValueUtilities.booleanValue(c.valueForKey("shouldValidateBeforeSave")); }
@@ -322,7 +322,7 @@ public class R2DDefaultBranchDelegate extends ERDBranchDelegate {
 		if(erpi != null) {
 			EOEnterpriseObject eo = (EOEnterpriseObject)NSKeyValueCoding.Utility.valueForKey(erpi, "masterObject");
 			String relationshipKey = (String)NSKeyValueCoding.Utility.valueForKey(erpi, "relationshipKey");
-			if(!ERXValueUtilities.isNull(eo) && !StringUtils.isBlank(relationshipKey)) {
+			if(!ERXValueUtilities.isNull(eo) && relationshipKey != null && !relationshipKey.isBlank()) {
 				EOEditingContext nestedEC = ERXEC.newEditingContext(eo.editingContext());
 				EOClassDescription relatedObjectClassDescription = eo.classDescriptionForDestinationKey(relationshipKey);
 				EOEnterpriseObject relatedObject = (EOEnterpriseObject)EOUtilities.createAndInsertInstance(nestedEC, relatedObjectClassDescription.entityName());

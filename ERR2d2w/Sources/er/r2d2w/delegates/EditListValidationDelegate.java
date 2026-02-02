@@ -1,6 +1,7 @@
 package er.r2d2w.delegates;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEnterpriseObject;
 import com.webobjects.foundation.NSMutableArray;
@@ -18,7 +19,7 @@ public class EditListValidationDelegate extends ValidationDelegate {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger log = Logger.getLogger(EditListValidationDelegate.class);
+	private static final Logger log = LoggerFactory.getLogger(EditListValidationDelegate.class);
 
 	private NSMutableDictionary<EOEnterpriseObject, NSMutableArray<String>> _keyPathsWithValidationExceptions = new NSMutableDictionary<EOEnterpriseObject, NSMutableArray<String>>();
 

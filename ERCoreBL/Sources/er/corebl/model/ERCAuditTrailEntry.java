@@ -1,7 +1,8 @@
 package er.corebl.model;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eoaccess.EOObjectNotAvailableException;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -23,7 +24,7 @@ public class ERCAuditTrailEntry extends er.corebl.model.eogen._ERCAuditTrailEntr
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCAuditTrailEntry.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCAuditTrailEntry.class);
 
     public static final ERCAuditTrailEntryClazz<ERCAuditTrailEntry> clazz = new ERCAuditTrailEntryClazz<ERCAuditTrailEntry>();
     public static class ERCAuditTrailEntryClazz<T extends ERCAuditTrailEntry> extends er.corebl.model.eogen._ERCAuditTrailEntry._ERCAuditTrailEntryClazz<T> {

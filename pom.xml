@@ -9,38 +9,60 @@
 	<url>https://github.com/nullterminated/ponder</url>
 	<modules>
 		<module>AWSPlugin</module>
-		<module>ERAddressBookExample</module>
-		<module>ERAuth</module>
 		<module>ERCoreBL</module>
-		<module>ERDatum</module>
 		<module>ERR2d2w</module>
-		<module>ERUsers</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<webobjects.version>5.4.3</webobjects.version>
-		<wonder.version>7.4</wonder.version>
+		<maven.compiler.release>25</maven.compiler.release>
+		<womodular.version>1.0.0</womodular.version>
+		<wonder.version>7.5-SNAPSHOT</wonder.version>
 		<doclint>none</doclint>
 	</properties>
 	<build>
-		<sourceDirectory>${project.basedir}/Sources</sourceDirectory>
+        <testSourceDirectory>Tests</testSourceDirectory>
+        <sourceDirectory>Sources</sourceDirectory>
+		<resources>
+			<resource>
+				<targetPath>META-INF/webobjects/Resources</targetPath>
+				<filtering>false</filtering>
+				<directory>Components</directory>
+			</resource>
+			<resource>
+				<targetPath>META-INF/webobjects/Resources</targetPath>
+				<filtering>false</filtering>
+				<directory>Resources</directory>
+			</resource>
+			<resource>
+				<targetPath>META-INF/webobjects/WebServerResources</targetPath>
+				<filtering>false</filtering>
+				<directory>WebServerResources</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
-				<?m2e ignore?>
-				<groupId>org.wocommunity</groupId>
-				<artifactId>wolifecycle-maven-plugin</artifactId>
-				<version>2.5</version>
-				<extensions>true</extensions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.4.0</version>
+				<executions>
+					<execution>
+						<id>generate-infoplist</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.basedir}/Resources</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/FilteredResources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -57,32 +79,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>wocommunity.releases</id>
-			<name>WOCommunity Releases</name>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>https://maven.wocommunity.org/content/groups/public/</url>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>wocommunity.releases</id>
-			<name>WOCommunity Releases</name>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<url>https://maven.wocommunity.org/content/groups/public/</url>
-		</pluginRepository>
-	</pluginRepositories>
 	<distributionManagement>
 		<repository>
 			<id>github</id>
@@ -100,32 +96,22 @@
 		<dependencies>
 			<dependency>
 				<groupId>wonder.core</groupId>
-				<artifactId>ERFoundation</artifactId>
-				<version>1.0</version>
-			</dependency>
-			<dependency>
-				<groupId>wonder.core</groupId>
-				<artifactId>ERExtensions</artifactId>
+				<artifactId>erextensions</artifactId>
 				<version>${wonder.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>wonder.core</groupId>
-				<artifactId>ERJavaMail</artifactId>
+				<artifactId>erjavamail</artifactId>
 				<version>${wonder.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>wonder.core</groupId>
-				<artifactId>ERDirectToWeb</artifactId>
+				<artifactId>erdirecttoweb</artifactId>
 				<version>${wonder.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>wonder.businesslogic</groupId>
-				<artifactId>ERAttachment</artifactId>
-				<version>${wonder.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>wonder.eof</groupId>
-				<artifactId>ERAttributeExtension</artifactId>
+				<artifactId>erattachment</artifactId>
 				<version>${wonder.version}</version>
 			</dependency>
 			<dependency>
@@ -149,34 +135,49 @@
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.webobjects</groupId>
-				<artifactId>JavaFoundation</artifactId>
-				<version>${webobjects.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.webobjects</groupId>
-				<artifactId>JavaDirectToWeb</artifactId>
-				<version>${webobjects.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.webobjects</groupId>
-				<artifactId>JavaWebObjects</artifactId>
-				<version>${webobjects.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.webobjects</groupId>
-				<artifactId>JavaEOControl</artifactId>
-				<version>${webobjects.version}</version>
-			</dependency>
-			<dependency>
 				<groupId>wonder.core</groupId>
-				<artifactId>JavaWOExtensions</artifactId>
+				<artifactId>javawoextensions</artifactId>
 				<version>${wonder.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.webobjects</groupId>
-				<artifactId>JavaEOAccess</artifactId>
-				<version>${webobjects.version}</version>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-foundation</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-eocontrol</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-eoaccess</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-jdbcadaptor</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-webobjects</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-dtwgeneration</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-eoproject</artifactId>
+				<version>${womodular.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.wocommunity</groupId>
+				<artifactId>wonder-modular-directtoweb</artifactId>
+				<version>${womodular.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>javax.mail</groupId>
@@ -189,14 +190,9 @@
 				<version>2.6</version>
 			</dependency>
 			<dependency>
-				<groupId>joda-time</groupId>
-				<artifactId>joda-time</artifactId>
-				<version>1.6.2</version>
-			</dependency>
-			<dependency>
 				<groupId>com.amazonaws</groupId>
 				<artifactId>aws-java-sdk</artifactId>
-				<version>1.3.26</version>
+				<version>1.12.794</version>
 			</dependency>
 			<dependency>
 				<groupId>commons-logging</groupId>
@@ -216,12 +212,7 @@
 			<dependency>
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
-				<version>4.2.1</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpcore</artifactId>
-				<version>4.2.1</version>
+				<version>4.5.14</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

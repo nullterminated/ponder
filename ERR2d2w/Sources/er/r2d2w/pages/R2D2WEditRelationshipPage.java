@@ -3,9 +3,7 @@ package er.r2d2w.pages;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
-import org.apache.commons.lang.ObjectUtils;
-import org.apache.commons.lang.StringUtils;
+import java.util.Objects;
 
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
@@ -82,9 +80,9 @@ public class R2D2WEditRelationshipPage extends ERD2WPage implements EditRelation
 	}
 	
 	public void setMasterObjectAndRelationshipKey(EOEnterpriseObject masterObject, String relationshipKey) {
-		if(!ERXValueUtilities.isNull(masterObject) && !StringUtils.isBlank(relationshipKey)) {
-			if(ObjectUtils.notEqual(masterObject(), masterObject) ||
-					ObjectUtils.notEqual(relationshipKey(), relationshipKey)) {
+		if(!ERXValueUtilities.isNull(masterObject) && relationshipKey != null && !relationshipKey.isBlank()) {
+			if(!Objects.equals(masterObject(), masterObject) ||
+					!Objects.equals(relationshipKey(), relationshipKey)) {
 				
 				/*
 				 * Only validate if this is an inline edit relationship page.

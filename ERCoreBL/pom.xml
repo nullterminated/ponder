@@ -7,44 +7,39 @@
 		<version>2.5-SNAPSHOT</version>
 	</parent>
 	<artifactId>ercorebl</artifactId>
-	<packaging>woframework</packaging>
 	<name>ERCoreBL</name>
 	<dependencies>
 		<dependency>
 			<groupId>wonder.core</groupId>
-			<artifactId>ERFoundation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>wonder.core</groupId>
-			<artifactId>ERExtensions</artifactId>
+			<artifactId>erextensions</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>wonder.businesslogic</groupId>
-			<artifactId>ERAttachment</artifactId>
+			<artifactId>erattachment</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>wonder.core</groupId>
-			<artifactId>ERJavaMail</artifactId>
+			<artifactId>erjavamail</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>wonder.core</groupId>
-			<artifactId>ERDirectToWeb</artifactId>
+			<artifactId>erdirecttoweb</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaFoundation</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-foundation</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaEOAccess</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-eocontrol</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaWebObjects</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-eoaccess</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.webobjects</groupId>
-			<artifactId>JavaEOControl</artifactId>
+			<groupId>org.wocommunity</groupId>
+			<artifactId>wonder-modular-webobjects</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-lang</groupId>

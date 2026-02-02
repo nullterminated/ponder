@@ -3,7 +3,8 @@ package er.r2d2w.assignments;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.directtoweb.D2WContext;
@@ -25,7 +26,7 @@ public class R2DPropertyMessageAssignment extends ERDDelayedAssignment {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger log = Logger.getLogger(R2DPropertyMessageAssignment.class);
+	private static final Logger log = LoggerFactory.getLogger(R2DPropertyMessageAssignment.class);
 
 	public R2DPropertyMessageAssignment(EOKeyValueUnarchiver u) {
 		super(u);

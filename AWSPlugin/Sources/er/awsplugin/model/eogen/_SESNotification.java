@@ -6,7 +6,8 @@ import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
 import java.math.*;
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
@@ -40,7 +41,7 @@ public abstract class _SESNotification extends  ERXGenericRecord {
     /* more clazz methods here */
   }
 
-  private static final Logger LOG = Logger.getLogger(_SESNotification.class);
+  private static final Logger LOG = LoggerFactory.getLogger(_SESNotification.class);
 
   public er.awsplugin.model.SESNotification.SESNotificationClazz clazz() {
     return er.awsplugin.model.SESNotification.clazz;

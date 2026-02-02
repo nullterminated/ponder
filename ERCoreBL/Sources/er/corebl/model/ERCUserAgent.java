@@ -4,7 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOMessage;
 import com.webobjects.appserver.WORequest;
@@ -26,7 +27,7 @@ public class ERCUserAgent extends er.corebl.model.eogen._ERCUserAgent {
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCUserAgent.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCUserAgent.class);
 
 	public static final ERCUserAgentClazz<ERCUserAgent> clazz = new ERCUserAgentClazz<ERCUserAgent>();
 

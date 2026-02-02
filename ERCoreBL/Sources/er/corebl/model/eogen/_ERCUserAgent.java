@@ -6,7 +6,8 @@ import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
 import java.math.*;
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
@@ -28,7 +29,7 @@ public abstract class _ERCUserAgent extends  ERXGenericRecord {
     /* more clazz methods here */
   }
 
-  private static final Logger LOG = Logger.getLogger(_ERCUserAgent.class);
+  private static final Logger LOG = LoggerFactory.getLogger(_ERCUserAgent.class);
 
   public er.corebl.model.ERCUserAgent.ERCUserAgentClazz clazz() {
     return er.corebl.model.ERCUserAgent.clazz;

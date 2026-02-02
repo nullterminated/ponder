@@ -1,6 +1,6 @@
 package er.r2d2w.components.repetitions;
 
-import org.apache.commons.lang.ObjectUtils;
+import java.util.Objects;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
@@ -87,7 +87,7 @@ public class R2DListTableRepetition extends ERDAttributeRepetition {
 	}
 
 	public boolean isGrouping() {
-		return ObjectUtils.equals(d2wContext().valueForKey("subTask"), "group");
+		return Objects.equals(d2wContext().valueForKey("subTask"), "group");
 	}
 
 	public String attributeHeaderID() {

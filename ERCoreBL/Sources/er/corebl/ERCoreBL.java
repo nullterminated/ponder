@@ -2,7 +2,8 @@ package er.corebl;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOApplication;
 import com.webobjects.eoaccess.EOEntity;
@@ -47,7 +48,7 @@ import er.javamail.ERJavaMail;
  * @author nullterminated
  */
 public class ERCoreBL extends ERXFrameworkPrincipal {
-	private static final Logger log = Logger.getLogger(ERCoreBL.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCoreBL.class);
 
 	/** holds the shared instance reference */
 	protected static volatile ERCoreBL sharedInstance;

@@ -1,9 +1,10 @@
 package er.r2d2w.components;
 
 import java.text.Format;
+import java.util.Optional;
 
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.foundation.NSValidation;
@@ -20,7 +21,7 @@ public class R2D2WEditString extends ERD2WEditString {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(R2D2WEditString.class);
+	private static final Logger log = LoggerFactory.getLogger(R2D2WEditString.class);
 
 	public R2D2WEditString(WOContext context) {
 		super(context);
@@ -50,9 +51,12 @@ public class R2D2WEditString extends ERD2WEditString {
 	}
 	
 	public String formatExceptionKey() {
-		String formatExceptionKey = (String) d2wContext().valueForKey("formatExceptionKey");
-		formatExceptionKey = StringUtils.defaultIfEmpty(formatExceptionKey, "InvalidValueException");
-		return formatExceptionKey;
+		return Optional.of(d2wContext())
+				.map(c -> c.valueForKey("formatExceptionKey"))
+				.filter(String.class::isInstance)
+				.map(String.class::cast)
+				.filter(s -> !s.isEmpty())
+				.orElse("InvalidValueException");
 	}
 	
 	public Object formatStringValue(String value) throws NSValidation.ValidationException {

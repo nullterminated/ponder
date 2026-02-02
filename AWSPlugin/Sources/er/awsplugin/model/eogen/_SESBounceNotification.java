@@ -6,7 +6,8 @@ import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
 import java.math.*;
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
@@ -52,7 +53,7 @@ public abstract class _SESBounceNotification extends er.awsplugin.model.SESNotif
     /* more clazz methods here */
   }
 
-  private static final Logger LOG = Logger.getLogger(_SESBounceNotification.class);
+  private static final Logger LOG = LoggerFactory.getLogger(_SESBounceNotification.class);
 
   public er.awsplugin.model.SESBounceNotification.SESBounceNotificationClazz clazz() {
     return er.awsplugin.model.SESBounceNotification.clazz;

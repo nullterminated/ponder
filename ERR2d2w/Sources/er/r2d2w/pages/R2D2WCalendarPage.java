@@ -2,7 +2,8 @@ package er.r2d2w.pages;
 
 import java.util.TimeZone;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOContext;
 import com.webobjects.appserver.WODisplayGroup;
@@ -22,7 +23,7 @@ public class R2D2WCalendarPage extends ERD2WCalendarPage {
 
 
 	/** logging support */
-	public final static Logger log = Logger.getLogger(R2D2WCalendarPage.class);
+	public final static Logger log = LoggerFactory.getLogger(R2D2WCalendarPage.class);
 	
 	public R2D2WCalendarPage(WOContext context) {
         super(context);

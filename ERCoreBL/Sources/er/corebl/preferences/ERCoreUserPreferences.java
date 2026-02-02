@@ -1,7 +1,8 @@
 package er.corebl.preferences;
 
 import org.apache.commons.lang.ObjectUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.directtoweb.D2WModel;
 import com.webobjects.eocontrol.EOEditingContext;
@@ -33,7 +34,7 @@ public enum ERCoreUserPreferences implements NSKeyValueCoding {
 	/** Notification that is posted when preferences change */
 	public final static String PreferenceDidChangeNotification = "PreferenceChangedNotification";
 
-	private static final Logger log = Logger.getLogger(ERCoreUserPreferences.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCoreUserPreferences.class);
 
 	/** EOEncoding key */
 	private static final String VALUE = "_V";

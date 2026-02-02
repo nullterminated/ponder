@@ -1,7 +1,5 @@
 package er.r2d2w.components.relationships;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.webobjects.appserver.WOContext;
 import com.webobjects.directtoweb.D2WContext;
 import com.webobjects.directtoweb.ERD2WContext;
@@ -108,7 +106,7 @@ public class R2DCreateSubEntityChooser extends ERDCustomComponent {
 		if(erpi != null && selectedEntity() != null) {
 			EOEnterpriseObject eo = (EOEnterpriseObject)NSKeyValueCoding.Utility.valueForKey(erpi, "masterObject");
 			String relationshipKey = (String)NSKeyValueCoding.Utility.valueForKey(erpi, "relationshipKey");
-			if(!ERXValueUtilities.isNull(eo) && !StringUtils.isBlank(relationshipKey)) {
+			if(!ERXValueUtilities.isNull(eo) && relationshipKey != null && !relationshipKey.isBlank()) {
 				EOEditingContext nestedEC = ERXEC.newEditingContext(eo.editingContext());
 				EOClassDescription relatedObjectClassDescription = selectedEntity().classDescriptionForInstances();
 				EOEnterpriseObject relatedObject = (EOEnterpriseObject)EOUtilities.createAndInsertInstance(nestedEC, relatedObjectClassDescription.entityName());

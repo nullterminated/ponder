@@ -1,6 +1,7 @@
 package er.corebl.model;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eocontrol.EOEditingContext;
 
@@ -13,7 +14,7 @@ public class ERCAuditClob extends er.corebl.model.eogen._ERCAuditClob {
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(ERCAuditClob.class);
+	private static final Logger log = LoggerFactory.getLogger(ERCAuditClob.class);
 
     public static final ERCAuditClobClazz<ERCAuditClob> clazz = new ERCAuditClobClazz<ERCAuditClob>();
     public static class ERCAuditClobClazz<T extends ERCAuditClob> extends er.corebl.model.eogen._ERCAuditClob._ERCAuditClobClazz<T> {

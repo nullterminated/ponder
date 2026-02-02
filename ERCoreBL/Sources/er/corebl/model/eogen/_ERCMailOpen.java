@@ -6,7 +6,8 @@ import com.webobjects.eocontrol.*;
 import com.webobjects.foundation.*;
 import java.math.*;
 import java.util.*;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import er.extensions.eof.*;
 import er.extensions.foundation.*;
@@ -30,7 +31,7 @@ public abstract class _ERCMailOpen extends  ERXGenericRecord {
     /* more clazz methods here */
   }
 
-  private static final Logger LOG = Logger.getLogger(_ERCMailOpen.class);
+  private static final Logger LOG = LoggerFactory.getLogger(_ERCMailOpen.class);
 
   public er.corebl.model.ERCMailOpen.ERCMailOpenClazz clazz() {
     return er.corebl.model.ERCMailOpen.clazz;

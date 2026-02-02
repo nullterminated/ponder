@@ -1,6 +1,7 @@
 package er.r2d2w.components.buttons;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.appserver.WOComponent;
 import com.webobjects.appserver.WOContext;
@@ -21,7 +22,7 @@ public abstract class R2DControllerButton extends ERDActionButton implements ERD
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private static final Logger log = Logger.getLogger(R2DControllerButton.class);
+	private static final Logger log = LoggerFactory.getLogger(R2DControllerButton.class);
 
 	/** holds the chosen branch */
 	protected NSDictionary<String,String> branch;

@@ -1,6 +1,7 @@
 package er.awsplugin;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.webobjects.eoaccess.EOModelGroup;
 import com.webobjects.eocontrol.EOClassDescription;
@@ -19,7 +20,7 @@ import er.extensions.foundation.ERXSelectorUtilities;
 
 public class AWSPlugin extends ERXFrameworkPrincipal {
 
-    public static final Logger log = Logger.getLogger(AWSPlugin.class);
+    public static final Logger log = LoggerFactory.getLogger(AWSPlugin.class);
     public final static Class<?>[] REQUIRES = new Class[] {ERXExtensions.class, ERCoreBL.class};
 
     protected static volatile AWSPlugin sharedInstance;
